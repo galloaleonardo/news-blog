@@ -26,3 +26,7 @@ Route::resource('editor-areas', 'EditorAreaController');
 Route::resource('news', 'NewsController');
 Route::resource('rotating-banners', 'RotatingBannerController');
 Route::resource('rotating-labels', 'RotatingLabelController');
+
+Route::get('/admin', function () {
+    return view('admin.dashboard');
+});
