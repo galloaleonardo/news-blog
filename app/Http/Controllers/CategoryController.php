@@ -9,7 +9,7 @@ class CategoryController extends Controller {
 
     public function index()
     {
-        $categories = Category::all();
+        $categories = Category::paginate(10);
 
         return view('admin.categories.index-categories', compact('categories'));
     }
@@ -45,24 +45,25 @@ class CategoryController extends Controller {
         return view('admin.categories.edit-categories', compact('category'));
     }
 
-    public function update(Request $request, Category $category)
+    public function update(Category $category)
     {
-        $request->validate([
+        \request()->validate([
             'name' => 'required'
         ]);
 
-        $category = $request->all();
+        $aux_category = \request()->all();
 
-        $category['displays_in_menu'] = $request->has('displays_in_menu') ? true : false;
-        $category['active']           = $request->has('active') ? true : false;
+        $aux_category['displays_in_menu'] = \request()->has('displays_in_menu') ? true : false;
+        $aux_category['active']           = \request()->has('active') ? true : false;
 
-        Category::update($category);
+        $category->update($aux_category);
 
         return redirect('/categories');
     }
 
     public function destroy(Category $category)
     {
-        //
+        $category->delete();
+        return redirect('/categories');
     }
 }

@@ -20,7 +20,7 @@ class CreateNewsTable extends Migration
             $table->string('title');
             $table->string('subtitle')->nullable();
             $table->char('display_order');
-            $table->boolean('image_link');
+            $table->string('image_link');
             $table->longText('content');
             $table->string('author');
             $table->string('youtube_link')->nullable();

@@ -9,6 +9,8 @@
 @endsection
 
 @section('content')
+
+
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <a href="/categories/create" class="btn btn-primary btn-icon-split">
@@ -37,8 +39,8 @@
                                 @foreach($categories as $category)
                                     <tr role="row" class="odd">
                                         <td>{{ $category->name }}</td>
-                                        <td>{{ $category->displays_in_menu }}</td>
-                                        <td>{{ $category->active }}</td>
+                                        <td>{{ $category->displays_in_menu ? 'Yes' : 'No' }} </td>
+                                        <td>{{ $category->active ? 'Yes' : 'No' }}</td>
                                         <td>{{ date_format($category->created_at, 'Y-m-d')  }}</td>
                                         <td>
                                             <a href="/categories/{{ $category->id }}" class="btn btn-light btn-icon-split btn-sm">
@@ -57,18 +59,7 @@
                     </div>
                     <div class="row">
                         <div class="col-sm-12 col-md-7">
-                            <div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate">
-                                <ul class="pagination">
-                                    <li class="paginate_button page-item previous disabled" id="dataTable_previous"><a href="#" aria-controls="dataTable" data-dt-idx="0" tabindex="0" class="page-link">Previous</a></li>
-                                    <li class="paginate_button page-item active"><a href="#" aria-controls="dataTable" data-dt-idx="1" tabindex="0" class="page-link">1</a></li>
-                                    <li class="paginate_button page-item "><a href="#" aria-controls="dataTable" data-dt-idx="2" tabindex="0" class="page-link">2</a></li>
-                                    <li class="paginate_button page-item "><a href="#" aria-controls="dataTable" data-dt-idx="3" tabindex="0" class="page-link">3</a></li>
-                                    <li class="paginate_button page-item "><a href="#" aria-controls="dataTable" data-dt-idx="4" tabindex="0" class="page-link">4</a></li>
-                                    <li class="paginate_button page-item "><a href="#" aria-controls="dataTable" data-dt-idx="5" tabindex="0" class="page-link">5</a></li>
-                                    <li class="paginate_button page-item "><a href="#" aria-controls="dataTable" data-dt-idx="6" tabindex="0" class="page-link">6</a></li>
-                                    <li class="paginate_button page-item next" id="dataTable_next"><a href="#" aria-controls="dataTable" data-dt-idx="7" tabindex="0" class="page-link">Next</a></li>
-                                </ul>
-                            </div>
+                            {{ $categories->links() }}
                         </div>
                     </div>
                 </div>

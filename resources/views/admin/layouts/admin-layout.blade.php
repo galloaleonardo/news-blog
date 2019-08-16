@@ -9,6 +9,10 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
+    @if (request()->is('news/create'))
+        <script src="https://cdn.ckeditor.com/4.12.1/standard/ckeditor.js"></script>
+    @endif
+
     <title>@yield('title-page')</title>
 
     <!-- Custom fonts for this template-->
@@ -37,8 +41,8 @@
         <hr class="sidebar-divider my-0">
 
         <!-- Nav Item - Dashboard -->
-        <li class="nav-item active">
-            <a class="nav-link" href="index.html">
+        <li class="nav-item {{ request()->is('admin') ? 'active' : '' }}">
+            <a class="nav-link" href="/admin">
                 <i class="fas fa-fw fa-tachometer-alt"></i>
                 <span>Dashboard</span></a>
         </li>
@@ -52,7 +56,7 @@
         </div>
 
         <!-- Nav Item - Categories Menu -->
-        <li class="nav-item">
+        <li class="nav-item {{ request()->is('categories') ? 'active' : '' }}">
             <a class="nav-link" href="/categories">
                 <i class="fas fa-sitemap"></i>
                 <span>Categories</span>
