@@ -8,7 +8,7 @@
 .env
 .env.backup
 .phpunit.result.cache
-.idea/workspace.xml
+.idea
 Homestead.json
 Homestead.yaml
 npm-debug.log
