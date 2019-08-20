@@ -6,6 +6,7 @@ use App\Category;
 use App\News;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
+use Intervention\Image\Facades\Image;
 
 class NewsController extends Controller {
 
@@ -29,7 +30,7 @@ class NewsController extends Controller {
         $request->validate([
             'title'         => ['required', 'max:100'],
             'subtitle'      => ['required', 'max:255'],
-            'image_link'    => ['required', 'image', 'mimes:jpeg,jpg,png', 'max:1024'],
+            'image_link'    => $this->validateImage(),
             'category_id'   => ['required', 'numeric'],
             'display_order' => 'required',
             'author'        => 'required',
@@ -48,7 +49,7 @@ class NewsController extends Controller {
 
     public function show(News $news)
     {
-        //
+        return view('admin.news.show-news', compact('news'));
     }
 
     public function edit(News $news)
@@ -68,9 +69,28 @@ class NewsController extends Controller {
 
     private function uploadImageAndReturnName(UploadedFile $image)
     {
-        $image_name = rand() . date('Y-m-d') . '.' . $image->getClientOriginalExtension();
-        $image->move(public_path('images'), $image_name);
+        $name = rand() . date('Y-m-d') . '.' . $image->getClientOriginalExtension();
+        $path_large = public_path('images/news/large/') . $name;
+        $path_small = public_path('images/news/small/') . $name;
 
-        return $image_name;
+        $img = Image::make($image);
+
+        $img->save($path_large, 60)
+            ->resize('300', '300')->save($path_small, 60);
+
+        return $name;
+    }
+
+    private function validateImage()
+    {
+        $validate = [
+                'required',
+                'image',
+                'mimes:jpeg,jpg,png',
+                'max:800',
+                'dimensions:max_width=1500, max_height=1500'
+        ];
+
+        return $validate;
     }
 }

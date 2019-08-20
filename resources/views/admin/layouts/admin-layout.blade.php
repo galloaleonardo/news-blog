@@ -56,7 +56,7 @@
         </div>
 
         <!-- Nav Item - Categories Menu -->
-        <li class="nav-item {{ request()->is('categories') ? 'active' : '' }}">
+        <li class="nav-item {{ request()->is('categories*') ? 'active' : '' }}">
             <a class="nav-link" href="/categories">
                 <i class="fas fa-sitemap"></i>
                 <span>Categories</span>
@@ -64,8 +64,8 @@
         </li>
 
         <!-- Nav Item - News Menu -->
-        <li class="nav-item">
-            <a class="nav-link" href="#">
+        <li class="nav-item {{ request()->is('news*') ? 'active' : '' }}">
+            <a class="nav-link" href="/news">
                 <i class="fas fa-newspaper"></i>
                 <span>News</span>
             </a>

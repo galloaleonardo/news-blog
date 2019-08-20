@@ -9,12 +9,6 @@
 @endsection
 
 @section('content')
-
-
-
-
-
-
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <a href="/news/create" class="btn btn-primary btn-icon-split">
@@ -92,11 +86,11 @@
                                 @foreach($news as $new)
                                     <tr role="row" class="odd">
                                         <td>{{ $new->title }}</td>
-                                        <td>{{ $new->category_id }}</td>
+                                        <td>{{ $new->category->name }}</td>
                                         <td>{{ $new->display_order }}</td>
                                         <td>{{ $new->author }}</td>
                                         <td>
-                                            <a href="/categories/{{ $new->id }}" class="btn btn-light btn-icon-split btn-sm">
+                                            <a href="/news/{{ $new->id }}" class="btn btn-light btn-icon-split btn-sm">
                                                 <span class="icon text-black-50">
                                                     <i class="fas fa-eye"></i>
                                                 </span>

@@ -9,11 +9,7 @@
       <case-sensitivity plain-identifiers="mixed" quoted-identifiers="mixed" />
       <secret-storage>master_key</secret-storage>
       <user-name>root</user-name>
-      <schema-mapping>
-        <introspection-scope>
-          <node kind="schema" negative="1" />
-        </introspection-scope>
-      </schema-mapping>
+      <introspection-schemas>*:@,mysql,performance_schema,rioclaromilgrau,sys,tutorial</introspection-schemas>
     </data-source>
   </component>
 </project>

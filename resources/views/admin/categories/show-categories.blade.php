@@ -48,7 +48,7 @@
                     </span>
                 <span class="text">Edit</span>
             </a>
-            <a href="/categories/create" class="btn btn-danger btn-icon-split" data-toggle="modal" data-target="#modalDelete">
+            <a href="#" class="btn btn-danger btn-icon-split" data-toggle="modal" data-target="#modalDelete">
                     <span class="icon text-danger">
                       <i class="fas fa-trash-alt"></i>
                     </span>

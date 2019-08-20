@@ -22,7 +22,7 @@
                         <input type="text" class="form-control {{ $errors->has('title') ? 'border-left-danger' : '' }}" id="title" name="title" value="{{ old('title') }}">
                     </div>
                     <div class="form-group col-md-4">
-                        <label for="image_link">Main image</label>
+                        <label for="image_link">Main image - <small>(Max. 1500px x 1500px) - (Max. 800kb)</small></label>
                         <div class="input-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text">
@@ -31,33 +31,33 @@
                             </div>
                             <div class="custom-file">
                                 <input type="file" class="custom-file-input" id="image_link" name="image_link">
-                                <label class="custom-file-label" for="image_link">Choose image...</label>
+                                <label class="custom-file-label {{ $errors->has('image_link') ? 'border-left-danger' : '' }}" for="image_link">Choose image...</label>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="subtitle">Subtitle</label>
-                    <textarea class="form-control" name="subtitle" id="subtitle"></textarea>
+                    <textarea class="form-control {{ $errors->has('subtitle') ? 'border-left-danger' : '' }}" name="subtitle" id="subtitle">{{ old('subtitle') }}</textarea>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-3">
                         <label for="category_id">Category</label>
-                        <select id="category_id" name="category_id" class="form-control">
+                        <select id="category_id" name="category_id" class="form-control {{ $errors->has('category_id') ? 'border-left-danger' : '' }}">
                             <option selected disabled>Choose...</option>
                             @foreach($categories as $category)
-                                <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                <option value="{{ $category->id }}" {{ $category->id == old('category_id') ? 'selected' : '' }}>{{ $category->name }}</option>
                             @endforeach
 
                         </select>
                     </div>
                     <div class="form-group col-md-3">
                         <label for="display_order">Dispay order</label>
-                        <select id="display_order" name="display_order" class="form-control">
+                        <select id="display_order" name="display_order" class="form-control {{ $errors->has('display_order') ? 'border-left-danger' : '' }}">
                             <option selected disabled>Choose...</option>
-                            <option value="D">Highlights</option>
-                            <option value="R">Recent</option>
-                            <option value="L">Lateral</option>
+                            <option value="D" {{ old('display_order') == "D"  ? 'selected' : '' }}>Highlights</option>
+                            <option value="R" {{ old('display_order') == "R"  ? 'selected' : '' }}>Recent</option>
+                            <option value="L" {{ old('display_order') == "L"  ? 'selected' : '' }}>Lateral</option>
                         </select>
                     </div>
                     <div class="form-group col-md-3">
@@ -66,11 +66,11 @@
                     </div>
                     <div class="form-group col-md-3">
                         <label for="youtube_link">Link Youtube</label>
-                        <input type="text" class="form-control {{ $errors->has('youtube_link') ? 'border-left-danger' : '' }}" id="youtube_link" name="youtube_link" value="{{ old('youtube_link') }}">
+                        <input type="text" class="form-control" id="youtube_link" name="youtube_link" value="{{ old('youtube_link') }}">
                     </div>
                     <div class="form-group col-md-12">
-                        <label for="news_content">Content</label>
-                        <textarea name="content" id="news_content"></textarea>
+                        <label class="{{ $errors->has('content') ? 'border-bottom-danger' : '' }}" for="news_content">Content</label>
+                        <textarea name="content" id="news_content">{{ old('content') }} </textarea>
                         <script>
                             CKEDITOR.replace('news_content');
                         </script>
