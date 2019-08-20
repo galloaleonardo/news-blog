@@ -1,12 +1,16 @@
 /node_modules
 /public/hot
 /public/storage
+/public/images/news/large
+/public/images/news/small
 /storage/*.key
 /vendor
 .env
 .env.backup
 .phpunit.result.cache
+.idea/workspace.xml
 Homestead.json
 Homestead.yaml
 npm-debug.log
 yarn-error.log
+_ide_helper.php
