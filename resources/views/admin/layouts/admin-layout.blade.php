@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    @if (request()->is('news/create'))
+    @if (request()->is('news/create') || request()->is('news/*/edit'))
         <script src="https://cdn.ckeditor.com/4.12.1/standard/ckeditor.js"></script>
     @endif
 
@@ -317,8 +317,10 @@
                 <!-- Page Heading -->
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
                     <h1 class="h3 mb-0 text-gray-800">@yield('title-content')</h1>
+                    @if (!(Route::current()->getName() == (request()->segment(1) . '.index')))
+                        <a href="@yield('go-back')"><i class="fas fa-arrow-circle-left"></i> Go back!</a>
+                    @endif
                 </div>
-
                 @yield('content')
             </div>
 

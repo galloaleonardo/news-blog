@@ -8,6 +8,10 @@
     Category
 @endsection
 
+@section('go-back')
+    /categories
+@endsection
+
 @section('content')
     @include('admin.errors')
 

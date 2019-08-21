@@ -8,6 +8,10 @@
     Category
 @endsection
 
+@section('go-back')
+    /categories/{{ $category->id }}
+@endsection
+
 @section('content')
     @include('admin.errors')
 

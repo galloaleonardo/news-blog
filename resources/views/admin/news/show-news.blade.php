@@ -8,6 +8,10 @@
     News
 @endsection
 
+@section('go-back')
+    /news
+@endsection
+
 @section('content')
     <!-- Modal -->
     <div class="modal fade" id="modalDelete" tabindex="-1" role="dialog">
@@ -56,14 +60,17 @@
             </a>
         </div>
         <div class="card-body">
-            <p class="h4 pb-3 text-primary">Resume:</p>
-            <p class="h5"><strong>Title: {{ $news->title }}</strong></p>
-            <p class="h5 mt-4"><strong>Subtitle</strong>:<br> {{ $news->subtitle }}</p>
-            <p class="h5 mt-4"><strong>Category</strong>: {{ $news->category->name }}</p>
-            <p class="h5"><strong>Display Order</strong>: {{ $news->display_order }}</p>
-            <p class="h5"><strong>Author</strong>: {{ $news->author }}</p>
-            <p class="h5"><strong>Link Youtube</strong>: {{ $news->youtube_link }}</p>
-
+            <div class="card shadow my-4">
+                <div class="card-body">
+                    <p class="h4 pb-3 text-primary">Resume:</p>
+                    <p class="h5"><strong>Title: {{ $news->title }}</strong></p>
+                    <p class="h5 mt-4"><strong>Subtitle</strong>:<br> {{ $news->subtitle }}</p>
+                    <p class="h5 mt-4"><strong>Category</strong>: {{ $news->category->name }}</p>
+                    <p class="h5"><strong>Display Order</strong>: {{ $news->display_order }}</p>
+                    <p class="h5"><strong>Author</strong>: {{ $news->author }}</p>
+                    <p class="h5"><strong>Link Youtube</strong>: {{ $news->youtube_link }}</p>
+                </div>
+            </div>
             <div class="card shadow my-4">
                 <div class="card-body">
                     <p class="h5"><strong>Main Image:<br></strong></p> <img src="/images/news/small/{{ $news->image_link }}" alt="">

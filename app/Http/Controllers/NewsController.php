@@ -54,29 +54,52 @@ class NewsController extends Controller {
 
     public function edit(News $news)
     {
-        //
+        $categories = Category::where('active', 1)->get();
+        return view('admin.news.edit-news', compact('news', 'categories'));
     }
 
     public function update(Request $request, News $news)
     {
-        //
+        $attributes = $request->all();
+
+        $request->validate([
+            'title'         => ['required', 'max:100'],
+            'subtitle'      => ['required', 'max:255'],
+            'category_id'   => ['required', 'numeric'],
+            'display_order' => 'required',
+            'author'        => 'required',
+            'content'       => 'required'
+        ]);
+
+        if ($request->hasFile('image_link')) {
+            $request->validate(['image_link' => $this->validateImage()]);
+            $attributes['image_link'] = $this->uploadImageAndReturnName($request->file('image_link'));
+        }
+
+        $attributes['active'] = $request->has('active') ? true : false;
+
+        $news->update($attributes);
+
+        return redirect('/news');
     }
 
     public function destroy(News $news)
     {
-        //
+        $news->delete();
+        return redirect('/news');
     }
 
     private function uploadImageAndReturnName(UploadedFile $image)
     {
-        $name = rand() . date('Y-m-d') . '.' . $image->getClientOriginalExtension();
+        $name = rand() . date('Y-m-d') . '.jpg';
         $path_large = public_path('images/news/large/') . $name;
         $path_small = public_path('images/news/small/') . $name;
 
-        $img = Image::make($image);
-
-        $img->save($path_large, 60)
-            ->resize('300', '300')->save($path_small, 60);
+        Image::make($image)
+            ->encode('jpg', 60)
+            ->save($path_large)
+            ->resize('300', '300')
+            ->save($path_small);
 
         return $name;
     }
