@@ -1,14 +1,15 @@
 @extends('admin.layouts.admin-layout')
 
 @section('title-page')
-    News Blog - News
+    News Blog - Advertisements
 @endsection
 
 @section('title-content')
-    News
+    Advertisements
 @endsection
 
 @section('content')
+
     <!-- Modal -->
     <div class="modal fade" id="modalDelete" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
@@ -30,7 +31,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">No, close</button>
-                    <form method="POST" action="/news/{{ $news->id }}">
+                    <form method="POST" action="/advertisements/{{ $advertising->id }}">
                         @method('DELETE')
                         @csrf
                         <button type="submit" class="btn btn-danger">Yes, delete</button>
@@ -42,7 +43,7 @@
 
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <a href="/news/{{ $news->id }}/edit" class="btn btn-warning btn-icon-split">
+            <a href="/advertisements/{{ $advertising->id }}/edit" class="btn btn-warning btn-icon-split">
                     <span class="icon text-warning">
                       <i class="fas fa-edit"></i>
                     </span>
@@ -56,26 +57,14 @@
             </a>
         </div>
         <div class="card-body">
-            <div class="card mb-4">
-                <div class="card-body">
-                    <p class="h4 pb-3 text-primary">Resume:</p>
-                    <p class="h5"><strong>Title: {{ $news->title }}</strong></p>
-                    <p class="h5 mt-4"><strong>Subtitle</strong>:<br> {{ $news->subtitle }}</p>
-                    <p class="h5 mt-4"><strong>Category</strong>: {{ $news->category->name }}</p>
-                    <p class="h5"><strong>Display Order</strong>: {{ $news->display_order }}</p>
-                    <p class="h5"><strong>Author</strong>: {{ $news->author }}</p>
-                    <p class="h5"><strong>Link Youtube</strong>: {{ $news->youtube_link }}</p>
-                </div>
-            </div>
-            <div class="card my-4">
-                <div class="card-body">
-                    <p class="h5"><strong>Main Image:<br></strong></p> <img src="/images/news/small/{{ $news->image_link }}" alt="">
-                </div>
-            </div>
+            <p class="h4 pb-3 text-primary">Resume:</p>
+            <p class="h5"><strong>Title:</strong> {{ $advertising->title }}</p>
+            <p class="h5"><strong>Destination Link:</strong> {{ $advertising->destination_link }}</p>
+            <p class="h5"><strong>Active:</strong> {{ $advertising->active ? 'Yes' : 'No' }}</p>
 
             <div class="card my-4">
                 <div class="card-body">
-                  <p class="h5"><strong>Content</strong>:<br> {!! $news->content !!}</p>
+                    <p class="h5"><strong>Main Image:<br></strong></p> <img src="/images/announcement/{{ $advertising->image_link }}" alt="">
                 </div>
             </div>
         </div>

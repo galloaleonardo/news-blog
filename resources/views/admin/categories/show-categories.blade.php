@@ -8,10 +8,6 @@
     Categories
 @endsection
 
-@section('go-back')
-    /categories
-@endsection
-
 @section('content')
     <!-- Modal -->
     <div class="modal fade" id="modalDelete" tabindex="-1" role="dialog">

@@ -128,22 +128,17 @@ class NewsController extends Controller {
     private function uploadImageAndReturnName(UploadedFile $image)
     {
         $name       = Helper::getRandomNameImage();
-        $orig_name  = "{$name}.{$image->getClientOriginalExtension()}";
         $jpg_name   = "{$name}.jpg";
         $path_large = public_path('images/news/large/');
         $path_small = public_path('images/news/small/');
-        $path_tmp   = public_path('images/tmp/');
 
-        Helper::checkPath([$path_large, $path_small, $path_tmp]);
+        Helper::checkPath([$path_large, $path_small]);
 
-        Image::make($image)->save($path_tmp . $orig_name);
-        Image::make($path_tmp . $orig_name)
-            ->encode('jpg', 10)
+        Image::make($image)
+            ->encode('jpg', 60)
             ->save($path_large . $jpg_name)
             ->resize(300, 300)
             ->save($path_small . $jpg_name);
-
-        \File::delete($path_tmp . $orig_name);
 
         return $jpg_name;
     }

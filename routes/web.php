@@ -21,14 +21,13 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('categories', 'CategoryController');
 Route::resource('users', 'UserController');
-Route::resource('advertising', 'AdvertisingController');
-Route::resource('editor-areas', 'EditorAreaController');
+
+Route::resource('advertisements', 'AdvertisingController', ['parameters' => [
+    'advertisements' => 'advertising'
+]]);
 
 Route::get('news/search', 'NewsController@search')->name('news.search');
 Route::resource('news', 'NewsController');
-
-Route::resource('rotating-banners', 'RotatingBannerController');
-Route::resource('rotating-labels', 'RotatingLabelController');
 
 Route::get('/admin', function () {
     return view('admin.dashboard');

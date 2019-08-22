@@ -1,17 +1,19 @@
 @extends('admin.layouts.admin-layout')
 
 @section('title-page')
-    News Blog - Categories
+    News Blog - Advertisements
 @endsection
 
 @section('title-content')
-    Categories
+    Advertisements
 @endsection
 
 @section('content')
+
+
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <a href="/categories/create" class="btn btn-primary btn-icon-split">
+            <a href="/advertisements/create" class="btn btn-primary btn-icon-split">
                     <span class="icon text-white-50">
                       <i class="fas fa-plus-square"></i>
                     </span>
@@ -26,28 +28,27 @@
                             <table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
                                 <thead>
                                 <tr role="row">
-                                    <th>Name</th>
-                                    <th>Displays in menu</th>
+                                    <th>Title</th>
+                                    <th>Destination Link</th>
                                     <th>Active</th>
                                     <th>Created at</th>
                                     <th style="width: 10%">Action</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($categories as $category)
+                                @foreach($advertisements as $advertising)
                                     <tr role="row" class="odd">
-                                        <td>{{ $category->name }}</td>
-                                        <td>{{ $category->displays_in_menu ? 'Yes' : 'No' }} </td>
-                                        <td>{{ $category->active ? 'Yes' : 'No' }}</td>
-                                        <td>{{ date_format($category->created_at, 'Y-m-d')  }}</td>
+                                        <td>{{ $advertising->title }}</td>
+                                        <td>{{ $advertising->destination_link }} </td>
+                                        <td>{{ $advertising->active }}</td>
+                                        <td>{{ date_format($advertising->created_at, 'Y-m-d')  }}</td>
                                         <td>
-                                            <a href="/categories/{{ $category->id }}" class="btn btn-light btn-icon-split btn-sm">
+                                            <a href="/advertisements/{{ $advertising->id }}" class="btn btn-light btn-icon-split btn-sm">
                                                 <span class="icon text-black-50">
                                                     <i class="fas fa-eye"></i>
                                                 </span>
                                                 <span class="text">View</span>
                                             </a>
-
                                         </td>
                                     </tr>
                                 @endforeach
@@ -57,7 +58,7 @@
                     </div>
                     <div class="row">
                         <div class="col-sm-12 col-md-7">
-                            {{ $categories->links() }}
+                            {{ $advertisements->links() }}
                         </div>
                     </div>
                 </div>

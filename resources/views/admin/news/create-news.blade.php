@@ -8,10 +8,6 @@
     News
 @endsection
 
-@section('go-back')
-    /news
-@endsection
-
 @section('content')
     @include('admin.errors')
 

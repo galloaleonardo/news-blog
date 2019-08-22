@@ -71,14 +71,6 @@
             </a>
         </li>
 
-        <!-- Nav Item - Editor Areas Menu -->
-        <li class="nav-item">
-            <a class="nav-link" href="#">
-                <i class="fas fa-book"></i>
-                <span>Editor Areas</span>
-            </a>
-        </li>
-
         <!-- Divider -->
         <hr class="sidebar-divider">
 
@@ -89,25 +81,9 @@
 
         <!-- Nav Item - Advertisings Menu -->
         <li class="nav-item">
-            <a class="nav-link collapsed" href="#">
+            <a class="nav-link collapsed" href="/advertisements">
                 <i class="fab fa-adversal"></i>
                 <span>Advertisings</span>
-            </a>
-        </li>
-
-        <!-- Nav Item - Rotating Banners Menu -->
-        <li class="nav-item">
-            <a class="nav-link" href="charts.html">
-                <i class="fab fa-bandcamp"></i>
-                <span>Rotating Banners</span>
-            </a>
-        </li>
-
-        <!-- Nav Item - Rotating Labels Menu -->
-        <li class="nav-item">
-            <a class="nav-link" href="tables.html">
-                <i class="fas fa-tags"></i>
-                <span>Rotating Labels</span>
             </a>
         </li>
 
@@ -317,9 +293,6 @@
                 <!-- Page Heading -->
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
                     <h1 class="h3 mb-0 text-gray-800">@yield('title-content')</h1>
-                    @if (!(Route::current()->getName() == (request()->segment(1) . '.index')))
-                        <a href="@yield('go-back')"><i class="fas fa-arrow-circle-left"></i> Go back!</a>
-                    @endif
                 </div>
                 @yield('content')
             </div>
