@@ -20,48 +20,60 @@
         </div>
         <div class="card-body">
             <div id="accordion">
-                <div class="card shadow mb-4">
+                <div class="card mb-4">
                     <div class="card-header py-3" id="headingOne">
                         <h5 class="mb-0">
                             <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter">
-                                <i class="fas fa-filter"></i> Click to filter
+                                <i class="fas fa-filter"></i> Filter
                             </button>
                         </h5>
                     </div>
 
                     <div id="collapseFilter" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
                         <div class="card-body">
-                            <form>
+                            <form method="GET" action="/news/search">
+                                @csrf
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
-                                        <input type="email" class="form-control" id="inputEmail4" placeholder="Title">
+                                        <input type="text" class="form-control" id="title" name="title" placeholder="Title">
                                     </div>
                                     <div class="form-group col-md-6">
-                                        <input type="text" class="form-control" id="inputPassword4" placeholder="Author">
+                                        <input type="text" class="form-control" id="author" name="author" placeholder="Author">
                                     </div>
                                 </div>
                                 <div class="form-row">
                                     <div class="form-group col-md-4">
-                                        <select id="inputState" class="form-control">
-                                            <option selected>Category</option>
+                                        <select id="category_id" name="category_id" class="form-control">
+                                            <option selected disabled>Category</option>
+                                            @foreach($categories as $category)
+                                                <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                            @endforeach
                                         </select>
                                     </div>
                                     <div class="form-group col-md-4">
-                                        <select id="inputState" class="form-control">
-                                            <option selected>Display order</option>
-                                            <option>...</option>
+                                        <select id="display_order" name="display_order" class="form-control">
+                                            <option selected disabled>Display order</option>
+                                            <option value="D">Highlights</option>
+                                            <option value="R">Recent</option>
+                                            <option value="L">Lateral</option>
                                         </select>
                                     </div>
                                     <div class="form-group col-md-4">
-                                        <select id="inputState" class="form-control">
-                                            <option selected>Active</option>
-                                            <option>All</option>
-                                            <option>Yes</option>
-                                            <option>No</option>
+                                        <select id="active" name="active" class="form-control">
+                                            <option selected disabled>Active</option>
+                                            <option value="A">All</option>
+                                            <option value="Y">Yes</option>
+                                            <option value="N">No</option>
                                         </select>
                                     </div>
                                 </div>
                                 <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
+                                <a href="/news" class="btn btn-warning btn-icon-split">
+                                    <span class="icon text-white-50">
+                                        <i class="fas fa-broom"></i>
+                                    </span>
+                                    <span class="text">Clear filter</span>
+                                </a>
                             </form>
                         </div>
                     </div>

@@ -23,7 +23,10 @@ Route::resource('categories', 'CategoryController');
 Route::resource('users', 'UserController');
 Route::resource('advertising', 'AdvertisingController');
 Route::resource('editor-areas', 'EditorAreaController');
+
+Route::get('news/search', 'NewsController@search')->name('news.search');
 Route::resource('news', 'NewsController');
+
 Route::resource('rotating-banners', 'RotatingBannerController');
 Route::resource('rotating-labels', 'RotatingLabelController');
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Category;
+use App\Helpers\Helper;
 use App\News;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
@@ -12,9 +13,10 @@ class NewsController extends Controller {
 
     public function index()
     {
-        $news = News::paginate(10);
+        $news       = News::paginate(10);
+        $categories = Category::where('active', 1)->get();
 
-        return view('admin.news.index-news', compact('news'));
+        return view('admin.news.index-news', compact('news', 'categories'));
     }
 
     public function create()
@@ -89,19 +91,61 @@ class NewsController extends Controller {
         return redirect('/news');
     }
 
+    public function search(Request $request)
+    {
+        $news       = News::query();
+        $categories = Category::where('active', 1)->get();
+
+        if ($request->has('title')) {
+            $news->where('title', 'LIKE', "%{$request->get('title')}%");
+        }
+
+        if ($request->has('author')) {
+            $news->where('author', 'LIKE', "%{$request->get('author')}%");
+        }
+
+        if ($request->has('category_id')) {
+            $news->where('category_id', $request->get('category_id'));
+        }
+
+        if ($request->has('display_order')) {
+            $news->where('display_order', $request->get('display_order'));
+        }
+
+        if ($request->has('active')) {
+            if ($request->get('active') == 'Y') {
+                $news->where('active', true);
+            } elseif ($request->get('active') == 'N') {
+                $news->where('active', false);
+            }
+        }
+
+        $news = $news->paginate(10)->appends($request->except('page'));
+
+        return view('admin.news.index-news', compact('news', 'categories'));
+    }
+
     private function uploadImageAndReturnName(UploadedFile $image)
     {
-        $name = rand() . date('Y-m-d') . '.jpg';
-        $path_large = public_path('images/news/large/') . $name;
-        $path_small = public_path('images/news/small/') . $name;
+        $name       = Helper::getRandomNameImage();
+        $orig_name  = "{$name}.{$image->getClientOriginalExtension()}";
+        $jpg_name   = "{$name}.jpg";
+        $path_large = public_path('images/news/large/');
+        $path_small = public_path('images/news/small/');
+        $path_tmp   = public_path('images/tmp/');
 
-        Image::make($image)
-            ->encode('jpg', 60)
-            ->save($path_large)
-            ->resize('300', '300')
-            ->save($path_small);
+        Helper::checkPath([$path_large, $path_small, $path_tmp]);
 
-        return $name;
+        Image::make($image)->save($path_tmp . $orig_name);
+        Image::make($path_tmp . $orig_name)
+            ->encode('jpg', 10)
+            ->save($path_large . $jpg_name)
+            ->resize(300, 300)
+            ->save($path_small . $jpg_name);
+
+        \File::delete($path_tmp . $orig_name);
+
+        return $jpg_name;
     }
 
     private function validateImage()
