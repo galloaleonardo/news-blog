@@ -19,13 +19,13 @@
                 <div class="form-row">
                     <div class="form-group col-md-12">
                         <label for="name">Tile</label>
-                        <input type="text" class="form-control {{ $errors->has('title') ? 'border-left-danger' : '' }}" id="title" name="title" value="{{ old('name') }}">
+                        <input type="text" class="form-control {{ $errors->has('title') ? 'border-left-danger' : '' }}" id="title" name="title" value="{{ old('title') }}">
                     </div>
 
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-6">
-                        <label for="image_link">Image - <small>(Max. 1500px x 1500px) - (Max. 800kb)</small></label>
+                        <label for="image_link">Image - <small>(Max. 600px x 600px) - (Max. 800kb)</small></label>
                         <div class="input-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text">
@@ -41,7 +41,7 @@
 
                     <div class="form-group col-md-6">
                         <label for="name">Destination Link</label>
-                        <input type="text" class="form-control {{ $errors->has('name') ? 'border-left-danger' : '' }}" id="destination_link" name="destination_link" value="{{ old('name') }}">
+                        <input type="text" class="form-control {{ $errors->has('destination_link') ? 'border-left-danger' : '' }}" id="destination_link" name="destination_link" value="{{ old('destination_link') }}">
                     </div>
                 </div>
                 <div class="form-group">

@@ -1,15 +1,14 @@
 @extends('admin.layouts.admin-layout')
 
 @section('title-page')
-    News Blog - Advertisements
+    News Blog - Users
 @endsection
 
 @section('title-content')
-    Advertisements
+    Users
 @endsection
 
 @section('content')
-
     <!-- Modal -->
     <div class="modal fade" id="modalDelete" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
@@ -31,7 +30,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">No, close</button>
-                    <form method="POST" action="/advertisements/{{ $advertising->id }}">
+                    <form method="POST" action="/users/{{ $user->id }}">
                         @method('DELETE')
                         @csrf
                         <button type="submit" class="btn btn-danger">Yes, delete</button>
@@ -43,7 +42,7 @@
 
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <a href="/advertisements/{{ $advertising->id }}/edit" class="btn btn-warning btn-icon-split">
+            <a href="/users/{{ $user->id }}/edit" class="btn btn-warning btn-icon-split">
                     <span class="icon text-warning">
                       <i class="fas fa-edit"></i>
                     </span>
@@ -58,15 +57,12 @@
         </div>
         <div class="card-body">
             <p class="h4 pb-3 text-primary">Resume:</p>
-            <p class="h5"><strong>Title:</strong> {{ $advertising->title }}</p>
-            <p class="h5"><strong>Destination Link:</strong> {{ $advertising->destination_link }}</p>
-            <p class="h5"><strong>Active:</strong> {{ $advertising->active ? 'Yes' : 'No' }}</p>
-
-            <div class="card my-4">
-                <div class="card-body">
-                    <p class="h5"><strong>Main Image:<br></strong></p> <img src="/images/announcements/{{ $advertising->image_link }}" alt="">
-                </div>
-            </div>
+            <p><img src="/images/news/small/5984842572019-08-21.jpg" alt="..." class="rounded-circle col-1 mb-2"></p>
+            <p class="h5"><strong>Name</strong>: {{ $user->name }}</p>
+            <p class="h5"><strong>Email:</strong> {{ $user->email }}</p>
+            <p class="h5"><strong>Admin:</strong> {{ $user->Admin ? 'Yes' : 'No' }}</p>
+            <p class="h5"><strong>Active:</strong> {{ $user->active ? 'Yes' : 'No' }}</p>
+            <p class="h5"><strong>Created At:</strong> {{ $user->created_at }}</p>
         </div>
     </div>
 @endsection

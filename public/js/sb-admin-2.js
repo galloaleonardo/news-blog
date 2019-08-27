@@ -155,6 +155,10 @@
 
 __webpack_require__(/*! startbootstrap-sb-admin-2/js/sb-admin-2 */ "./node_modules/startbootstrap-sb-admin-2/js/sb-admin-2.js");
 
+$(".alert").delay(1500).slideUp(200, function () {
+  $(this).alert('close');
+});
+
 /***/ }),
 
 /***/ 1:
@@ -164,7 +168,7 @@ __webpack_require__(/*! startbootstrap-sb-admin-2/js/sb-admin-2 */ "./node_modul
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\news-blog\resources\js\sb-admin-2.js */"./resources/js/sb-admin-2.js");
+module.exports = __webpack_require__(/*! /Users/galloleonardo/news-blog/resources/js/sb-admin-2.js */"./resources/js/sb-admin-2.js");
 
 
 /***/ })

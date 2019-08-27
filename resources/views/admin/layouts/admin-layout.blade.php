@@ -33,7 +33,7 @@
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
         <!-- Sidebar - Brand -->
-        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/admin">
             <div class="sidebar-brand-text mx-3">News Blog</div>
         </a>
 
@@ -90,7 +90,6 @@
         <!-- Divider -->
         <hr class="sidebar-divider d-none d-md-block">
 
-
         <!-- Heading -->
         <div class="sidebar-heading">
             Operational
@@ -98,7 +97,7 @@
 
         <!-- Nav Item - Users Menu -->
         <li class="nav-item">
-            <a class="nav-link" href="tables.html">
+            <a class="nav-link" href="/users">
                 <i class="fas fa-users"></i>
                 <span>Users</span>
             </a>
@@ -293,6 +292,8 @@
                 <!-- Page Heading -->
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
                     <h1 class="h3 mb-0 text-gray-800">@yield('title-content')</h1>
+
+                    @include('admin.flash-message')
                 </div>
                 @yield('content')
             </div>
@@ -339,6 +340,8 @@
         </div>
     </div>
 </div>
+
+
 
 <!-- Bootstrap core JavaScript-->
 <script src="/js/app.js"></script>

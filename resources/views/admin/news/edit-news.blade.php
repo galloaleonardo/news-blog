@@ -8,10 +8,6 @@
     News
 @endsection
 
-@section('go-back')
-    /news/{{ $news->id }}
-@endsection
-
 @section('content')
     @include('admin.errors')
 
@@ -53,7 +49,6 @@
                             @foreach($categories as $category)
                                 <option value="{{ $category->id }}" {{ $category->id == $news->category_id ? 'selected' : '' }}>{{ $category->name }}</option>
                             @endforeach
-
                         </select>
                     </div>
                     <div class="form-group col-md-3">
