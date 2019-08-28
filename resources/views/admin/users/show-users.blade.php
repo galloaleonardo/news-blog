@@ -9,7 +9,7 @@
 @endsection
 
 @section('content')
-    <!-- Modal -->
+    <!-- Modal DELETE -->
     <div class="modal fade" id="modalDelete" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -40,6 +40,34 @@
         </div>
     </div>
 
+    <!-- Modal PASSWORD !-->
+    <div class="modal fade" id="modalPassword" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">
+                        <span class="icon">
+                            <i class="fas fa-key"></i>
+                            CHANGE PASSWORD
+                        </span>
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Do you want to change the user's password?</p>
+                    <p>An email will be sent to <strong>{{ $user->email }}</strong> with instructions.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">No, close</button>
+                    <button type="submit" class="btn btn-danger">Yes, send</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <a href="/users/{{ $user->id }}/edit" class="btn btn-warning btn-icon-split">
@@ -53,6 +81,12 @@
                       <i class="fas fa-trash-alt"></i>
                     </span>
                 <span class="text">Delete</span>
+            </a>
+            <a href="#" class="btn btn-dark btn-icon-split float-md-right" data-toggle="modal" data-target="#modalPassword">
+                    <span class="icon text-danger">
+                      <i class="fas fa-key"></i>
+                    </span>
+                <span class="text">Change password</span>
             </a>
         </div>
         <div class="card-body">
