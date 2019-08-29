@@ -16,6 +16,8 @@ Route::get('/', function () {
 });
 
 Auth::routes();
+Auth::routes(['verify' => true]);
+Route::get('first-access/{user}', 'Auth\FirstAccessController@verify');
 
 Route::get('/home', 'HomeController@index')->name('home');
 
@@ -27,7 +29,10 @@ Route::resource('advertisements', 'AdvertisingController', ['parameters' => [
 ]]);
 
 Route::get('news/search', 'NewsController@search')->name('news.search');
-Route::resource('news', 'NewsController');
+
+Route::resource('news', 'NewsController')
+    ->middleware('auth')
+    ->middleware('first.access');
 
 Route::get('/admin', function () {
     return view('admin.dashboard');

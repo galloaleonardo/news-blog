@@ -39,7 +39,7 @@ class UserController extends Controller
         $attributes['password'] = \Hash::make('1234567890');
         $attributes['admin']    = $request->has('admin') ? true : false;
         $attributes['active']   = $request->has('active') ? true : false;
-
+        $attributes['token']    = \Str::random(50);
 
         User::create($attributes);
 
