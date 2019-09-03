@@ -13,7 +13,7 @@
 
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <a href="/advertisements/create" class="btn btn-primary btn-icon-split">
+            <a href="{{ route('advertisements.create') }}" class="btn btn-primary btn-icon-split">
                     <span class="icon text-white-50">
                       <i class="fas fa-plus-square"></i>
                     </span>
@@ -43,7 +43,7 @@
                                         <td>{{ $advertising->active }}</td>
                                         <td>{{ date_format($advertising->created_at, 'Y-m-d')  }}</td>
                                         <td>
-                                            <a href="/advertisements/{{ $advertising->id }}" class="btn btn-light btn-icon-split btn-sm">
+                                            <a href="{{ route('advertisements.show', $advertising->id) }}" class="btn btn-light btn-icon-split btn-sm">
                                                 <span class="icon text-black-50">
                                                     <i class="fas fa-eye"></i>
                                                 </span>

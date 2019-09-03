@@ -15,10 +15,14 @@ class FirstAccess
      */
     public function handle($request, Closure $next)
     {
-
         $user = \Auth::user();
 
-        if (! $user->validated) {
+        if ($user) {
+            if ( ! $user->validated) {
+                \Auth::logout();
+                return redirect('/login');
+            }
+        } else {
             return redirect('/login');
         }
 

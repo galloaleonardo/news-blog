@@ -11,7 +11,7 @@
 @section('content')
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <a href="/news/create" class="btn btn-primary btn-icon-split">
+            <a href="{{ route('news.create') }}" class="btn btn-primary btn-icon-split">
                     <span class="icon text-white-50">
                       <i class="fas fa-plus-square"></i>
                     </span>
@@ -31,7 +31,7 @@
 
                     <div id="collapseFilter" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
                         <div class="card-body">
-                            <form method="GET" action="/news/search">
+                            <form method="GET" action="{{ route('news.search') }}">
                                 @csrf
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
@@ -68,7 +68,7 @@
                                     </div>
                                 </div>
                                 <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
-                                <a href="/news" class="btn btn-warning btn-icon-split">
+                                <a href="{{ route('news.index') }}" class="btn btn-warning btn-icon-split">
                                     <span class="icon text-white-50">
                                         <i class="fas fa-broom"></i>
                                     </span>
@@ -102,7 +102,8 @@
                                         <td>{{ $new->display_order }}</td>
                                         <td>{{ $new->author }}</td>
                                         <td>
-                                            <a href="/news/{{ $new->id }}" class="btn btn-light btn-icon-split btn-sm">
+
+                                            <a href="{{ route('news.show', $new->id) }}" class="btn btn-light btn-icon-split btn-sm">
                                                 <span class="icon text-black-50">
                                                     <i class="fas fa-eye"></i>
                                                 </span>

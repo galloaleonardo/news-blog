@@ -14,7 +14,7 @@
     <div class="card shadow mb-4">
         <div class="card-header py-3"><i class="fas fa-edit"></i> Update user</div>
         <div class="card-body">
-            <form method="POST" action="/categories/{{ $user->id }}">
+            <form method="POST" action="{{ route('users.update', $user->id) }}" enctype="multipart/form-data">
                 @method('PATCH')
                 @csrf
                 <div class="form-row">
@@ -59,7 +59,7 @@
                         </label>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-primary">Create</button>
+                <button type="submit" class="btn btn-primary">Update</button>
             </form>
         </div>
     </div>

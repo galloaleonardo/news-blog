@@ -26,7 +26,7 @@ class UserController extends Controller
     {
         $request->validate([
             'name' => 'required|min:3',
-            'email' => 'required'
+            'email' => 'required|unique:users,email'
         ]);
 
         $attributes = $request->all();
@@ -36,14 +36,14 @@ class UserController extends Controller
             $attributes['avatar'] = $this->uploadImageAndReturnName($request->file('avatar'));
         }
 
-        $attributes['password'] = \Hash::make('1234567890');
+        $attributes['password'] = \Hash::make(rand());
         $attributes['admin']    = $request->has('admin') ? true : false;
         $attributes['active']   = $request->has('active') ? true : false;
         $attributes['token']    = \Str::random(50);
 
         User::create($attributes);
 
-        return redirect('/users')->with('success', 'User created successfuly.');
+        return redirect(route('users.index'))->with('success', 'User created successfuly.');
     }
 
     public function show(User $user)
@@ -56,15 +56,32 @@ class UserController extends Controller
         return view('admin.users.edit-users', compact('user'));
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, User $user)
     {
-        //
+        $attributes = $request->all();
+
+        $request->validate([
+            'name' => 'required|min:3',
+            'email' => 'required|unique:users,email, ' . $user->id
+        ]);
+
+        if ($request->hasFile('avatar')) {
+            $request->validate(['avatar' => $this->validateImage()]);
+            $attributes['avatar'] = $this->uploadImageAndReturnName($request->file('avatar'));
+        }
+
+        $attributes['admin']    = $request->has('admin') ? true : false;
+        $attributes['active']   = $request->has('active') ? true : false;
+
+        $user->update($attributes);
+
+        return redirect(route('users.index'))->with('success', 'User updated successfuly.');
     }
 
     public function destroy(User $user)
     {
         $user->delete();
-        return redirect('/users')->with('success', 'User deleted successfuly.');
+        return redirect(route('users.index'))->with('success', 'User deleted successfuly.');
     }
 
     private function uploadImageAndReturnName(UploadedFile $image)

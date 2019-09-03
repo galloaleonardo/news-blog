@@ -30,7 +30,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">No, close</button>
-                    <form method="POST" action="/users/{{ $user->id }}">
+                    <form method="POST" action="{{ route('users.destroy', $user->id) }}">
                         @method('DELETE')
                         @csrf
                         <button type="submit" class="btn btn-danger">Yes, delete</button>
@@ -70,7 +70,7 @@
 
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <a href="/users/{{ $user->id }}/edit" class="btn btn-warning btn-icon-split">
+            <a href="{{ route('users.edit', $user->id ) }}" class="btn btn-warning btn-icon-split">
                     <span class="icon text-warning">
                       <i class="fas fa-edit"></i>
                     </span>
@@ -91,7 +91,7 @@
         </div>
         <div class="card-body">
             <p class="h4 pb-3 text-primary">Resume:</p>
-            <p><img src="/images/news/small/5984842572019-08-21.jpg" alt="..." class="rounded-circle col-1 mb-2"></p>
+            <p><img src="/images/avatars/{{ $user->avatar }}" alt="..." class="rounded-circle col-1 mb-2"></p>
             <p class="h5"><strong>Name</strong>: {{ $user->name }}</p>
             <p class="h5"><strong>Email:</strong> {{ $user->email }}</p>
             <p class="h5"><strong>Admin:</strong> {{ $user->Admin ? 'Yes' : 'No' }}</p>

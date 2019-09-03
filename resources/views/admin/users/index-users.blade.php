@@ -11,7 +11,7 @@
 @section('content')
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <a href="/users/create" class="btn btn-primary btn-icon-split">
+            <a href="{{ route('users.create') }}" class="btn btn-primary btn-icon-split">
                     <span class="icon text-white-50">
                       <i class="fas fa-plus-square"></i>
                     </span>
@@ -43,7 +43,7 @@
                                         <td>{{ $user->active ? 'Yes' : 'No' }}</td>
                                         <td>{{ date_format($user->created_at, 'Y-m-d')  }}</td>
                                         <td>
-                                            <a href="/users/{{ $user->id }}" class="btn btn-light btn-icon-split btn-sm">
+                                            <a href="{{ route('users.show', $user->id) }}" class="btn btn-light btn-icon-split btn-sm">
                                                 <span class="icon text-black-50">
                                                     <i class="fas fa-eye"></i>
                                                 </span>

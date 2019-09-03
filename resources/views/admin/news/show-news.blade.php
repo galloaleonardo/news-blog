@@ -30,7 +30,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">No, close</button>
-                    <form method="POST" action="/news/{{ $news->id }}">
+                    <form method="POST" action="{{ route('news.destroy', $news->id) }}">
                         @method('DELETE')
                         @csrf
                         <button type="submit" class="btn btn-danger">Yes, delete</button>
@@ -42,7 +42,7 @@
 
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <a href="/news/{{ $news->id }}/edit" class="btn btn-warning btn-icon-split">
+            <a href="{{ route('news.edit', $news->id) }}" class="btn btn-warning btn-icon-split">
                     <span class="icon text-warning">
                       <i class="fas fa-edit"></i>
                     </span>

@@ -14,7 +14,7 @@
     <div class="card shadow mb-4">
         <div class="card-header py-3"><i class="fas fa-plus-square"></i> Create a new category</div>
         <div class="card-body">
-            <form method="POST" action="/categories">
+            <form method="POST" action="{{ route('categories.store') }}">
                 @csrf
                 <div class="form-row">
                     <div class="form-group col-md-6">

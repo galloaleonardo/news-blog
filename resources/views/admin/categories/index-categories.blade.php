@@ -11,7 +11,7 @@
 @section('content')
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <a href="/categories/create" class="btn btn-primary btn-icon-split">
+            <a href="{{ route('categories.create') }}" class="btn btn-primary btn-icon-split">
                     <span class="icon text-white-50">
                       <i class="fas fa-plus-square"></i>
                     </span>
@@ -41,7 +41,7 @@
                                         <td>{{ $category->active ? 'Yes' : 'No' }}</td>
                                         <td>{{ date_format($category->created_at, 'Y-m-d')  }}</td>
                                         <td>
-                                            <a href="/categories/{{ $category->id }}" class="btn btn-light btn-icon-split btn-sm">
+                                            <a href="{{ route('categories.show', $category->id) }}" class="btn btn-light btn-icon-split btn-sm">
                                                 <span class="icon text-black-50">
                                                     <i class="fas fa-eye"></i>
                                                 </span>

@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    @if (request()->is('news/create') || request()->is('news/*/edit'))
+    @if (request()->is('*news/create') || request()->is('*news/*/edit'))
         <script src="https://cdn.ckeditor.com/4.12.1/standard/ckeditor.js"></script>
     @endif
 
@@ -33,7 +33,7 @@
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
         <!-- Sidebar - Brand -->
-        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/admin">
+        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ route('dashboard') }}">
             <div class="sidebar-brand-text mx-3">News Blog</div>
         </a>
 
@@ -42,7 +42,7 @@
 
         <!-- Nav Item - Dashboard -->
         <li class="nav-item {{ request()->is('admin') ? 'active' : '' }}">
-            <a class="nav-link" href="/admin">
+            <a class="nav-link" href="{{ route('dashboard') }}">
                 <i class="fas fa-fw fa-tachometer-alt"></i>
                 <span>Dashboard</span></a>
         </li>
@@ -56,16 +56,16 @@
         </div>
 
         <!-- Nav Item - Categories Menu -->
-        <li class="nav-item {{ request()->is('categories*') ? 'active' : '' }}">
-            <a class="nav-link" href="/categories">
+        <li class="nav-item {{ request()->is('*categories*') ? 'active' : '' }}">
+            <a class="nav-link" href="{{ route('categories.index') }}">
                 <i class="fas fa-sitemap"></i>
                 <span>Categories</span>
             </a>
         </li>
 
         <!-- Nav Item - News Menu -->
-        <li class="nav-item {{ request()->is('news*') ? 'active' : '' }}">
-            <a class="nav-link" href="/news">
+        <li class="nav-item {{ request()->is('*news*') ? 'active' : '' }}">
+            <a class="nav-link" href="{{ route('news.index') }}">
                 <i class="fas fa-newspaper"></i>
                 <span>News</span>
             </a>
@@ -80,8 +80,8 @@
         </div>
 
         <!-- Nav Item - Advertisings Menu -->
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="/advertisements">
+        <li class="nav-item {{ request()->is('*advertisements*') ? 'active' : '' }}">
+            <a class="nav-link collapsed" href="{{ route('advertisements.index') }}">
                 <i class="fab fa-adversal"></i>
                 <span>Advertisings</span>
             </a>
@@ -96,8 +96,8 @@
         </div>
 
         <!-- Nav Item - Users Menu -->
-        <li class="nav-item">
-            <a class="nav-link" href="/users">
+        <li class="nav-item {{ request()->is('*users*') ? 'active' : '' }}">
+            <a class="nav-link" href="{{ route('users.index') }}">
                 <i class="fas fa-users"></i>
                 <span>Users</span>
             </a>
@@ -258,8 +258,13 @@
                     <!-- Nav Item - User Information -->
                     <li class="nav-item dropdown no-arrow">
                         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <span class="mr-2 d-none d-lg-inline text-gray-600 small">Valerie Luna</span>
-                            <i class="fas fa-user-circle"></i>
+                            <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::user()->name }}</span>
+
+                            @if( ! Auth::user()->avatar)
+                                <i class="fas fa-user-circle"></i>
+                             @else
+                                <img src="/images/avatars/{{ Auth::user()->avatar }}" width="25px" alt="">
+                            @endif
                         </a>
                         <!-- Dropdown - User Information -->
                         <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">

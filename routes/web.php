@@ -21,19 +21,11 @@ Route::get('first-access/{user}', 'Auth\FirstAccessController@verify');
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::resource('categories', 'CategoryController');
-Route::resource('users', 'UserController');
-
-Route::resource('advertisements', 'AdvertisingController', ['parameters' => [
-    'advertisements' => 'advertising'
-]]);
-
-Route::get('news/search', 'NewsController@search')->name('news.search');
-
-Route::resource('news', 'NewsController')
-    ->middleware('auth')
-    ->middleware('first.access');
-
-Route::get('/admin', function () {
-    return view('admin.dashboard');
+Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'first.access']], function () {
+    Route::get('/', function () { return view('admin.dashboard'); })->name('dashboard');
+    Route::resource('news', 'NewsController');
+    Route::get('search', 'NewsController@search')->name('news.search');
+    Route::resource('categories', 'CategoryController');
+    Route::resource('users', 'UserController');
+    Route::resource('advertisements', 'AdvertisingController', ['parameters' => ['advertisements' => 'advertising']]);
 });

@@ -46,7 +46,8 @@ class NewsController extends Controller {
 
         News::create($attributes);
 
-        return redirect('/news')->with('success', 'News created successfuly.');
+
+        return redirect(route('news.index'))->with('success', 'News created successfuly.');
     }
 
     public function show(News $news)
@@ -82,13 +83,13 @@ class NewsController extends Controller {
 
         $news->update($attributes);
 
-        return redirect('/news')->with('success', 'News updated successfuly.');
+        return redirect(route('news.index'))->with('success', 'News updated successfuly.');
     }
 
     public function destroy(News $news)
     {
         $news->delete();
-        return redirect('/news')->with('success', 'News deleted successfuly.');
+        return redirect(route('news.index'))->with('success', 'News deleted successfuly.');
     }
 
     public function search(Request $request)

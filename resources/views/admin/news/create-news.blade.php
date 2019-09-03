@@ -14,7 +14,7 @@
     <div class="card shadow mb-4">
         <div class="card-header py-3"><i class="fas fa-plus-square"></i> Create a new news</div>
         <div class="card-body">
-            <form method="POST" action="/news" enctype="multipart/form-data">
+            <form method="POST" action="{{ route('news.store') }}" enctype="multipart/form-data">
                 @csrf
                 <div class="form-row">
                     <div class="form-group col-md-8">

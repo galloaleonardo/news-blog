@@ -37,7 +37,7 @@ class AdvertisingController extends Controller {
 
         Advertising::create($attributes);
 
-        return redirect('/advertisements')->with('success', 'Advertising created successfuly.');
+        return redirect(route('advertisements.index'))->with('success', 'Advertising created successfuly.');
     }
 
     public function show(Advertising $advertising)
@@ -65,13 +65,13 @@ class AdvertisingController extends Controller {
 
         $advertising->update($attributes);
 
-        return redirect('/advertisements')->with('success', 'Advertising updated successfuly.');
+        return redirect(route('advertisements.index'))->with('success', 'Advertising updated successfuly.');
     }
 
     public function destroy(Advertising $advertising)
     {
         $advertising->delete();
-        return redirect('/advertisements')->with('success', 'Advertising deleted successfuly.');
+        return redirect(route('advertisements.index'))->with('success', 'Advertising deleted successfuly.');
     }
 
     private function uploadImageAndReturnName(UploadedFile $image)

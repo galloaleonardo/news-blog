@@ -32,7 +32,7 @@ class CategoryController extends Controller {
 
         Category::create($category);
 
-        return redirect('/categories')->with('success', 'Category created successfuly.');
+        return redirect(route('categories.index'))->with('success', 'Category created successfuly.');
     }
 
     public function show(Category $category)
@@ -58,12 +58,12 @@ class CategoryController extends Controller {
 
         $category->update($aux_category);
 
-        return redirect('/categories')->with('success', 'Category updated successfuly.');
+        return redirect(route('categories.index'))->with('success', 'Category updated successfuly.');
     }
 
     public function destroy(Category $category)
     {
         $category->delete();
-        return redirect('/categories')->with('success', 'Category deleted successfuly.');
+        return redirect(route('categories.index'))->with('success', 'Category deleted successfuly.');
     }
 }

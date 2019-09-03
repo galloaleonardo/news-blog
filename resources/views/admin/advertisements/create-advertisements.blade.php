@@ -14,7 +14,7 @@
     <div class="card shadow mb-4">
         <div class="card-header py-3"><i class="fas fa-plus-square"></i> Create a new advertising</div>
         <div class="card-body">
-            <form method="POST" action="/advertisements"  enctype="multipart/form-data">
+            <form method="POST" action="{{ route('advertisements.store') }}"  enctype="multipart/form-data">
                 @csrf
                 <div class="form-row">
                     <div class="form-group col-md-12">
