@@ -9,6 +9,8 @@
 @endsection
 
 @section('content')
+    @include('admin.modal-delete-index')
+
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <a href="{{ route('categories.create') }}" class="btn btn-primary btn-icon-split">
@@ -42,12 +44,22 @@
                                         <td>{{ date_format($category->created_at, 'Y-m-d')  }}</td>
                                         <td>
                                             <a href="{{ route('categories.show', $category->id) }}" class="btn btn-light btn-icon-split btn-sm">
-                                                <span class="icon text-black-50">
+                                                <span class="icon text-black" data-toggle="tooltip" data-placement="top" title="View">
                                                     <i class="fas fa-eye"></i>
                                                 </span>
-                                                <span class="text">View</span>
                                             </a>
-
+                                            |
+                                            <a href="{{ route('categories.edit', $category->id) }}" class="btn btn-light btn-icon-split btn-sm">
+                                                <span class="icon text-info" data-toggle="tooltip" data-placement="top" title="Edit">
+                                                    <i class="fas fa-pencil-alt"></i>
+                                                </span>
+                                            </a>
+                                            |
+                                            <a href="javascript:" data-toggle="modal" data-target="#modalDelete" class="btn btn-light btn-icon-split btn-sm" onclick="deleteData('categories', {{$category->id}})">
+                                                <span class="icon text-danger" data-toggle="tooltip" data-placement="top" title="Delete">
+                                                    <i class="fas fa-trash-alt"></i>
+                                                </span>
+                                            </a>
                                         </td>
                                     </tr>
                                 @endforeach

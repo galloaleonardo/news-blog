@@ -78,7 +78,7 @@
                 </div>
                 <div class="form-group">
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="active" name="active" {{ old('active') ? 'checked' : '' }} >
+                        <input class="form-check-input" type="checkbox" id="active" name="active" checked >
                         <label class="form-check-label" for="active">
                             Active
                         </label>

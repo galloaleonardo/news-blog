@@ -9,6 +9,8 @@
 @endsection
 
 @section('content')
+    @include('admin.modal-delete-index')
+
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <a href="{{ route('news.create') }}" class="btn btn-primary btn-icon-split">
@@ -102,12 +104,22 @@
                                         <td>{{ $new->display_order }}</td>
                                         <td>{{ $new->author }}</td>
                                         <td>
-
                                             <a href="{{ route('news.show', $new->id) }}" class="btn btn-light btn-icon-split btn-sm">
-                                                <span class="icon text-black-50">
+                                                <span class="icon text-black" data-toggle="tooltip" data-placement="top" title="View">
                                                     <i class="fas fa-eye"></i>
                                                 </span>
-                                                <span class="text">View</span>
+                                            </a>
+                                            |
+                                            <a href="{{ route('news.edit', $new->id) }}" class="btn btn-light btn-icon-split btn-sm">
+                                                <span class="icon text-info" data-toggle="tooltip" data-placement="top" title="Edit">
+                                                    <i class="fas fa-pencil-alt"></i>
+                                                </span>
+                                            </a>
+                                            |
+                                            <a href="javascript:" data-toggle="modal" data-target="#modalDelete" class="btn btn-light btn-icon-split btn-sm" onclick="deleteData('news', {{$new->id}})">
+                                                <span class="icon text-danger" data-toggle="tooltip" data-placement="top" title="Delete">
+                                                    <i class="fas fa-trash-alt"></i>
+                                                </span>
                                             </a>
                                         </td>
                                     </tr>

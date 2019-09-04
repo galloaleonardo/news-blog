@@ -3,5 +3,6 @@
     "/css/app.css": "/css/app.css",
     "/css/sb-admin-2.css": "/css/sb-admin-2.css",
     "/js/sb-admin-2.js": "/js/sb-admin-2.js",
+    "/js/functions.js": "/js/functions.js",
     "/js/jquery.easing.min.js": "/js/jquery.easing.min.js"
 }

@@ -9,7 +9,7 @@
 @endsection
 
 @section('content')
-
+    @include('admin.modal-delete-index')
 
     <div class="card shadow mb-4">
         <div class="card-header py-3">
@@ -44,10 +44,21 @@
                                         <td>{{ date_format($advertising->created_at, 'Y-m-d')  }}</td>
                                         <td>
                                             <a href="{{ route('advertisements.show', $advertising->id) }}" class="btn btn-light btn-icon-split btn-sm">
-                                                <span class="icon text-black-50">
+                                                <span class="icon text-black" data-toggle="tooltip" data-placement="top" title="View">
                                                     <i class="fas fa-eye"></i>
                                                 </span>
-                                                <span class="text">View</span>
+                                            </a>
+                                            |
+                                            <a href="{{ route('advertisements.edit', $advertising->id) }}" class="btn btn-light btn-icon-split btn-sm">
+                                                <span class="icon text-info" data-toggle="tooltip" data-placement="top" title="Edit">
+                                                    <i class="fas fa-pencil-alt"></i>
+                                                </span>
+                                            </a>
+                                            |
+                                            <a href="javascript:" data-toggle="modal" data-target="#modalDelete" class="btn btn-light btn-icon-split btn-sm" onclick="deleteData('advertisements', {{$advertising->id}})">
+                                                <span class="icon text-danger" data-toggle="tooltip" data-placement="top" title="Delete">
+                                                    <i class="fas fa-trash-alt"></i>
+                                                </span>
                                             </a>
                                         </td>
                                     </tr>

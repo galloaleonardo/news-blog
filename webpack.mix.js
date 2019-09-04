@@ -17,5 +17,7 @@ mix.js('resources/js/app.js', 'public/js')
 mix.js('resources/js/sb-admin-2.js', 'public/js')
     .sass('resources/sass/sb-admin-2.scss', 'public/css');
 
+mix.copy('resources/js/functions.js', 'public/js');
+
 mix.copyDirectory('node_modules/@fortawesome/fontawesome-free', 'public/fontawesome');
 mix.copyDirectory('node_modules/jquery.easing/jquery.easing.min.js', 'public/js');
