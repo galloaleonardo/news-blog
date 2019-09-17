@@ -17,11 +17,10 @@ Route::get('/', function () {
 
 Auth::routes();
 Auth::routes(['verify' => true]);
-Route::get('first-access/{user}', 'Auth\FirstAccessController@verify');
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'first.access']], function () {
+Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
     Route::get('/', function () { return view('admin.dashboard'); })->name('dashboard');
     Route::resource('news', 'NewsController');
     Route::get('search', 'NewsController@search')->name('news.search');

@@ -10,7 +10,7 @@
 
 @section('content')
     @include('admin.modal-delete-index')
-
+    {{ Breadcrumbs::render('categories') }}
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <a href="{{ route('categories.create') }}" class="btn btn-primary btn-icon-split">
@@ -32,7 +32,7 @@
                                     <th>Displays in menu</th>
                                     <th>Active</th>
                                     <th>Created at</th>
-                                    <th style="width: 10%">Action</th>
+                                    <th style="width: 25%">Action</th>
                                 </tr>
                                 </thead>
                                 <tbody>

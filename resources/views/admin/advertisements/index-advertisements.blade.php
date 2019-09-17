@@ -8,9 +8,10 @@
     Advertisements
 @endsection
 
+
 @section('content')
     @include('admin.modal-delete-index')
-
+    {{ Breadcrumbs::render('advertisements') }}
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <a href="{{ route('advertisements.create') }}" class="btn btn-primary btn-icon-split">
@@ -32,7 +33,7 @@
                                     <th>Destination Link</th>
                                     <th>Active</th>
                                     <th>Created at</th>
-                                    <th style="width: 10%">Action</th>
+                                    <th style="width: 25%">Action</th>
                                 </tr>
                                 </thead>
                                 <tbody>

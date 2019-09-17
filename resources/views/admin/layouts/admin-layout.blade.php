@@ -34,7 +34,7 @@
 
         <!-- Sidebar - Brand -->
         <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ route('dashboard') }}">
-            <div class="sidebar-brand-text mx-3">News Blog</div>
+            <div class="sidebar-brand-text mx-3">News Blog <i class="fab fa-neos"></i></div>
         </a>
 
         <!-- Divider -->
@@ -339,8 +339,11 @@
             </div>
             <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
             <div class="modal-footer">
-                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                <a class="btn btn-primary" href="login.html">Logout</a>
+                <form action="{{ route('logout') }}" method="POST">
+                    @csrf
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <button class="btn btn-primary" type="submit">Logout</button>
+                </form>
             </div>
         </div>
     </div>

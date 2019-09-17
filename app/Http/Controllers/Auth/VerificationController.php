@@ -27,6 +27,8 @@ class VerificationController extends Controller
      * @var string
      */
 
+    protected $redirectTo = '/admin';
+
     /**
      * Create a new controller instance.
      *
@@ -37,12 +39,5 @@ class VerificationController extends Controller
         $this->middleware('auth');
         $this->middleware('signed')->only('verify');
         $this->middleware('throttle:6,1')->only('verify', 'resend');
-    }
-
-    public function redirectPath()
-    {
-        $token = \Auth::guard()->user()->token ?? 'token';
-
-        return "/first-access/{$token}";
     }
 }

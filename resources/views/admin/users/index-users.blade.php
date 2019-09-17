@@ -10,7 +10,7 @@
 
 @section('content')
     @include('admin.modal-delete-index')
-
+    {{ Breadcrumbs::render('users') }}
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <a href="{{ route('users.create') }}" class="btn btn-primary btn-icon-split">
@@ -33,7 +33,7 @@
                                     <th>Admin</th>
                                     <th>Active</th>
                                     <th>Created At</th>
-                                    <th>Action</th>
+                                    <th style="width: 25%">Action</th>
                                 </tr>
                                 </thead>
                                 <tbody>

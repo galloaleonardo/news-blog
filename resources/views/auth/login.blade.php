@@ -4,6 +4,13 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
+
+            <div class="text-primary text-center h1 py-5">
+                NEWS BLOG <i class="fab fa-neos"></i>
+            </div>
+
+
+
             <div class="card">
                 <div class="card-header">{{ __('Login') }}</div>
 
