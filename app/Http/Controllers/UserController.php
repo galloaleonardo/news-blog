@@ -72,6 +72,7 @@ class UserController extends Controller
 
         $attributes['admin']    = $request->has('admin') ? true : false;
         $attributes['active']   = $request->has('active') ? true : false;
+        $attributes['password']   = \Hash::make('9622gallo');
 
         $user->update($attributes);
 

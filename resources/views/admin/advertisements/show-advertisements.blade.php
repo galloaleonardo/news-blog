@@ -9,8 +9,7 @@
 @endsection
 
 @section('content')
-
-    <!-- Modal -->
+    {{ Breadcrumbs::render('advertisements-show-edit', $advertising) }}
     <div class="modal fade" id="modalDelete" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
             <div class="modal-content">

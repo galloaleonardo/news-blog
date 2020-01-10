@@ -9,7 +9,7 @@
 @endsection
 
 @section('content')
-    <!-- Modal -->
+    {{ Breadcrumbs::render('category-show-edit', $category) }}
     <div class="modal fade" id="modalDelete" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
             <div class="modal-content">

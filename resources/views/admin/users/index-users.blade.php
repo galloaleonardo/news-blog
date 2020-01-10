@@ -27,24 +27,22 @@
                         <div class="col-sm-12">
                             <table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
                                 <thead>
-                                <tr role="row">
-                                    <th>Name</th>
-                                    <th>Email</th>
-                                    <th>Admin</th>
-                                    <th>Active</th>
-                                    <th>Created At</th>
-                                    <th style="width: 25%">Action</th>
+                                <tr role="row" class="d-flex">
+                                    <th class="col-4">Name</th>
+                                    <th class="col-4">Email</th>
+                                    <th class="col-1">Admin</th>
+                                    <th class="col-1">Active</th>
+                                    <th class="col-2">Action</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 @foreach($users as $user)
-                                    <tr role="row" class="odd">
-                                        <td>{{ $user->name }}</td>
-                                        <td>{{ $user->email }} </td>
-                                        <td>{{ $user->admin ? 'Yes' : 'No' }}</td>
-                                        <td>{{ $user->active ? 'Yes' : 'No' }}</td>
-                                        <td>{{ date_format($user->created_at, 'Y-m-d')  }}</td>
-                                        <td>
+                                    <tr role="row" class="d-flex">
+                                        <td class="col-4">{{ $user->name }}</td>
+                                        <td class="col-4">{{ $user->email }} </td>
+                                        <td class="col-1">{{ $user->admin ? 'Yes' : 'No' }}</td>
+                                        <td class="col-1">{{ $user->active ? 'Yes' : 'No' }}</td>
+                                        <td class="col-2">
                                             <a href="{{ route('users.show', $user->id) }}" class="btn btn-light btn-icon-split btn-sm">
                                                 <span class="icon text-black" data-toggle="tooltip" data-placement="top" title="View">
                                                     <i class="fas fa-eye"></i>

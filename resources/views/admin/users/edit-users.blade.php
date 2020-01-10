@@ -10,7 +10,7 @@
 
 @section('content')
     @include('admin.errors')
-
+    {{ Breadcrumbs::render('users-show-edit', $user) }}
     <div class="card shadow mb-4">
         <div class="card-header py-3"><i class="fas fa-edit"></i> Update user</div>
         <div class="card-body">

@@ -9,7 +9,7 @@
 @endsection
 
 @section('content')
-    <!-- Modal -->
+    {{ Breadcrumbs::render('news-show-edit', $news) }}
     <div class="modal fade" id="modalDelete" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -59,23 +59,33 @@
             <div class="card mb-4">
                 <div class="card-body">
                     <p class="h4 pb-3 text-primary">Resume:</p>
-                    <p class="h5"><strong>Title: {{ $news->title }}</strong></p>
-                    <p class="h5 mt-4"><strong>Subtitle</strong>:<br> {{ $news->subtitle }}</p>
-                    <p class="h5 mt-4"><strong>Category</strong>: {{ $news->category->name }}</p>
-                    <p class="h5"><strong>Display Order</strong>: {{ $news->display_order }}</p>
-                    <p class="h5"><strong>Author</strong>: {{ $news->author }}</p>
-                    <p class="h5"><strong>Link Youtube</strong>: {{ $news->youtube_link }}</p>
-                </div>
-            </div>
-            <div class="card my-4">
-                <div class="card-body">
-                    <p class="h5"><strong>Main Image:<br></strong></p> <img src="/images/news/small/{{ $news->image_link }}" alt="">
-                </div>
-            </div>
 
-            <div class="card my-4">
-                <div class="card-body">
-                  <p class="h5"><strong>Content</strong>:<br> {!! $news->content !!}</p>
+                    <p class="h5"><strong>Title</strong></p>
+                    <input type="text" class="form-control col-md-12 mb-4" value="{{ $news->title }}" readonly="readonly">
+
+                    <p class="h5"><strong>Subtitle</strong></p>
+                    <input type="text" class="form-control col-md-12 mb-4" value="{{ $news->subtitle }}" readonly="readonly">
+
+                    <p class="h5"><strong>Category</strong></p>
+                    <input type="text" class="form-control col-md-12 mb-4" value="{{ $news->category->name }}" readonly="readonly">
+
+                    <p class="h5"><strong>Display Order</strong></p>
+                    <input type="text" class="form-control col-md-12 mb-4" value="{{ $news->display_order }}" readonly="readonly">
+
+                    <p class="h5"><strong>Author</strong></p>
+                    <input type="text" class="form-control col-md-12 mb-4" value="{{ $news->author }}" readonly="readonly">
+
+                    <a class="h4" data-toggle="collapse" href="#collapseImg" role="button" aria-expanded="false" aria-controls="collapseImg">
+                        Main Image <i class="fas fa-sort-down"></i>
+                    </a>
+                    <div class="collapse my-4" id="collapseImg">
+                        <div class="card card-body" style="display: grid;">
+                            <img class="mb-4" style="width: auto" src="/images/news/small/{{ $news->image_link }}" alt="">
+                        </div>
+                    </div>
+
+                    <p class="h5 mt-4"><strong>Content</strong></p>
+                    <textarea class="form-control" rows="20" readonly="readonly">{{ $news->content }}</textarea>
                 </div>
             </div>
         </div>

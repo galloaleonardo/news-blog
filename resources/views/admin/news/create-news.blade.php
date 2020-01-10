@@ -10,7 +10,7 @@
 
 @section('content')
     @include('admin.errors')
-
+    {{ Breadcrumbs::render('news-create') }}
     <div class="card shadow mb-4">
         <div class="card-header py-3"><i class="fas fa-plus-square"></i> Create a new news</div>
         <div class="card-body">

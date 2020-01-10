@@ -27,22 +27,20 @@
                         <div class="col-sm-12">
                             <table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
                                 <thead>
-                                <tr role="row">
-                                    <th>Name</th>
-                                    <th>Displays in menu</th>
-                                    <th>Active</th>
-                                    <th>Created at</th>
-                                    <th style="width: 25%">Action</th>
+                                <tr role="row" class="d-flex">
+                                    <th class="col-6">Name</th>
+                                    <th class="col-2">Displays in menu</th>
+                                    <th class="col-2">Active</th>
+                                    <th class="col-2 text-center">Action</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 @foreach($categories as $category)
-                                    <tr role="row" class="odd">
-                                        <td>{{ $category->name }}</td>
-                                        <td>{{ $category->displays_in_menu ? 'Yes' : 'No' }} </td>
-                                        <td>{{ $category->active ? 'Yes' : 'No' }}</td>
-                                        <td>{{ date_format($category->created_at, 'Y-m-d')  }}</td>
-                                        <td>
+                                    <tr role="row" class="d-flex">
+                                        <td class="col-6">{{ $category->name }}</td>
+                                        <td class="col-2">{{ $category->displays_in_menu ? 'Yes' : 'No' }} </td>
+                                        <td class="col-2">{{ $category->active ? 'Yes' : 'No' }}</td>
+                                        <td class="col-2 text-center">
                                             <a href="{{ route('categories.show', $category->id) }}" class="btn btn-light btn-icon-split btn-sm">
                                                 <span class="icon text-black" data-toggle="tooltip" data-placement="top" title="View">
                                                     <i class="fas fa-eye"></i>
@@ -67,7 +65,7 @@
                             </table>
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="row float-right">
                         <div class="col-sm-12 col-md-7">
                             {{ $categories->links() }}
                         </div>

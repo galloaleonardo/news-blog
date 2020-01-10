@@ -10,7 +10,7 @@
 
 @section('content')
     @include('admin.errors')
-
+    {{ Breadcrumbs::render('advertisements-create') }}
     <div class="card shadow mb-4">
         <div class="card-header py-3"><i class="fas fa-plus-square"></i> Create a new advertising</div>
         <div class="card-body">

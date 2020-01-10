@@ -94,9 +94,7 @@ class AdvertisingController extends Controller {
         $validate = [
             'required',
             'image',
-            'mimes:jpeg,jpg,png',
-            'max:800',
-            'dimensions:max_width=600, max_height=600'
+            'mimes:jpeg,jpg,png'
         ];
 
         return $validate;

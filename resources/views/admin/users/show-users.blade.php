@@ -9,7 +9,7 @@
 @endsection
 
 @section('content')
-    <!-- Modal DELETE -->
+    {{ Breadcrumbs::render('users-show-edit', $user) }}
     <div class="modal fade" id="modalDelete" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
