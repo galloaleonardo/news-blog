@@ -56,10 +56,24 @@
             </a>
         </div>
         <div class="card-body">
-            <p class="h4 pb-3 text-primary">Resume:</p>
-            <p class="h5"><strong>Name</strong>: {{ $category->name }}</p>
-            <p class="h5"><strong>Displays in menu:</strong> {{ $category->displays_in_menu ? 'Yes' : 'No' }}</p>
-            <p class="h5"><strong>Active:</strong> {{ $category->active ? 'Yes' : 'No' }}</p>
+            <div class="card mb-4">
+                <div class="card-body">
+                    <p class="h4 pb-3 text-primary">Resume:</p>
+
+                    <p class="h5"><strong>Name</strong></p>
+                    <input type="text" class="form-control col-md-12 mb-4" value="{{ $category->name }}" readonly="readonly">
+
+                    <p class="h5">
+                        <input type="checkbox" style="margin-left: 0" class="form-check-input" id="displays_in_menu" {{ $category->displays_in_menu ? 'checked' : '' }} disabled="disabled">
+                        <label class="form-check-label" style="margin-left: 20px" for="displays_in_menu">Displays in menu</label>
+                    </p>
+
+                    <p class="h5">
+                        <input type="checkbox" style="margin-left: 0" class="form-check-input" id="displays_in_menu" {{ $category->active ? 'checked' : '' }} disabled="disabled">
+                        <label class="form-check-label" style="margin-left: 20px" for="displays_in_menu">Active</label>
+                    </p>
+                </div>
+            </div>
         </div>
     </div>
 @endsection

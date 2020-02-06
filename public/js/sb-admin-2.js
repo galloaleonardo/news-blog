@@ -171,7 +171,7 @@ $(function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/galloleonardo/news-blog/resources/js/sb-admin-2.js */"./resources/js/sb-admin-2.js");
+module.exports = __webpack_require__(/*! /Users/galloaleonardo/dev/works/laravel/news-blog/resources/js/sb-admin-2.js */"./resources/js/sb-admin-2.js");
 
 
 /***/ })

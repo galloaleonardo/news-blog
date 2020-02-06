@@ -21,10 +21,14 @@ Auth::routes(['verify' => true]);
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
-    Route::get('/', function () { return view('admin.dashboard'); })->name('dashboard');
+    Route::get('/', 'DashboardController@index')->name('dashboard');
     Route::resource('news', 'NewsController');
     Route::get('search', 'NewsController@search')->name('news.search');
     Route::resource('categories', 'CategoryController');
     Route::resource('users', 'UserController');
     Route::resource('advertisements', 'AdvertisingController', ['parameters' => ['advertisements' => 'advertising']]);
+});
+
+Route::get('/news', function () {
+   return view('news.template.template');
 });

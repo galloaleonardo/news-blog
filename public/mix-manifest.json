@@ -4,5 +4,11 @@
     "/css/sb-admin-2.css": "/css/sb-admin-2.css",
     "/js/sb-admin-2.js": "/js/sb-admin-2.js",
     "/js/functions.js": "/js/functions.js",
+    "/js/scripts-news-theme.js": "/js/scripts-news-theme.js",
+    "/js/jquery.min.js": "/js/jquery.min.js",
+    "/js/bootstrap.min.js": "/js/bootstrap.min.js",
+    "/css/styles-news-theme.css": "/css/styles-news-theme.css",
+    "/css/ionicons.css": "/css/ionicons.css",
+    "/css/bootstrap.min.css": "/css/bootstrap.min.css",
     "/js/jquery.easing.min.js": "/js/jquery.easing.min.js"
 }

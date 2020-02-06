@@ -2,7 +2,7 @@
   "_args": [
     [
       "@fortawesome/fontawesome-free@5.9.0",
-      "/Users/galloleonardo/news-blog"
+      "/Users/galloaleonardo/dev/works/laravel/news-blog"
     ]
   ],
   "_from": "@fortawesome/fontawesome-free@5.9.0",
@@ -27,7 +27,7 @@
   ],
   "_resolved": "https://registry.npmjs.org/@fortawesome/fontawesome-free/-/fontawesome-free-5.9.0.tgz",
   "_spec": "5.9.0",
-  "_where": "/Users/galloleonardo/news-blog",
+  "_where": "/Users/galloaleonardo/dev/works/laravel/news-blog",
   "author": {
     "name": "Dave Gandy",
     "email": "dave@fontawesome.com",

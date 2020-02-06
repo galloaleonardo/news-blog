@@ -2,7 +2,6 @@
 <html lang="pt">
 
 <head>
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -21,6 +20,7 @@
 
     <!-- Custom styles for this template-->
     <link href="/css/sb-admin-2.css" rel="stylesheet">
+
 
 </head>
 
@@ -301,6 +301,13 @@
                     @include('admin.flash-message')
                 </div>
                 @yield('content')
+
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js" charset="utf-8"></script>
+
+                @if(isset($lineChart) || isset($barChart))
+                    {!! $lineChart->script() !!}
+                    {!! $barChart->script() !!}
+                @endif
             </div>
 
         </div>

@@ -22,6 +22,7 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="/css/sb-admin-2.css" rel="stylesheet">
+
 </head>
 <body>
     <div id="app">

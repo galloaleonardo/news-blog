@@ -55,15 +55,31 @@
                 <span class="text">Delete</span>
             </a>
         </div>
-        <div class="card-body">
-            <p class="h4 pb-3 text-primary">Resume:</p>
-            <p class="h5"><strong>Title:</strong> {{ $advertising->title }}</p>
-            <p class="h5"><strong>Destination Link:</strong> {{ $advertising->destination_link }}</p>
-            <p class="h5"><strong>Active:</strong> {{ $advertising->active ? 'Yes' : 'No' }}</p>
 
-            <div class="card my-4">
+        <div class="card-body">
+            <div class="card mb-4">
                 <div class="card-body">
-                    <p class="h5"><strong>Main Image:<br></strong></p> <img src="/images/announcements/{{ $advertising->image_link }}" alt="">
+                    <p class="h4 pb-3 text-primary">Resume:</p>
+
+                    <p class="h5"><strong>Title</strong></p>
+                    <input type="text" class="form-control col-md-12 mb-4" value="{{ $advertising->title }}" readonly="readonly">
+
+                    <p class="h5"><strong>Destination Link</strong></p>
+                    <input type="text" class="form-control col-md-12 mb-4" value="{{ $advertising->destination_link }}" readonly="readonly">
+
+                    <a class="h4" data-toggle="collapse" href="#collapseImg" role="button" aria-expanded="false" aria-controls="collapseImg">
+                        Image <i class="fas fa-sort-down"></i>
+                    </a>
+                    <div class="collapse my-4" id="collapseImg">
+                        <div class="card card-body" style="display: grid;">
+                            <img src="/images/announcements/{{ $advertising->image_link }}" class="mb-4" style="width: auto" alt="">
+                        </div>
+                    </div>
+
+                    <p class="h5 mt-2">
+                        <input type="checkbox" style="margin-left: 0" class="form-check-input" id="displays_in_menu" {{ $advertising->destination_link ? 'checked' : '' }} disabled="disabled">
+                        <label class="form-check-label" style="margin-left: 20px" for="displays_in_menu">Active</label>
+                    </p>
                 </div>
             </div>
         </div>
