@@ -55,7 +55,7 @@
                                     <div class="form-group col-md-4">
                                         <select id="display_order" name="display_order" class="form-control">
                                             <option selected disabled>Display order</option>
-                                            <option value="D">Highlights</option>
+                                            <option value="F">Featured</option>
                                             <option value="R">Recent</option>
                                             <option value="L">Lateral</option>
                                         </select>

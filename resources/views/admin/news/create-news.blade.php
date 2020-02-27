@@ -55,7 +55,7 @@
                         <label for="display_order">Dispay order</label>
                         <select id="display_order" name="display_order" class="form-control {{ $errors->has('display_order') ? 'border-left-danger' : '' }}">
                             <option selected disabled>Choose...</option>
-                            <option value="D" {{ old('display_order') == "D"  ? 'selected' : '' }}>Highlights</option>
+                            <option value="D" {{ old('display_order') == "F"  ? 'selected' : '' }}>Featured</option>
                             <option value="R" {{ old('display_order') == "R"  ? 'selected' : '' }}>Recent</option>
                             <option value="L" {{ old('display_order') == "L"  ? 'selected' : '' }}>Lateral</option>
                         </select>

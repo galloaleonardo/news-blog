@@ -19,12 +19,13 @@ class CreateNewsTable extends Migration
             $table->foreign('category_id')->references('id')->on('categories');
             $table->string('title');
             $table->string('subtitle')->nullable();
-            $table->char('display_order');
             $table->string('image_link');
             $table->longText('content');
             $table->string('author');
             $table->string('youtube_link')->nullable();
             $table->boolean('active')->default(true);
+            $table->boolean('featured')->default(false);
+            $table->bigInteger('views');
             $table->timestamps();
         });
     }
