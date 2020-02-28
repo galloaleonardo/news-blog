@@ -1,7 +1,5 @@
 <?php
 
-Route::get('/home', 'HomeController@index')->name('home');
-
 Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
     Route::get('/', 'DashboardController@index')->name('dashboard');
     Route::resource('news', 'NewsController');
@@ -13,3 +11,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
 
 Route::get('/', 'MagazineController@index')->name('magazine.index');
 Route::get('/show/{news}', 'MagazineController@show')->name('magazine.show');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

@@ -9,11 +9,12 @@ use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 use Intervention\Image\Facades\Image;
 
-class NewsController extends Controller {
+class NewsController extends Controller
+{
 
     public function index()
     {
-        $news       = News::paginate(10);
+        $news = News::paginate(10);
         $categories = Category::where('active', 1)->get();
 
         return view('admin.news.index-news', compact('news', 'categories'));
@@ -30,22 +31,21 @@ class NewsController extends Controller {
     {
 
         $request->validate([
-            'title'         => ['required', 'max:100'],
-            'subtitle'      => ['required', 'max:255'],
-            'image_link'    => $this->validateImage(),
-            'category_id'   => ['required', 'numeric'],
-            'display_order' => 'required',
-            'author'        => 'required',
-            'content'       => 'required'
+            'title' => ['required', 'max:100'],
+            'subtitle' => ['required', 'max:255'],
+            'image_link' => $this->validateImage(),
+            'category_id' => ['required', 'numeric'],
+            'author' => 'required',
+            'content' => 'required'
         ]);
 
         $attributes = $request->all();
 
-        $attributes['active']     = $request->has('active') ? true : false;
+        $attributes['active'] = $request->has('active') ? true : false;
+        $attributes['featured'] = $request->has('active') ? true : false;
         $attributes['image_link'] = $this->uploadImageAndReturnName($request->file('image_link'));
 
         News::create($attributes);
-
 
         return redirect(route('news.index'))->with('success', 'News created successfuly.');
     }
@@ -66,12 +66,11 @@ class NewsController extends Controller {
         $attributes = $request->all();
 
         $request->validate([
-            'title'         => ['required', 'max:100'],
-            'subtitle'      => ['required', 'max:255'],
-            'category_id'   => ['required', 'numeric'],
-            'display_order' => 'required',
-            'author'        => 'required',
-            'content'       => 'required'
+            'title' => ['required', 'max:100'],
+            'subtitle' => ['required', 'max:255'],
+            'category_id' => ['required', 'numeric'],
+            'author' => 'required',
+            'content' => 'required'
         ]);
 
         if ($request->hasFile('image_link')) {
@@ -80,6 +79,7 @@ class NewsController extends Controller {
         }
 
         $attributes['active'] = $request->has('active') ? true : false;
+        $attributes['featured'] = $request->has('featured') ? true : false;
 
         $news->update($attributes);
 
@@ -94,7 +94,7 @@ class NewsController extends Controller {
 
     public function search(Request $request)
     {
-        $news       = News::query();
+        $news = News::query();
         $categories = Category::where('active', 1)->get();
 
         if ($request->has('title')) {
@@ -128,8 +128,8 @@ class NewsController extends Controller {
 
     private function uploadImageAndReturnName(UploadedFile $image)
     {
-        $name       = Helper::getRandomNameImage();
-        $jpg_name   = "{$name}.jpg";
+        $name = Helper::getRandomNameImage();
+        $jpg_name = "{$name}.jpg";
         $path_large = public_path('images/news/large/');
         $path_small = public_path('images/news/small/');
 
@@ -147,11 +147,11 @@ class NewsController extends Controller {
     private function validateImage()
     {
         $validate = [
-                'required',
-                'image',
-                'mimes:jpeg,jpg,png',
-                'max:800',
-                'dimensions:max_width=1500, max_height=1500'
+            'required',
+            'image',
+            'mimes:jpeg,jpg,png',
+            'max:800',
+            'dimensions:max_width=1500, max_height=1500'
         ];
 
         return $validate;

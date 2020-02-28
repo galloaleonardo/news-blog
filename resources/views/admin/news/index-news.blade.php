@@ -36,12 +36,10 @@
                             <form method="GET" action="{{ route('news.search') }}">
                                 @csrf
                                 <div class="form-row">
-                                    <div class="form-group col-md-6">
+                                    <div class="form-group col-md-12">
                                         <input type="text" class="form-control" id="title" name="title" placeholder="Title">
                                     </div>
-                                    <div class="form-group col-md-6">
-                                        <input type="text" class="form-control" id="author" name="author" placeholder="Author">
-                                    </div>
+
                                 </div>
                                 <div class="form-row">
                                     <div class="form-group col-md-4">
@@ -53,20 +51,15 @@
                                         </select>
                                     </div>
                                     <div class="form-group col-md-4">
-                                        <select id="display_order" name="display_order" class="form-control">
-                                            <option selected disabled>Display order</option>
-                                            <option value="F">Featured</option>
-                                            <option value="R">Recent</option>
-                                            <option value="L">Lateral</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group col-md-4">
                                         <select id="active" name="active" class="form-control">
                                             <option selected disabled>Active</option>
                                             <option value="A">All</option>
                                             <option value="Y">Yes</option>
                                             <option value="N">No</option>
                                         </select>
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <input type="text" class="form-control" id="author" name="author" placeholder="Author">
                                     </div>
                                 </div>
                                 <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>

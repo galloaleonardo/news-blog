@@ -51,23 +51,16 @@
                             @endforeach
                         </select>
                     </div>
-                    <div class="form-group col-md-3">
-                        <label for="display_order">Dispay order</label>
-                        <select id="display_order" name="display_order" class="form-control {{ $errors->has('display_order') ? 'border-left-danger' : '' }}">
-                            <option selected disabled>Choose...</option>
-                            <option value="D" {{ $news->display_order == "D"  ? 'selected' : '' }}>Highlights</option>
-                            <option value="R" {{ $news->display_order == "R"  ? 'selected' : '' }}>Recent</option>
-                            <option value="L" {{ $news->display_order == "L"  ? 'selected' : '' }}>Lateral</option>
-                        </select>
-                    </div>
-                    <div class="form-group col-md-3">
+                    <div class="form-group col-md-4">
                         <label for="author">Author</label>
                         <input type="text" class="form-control {{ $errors->has('author') ? 'border-left-danger' : '' }}" id="author" name="author" value="{{ $news->author }}">
                     </div>
-                    <div class="form-group col-md-3">
+                    <div class="form-group col-md-4">
                         <label for="youtube_link">Link Youtube</label>
                         <input type="text" class="form-control" id="youtube_link" name="youtube_link" value="{{ $news->youtube_link }}">
                     </div>
+                </div>
+                <div class="form-row">
                     <div class="form-group col-md-12">
                         <label class="{{ $errors->has('content') ? 'border-bottom-danger' : '' }}" for="news_content">Content</label>
                         <textarea name="content" id="news_content">{{ $news->content }} </textarea>
@@ -76,9 +69,15 @@
                         </script>
                     </div>
                 </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="featured" name="featured" {{ $news->featured ? 'checked' : '' }}>
+                    <label class="form-check-label" for="featured">
+                        Featured
+                    </label>
+                </div>
                 <div class="form-group">
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="active" name="active" {{ $category->active ? 'checked' : '' }}>
+                        <input class="form-check-input" type="checkbox" id="active" name="active" {{ $news->active ? 'checked' : '' }}>
                         <label class="form-check-label" for="active">
                             Active
                         </label>

@@ -19,10 +19,12 @@
                 <div class="form-row">
                     <div class="form-group col-md-8">
                         <label for="name">Title</label>
-                        <input type="text" class="form-control {{ $errors->has('title') ? 'border-left-danger' : '' }}" id="title" name="title" value="{{ old('title') }}">
+                        <input type="text" class="form-control {{ $errors->has('title') ? 'border-left-danger' : '' }}"
+                               id="title" name="title" value="{{ old('title') }}">
                     </div>
                     <div class="form-group col-md-4">
-                        <label for="image_link">Main image - <small>(Max. 1500px x 1500px) - (Max. 800kb)</small></label>
+                        <label for="image_link">Main image - <small>(Max. 1500px x 1500px) - (Max.
+                                800kb)</small></label>
                         <div class="input-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text">
@@ -31,19 +33,23 @@
                             </div>
                             <div class="custom-file">
                                 <input type="file" class="custom-file-input" id="image_link" name="image_link">
-                                <label class="custom-file-label {{ $errors->has('image_link') ? 'border-left-danger' : '' }}" for="image_link">Choose image...</label>
+                                <label class="custom-file-label {{ $errors->has('image_link') ? 'border-left-danger' : '' }}"
+                                       for="image_link">Choose image...</label>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="subtitle">Subtitle</label>
-                    <textarea class="form-control {{ $errors->has('subtitle') ? 'border-left-danger' : '' }}" name="subtitle" id="subtitle">{{ old('subtitle') }}</textarea>
+                    <textarea class="form-control {{ $errors->has('subtitle') ? 'border-left-danger' : '' }}"
+                              name="subtitle" id="subtitle">{{ old('subtitle') }}</textarea>
                 </div>
+
                 <div class="form-row">
-                    <div class="form-group col-md-3">
+                    <div class="form-group col-md-4">
                         <label for="category_id">Category</label>
-                        <select id="category_id" name="category_id" class="form-control {{ $errors->has('category_id') ? 'border-left-danger' : '' }}">
+                        <select id="category_id" name="category_id"
+                                class="form-control {{ $errors->has('category_id') ? 'border-left-danger' : '' }}">
                             <option selected disabled>Choose...</option>
                             @foreach($categories as $category)
                                 <option value="{{ $category->id }}" {{ $category->id == old('category_id') ? 'selected' : '' }}>{{ $category->name }}</option>
@@ -51,23 +57,18 @@
 
                         </select>
                     </div>
-                    <div class="form-group col-md-3">
-                        <label for="display_order">Dispay order</label>
-                        <select id="display_order" name="display_order" class="form-control {{ $errors->has('display_order') ? 'border-left-danger' : '' }}">
-                            <option selected disabled>Choose...</option>
-                            <option value="D" {{ old('display_order') == "F"  ? 'selected' : '' }}>Featured</option>
-                            <option value="R" {{ old('display_order') == "R"  ? 'selected' : '' }}>Recent</option>
-                            <option value="L" {{ old('display_order') == "L"  ? 'selected' : '' }}>Lateral</option>
-                        </select>
-                    </div>
-                    <div class="form-group col-md-3">
+                    <div class="form-group col-md-4">
                         <label for="author">Author</label>
-                        <input type="text" class="form-control {{ $errors->has('author') ? 'border-left-danger' : '' }}" id="author" name="author" value="{{ old('author') }}">
+                        <input type="text" class="form-control {{ $errors->has('author') ? 'border-left-danger' : '' }}"
+                               id="author" name="author" value="{{ old('author') }}">
                     </div>
-                    <div class="form-group col-md-3">
+                    <div class="form-group col-md-4">
                         <label for="youtube_link">Link Youtube</label>
-                        <input type="text" class="form-control" id="youtube_link" name="youtube_link" value="{{ old('youtube_link') }}">
+                        <input type="text" class="form-control" id="youtube_link" name="youtube_link"
+                               value="{{ old('youtube_link') }}">
                     </div>
+                </div>
+                <div class="form-row">
                     <div class="form-group col-md-12">
                         <label class="{{ $errors->has('content') ? 'border-bottom-danger' : '' }}" for="news_content">Content</label>
                         <textarea name="content" id="news_content">{{ old('content') }} </textarea>
@@ -78,13 +79,18 @@
                 </div>
                 <div class="form-group">
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="active" name="active" checked >
+                        <input class="form-check-input" type="checkbox" id="featured" name="featured">
+                        <label class="form-check-label" for="featured">
+                            Featured
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="active" name="active" checked>
                         <label class="form-check-label" for="active">
                             Active
                         </label>
                     </div>
-                </div>
-                <button type="submit" class="btn btn-primary">Create</button>
+                    <button type="submit" class="btn btn-primary mt-4">Create</button>
             </form>
         </div>
     </div>
