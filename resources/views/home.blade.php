@@ -14,9 +14,7 @@
                         </div>
                     @endif
 
-                        <div class="alert alert-primary" role="alert">
-                            Voce está logado!
-                        </div>
+                    You are logged in!
                 </div>
             </div>
         </div>

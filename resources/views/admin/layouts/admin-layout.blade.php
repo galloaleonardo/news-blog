@@ -2,12 +2,15 @@
 <html lang="pt">
 
 <head>
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
+
+    @if (request()->is('*news/create') || request()->is('*news/*/edit'))
+        <script src="https://cdn.ckeditor.com/4.12.1/standard/ckeditor.js"></script>
+    @endif
 
     <title>@yield('title-page')</title>
 
@@ -17,6 +20,7 @@
 
     <!-- Custom styles for this template-->
     <link href="/css/sb-admin-2.css" rel="stylesheet">
+
 
 </head>
 
@@ -29,16 +33,16 @@
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
         <!-- Sidebar - Brand -->
-        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-            <div class="sidebar-brand-text mx-3">News Blog</div>
+        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ route('dashboard') }}">
+            <div class="sidebar-brand-text mx-3">News Blog <i class="fab fa-neos"></i></div>
         </a>
 
         <!-- Divider -->
         <hr class="sidebar-divider my-0">
 
         <!-- Nav Item - Dashboard -->
-        <li class="nav-item active">
-            <a class="nav-link" href="index.html">
+        <li class="nav-item {{ request()->is('admin') ? 'active' : '' }}">
+            <a class="nav-link" href="{{ route('dashboard') }}">
                 <i class="fas fa-fw fa-tachometer-alt"></i>
                 <span>Dashboard</span></a>
         </li>
@@ -52,26 +56,18 @@
         </div>
 
         <!-- Nav Item - Categories Menu -->
-        <li class="nav-item">
-            <a class="nav-link" href="#">
+        <li class="nav-item {{ request()->is('*categories*') ? 'active' : '' }}">
+            <a class="nav-link" href="{{ route('categories.index') }}">
                 <i class="fas fa-sitemap"></i>
                 <span>Categories</span>
             </a>
         </li>
 
         <!-- Nav Item - News Menu -->
-        <li class="nav-item">
-            <a class="nav-link" href="#">
+        <li class="nav-item {{ request()->is('*news*') ? 'active' : '' }}">
+            <a class="nav-link" href="{{ route('news.index') }}">
                 <i class="fas fa-newspaper"></i>
                 <span>News</span>
-            </a>
-        </li>
-
-        <!-- Nav Item - Editor Areas Menu -->
-        <li class="nav-item">
-            <a class="nav-link" href="#">
-                <i class="fas fa-book"></i>
-                <span>Editor Areas</span>
             </a>
         </li>
 
@@ -84,32 +80,15 @@
         </div>
 
         <!-- Nav Item - Advertisings Menu -->
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="#">
+        <li class="nav-item {{ request()->is('*advertisements*') ? 'active' : '' }}">
+            <a class="nav-link collapsed" href="{{ route('advertisements.index') }}">
                 <i class="fab fa-adversal"></i>
                 <span>Advertisings</span>
             </a>
         </li>
 
-        <!-- Nav Item - Rotating Banners Menu -->
-        <li class="nav-item">
-            <a class="nav-link" href="charts.html">
-                <i class="fab fa-bandcamp"></i>
-                <span>Rotating Banners</span>
-            </a>
-        </li>
-
-        <!-- Nav Item - Rotating Labels Menu -->
-        <li class="nav-item">
-            <a class="nav-link" href="tables.html">
-                <i class="fas fa-tags"></i>
-                <span>Rotating Labels</span>
-            </a>
-        </li>
-
         <!-- Divider -->
         <hr class="sidebar-divider d-none d-md-block">
-
 
         <!-- Heading -->
         <div class="sidebar-heading">
@@ -117,8 +96,8 @@
         </div>
 
         <!-- Nav Item - Users Menu -->
-        <li class="nav-item">
-            <a class="nav-link" href="tables.html">
+        <li class="nav-item {{ request()->is('*users*') ? 'active' : '' }}">
+            <a class="nav-link" href="{{ route('users.index') }}">
                 <i class="fas fa-users"></i>
                 <span>Users</span>
             </a>
@@ -145,18 +124,6 @@
                 <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
                     <i class="fa fa-bars"></i>
                 </button>
-
-                <!-- Topbar Search -->
-                <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                    <div class="input-group">
-                        <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
-                        <div class="input-group-append">
-                            <button class="btn btn-primary" type="button">
-                                <i class="fas fa-search fa-sm"></i>
-                            </button>
-                        </div>
-                    </div>
-                </form>
 
                 <!-- Topbar Navbar -->
                 <ul class="navbar-nav ml-auto">
@@ -291,8 +258,13 @@
                     <!-- Nav Item - User Information -->
                     <li class="nav-item dropdown no-arrow">
                         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <span class="mr-2 d-none d-lg-inline text-gray-600 small">Valerie Luna</span>
-                            <i class="fas fa-user-circle"></i>
+                            <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::user()->name }}</span>
+
+                            @if( ! Auth::user()->avatar)
+                                <i class="fas fa-user-circle"></i>
+                             @else
+                                <img src="/images/avatars/{{ Auth::user()->avatar }}" width="25px" alt="">
+                            @endif
                         </a>
                         <!-- Dropdown - User Information -->
                         <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
@@ -325,10 +297,17 @@
                 <!-- Page Heading -->
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
                     <h1 class="h3 mb-0 text-gray-800">@yield('title-content')</h1>
-                    <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
-                </div>
 
+                    @include('admin.flash-message')
+                </div>
                 @yield('content')
+
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js" charset="utf-8"></script>
+
+                @if(isset($lineChart) || isset($barChart))
+                    {!! $lineChart->script() !!}
+                    {!! $barChart->script() !!}
+                @endif
             </div>
 
         </div>
@@ -367,12 +346,17 @@
             </div>
             <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
             <div class="modal-footer">
-                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                <a class="btn btn-primary" href="login.html">Logout</a>
+                <form action="{{ route('logout') }}" method="POST">
+                    @csrf
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <button class="btn btn-primary" type="submit">Logout</button>
+                </form>
             </div>
         </div>
     </div>
 </div>
+
+
 
 <!-- Bootstrap core JavaScript-->
 <script src="/js/app.js"></script>
@@ -382,6 +366,9 @@
 
 <!-- Custom scripts for all pages-->
 <script src="/js/sb-admin-2.js"></script>
+
+<!-- Functions scripts -->
+<script src="/js/functions.js"></script>
 
 </body>
 

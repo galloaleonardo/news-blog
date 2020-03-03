@@ -1,32 +1,17 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
-Route::get('/', function () {
-    return view('welcome');
+Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
+    Route::get('/', 'DashboardController@index')->name('dashboard');
+    Route::resource('news', 'NewsController');
+    Route::get('search', 'NewsController@search')->name('news.search');
+    Route::resource('categories', 'CategoryController');
+    Route::resource('users', 'UserController');
+    Route::resource('advertisements', 'AdvertisingController', ['parameters' => ['advertisements' => 'advertising']]);
 });
+
+Route::get('/', 'MagazineController@index')->name('magazine.index');
+Route::get('/show/{news}', 'MagazineController@show')->name('magazine.show');
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-
-Route::resource('categories', 'CategoryController');
-Route::resource('users', 'UserController');
-Route::resource('advertising', 'AdvertisingController');
-Route::resource('editor-areas', 'EditorAreaController');
-Route::resource('news', 'NewsController');
-Route::resource('rotating-banners', 'RotatingBannerController');
-Route::resource('rotating-labels', 'RotatingLabelController');
-
-Route::get('/admin', function () {
-    return view('admin.dashboard');
-});
