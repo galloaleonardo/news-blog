@@ -69,6 +69,7 @@
                         </script>
                     </div>
                 </div>
+
                 <div class="form-check">
                     <input class="form-check-input" type="checkbox" id="featured" name="featured" {{ $news->featured ? 'checked' : '' }}>
                     <label class="form-check-label" for="featured">

@@ -16,7 +16,7 @@ trait MagazineTrait
 
     public function getRecentNews()
     {
-        return News::where('featured', false)->limit(5)->get();
+        return News::where('featured', false)->orderBy('updated_at', 'desc')->limit(5)->get();
     }
 
     public function getPopularNews()

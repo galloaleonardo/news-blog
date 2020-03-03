@@ -18,7 +18,7 @@ class MagazineController extends Controller
         $popularNews = $this->getPopularNews();
         $advertising = $this->getAdvertising();
 
-        return view('news.template.magazine',
+        return view('magazine.template.magazine',
             compact('featuredNews', 'recentNews', 'popularNews', 'advertising'));
     }
 

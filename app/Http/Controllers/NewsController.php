@@ -14,7 +14,7 @@ class NewsController extends Controller
 
     public function index()
     {
-        $news = News::paginate(10);
+        $news = News::orderBy('updated_at', 'desc')->paginate(10);
         $categories = Category::where('active', 1)->get();
 
         return view('admin.news.index-news', compact('news', 'categories'));
@@ -42,7 +42,7 @@ class NewsController extends Controller
         $attributes = $request->all();
 
         $attributes['active'] = $request->has('active') ? true : false;
-        $attributes['featured'] = $request->has('active') ? true : false;
+        $attributes['featured'] = $request->has('featured') ? true : false;
         $attributes['image_link'] = $this->uploadImageAndReturnName($request->file('image_link'));
 
         News::create($attributes);
