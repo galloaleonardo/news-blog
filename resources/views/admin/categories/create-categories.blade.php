@@ -28,6 +28,16 @@
                         <label class="form-check-label" for="displays_in_menu">
                             Displays in menu
                         </label>
+                        <i class="fas fa-info-circle" data-toggle="tooltip" data-placement="top" title="This option displays the category name in the home page menu."></i>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="featured" name="featured" value="{{ old('featured') }}">
+                        <label class="form-check-label" for="featured">
+                            Featured
+                        </label>
+                        <i class="fas fa-info-circle" data-toggle="tooltip" data-placement="top" title="This option displays the category as highlighted on the home page."></i>
                     </div>
                 </div>
                 <div class="form-group">

@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use App\Category;
 use Illuminate\Http\Request;
 
-class CategoryController extends Controller {
+class CategoryController extends Controller
+{
 
     public function index()
     {
@@ -28,7 +29,8 @@ class CategoryController extends Controller {
         $category = $request->all();
 
         $category['displays_in_menu'] = $request->has('displays_in_menu') ? true : false;
-        $category['active']           = $request->has('active') ? true : false;
+        $category['featured'] = $request->has('featured') ? true : false;
+        $category['active'] = $request->has('active') ? true : false;
 
         Category::create($category);
 
@@ -54,7 +56,8 @@ class CategoryController extends Controller {
         $aux_category = \request()->all();
 
         $aux_category['displays_in_menu'] = \request()->has('displays_in_menu') ? true : false;
-        $aux_category['active']           = \request()->has('active') ? true : false;
+        $aux_category['featured'] = \request()->has('featured') ? true : false;
+        $aux_category['active'] = \request()->has('active') ? true : false;
 
         $category->update($aux_category);
 

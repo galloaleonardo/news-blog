@@ -5,6 +5,7 @@ namespace App\Http\Traits;
 
 
 use App\Advertising;
+use App\Category;
 use App\News;
 
 trait MagazineTrait
@@ -22,6 +23,41 @@ trait MagazineTrait
     public function getPopularNews()
     {
         return News::limit(4)->orderBy('views', 'desc')->get();
+    }
+
+    public function getFeaturedCategories()
+    {
+        $categories = Category::where('featured', true)->limit(3)->get();
+
+        $category_news_1 = News::select('news.*', 'categories.name')
+            ->join('categories', 'news.category_id', 'categories.id')
+            ->where('categories.id', $categories[0]->id)
+            ->where('categories.featured', true)
+            ->inRandomOrder()
+            ->limit(6)
+            ->get();
+
+        $category_news_2 = News::select('news.*', 'categories.name')
+            ->join('categories', 'news.category_id', 'categories.id')
+            ->where('categories.id', $categories[1]->id)
+            ->where('categories.featured', true)
+            ->inRandomOrder()
+            ->limit(6)
+            ->get();
+
+        $category_news_3 = News::select('news.*', 'categories.name')
+            ->join('categories', 'news.category_id', 'categories.id')
+            ->where('categories.id', $categories[2]->id)
+            ->where('categories.featured', true)
+            ->inRandomOrder()
+            ->limit(6)
+            ->get();
+
+        return [
+            'category_1' => $category_news_1,
+            'category_2' => $category_news_2,
+            'category_3' => $category_news_3
+        ];
     }
 
     public function getAdvertising()

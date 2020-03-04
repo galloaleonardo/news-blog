@@ -12,7 +12,6 @@
     <link href="{{ asset('/fontawesome/css/all.css') }}" rel="stylesheet" type="text/css">
 </head>
 <body>
-
 <header class="shadow mb-4" style="background-color: #F8F9FC">
     <div class="container">
         <a class="logo" href="/">
@@ -195,45 +194,59 @@
                         <ul class="nav nav-tabs" id="myTab" role="tablist">
                             <li class="nav-item">
                                 <a class="nav-link active font-13" id="home-tab" data-toggle="tab" href="#home"
-                                   role="tab" aria-controls="home" aria-selected="true">Home</a>
+                                   role="tab" aria-controls="home"
+                                   aria-selected="true">{{ $featuredNewsCategories['category_1'][0]->name }}</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link font-13" id="profile-tab" data-toggle="tab" href="#profile"
-                                   role="tab" aria-controls="profile" aria-selected="false">Profile</a>
+                                   role="tab" aria-controls="profile"
+                                   aria-selected="false">{{ $featuredNewsCategories['category_2'][0]->name }}</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link font-13" id="contact-tab" data-toggle="tab" href="#contact"
-                                   role="tab" aria-controls="contact" aria-selected="false">Contact</a>
+                                   role="tab" aria-controls="contact"
+                                   aria-selected="false">{{ @$featuredNewsCategories['category_3'][0]->name }}</a>
                             </li>
                         </ul>
                         <div class="tab-content mt-4" id="myTabContent">
                             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        <img src="images/crypto-news-6-600x450.jpg" alt="">
-                                        <h4 class="pt-20"><a href="#"><b>1</b></a></h4>
-                                        <ul class="list-li-mr-20 pt-10 mb-30">
-                                            <li class="color-lite-black">by <a href="#" class="color-black"><b>Olivia
-                                                        Capzallo,</b></a>
-                                                Jan 25, 2018
-                                            </li>
-                                        </ul>
+                                <div class="col-sm-12">
+                                    <div class="row">
+                                        @foreach($featuredNewsCategories['category_1'] as $category_1)
+                                            <div class="col-sm-6">
+                                                <img src="{{ asset('/images/news/large') . '/' . $category_1->image_link }}"
+                                                     alt="">
+                                                <h4 class="pt-20"><a href="#"><b>{{ $category_1->title }}</b></a></h4>
+                                                <ul class="list-li-mr-20 pt-10 mb-30">
+                                                    <li class="color-lite-black">by <a href="#" class="color-black">
+                                                            <b>{{ $category_1->author }}</b></a>
+                                                        Jan 25, 2018
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        @endforeach
                                     </div>
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                                 <div class="tab-pane fade show active" id="home" role="tabpanel"
                                      aria-labelledby="home-tab">
-                                    <div class="row">
-                                        <div class="col-sm-6">
-                                            <img src="images/crypto-news-6-600x450.jpg" alt="">
-                                            <h4 class="pt-20"><a href="#"><b>2</b></a></h4>
-                                            <ul class="list-li-mr-20 pt-10 mb-30">
-                                                <li class="color-lite-black">by <a href="#" class="color-black"><b>Olivia
-                                                            Capzallo,</b></a>
-                                                    Jan 25, 2018
-                                                </li>
-                                            </ul>
+                                    <div class="col-sm-12">
+                                        <div class="row">
+                                            @foreach($featuredNewsCategories['category_2'] as $category_2)
+                                                <div class="col-sm-6">
+                                                    <img src="{{ asset('/images/news/large') . '/' . $category_2->image_link }}"
+                                                         alt="">
+                                                    <h4 class="pt-20"><a href="#"><b>{{ $category_2->title }}</b></a>
+                                                    </h4>
+                                                    <ul class="list-li-mr-20 pt-10 mb-30">
+                                                        <li class="color-lite-black">by <a href="#" class="color-black">
+                                                                <b>{{ $category_2->author }}</b></a>
+                                                            Jan 25, 2018
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            @endforeach
                                         </div>
                                     </div>
                                 </div>
@@ -241,16 +254,22 @@
                             <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
                                 <div class="tab-pane fade show active" id="home" role="tabpanel"
                                      aria-labelledby="home-tab">
-                                    <div class="row">
-                                        <div class="col-sm-6">
-                                            <img src="images/crypto-news-6-600x450.jpg" alt="">
-                                            <h4 class="pt-20"><a href="#"><b>3</b></a></h4>
-                                            <ul class="list-li-mr-20 pt-10 mb-30">
-                                                <li class="color-lite-black">by <a href="#" class="color-black"><b>Olivia
-                                                            Capzallo,</b></a>
-                                                    Jan 25, 2018
-                                                </li>
-                                            </ul>
+                                    <div class="col-sm-12">
+                                        <div class="row">
+                                            @foreach($featuredNewsCategories['category_3'] as $category_3)
+                                                <div class="col-sm-6">
+                                                    <img src="{{ asset('/images/news/large') . '/' . $category_3->image_link }}"
+                                                         alt="">
+                                                    <h4 class="pt-20"><a href="#"><b>{{ $category_3->title }}</b></a>
+                                                    </h4>
+                                                    <ul class="list-li-mr-20 pt-10 mb-30">
+                                                        <li class="color-lite-black">by <a href="#" class="color-black">
+                                                                <b>{{ $category_3->author }}</b></a>
+                                                            Jan 25, 2018
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            @endforeach
                                         </div>
                                     </div>
                                 </div>
