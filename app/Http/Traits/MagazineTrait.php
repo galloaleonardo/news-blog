@@ -62,6 +62,6 @@ trait MagazineTrait
 
     public function getAdvertising()
     {
-        return Advertising::all();
+        return Advertising::where('active', true)->limit(6)->get();
     }
 }

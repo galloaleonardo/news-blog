@@ -25,6 +25,6 @@ class MagazineController extends Controller
 
     public function show(News $news)
     {
-        dd($news);
+        return view('magazine.template.post', compact('news'));
     }
 }

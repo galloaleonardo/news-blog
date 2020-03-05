@@ -29,7 +29,6 @@ class NewsController extends Controller
 
     public function store(Request $request)
     {
-
         $request->validate([
             'title' => ['required', 'max:100'],
             'subtitle' => ['required', 'max:255'],
@@ -44,6 +43,7 @@ class NewsController extends Controller
         $attributes['active'] = $request->has('active') ? true : false;
         $attributes['featured'] = $request->has('featured') ? true : false;
         $attributes['image_link'] = $this->uploadImageAndReturnName($request->file('image_link'));
+        $attributes['content'] = str_replace('<p>', '<p class="mtb-40">', $attributes['content']);
 
         News::create($attributes);
 
@@ -80,6 +80,7 @@ class NewsController extends Controller
 
         $attributes['active'] = $request->has('active') ? true : false;
         $attributes['featured'] = $request->has('featured') ? true : false;
+        $attributes['content'] = str_replace('<p>', '<p class="mtb-40">', $attributes['content']);
 
         $news->update($attributes);
 

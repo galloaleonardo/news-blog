@@ -59,7 +59,7 @@
     <div class="h-600x h-sm-auto">
         <div class="h-2-3 h-sm-auto oflow-hidden">
             <div class="pb-5 pr-5 pr-sm-0 float-left float-sm-none w-2-3 w-sm-100 h-100 h-sm-300x">
-                <a class="pos-relative h-100 dplay-block" href="#">
+                <a class="pos-relative h-100 dplay-block" href="{{ route('magazine.show', ['news' => $featuredNews[0]->id]) }}">
                     <img class="image-size" src="{{ asset('/images/news/large') . '/' . $featuredNews[0]->image_link }}"
                          alt="">
                     <div class="img-bg bg-1 bg-grad-layer-6"></div>
@@ -315,18 +315,13 @@
                                         class="color-black"><b>Danile Palmer,</b></span> Jan 25, 2018</h6>
                         </div>
                     </a>
-                    <div class="mtb-50 pos-relative">
-                        <img src="images/banner-1-600x450.jpg" alt="">
-                        <div class="abs-tblr bg-layer-7 text-center color-white">
-                            <div class="dplay-tbl">
-                                <div class="dplay-tbl-cell">
-                                    <h4><b>Available for mobile & desktop</b></h4>
-                                    <a class="mt-15 color-primary link-brdr-btm-primary" href="#"><b>Download for
-                                            free</b></a>
-                                </div>
-                            </div>
+                    @foreach($advertising as $adv)
+                        <div class="mtb-50 pos-relative">
+                            <a href="{{ $adv->destination_link }}" style="display: inline;" target="_blank">
+                                <img src="{{ asset('/images/announcements') . '/' . $adv->image_link }}" alt=""/>
+                            </a>
                         </div>
-                    </div>
+                    @endforeach
                 </div>
             </div>
         </div>
