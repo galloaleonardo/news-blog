@@ -30,9 +30,9 @@
                                 <tr role="row" class="d-flex">
                                     <th class="col-4">Name</th>
                                     <th class="col-4">Email</th>
-                                    <th class="col-1">Admin</th>
-                                    <th class="col-1">Active</th>
-                                    <th class="col-2">Action</th>
+                                    <th class="col-1" style="text-align: center">Admin</th>
+                                    <th class="col-1" style="text-align: center">Active</th>
+                                    <th class="col-2" style="text-align: center">Action</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -40,22 +40,28 @@
                                     <tr role="row" class="d-flex">
                                         <td class="col-4">{{ $user->name }}</td>
                                         <td class="col-4">{{ $user->email }} </td>
-                                        <td class="col-1">{{ $user->admin ? 'Yes' : 'No' }}</td>
-                                        <td class="col-1">{{ $user->active ? 'Yes' : 'No' }}</td>
-                                        <td class="col-2">
-                                            <a href="{{ route('users.show', $user->id) }}" class="btn btn-light btn-icon-split btn-sm">
+                                        <td class="col-1" style="text-align: center">
+                                            <input type="checkbox" id="is-admin" disbled {{ $user->admin ? 'checked="checked"' : '' }}>
+                                            <label class="form-check-label" for="is-admin"></label>
+                                        </td>
+                                        <td class="col-1" style="text-align: center">
+                                            <input type="checkbox" id="is-active" disabled {{ $user->active ? 'checked="checked"' : '' }}>
+                                            <label class="form-check-label" for="is-active"></label>
+                                        </td>
+                                        <td class="col-2" style="text-align: center">
+                                            <a href="{{ route('users.show', $user->id) }}" class="btn btn-light btn-sm">
                                                 <span class="icon text-black" data-toggle="tooltip" data-placement="top" title="View">
                                                     <i class="fas fa-eye"></i>
                                                 </span>
                                             </a>
-                                            |
-                                            <a href="{{ route('users.edit', $user->id) }}" class="btn btn-light btn-icon-split btn-sm">
+                                            
+                                            <a href="{{ route('users.edit', $user->id) }}" class="btn btn-light btn-sm">
                                                 <span class="icon text-info" data-toggle="tooltip" data-placement="top" title="Edit">
                                                     <i class="fas fa-pencil-alt"></i>
                                                 </span>
                                             </a>
-                                            |
-                                            <a href="javascript:" data-toggle="modal" data-target="#modalDelete" class="btn btn-light btn-icon-split btn-sm" onclick="deleteData('users', {{$user->id}})">
+                                            
+                                            <a href="javascript:" data-toggle="modal" data-target="#modalDelete" class="btn btn-light btn-sm" onclick="deleteData('users', {{$user->id}})">
                                                 <span class="icon text-danger" data-toggle="tooltip" data-placement="top" title="Delete">
                                                     <i class="fas fa-trash-alt"></i>
                                                 </span>
