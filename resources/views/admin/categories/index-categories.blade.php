@@ -38,22 +38,28 @@
                                 @foreach($categories as $category)
                                     <tr role="row" class="d-flex">
                                         <td class="col-6">{{ $category->name }}</td>
-                                        <td class="col-2">{{ $category->displays_in_menu ? 'Yes' : 'No' }} </td>
-                                        <td class="col-2">{{ $category->active ? 'Yes' : 'No' }}</td>
                                         <td class="col-2 text-center">
-                                            <a href="{{ route('categories.show', $category->id) }}" class="btn btn-light btn-icon-split btn-sm">
+                                            <input type="checkbox" style="width:20px; height: 20px" id="displays-in-menu" disabled {{ $category->displays_in_menu ? 'checked="checked"' : '' }}>
+                                            <label class="form-check-label" for="displays-in-menu"></label>
+                                        </td>
+                                        <td class="col-2 text-center">
+                                            <input type="checkbox" style="width:20px; height: 20px" id="is-active" disabled {{ $category->active ? 'checked="checked"' : '' }}>
+                                            <label class="form-check-label" for="is-active"></label>
+                                        </td>
+                                        <td class="col-2 text-center">
+                                            <a href="{{ route('categories.show', $category->id) }}" class="btn btn-light btn-sm">
                                                 <span class="icon text-black" data-toggle="tooltip" data-placement="top" title="View">
                                                     <i class="fas fa-eye"></i>
                                                 </span>
                                             </a>
-                                            |
-                                            <a href="{{ route('categories.edit', $category->id) }}" class="btn btn-light btn-icon-split btn-sm">
+                                            
+                                            <a href="{{ route('categories.edit', $category->id) }}" class="btn btn-light btn-sm">
                                                 <span class="icon text-info" data-toggle="tooltip" data-placement="top" title="Edit">
                                                     <i class="fas fa-pencil-alt"></i>
                                                 </span>
                                             </a>
-                                            |
-                                            <a href="javascript:" data-toggle="modal" data-target="#modalDelete" class="btn btn-light btn-icon-split btn-sm" onclick="deleteData('categories', {{$category->id}})">
+                                            
+                                            <a href="javascript:" data-toggle="modal" data-target="#modalDelete" class="btn btn-light btn-sm" onclick="deleteData('categories', {{$category->id}})">
                                                 <span class="icon text-danger" data-toggle="tooltip" data-placement="top" title="Delete">
                                                     <i class="fas fa-trash-alt"></i>
                                                 </span>
