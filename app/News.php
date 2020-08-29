@@ -3,10 +3,14 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use phpDocumentor\Reflection\Types\Boolean;
+use CyrildeWit\EloquentViewable\Contracts\Viewable;
+use CyrildeWit\EloquentViewable\InteractsWithViews;
 
-class News extends Model
+class News extends Model implements Viewable
 {
+
+    use InteractsWithViews;
+
     protected $guarded = [];
     protected $casts = [
         'active' => 'boolean',

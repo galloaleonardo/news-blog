@@ -27,26 +27,26 @@
                         <div class="col-sm-12">
                             <table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
                                 <thead>
-                                <tr role="row" class="d-flex">
-                                    <th class="col-6">Name</th>
-                                    <th class="col-2">Displays in menu</th>
-                                    <th class="col-2">Active</th>
-                                    <th class="col-2 text-center">Action</th>
+                                <tr role="row">
+                                    <th>Name</th>
+                                    <th class="min text-center">Displays in menu</th>
+                                    <th class="min text-center">Active</th>
+                                    <th class="min text-center">Action</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 @foreach($categories as $category)
-                                    <tr role="row" class="d-flex">
-                                        <td class="col-6">{{ $category->name }}</td>
-                                        <td class="col-2 text-center">
+                                    <tr role="row">
+                                        <td>{{ $category->name }}</td>
+                                        <td class="min text-center">
                                             <input type="checkbox" style="width:20px; height: 20px" id="displays-in-menu" disabled {{ $category->displays_in_menu ? 'checked="checked"' : '' }}>
                                             <label class="form-check-label" for="displays-in-menu"></label>
                                         </td>
-                                        <td class="col-2 text-center">
+                                        <td class="min text-center">
                                             <input type="checkbox" style="width:20px; height: 20px" id="is-active" disabled {{ $category->active ? 'checked="checked"' : '' }}>
                                             <label class="form-check-label" for="is-active"></label>
                                         </td>
-                                        <td class="col-2 text-center">
+                                        <td class="min text-center">
                                             <a href="{{ route('categories.show', $category->id) }}" class="btn btn-light btn-sm">
                                                 <span class="icon text-black" data-toggle="tooltip" data-placement="top" title="View">
                                                     <i class="fas fa-eye"></i>

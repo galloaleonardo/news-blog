@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Traits\MagazineTrait;
 use App\News;
-use Illuminate\Support\Collection;
 
 class MagazineController extends Controller
 {
@@ -23,8 +22,12 @@ class MagazineController extends Controller
             compact('featuredNews', 'recentNews', 'popularNews', 'advertising', 'featuredNewsCategories'));
     }
 
-    public function show(News $news)
+    public function show(int $id, string $title)
     {
+        $news = News::findOrFail($id);
+
+        views($news)->record();
+
         return view('magazine.template.post', compact('news'));
     }
 }

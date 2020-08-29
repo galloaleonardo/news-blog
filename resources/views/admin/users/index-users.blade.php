@@ -27,28 +27,28 @@
                         <div class="col-sm-12">
                             <table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
                                 <thead>
-                                <tr role="row" class="d-flex">
-                                    <th class="col-4">Name</th>
-                                    <th class="col-4">Email</th>
-                                    <th class="col-1 text-center">Admin</th>
-                                    <th class="col-1 text-center">Active</th>
-                                    <th class="col-2 text-center">Action</th>
+                                <tr role="row">
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th class="min text-center">Admin</th>
+                                    <th class="min text-center">Active</th>
+                                    <th class="min text-center">Action</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 @foreach($users as $user)
-                                    <tr role="row" class="d-flex">
-                                        <td class="col-4">{{ $user->name }}</td>
-                                        <td class="col-4">{{ $user->email }} </td>
-                                        <td class="col-1 text-center">
+                                    <tr role="row">
+                                        <td>{{ $user->name }}</td>
+                                        <td>{{ $user->email }} </td>
+                                        <td class="min text-center">
                                             <input type="checkbox" style="width:20px; height: 20px" id="is-admin" disbled {{ $user->admin ? 'checked="checked"' : '' }}>
                                             <label class="form-check-label" for="is-admin"></label>
                                         </td>
-                                        <td class="col-1 text-center">
+                                        <td class="min text-center">
                                             <input type="checkbox" style="width:20px; height: 20px" id="is-active" disabled {{ $user->active ? 'checked="checked"' : '' }}>
                                             <label class="form-check-label" for="is-active"></label>
                                         </td>
-                                        <td class="col-2 text-center">
+                                        <td class="min text-center">
                                             <a href="{{ route('users.show', $user->id) }}" class="btn btn-light btn-sm">
                                                 <span class="icon text-black" data-toggle="tooltip" data-placement="top" title="View">
                                                     <i class="fas fa-eye"></i>

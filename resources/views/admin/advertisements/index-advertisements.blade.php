@@ -28,23 +28,23 @@
                         <div class="col-sm-12">
                             <table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
                                 <thead>
-                                <tr role="row" class="d-flex">
-                                    <th class="col-4">Title</th>
-                                    <th class="col-4">Destination Link</th>
-                                    <th class="col-2 text-center">Active</th>
-                                    <th class="col-2 text-center">Action</th>
+                                <tr role="row">
+                                    <th>Title</th>
+                                    <th>Destination Link</th>
+                                    <th class="min text-center">Active</th>
+                                    <th class="min text-center">Action</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 @foreach($advertisements as $advertising)
-                                    <tr role="row" class="d-flex">
-                                        <td class="col-4">{{ $advertising->title }}</td>
-                                        <td class="col-4">{{ $advertising->destination_link }} </td>
-                                        <td class="col-2 text-center">
+                                    <tr role="row">
+                                        <td>{{ $advertising->title }}</td>
+                                        <td>{{ $advertising->destination_link }} </td>
+                                        <td class="min text-center">
                                             <input type="checkbox" style="width:20px; height: 20px" id="is-active" disabled {{ $advertising->active ? 'checked="checked"' : '' }}>
                                             <label class="form-check-label" for="is-active"></label>
                                         </td>
-                                        <td class="col-2 text-center">
+                                        <td class="min text-center">
                                             <a href="{{ route('advertisements.show', $advertising->id) }}" class="btn btn-light btn-sm">
                                                 <span class="icon text-black" data-toggle="tooltip" data-placement="top" title="View">
                                                     <i class="fas fa-eye"></i>

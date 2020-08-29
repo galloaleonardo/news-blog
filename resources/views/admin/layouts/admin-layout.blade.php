@@ -20,8 +20,10 @@
 
     <!-- Custom styles for this template-->
     <link href="/css/sb-admin-2.css" rel="stylesheet">
+    <link href="/css/custom.css" rel="stylesheet">
 
 
+    @yield('custom-style')
 </head>
 
 <body id="page-top">
@@ -42,9 +44,10 @@
 
         <!-- Nav Item - Dashboard -->
         <li class="nav-item {{ request()->is('admin') ? 'active' : '' }}">
-            <a class="nav-link" href="{{ route('dashboard') }}">
+            <a class="nav-link py-2" href="{{ route('dashboard') }}">
                 <i class="fas fa-fw fa-tachometer-alt"></i>
-                <span>Dashboard</span></a>
+                <span>Dashboard</span>
+            </a>
         </li>
 
         <!-- Divider -->
@@ -57,7 +60,7 @@
 
         <!-- Nav Item - Categories Menu -->
         <li class="nav-item {{ request()->is('*categories*') ? 'active' : '' }}">
-            <a class="nav-link" href="{{ route('categories.index') }}">
+            <a class="nav-link py-1" href="{{ route('categories.index') }}">
                 <i class="fas fa-sitemap"></i>
                 <span>Categories</span>
             </a>
@@ -65,7 +68,7 @@
 
         <!-- Nav Item - News Menu -->
         <li class="nav-item {{ request()->is('*news*') ? 'active' : '' }}">
-            <a class="nav-link" href="{{ route('news.index') }}">
+            <a class="nav-link py-1" href="{{ route('news.index') }}">
                 <i class="fas fa-newspaper"></i>
                 <span>News</span>
             </a>
@@ -81,7 +84,7 @@
 
         <!-- Nav Item - Advertisings Menu -->
         <li class="nav-item {{ request()->is('*advertisements*') ? 'active' : '' }}">
-            <a class="nav-link collapsed" href="{{ route('advertisements.index') }}">
+            <a class="nav-link py-1" href="{{ route('advertisements.index') }}">
                 <i class="fab fa-adversal"></i>
                 <span>Advertisings</span>
             </a>
@@ -97,14 +100,42 @@
 
         <!-- Nav Item - Users Menu -->
         <li class="nav-item {{ request()->is('*users*') ? 'active' : '' }}">
-            <a class="nav-link" href="{{ route('users.index') }}">
+            <a class="nav-link py-1" href="{{ route('users.index') }}">
                 <i class="fas fa-users"></i>
                 <span>Users</span>
             </a>
         </li>
 
+        <!-- Divider -->
+        <hr class="sidebar-divider d-none d-md-block">
+
+        <!-- Heading -->
+        <div class="sidebar-heading">
+            Integrations
+        </div>
+
+        <!-- Nav Item - Users Menu -->
+        <li class="nav-item {{ request()->is('*users*') ? 'active' : '' }}">
+            <a class="nav-link py-1" href="{{ route('advertisements.index') }}">
+                <i class="fab fa-google"></i>
+                <span>Google Ads</span>
+            </a>
+
+            <a class="nav-link py-1" href="{{ route('advertisements.index') }}">
+                <i class="fab fa-google"></i>
+                <span>Google Analytics</span>
+            </a>
+
+            <a class="nav-link py-1" href="{{ route('advertisements.index') }}">
+                <i class="fas fa-code"></i>
+                <span>Script Injection</span>
+            </a>
+
+            
+        </li>
+
         <!-- Sidebar Toggler (Sidebar) -->
-        <div class="text-center d-none d-md-inline">
+        <div class="text-center d-none d-md-inline pt-4">
             <button class="rounded-circle border-0" id="sidebarToggle"></button>
         </div>
 

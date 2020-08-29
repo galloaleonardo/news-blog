@@ -58,83 +58,94 @@
 <div class="container">
     <div class="h-600x h-sm-auto">
         <div class="h-2-3 h-sm-auto oflow-hidden">
-            <div class="pb-5 pr-5 pr-sm-0 float-left float-sm-none w-2-3 w-sm-100 h-100 h-sm-300x">
-                <a class="pos-relative h-100 dplay-block" href="{{ route('magazine.show', ['news' => $featuredNews[0]->id]) }}">
-                    <img class="image-size" src="{{ asset('/images/news/large') . '/' . $featuredNews[0]->image_link }}"
-                         alt="">
-                    <div class="img-bg bg-1 bg-grad-layer-6"></div>
-                    <div class="abs-blr color-white p-20 bg-sm-color-7">
-                        <h3 class="mb-15 mb-sm-5 font-sm-13"><b>{{ $featuredNews[0]->title }}</b></h3>
-                        <ul class="list-li-mr-20">
-                            <li>by <span class="color-primary"><b>{{ $featuredNews[0]->author }}</b></span> Jan 25, 2018
-                            </li>
-                        </ul>
-                    </div>
-                </a>
-            </div>
+            @if (isset($featuredNews[0]))
+                <div class="pb-5 pr-5 pr-sm-0 float-left float-sm-none w-2-3 w-sm-100 h-100 h-sm-300x">
+                    <a class="pos-relative h-100 dplay-block" href="{{ route('magazine.show', ['id' => $featuredNews[0]->id, 'title' => Illuminate\Support\Str::slug($featuredNews[0]->title)]) }}">
+                        <img class="image-size" src="{{ asset('/images/news/large') . '/' . $featuredNews[0]->image_link }}"
+                            alt="">
+                        <div class="img-bg bg-1 bg-grad-layer-6"></div>
+                        <div class="abs-blr color-white p-20 bg-sm-color-7">
+                            <h3 class="mb-15 mb-sm-5 font-sm-13"><b>{{ $featuredNews[0]->title }}</b></h3>
+                            <ul class="list-li-mr-20">
+                                <li>by <span class="color-primary"><b>{{ $featuredNews[0]->author }}</b></span> Jan 25, 2018
+                                </li>
+                            </ul>
+                        </div>
+                    </a>
+                </div>
+            @endif
             <div class="float-left float-sm-none w-1-3 w-sm-100 h-100 h-sm-600x">
-                <div class="pl-5 pb-5 pl-sm-0 ptb-sm-5 pos-relative h-50">
-                    <a class="pos-relative h-100 dplay-block" href="#">
-                        <img class="image-size"
-                             src="{{ asset('/images/news/large') . '/' . $featuredNews[1]->image_link }}" alt="">
+                @if (isset($featuredNews[1]))
+                    <div class="pl-5 pb-5 pl-sm-0 ptb-sm-5 pos-relative h-50">
+                        <a class="pos-relative h-100 dplay-block" href="#">
+                            <img class="image-size"
+                                src="{{ asset('/images/news/large') . '/' . $featuredNews[1]->image_link }}" alt="">
 
-                        <div class="img-bg bg-2 bg-grad-layer-6"></div>
+                            <div class="img-bg bg-2 bg-grad-layer-6"></div>
 
-                        <div class="abs-blr color-white p-20 bg-sm-color-7">
-                            <h4 class="mb-10 mb-sm-5"><b>{{ $featuredNews[1]->title }}</b></h4>
-                            <ul class="list-li-mr-20">
-                                <li>Jan 25, 2018</li>
-                            </ul>
-                        </div>
-                    </a>
-                </div>
-                <div class="pl-5 ptb-5 pl-sm-0 pos-relative h-50">
-                    <a class="pos-relative h-100 dplay-block" href="#">
-                        <img class="image-size"
-                             src="{{ asset('/images/news/large') . '/' . $featuredNews[2]->image_link }}" alt="">
+                            <div class="abs-blr color-white p-20 bg-sm-color-7">
+                                <h4 class="mb-10 mb-sm-5"><b>{{ $featuredNews[1]->title }}</b></h4>
+                                <ul class="list-li-mr-20">
+                                    <li>Jan 25, 2018</li>
+                                </ul>
+                            </div>
+                        </a>
+                    </div>
+                @endif
+                @if (isset($featuredNews[2]))
+                    <div class="pl-5 ptb-5 pl-sm-0 pos-relative h-50">
+                        <a class="pos-relative h-100 dplay-block" href="#">
+                            <img class="image-size"
+                                src="{{ asset('/images/news/large') . '/' . $featuredNews[2]->image_link }}" alt="">
 
-                        <div class="img-bg bg-3 bg-grad-layer-6"></div>
+                            <div class="img-bg bg-3 bg-grad-layer-6"></div>
 
-                        <div class="abs-blr color-white p-20 bg-sm-color-7">
-                            <h4 class="mb-10 mb-sm-5"><b>{{$featuredNews[2]->title  }}</b></h4>
-                            <ul class="list-li-mr-20">
-                                <li>Jan 25, 2018</li>
-                            </ul>
-                        </div>
-                    </a>
-                </div>
+                            <div class="abs-blr color-white p-20 bg-sm-color-7">
+                                <h4 class="mb-10 mb-sm-5"><b>{{$featuredNews[2]->title }}</b></h4>
+                                <ul class="list-li-mr-20">
+                                    <li>Jan 25, 2018</li>
+                                </ul>
+                            </div>
+                        </a>
+                    </div>
+                @endif
             </div>
         </div>
 
         <div class="h-1-3 oflow-hidden">
-            <div class="pr-5 pr-sm-0 pt-5 float-left float-sm-none pos-relative w-1-3 w-sm-100 h-100 h-sm-300x">
-                <a class="pos-relative h-100 dplay-block" href="#">
-                    <img class="image-size" src="{{ asset('/images/news/large') . '/' . $featuredNews[3]->image_link }}"
-                         alt="">
-                    <div class="img-bg bg-4 bg-grad-layer-6"></div>
-                    <div class="abs-blr color-white p-20 bg-sm-color-7">
-                        <h4 class="mb-10 mb-sm-5"><b>{{ $featuredNews[3]->title }}</b></h4>
-                        <ul class="list-li-mr-20">
-                            <li>Jan 25, 2018</li>
-                        </ul>
-                    </div>
-                </a>
-            </div>
+            @if (isset($featuredNews[3]))
+                <div class="pr-5 pr-sm-0 pt-5 float-left float-sm-none pos-relative w-1-3 w-sm-100 h-100 h-sm-300x">
+                    <a class="pos-relative h-100 dplay-block" href="#">
+                        <img class="image-size" src="{{ asset('/images/news/large') . '/' . $featuredNews[3]->image_link }}"
+                            alt="">
+                        <div class="img-bg bg-4 bg-grad-layer-6"></div>
+                        <div class="abs-blr color-white p-20 bg-sm-color-7">
+                            <h4 class="mb-10 mb-sm-5"><b>{{ $featuredNews[3]->title }}</b></h4>
+                            <ul class="list-li-mr-20">
+                                <li>Jan 25, 2018</li>
+                            </ul>
+                        </div>
+                    </a>
+                </div>
+            @endif
 
-            <div class="plr-5 plr-sm-0 pt-5 pt-sm-10 float-left float-sm-none pos-relative w-1-3 w-sm-100 h-100 h-sm-300x">
-                <a class="pos-relative h-100 dplay-block" href="#">
-                    <img class="image-size" src="{{ asset('/images/news/large') . '/' . $featuredNews[4]->image_link }}"
-                         alt="">
-                    <div class="img-bg bg-5 bg-grad-layer-6"></div>
-                    <div class="abs-blr color-white p-20 bg-sm-color-7">
-                        <h4 class="mb-10 mb-sm-5"><b>{{ $featuredNews[4]->title }}</b></h4>
-                        <ul class="list-li-mr-20">
-                            <li>Jan 25, 2018</li>
-                        </ul>
-                    </div>
-                </a>
-            </div>
+            @if (isset($featuredNews[4]))
+                <div class="plr-5 plr-sm-0 pt-5 pt-sm-10 float-left float-sm-none pos-relative w-1-3 w-sm-100 h-100 h-sm-300x">
+                    <a class="pos-relative h-100 dplay-block" href="#">
+                        <img class="image-size" src="{{ asset('/images/news/large') . '/' . $featuredNews[4]->image_link }}"
+                            alt="">
+                        <div class="img-bg bg-5 bg-grad-layer-6"></div>
+                        <div class="abs-blr color-white p-20 bg-sm-color-7">
+                            <h4 class="mb-10 mb-sm-5"><b>{{ $featuredNews[4]->title }}</b></h4>
+                            <ul class="list-li-mr-20">
+                                <li>Jan 25, 2018</li>
+                            </ul>
+                        </div>
+                    </a>
+                </div>
+            @endif
 
+            @if (isset($featuredNews[5]))
             <div class="pl-5 pl-sm-0 pt-5 pt-sm-10 float-left float-sm-none pos-relative w-1-3 w-sm-100 h-100 h-sm-300x">
                 <a class="pos-relative h-100 dplay-block" href="#">
                     <img class="image-size" src="{{ asset('/images/news/large') . '/' . $featuredNews[5]->image_link }}"
@@ -150,6 +161,7 @@
                     </div>
                 </a>
             </div>
+            @endif
         </div>
     </div>
 </div>
@@ -161,15 +173,17 @@
                 <h4 class="p-title"><b>RECENT NEWS</b></h4>
                 <div class="row">
                     <div class="col-sm-6 mb-4">
-                        <img src="{{ asset('/images/news/large') . '/' . $recentNews[0]->image_link }}" alt="">
-                        <h4 class="pt-20"><a href="#"><b>{{ $recentNews[0]->title }}</b></a></h4>
-                        <ul class="list-li-mr-20 pt-10 pb-20">
-                            <li class="color-lite-black">by
-                                <a href="#" class="color-black"><b>{{ $recentNews[0]->author }}, </b></a>
-                                Jan 25, 2018
-                            </li>
-                        </ul>
-                        <p>{{ $recentNews[0]->subtitle }}</p>
+                        @if (isset($recentNews[0]))                            
+                            <img src="{{ asset('/images/news/large') . '/' . $recentNews[0]->image_link }}" alt="">
+                            <h4 class="pt-20"><a href="#"><b>{{ $recentNews[0]->title }}</b></a></h4>
+                            <ul class="list-li-mr-20 pt-10 pb-20">
+                                <li class="color-lite-black">by
+                                    <a href="#" class="color-black"><b>{{ $recentNews[0]->author }}, </b></a>
+                                    Jan 25, 2018
+                                </li>
+                            </ul>
+                            <p>{{ $recentNews[0]->subtitle }}</p>
+                        @endif
                     </div>
                     <div class="col-sm-6">
                         @for($i = 1; $i <= 4; $i++)
@@ -192,21 +206,34 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <ul class="nav nav-tabs" id="myTab" role="tablist">
-                            <li class="nav-item">
-                                <a class="nav-link active font-13" id="home-tab" data-toggle="tab" href="#home"
-                                   role="tab" aria-controls="home"
-                                   aria-selected="true">{{ $featuredNewsCategories['category_1'][0]->name }}</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link font-13" id="profile-tab" data-toggle="tab" href="#profile"
-                                   role="tab" aria-controls="profile"
-                                   aria-selected="false">{{ $featuredNewsCategories['category_2'][0]->name }}</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link font-13" id="contact-tab" data-toggle="tab" href="#contact"
-                                   role="tab" aria-controls="contact"
-                                   aria-selected="false">{{ @$featuredNewsCategories['category_3'][0]->name }}</a>
-                            </li>
+                            @if (isset($featuredNewsCategories['category_1'][0]))                            
+                                <li class="nav-item">
+                                    <a class="nav-link active font-13" id="home-tab" data-toggle="tab" href="#home"
+                                    role="tab" aria-controls="home"
+                                    aria-selected="true">{{ $featuredNewsCategories['category_1'][0]->name }}</a>
+                                </li>
+                            @endif
+                            @if (isset($featuredNewsCategories['category_2'][0]))    
+                                <li class="nav-item">
+                                    <a class="nav-link font-13" id="profile-tab" data-toggle="tab" href="#profile"
+                                    role="tab" aria-controls="profile"
+                                    aria-selected="false">{{ $featuredNewsCategories['category_2'][0]->name }}</a>
+                                </li>
+                            @endif
+                            @if (isset($featuredNewsCategories['category_3'][0]))    
+                                <li class="nav-item">
+                                    <a class="nav-link font-13" id="contact-tab" data-toggle="tab" href="#contact"
+                                    role="tab" aria-controls="contact"
+                                    aria-selected="false">{{ $featuredNewsCategories['category_3'][0]->name }}</a>
+                                </li>
+                            @endif
+                            @if (isset($featuredNewsCategories['category_4'][0]))    
+                                <li class="nav-item">
+                                    <a class="nav-link font-13" id="contact-tab" data-toggle="tab" href="#contact"
+                                    role="tab" aria-controls="contact"
+                                    aria-selected="false">{{ $featuredNewsCategories['category_4'][0]->name }}</a>
+                                </li>
+                            @endif
                         </ul>
                         <div class="tab-content mt-4" id="myTabContent">
                             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
@@ -265,6 +292,29 @@
                                                     <ul class="list-li-mr-20 pt-10 mb-30">
                                                         <li class="color-lite-black">by <a href="#" class="color-black">
                                                                 <b>{{ $category_3->author }}</b></a>
+                                                            Jan 25, 2018
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            @endforeach
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+                                <div class="tab-pane fade show active" id="home" role="tabpanel"
+                                     aria-labelledby="home-tab">
+                                    <div class="col-sm-12">
+                                        <div class="row">
+                                            @foreach($featuredNewsCategories['category_4'] as $category_4)
+                                                <div class="col-sm-6">
+                                                    <img src="{{ asset('/images/news/large') . '/' . $category_4->image_link }}"
+                                                         alt="">
+                                                    <h4 class="pt-20"><a href="#"><b>{{ $category_4->title }}</b></a>
+                                                    </h4>
+                                                    <ul class="list-li-mr-20 pt-10 mb-30">
+                                                        <li class="color-lite-black">by <a href="#" class="color-black">
+                                                                <b>{{ $category_4->author }}</b></a>
                                                             Jan 25, 2018
                                                         </li>
                                                     </ul>

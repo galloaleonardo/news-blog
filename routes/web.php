@@ -10,7 +10,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
 });
 
 Route::get('/', 'MagazineController@index')->name('magazine.index');
-Route::get('/show/{news}', 'MagazineController@show')->name('magazine.show');
+Route::get('/show/{id}/{title}', 'MagazineController@show')->name('magazine.show');
 
 Auth::routes();
 

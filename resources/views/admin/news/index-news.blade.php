@@ -83,33 +83,35 @@
                                 <thead>
                                 <tr role="row">
                                     <th>Title</th>
-                                    <th>Category</th>
-                                    <th>Display Order</th>
-                                    <th>Author</th>
-                                    <th style="width: 25%">Actions</th>
+                                    <th class="min">Category</th>
+                                    <th class="min">Featured</th>
+                                    <th class="min">Author</th>
+                                    <th class="min text-center">Actions</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 @foreach($news as $new)
-                                    <tr role="row" class="odd">
+                                    <tr role="row">
                                         <td>{{ $new->title }}</td>
-                                        <td>{{ $new->category->name }}</td>
-                                        <td>{{ $new->display_order }}</td>
-                                        <td>{{ $new->author }}</td>
-                                        <td>
-                                            <a href="{{ route('news.show', $new->id) }}" class="btn btn-light btn-icon-split btn-sm">
+                                        <td class="min">{{ $new->category->name }}</td>
+                                        <td class="min text-center">
+                                            <input type="checkbox" style="width:20px; height: 20px" id="fatured" disabled {{ $new->featured ? 'checked="checked"' : '' }}>
+                                            <label class="form-check-label" for="fatured"></label>
+                                        <td class="min">{{ $new->author }}</td>
+                                        <td class="min text-center">
+                                            <a href="{{ route('news.show', $new->id) }}" class="btn btn-light btn-sm">
                                                 <span class="icon text-black" data-toggle="tooltip" data-placement="top" title="View">
                                                     <i class="fas fa-eye"></i>
                                                 </span>
                                             </a>
-                                            |
-                                            <a href="{{ route('news.edit', $new->id) }}" class="btn btn-light btn-icon-split btn-sm">
+                                            
+                                            <a href="{{ route('news.edit', $new->id) }}" class="btn btn-light btn-sm">
                                                 <span class="icon text-info" data-toggle="tooltip" data-placement="top" title="Edit">
                                                     <i class="fas fa-pencil-alt"></i>
                                                 </span>
                                             </a>
-                                            |
-                                            <a href="javascript:" data-toggle="modal" data-target="#modalDelete" class="btn btn-light btn-icon-split btn-sm" onclick="deleteData('news', {{$new->id}})">
+                                            
+                                            <a href="javascript:" data-toggle="modal" data-target="#modalDelete" class="btn btn-light btn-sm" onclick="deleteData('news', {{$new->id}})">
                                                 <span class="icon text-danger" data-toggle="tooltip" data-placement="top" title="Delete">
                                                     <i class="fas fa-trash-alt"></i>
                                                 </span>
