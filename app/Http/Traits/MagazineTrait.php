@@ -36,6 +36,7 @@ trait MagazineTrait
                 ->join('categories', 'news.category_id', 'categories.id')
                 ->where('categories.id', $categories[0]->id)
                 ->where('categories.featured', true)
+                ->orderBy('news.created_at', 'desc')
                 ->inRandomOrder()
                 ->limit(6)
                 ->get();
@@ -48,6 +49,7 @@ trait MagazineTrait
                 ->join('categories', 'news.category_id', 'categories.id')
                 ->where('categories.id', $categories[1]->id)
                 ->where('categories.featured', true)
+                ->orderBy('news.created_at', 'desc')
                 ->inRandomOrder()
                 ->limit(6)
                 ->get();
@@ -60,6 +62,7 @@ trait MagazineTrait
                 ->join('categories', 'news.category_id', 'categories.id')
                 ->where('categories.id', $categories[2]->id)
                 ->where('categories.featured', true)
+                ->orderBy('news.created_at', 'desc')
                 ->inRandomOrder()
                 ->limit(6)
                 ->get();
@@ -72,6 +75,7 @@ trait MagazineTrait
                 ->join('categories', 'news.category_id', 'categories.id')
                 ->where('categories.id', $categories[3]->id)
                 ->where('categories.featured', true)
+                ->orderBy('news.created_at', 'desc')
                 ->inRandomOrder()
                 ->limit(6)
                 ->get();

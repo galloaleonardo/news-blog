@@ -114,7 +114,7 @@
             Integrations
         </div>
 
-        <!-- Nav Item - Users Menu -->
+        <!-- Nav Item - Ads Menu -->
         <li class="nav-item {{ request()->is('*users*') ? 'active' : '' }}">
             <a class="nav-link py-1" href="{{ route('advertisements.index') }}">
                 <i class="fab fa-google"></i>
@@ -132,6 +132,22 @@
             </a>
 
             
+        </li>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider d-none d-md-block">
+
+        <!-- Heading -->
+        <div class="sidebar-heading">
+            Settings
+        </div>
+
+        <!-- Nav Item - Settings Menu -->
+        <li class="nav-item {{ request()->is('*users*') ? 'active' : '' }}">
+            <a class="nav-link py-1" href="{{ route('advertisements.index') }}">
+                <i class="fas fa-cogs"></i>
+                <span>Settings</span>
+            </a>            
         </li>
 
         <!-- Sidebar Toggler (Sidebar) -->

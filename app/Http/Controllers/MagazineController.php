@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\Helper;
 use App\Http\Traits\MagazineTrait;
 use App\News;
 
@@ -25,6 +26,8 @@ class MagazineController extends Controller
     public function show(int $id, string $title)
     {
         $news = News::findOrFail($id);
+
+        Helper::getDateForPost($news->updated_at);        
 
         views($news)->record();
 
