@@ -25,7 +25,6 @@ class CreateNewsTable extends Migration
             $table->string('youtube_link')->nullable();
             $table->boolean('active')->default(true);
             $table->boolean('featured')->default(false);
-            $table->bigInteger('views')->nullable();
             $table->timestamps();
         });
     }

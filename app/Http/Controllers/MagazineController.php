@@ -13,24 +13,26 @@ class MagazineController extends Controller
 
     public function index()
     {
+        $advertising = $this->getAdvertising();
         $featuredNews = $this->getFeaturedNews();
         $recentNews = $this->getRecentNews();
-        $popularNews = $this->getPopularNews();
-        $advertising = $this->getAdvertising();
         $featuredNewsCategories = $this->getFeaturedCategories();
+        $popularNews = $this->getPopularNews([$featuredNews, $recentNews, $featuredNewsCategories]);
 
         return view('magazine.template.magazine',
-            compact('featuredNews', 'recentNews', 'popularNews', 'advertising', 'featuredNewsCategories'));
+            compact('advertising', 'featuredNews', 'recentNews', 'featuredNewsCategories', 'popularNews'));
     }
 
     public function show(int $id, string $title)
     {
         $news = News::findOrFail($id);
+        $popularNews = $this->getPopularNews([]);
+        $suggestedNews = $this->suggestedNews($news->id, $news->category_id);
 
         Helper::getDateForPost($news->updated_at);        
 
         views($news)->record();
 
-        return view('magazine.template.post', compact('news'));
+        return view('magazine.template.post', compact('news', 'popularNews', 'suggestedNews'));
     }
 }

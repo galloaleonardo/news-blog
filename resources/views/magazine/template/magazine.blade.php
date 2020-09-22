@@ -322,7 +322,7 @@
                                                         </h4>
                                                         <ul class="list-li-mr-20 pt-10 mb-30">
                                                             <li class="color-lite-black">by <b>{{ $category_4->author }}</b>
-                                                                {{ App\Helpers\Helper::getDateForPost($category_4->created_at)}}
+                                                                {{ App\Helpers\Helper::getDateForPost($category_4->created_at) }}
                                                             </li>
                                                         </ul>
                                                     </a>
@@ -341,38 +341,19 @@
             <div class="col-md-6 col-lg-4">
                 <div class="pl-20 pl-md-0">
                     <h4 class="p-title"><b>POPULAR POSTS</b></h4>
-                    <a class="oflow-hidden pos-relative mb-20 dplay-block" href="#">
-                        <div class="wh-100x abs-tlr"><img src="images/polular-1-100x100.jpg" alt=""></div>
+                    @for($i = 0; $i <= (count($popularNews) - 1) ; $i++)
+                    <a class="oflow-hidden pos-relative mb-20 dplay-block" href="{{ route('magazine.show', ['id' => $popularNews[$i]->id, 'title' => Illuminate\Support\Str::slug($popularNews[$i]->title)]) }}">
+                        <div class="wh-100x abs-tlr">
+                            <img src="{{ asset('/images/news/large') . '/' . $popularNews[$i]->image_link }}" alt=""></div>
                         <div class="ml-120 min-h-100x">
-                            <h5><b>Bitcoin Billionares Hidding in Plain Sight</b></h5>
+                            <h5><b>{{ $popularNews[$i]->title }}</b></h5>
                             <h6 class="color-lite-black pt-10">by <span
-                                        class="color-black"><b>Danile Palmer,</b></span> Jan 25, 2018</h6>
+                                        class="color-black"><b>{{ $popularNews[$i]->author }}</b></span> {{ App\Helpers\Helper::getDateForPost($popularNews[$i]->created_at) }}</h6>
                         </div>
                     </a>
-                    <a class="oflow-hidden pos-relative mb-20 dplay-block" href="#">
-                        <div class="wh-100x abs-tlr"><img src="images/polular-2-100x100.jpg" alt=""></div>
-                        <div class="ml-120 min-h-100x">
-                            <h5><b>Bitcoin Billionares Hidding in Plain Sight</b></h5>
-                            <h6 class="color-lite-black pt-10">by <span
-                                        class="color-black"><b>Danile Palmer,</b></span> Jan 25, 2018</h6>
-                        </div>
-                    </a>
-                    <a class="oflow-hidden pos-relative mb-20 dplay-block" href="#">
-                        <div class="wh-100x abs-tlr"><img src="images/polular-3-100x100.jpg" alt=""></div>
-                        <div class="ml-120 min-h-100x">
-                            <h5><b>Bitcoin Billionares Hidding in Plain Sight</b></h5>
-                            <h6 class="color-lite-black pt-10">by <span
-                                        class="color-black"><b>Danile Palmer,</b></span> Jan 25, 2018</h6>
-                        </div>
-                    </a>
-                    <a class="oflow-hidden pos-relative mb-20 dplay-block" href="#">
-                        <div class="wh-100x abs-tlr"><img src="images/polular-4-100x100.jpg" alt=""></div>
-                        <div class="ml-120 min-h-100x">
-                            <h5><b>Bitcoin Billionares Hidding in Plain Sight</b></h5>
-                            <h6 class="color-lite-black pt-10">by <span
-                                        class="color-black"><b>Danile Palmer,</b></span> Jan 25, 2018</h6>
-                        </div>
-                    </a>
+                    @endfor
+
+                    <h4 class="p-title"><b>ADVERTISING</b></h4>
                     @foreach($advertising as $adv)
                         <div class="mtb-50 pos-relative">
                             <a href="{{ $adv->destination_link }}" style="display: inline;" target="_blank">
