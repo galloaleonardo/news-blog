@@ -22,7 +22,12 @@ trait MagazineTrait
         return News::where('featured', false)->orderBy('created_at', 'desc')->limit(5)->get();
     }
 
-    public function getFeaturedCategories()
+    public function getCategories()
+    {
+        return Category::where('displays_in_menu', true)->orderBy('name')->get();
+    }
+
+    public function getNewsFeaturedCategories()
     {
         $categories = Category::where('featured', true)->limit(4)->get();
 

@@ -1,59 +1,11 @@
 <!DOCTYPE HTML>
 <html lang="en">
 <head>
-    <title>News Blog</title>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta charset="UTF-8">
-
-    <link href="https://fonts.googleapis.com/css?family=Encode+Sans+Expanded:400,600,700" rel="stylesheet">
-    <link href="{{ asset('/css/bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('/css/styles-news-theme.css') }}" rel="stylesheet">
-    <link href="{{ asset('/fontawesome/css/all.css') }}" rel="stylesheet" type="text/css">
+    @include('magazine.includes.head')
 </head>
 <body>
-<header class="shadow mb-4" style="background-color: #F8F9FC">
-    <div class="container">
-        <a class="logo" href="/">
-            <div class="h5 mx-3">News Blog <strong><i class="fab fa-neos"></i></strong></div>
-        </a>
-        <a class="right-area src-btn" href="#">
-            <i class="active src-icn ion-search"></i>
-            <i class="close-icn ion-close"></i>
-        </a>
-        <div class="src-form">
-            <form>
-                <input type="text" placeholder="Search here">
-                <button type="submit"><i class="ion-search"></i></button>
-            </form>
-        </div>
 
-        <a class="menu-nav-icon" data-menu="#main-menu" href="#"><i class="ion-navicon"></i></a>
-
-        <ul class="main-menu" id="main-menu">
-            <li><a href="02_archive-page.html">NEWS</a></li>
-            <li class="drop-down"><a href="03_single-post.html">CATEGORIES<i class="ion-arrow-down-b"></i></a>
-                <ul class="drop-down-menu drop-down-inner">
-                    <li><a href="#">CATEGORY 1</a></li>
-                    <li><a href="#">CATEGORY 2</a></li>
-                </ul>
-            </li>
-            <li><a href="06_contact-us.html">ALL NEWS</a></li>
-            <li><a href="06_contact-us.html">CONTACT US</a></li>
-            <li>
-                <div class="input-group mb-3 ml-4">
-                    <input type="text" class="form-control form-control-sm" placeholder="Search">
-                    <div class="input-group-append">
-                        <button class="btn btn-outline-secondary btn-sm">
-                            Go
-                        </button>
-                    </div>
-                </div>
-            </li>
-        </ul>
-        <div class="clearfix"></div>
-    </div>
-</header>
+@include('magazine.includes.navbar')
 
 <section>
     <div class="container">
@@ -131,35 +83,7 @@
     </div><!-- container -->
 </section>
 
-<footer class="bg-191 color-ccc">
-    <div class="container">
-        <div class="pt-50 pb-20 pos-relative">
-            <div class="abs-tblr pt-50 z--1 text-center">
-                <div class="h-80 pos-relative"></div>
-            </div>
-            <div class="row">
-                <div class="col-sm-4">
-                    <div class="mb-30">
-                        <div class="h5">News Blog <strong><i class="fab fa-neos"></i></strong></div>
-                        <p class="mtb-20 color-ccc">
-                            A open-source project developed in Laravel with the aim of contributing to the community,
-                            delivering a magazine site ready for use.
-                        </p>
-                        <p class="color-ash">
-                            Developed by Leonardo Gallo
-                            <br>
-                            This template is made with <i class="fas fa-heart" aria-hidden="true"></i>
-                            by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</footer>
-
-<script src="{{ asset('/js/jquery.min.js') }}"></script>
-<script src="{{ asset('/js/bootstrap.min.js') }}"></script>
-<script src="{{ asset('/js/scripts-news-theme.js') }}"></script>
+@include('magazine.includes.footer')
+@include('magazine.includes.scripts')
 </body>
 </html>

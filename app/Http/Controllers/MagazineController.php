@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App;
 use App\Helpers\Helper;
 use App\Http\Traits\MagazineTrait;
 use App\News;
@@ -13,18 +14,20 @@ class MagazineController extends Controller
 
     public function index()
     {
+        $categories = $this->getCategories();
         $advertising = $this->getAdvertising();
         $featuredNews = $this->getFeaturedNews();
         $recentNews = $this->getRecentNews();
-        $featuredNewsCategories = $this->getFeaturedCategories();
+        $featuredNewsCategories = $this->getNewsFeaturedCategories();
         $popularNews = $this->getPopularNews([$featuredNews, $recentNews, $featuredNewsCategories]);
 
-        return view('magazine.template.magazine',
-            compact('advertising', 'featuredNews', 'recentNews', 'featuredNewsCategories', 'popularNews'));
+        return view('magazine.homepage.index',
+            compact('categories', 'advertising', 'featuredNews', 'recentNews', 'featuredNewsCategories', 'popularNews'));
     }
 
     public function show(int $id, string $title)
     {
+        $categories = $this->getCategories();
         $news = News::findOrFail($id);
         $popularNews = $this->getPopularNews([]);
         $suggestedNews = $this->suggestedNews($news->id, $news->category_id);
@@ -33,6 +36,6 @@ class MagazineController extends Controller
 
         views($news)->record();
 
-        return view('magazine.template.post', compact('news', 'popularNews', 'suggestedNews'));
+        return view('magazine.post.index', compact('categories', 'news', 'popularNews', 'suggestedNews'));
     }
 }
