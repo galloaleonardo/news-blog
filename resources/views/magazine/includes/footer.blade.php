@@ -7,7 +7,7 @@
             <div class="row">
                 <div class="col-sm-4">
                     <div class="mb-30">
-                        <div class="h5">{{ trans('magazine.footer.larazine') }} <strong><i class="fab fa-neos"></i></strong></div>
+                        <div class="h5">{{ trans('magazine.footer.larazine') }} <strong><i class="fas fa-feather-alt"></i></i></strong></div>
                         <p class="mtb-20 color-ccc">
                             {{ trans('magazine.footer.description') }}
                         </p>

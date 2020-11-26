@@ -15,8 +15,11 @@ return [
     'footer' => [
         'larazine' => 'Larazine',
         'description' => 'A open-source project developed in Laravel with the aim of contributing to the community, delivering a magazine site ready for use.',
-        'developed_by' => 'Developed By :name',
-        
+        'developed_by' => 'Developed By :name'
+    ],
 
+    'body' => [
+        'featured_news' => 'Featured News',
+        'all_news' => 'All News'
     ]
 ];

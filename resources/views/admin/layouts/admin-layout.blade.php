@@ -36,7 +36,7 @@
 
         <!-- Sidebar - Brand -->
         <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ route('dashboard') }}">
-            <div class="sidebar-brand-text mx-3">News Blog <i class="fab fa-neos"></i></div>
+            <div class="sidebar-brand-text mx-3">Larazine <i class="fas fa-feather-alt"></i></div>
         </a>
 
         <!-- Divider -->

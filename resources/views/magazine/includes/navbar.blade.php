@@ -1,7 +1,7 @@
 <header class="shadow mb-4" style="background-color: #F8F9FC">
     <div class="container">
         <a class="logo" href="{{ route('magazine.index') }}">
-            <div class="h5 mx-3">{{ trans('magazine.header.larazine') }} <strong><i class="fab fa-neos"></i></strong></div>
+            <div class="h5 mx-3">{{ trans('magazine.header.larazine') }} <strong><i class="fas fa-feather-alt"></i></strong></div>
         </a>
         <a class="right-area src-btn" href="#">
             <i class="active src-icn ion-search"></i>
@@ -34,19 +34,21 @@
                 </ul>
             </li>
             <li>
-                <a href="06_contact-us.html">
+                <a href="{{ route('magazine.all') }}">
                     {{ strtoupper(trans('magazine.header.all_news')) }}
                 </a>
             </li>
             <li>
-                <div class="input-group mb-3 ml-4">
-                    <input type="text" class="form-control form-control-sm" placeholder="{{ trans('magazine.header.search') }}">
-                    <div class="input-group-append">
-                        <button class="btn btn-outline-secondary btn-sm">
-                            {{ trans('magazine.header.go') }}
-                        </button>
+                <form method="GET" action="{{ route('magazine.all') }}">
+                    <div class="input-group mb-3 ml-4">
+                        <input type="text" name="search" class="form-control form-control-sm" placeholder="{{ trans('magazine.header.search') }}">
+                        <div class="input-group-append">
+                            <button type="submit" class="btn btn-outline-secondary btn-sm">
+                                {{ trans('magazine.header.go') }}
+                            </button>
+                        </div>
                     </div>
-                </div>
+                </form>
             </li>
         </ul>
         <div class="clearfix"></div>

@@ -1,4 +1,6 @@
 <div class="container">
+    <h4 class="p-title"><b>{{trans('magazine.body.featured_news')}}</b></h4>
+
     <div class="h-600x h-sm-auto">
         <div class="h-2-3 h-sm-auto oflow-hidden">
             @if (isset($featuredNews[0]))
