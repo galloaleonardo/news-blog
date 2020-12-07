@@ -29,7 +29,7 @@
                 </a>
                     <ul class="drop-down-menu drop-down-inner">
                     @foreach ($categories as $category)
-                        <li><a href="#">{{ strtoupper($category->name) }}</a></li>
+                        <li><a href="{{ route('magazine.all', ['category' => $category->name]) }}">{{ strtoupper($category->name) }}</a></li>
                     @endforeach
                 </ul>
             </li>

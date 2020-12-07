@@ -20,6 +20,18 @@ return [
 
     'body' => [
         'featured_news' => 'Featured News',
-        'all_news' => 'All News'
+        'all_news' => 'All News',
+        'recent_news' => 'Recent News',
+        'popular_posts' => 'Popular Posts',
+        'featured_categories' => 'Featured Categories',
+        'advertising' => 'Advertising',
+        'by' => 'by',
+        'updated_in' => 'updated in',
+        'at' => 'at',
+        'share' => 'Share',
+        'you_may_also_like' => 'You May Also Like',
+        'newsletter' => 'Newsletter',
+        'newsletter_description' => 'Subscribe to our newsletter for weekly news.',
+        'newsletter_placeholder' => 'Your email'
     ]
 ];

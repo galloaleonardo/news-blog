@@ -14,12 +14,12 @@
                 <img src="{{ asset('/images/news/large') . '/' . $news->image_link }}" alt="">
                 <h3 class="mt-30"><b>{{ $news->title }}</b></h3>
                 <ul class="list-li-mr-20 mtb-15">
-                    <li>by <a href="#"><b>{{ $news->author }}</b>, </a> {{ date_format($news->created_at, 'j F Y') }}
-                        | updated in {{ date_format($news->updated_at, 'd/m/Y') }} at {{ date_format($news->updated_at, 'H:i:s') }}</li>
+                    <li>{{ trans('magazine.body.by') }} <a href="#"><b>{{ $news->author }}</b>, </a> {{ date_format($news->created_at, 'j F Y') }}
+                        | {{ trans('magazine.body.updated_in') }} {{ date_format($news->updated_at, 'd/m/Y') }} at {{ date_format($news->updated_at, 'H:i:s') }}</li>
                 </ul>
                 <div class="mt-40 mt-sm-20">
                     <ul class="mb-30 list-a-bg-grey list-a-hw-radial-35 list-a-hvr-primary list-li-ml-5">
-                        <li class="mr-10 ml-0">Share</li>
+                        <li class="mr-10 ml-0">{{trans('magazine.body.share')}}</li>
                         <li class="text-center align-middle"><a href="#"><i class="fab fa-facebook-f"></i></a></li>
                         <li class="text-center align-middle"><a href="#"><i class="fab fa-twitter"></i></a></li>
                         <li class="text-center align-middle"><a href="#"><i class="fab fa-whatsapp"></i></a></li>
@@ -67,11 +67,11 @@
                     </div><!-- mtb-50 -->
 
                     <div class="mtb-50 mb-md-0">
-                        <h4 class="p-title"><b>NEWSLETTER</b></h4>
-                        <p class="mb-20">Subscribe to our newsletter for weekly news.</p>
+                        <h4 class="p-title"><b>{{ trans('magazine.body.newsletter') }}</b></h4>
+                        <p class="mb-20">{{ trans('magazine.body.newsletter_description') }}</p>
                         <form class="nwsltr-primary-1">
-                            <input type="text" placeholder="Your email">
-                            <button type="submit"><i class="ion-ios-paperplane"></i></button>
+                            <input type="text" placeholder="{{ trans('magazine.body.newsletter_placeholder') }}">
+                            <button type="submit"><i style="color: white" class="fas fa-paper-plane"></i></button>
                         </form>
                     </div><!-- mtb-50 -->
 

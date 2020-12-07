@@ -44,13 +44,12 @@ class MagazineController extends Controller
 
     public function all(Request $request)
     {
-        $search = $request->has('search') ? $request->get('search') : null;
+        $search   = $request->has('search') ? $request->get('search') : null;
+        $category = $request->has('category') ? $request->get('category') : null;
 
         $categories = $this->getCategories();
-        $news = News::where('active', true)
-            ->where('title', 'LIKE', '%'.$search.'%')
-            ->orderBy('updated_at', 'desc')
-            ->get();
+
+        $news = $this->getOrSearchAllNews($search, $category);
 
         return view('magazine.all-news.index', compact('news', 'categories'));
     }

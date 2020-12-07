@@ -125,4 +125,24 @@ trait MagazineTrait
     {
         return Advertising::where('active', true)->limit(6)->get();
     }
+
+    public function getOrSearchAllNews(?string $search, ?string $category)
+    {
+        return News::where('active', true)
+            ->where(function ($query) use ($search, $category) {
+                if ($search) {
+                    $query->where('title', 'LIKE', '%' . $search . '%');
+                }
+
+                if ($category) {
+                    $categoryModel = Category::where('name', $category)->first();
+
+                    if ($categoryModel) {
+                        $query->where('category_id', $categoryModel->id);
+                    }
+                }
+            })
+            ->orderBy('updated_at', 'desc')
+            ->get();
+    }
 }
