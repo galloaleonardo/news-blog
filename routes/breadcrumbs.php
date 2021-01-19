@@ -1,6 +1,8 @@
 <?php
 
 // Home
+use DaveJamesMiller\Breadcrumbs\Facades\Breadcrumbs;
+
 Breadcrumbs::for('dashboard', function ($trail) {
     $trail->push('Dashboard', route('dashboard'));
 });
@@ -75,6 +77,18 @@ Breadcrumbs::for('users-create', function ($trail) {
 Breadcrumbs::for('users-show-edit', function ($trail, $user) {
     $trail->parent('users');
     $trail->push($user->name);
+});
+
+// Home > Settings
+Breadcrumbs::for('settings', function ($trail) {
+    $trail->parent('dashboard');
+    $trail->push('Settings', route('settings.index'));
+});
+
+// Home > Settings > Edit
+Breadcrumbs::for('settings-edit', function ($trail) {
+    $trail->parent('settings');
+    $trail->push('Edit');
 });
 
 // Home > Blog

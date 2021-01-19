@@ -131,7 +131,7 @@
                 <span>Script Injection</span>
             </a>
 
-            
+
         </li>
 
         <!-- Divider -->
@@ -143,11 +143,11 @@
         </div>
 
         <!-- Nav Item - Settings Menu -->
-        <li class="nav-item {{ request()->is('*users*') ? 'active' : '' }}">
-            <a class="nav-link py-1" href="{{ route('advertisements.index') }}">
+        <li class="nav-item {{ request()->is('*settings*') ? 'active' : '' }}">
+            <a class="nav-link py-1" href="{{ route('settings.index') }}">
                 <i class="fas fa-cogs"></i>
                 <span>Settings</span>
-            </a>            
+            </a>
         </li>
 
         <!-- Sidebar Toggler (Sidebar) -->

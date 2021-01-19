@@ -5,6 +5,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
     Route::resource('news', 'NewsController');
     Route::get('search', 'NewsController@search')->name('news.search');
     Route::resource('categories', 'CategoryController');
+    Route::resource('settings', 'SettingsController');
     Route::resource('users', 'UserController');
     Route::resource('advertisements', 'AdvertisingController', ['parameters' => ['advertisements' => 'advertising']]);
 });
