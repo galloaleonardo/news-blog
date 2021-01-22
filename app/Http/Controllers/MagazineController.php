@@ -35,7 +35,7 @@ class MagazineController extends Controller
         $popularNews = $this->getPopularNews([]);
         $suggestedNews = $this->suggestedNews($news->id, $news->category_id);
 
-        Helper::getDateForPost($news->updated_at);
+        Helper::getWrittenDateLanguage($news->updated_at);
 
         views($news)->record();
 

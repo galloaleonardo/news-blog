@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html lang="en">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     @include('magazine.includes.head')
 </head>
@@ -18,7 +18,7 @@
 @include('magazine.includes.navbar')
 
 <div class="container">
-    <h4 class="p-title"><b>{{trans('magazine.body.all_news')}}</b></h4>
+    <h4 class="p-title"><b>{{trans('magazine.all_news')}}</b></h4>
 
     <div class="row">
         @foreach($news as $new)
@@ -29,8 +29,8 @@
                     </div>
                     <h4 class="pt-20"><b>{{ $new->title }}</b></h4>
                     <ul class="list-li-mr-20 pt-10 mb-30">
-                        <li class="color-lite-black">by <b>{{ $new->author }}</b></a>
-                            {{ App\Helpers\Helper::getDateForPost($new->created_at)}}
+                        <li class="color-lite-black">{{ trans('magazine.by') }} <b>{{ $new->author }}</b></a>
+                            {{ App\Helpers\Helper::getWrittenDateLanguage($new->created_at)}}
                         </li>
                     </ul>
                 </a>

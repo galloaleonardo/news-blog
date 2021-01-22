@@ -21,27 +21,34 @@ class Helper
         return rand() . date('Y-m-d');
     }
 
-    public static function getDateForPost(string $datetime, bool $short = true)
+    public static function getWrittenDateLanguage(string $datetime, bool $short = true)
     {
         if (!$datetime) {
             return null;
         }
 
-        self::setLocale();
-
-        $data = ucwords((new Date($datetime))->format('j F Y | H:i'));
-
         if ($short) {
-            $words = explode(' ', $data);
-
-            return $words[0] . ' ' . substr($words[1], 0, 3) . ' ' . $words[2];
+            return strtolower(strftime('%d %b %y', strtotime($datetime)));
         }
 
-        return $data;
+        return strtolower(strftime('%A, %d %B %Y', strtotime($datetime)));
     }
 
-    private static function setLocale()
+    public static function getDateFormatLanguage($date)
     {
-        Date::setLocale('pt');
+        if (\App::getLocale() === 'en') {
+            return date_format($date, 'Y-m-d');
+        }
+
+        if (\App::getLocale() === 'ptbr') {
+            return date_format($date, 'd/m/Y');
+        }
+
+        return date_format($date, 'Y-m-d');
+    }
+
+    private static function setDateLocale(): bool
+    {
+        return Date::setLocale(\App::getLocale());
     }
 }

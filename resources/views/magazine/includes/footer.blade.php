@@ -7,12 +7,12 @@
             <div class="row">
                 <div class="col-sm-4">
                     <div class="mb-30">
-                        <div class="h5">{{ trans('magazine.footer.larazine') }} <strong><i class="fas fa-feather-alt"></i></i></strong></div>
+                        <div class="h5">{{ trans('magazine.larazine') }} <strong><i class="fas fa-feather-alt"></i></i></strong></div>
                         <p class="mtb-20 color-ccc">
-                            {{ trans('magazine.footer.description') }}
+                            {{ trans('magazine.description') }}
                         </p>
                         <p class="color-ash">
-                            {{ trans('magazine.footer.developed_by', ['name' => 'Leonardo Gallo']) }}
+                            {{ trans('magazine.developed_by', ['name' => 'Leonardo Gallo']) }}
                             <br>
                             This template is made with <i class="fas fa-heart" aria-hidden="true"></i>
                             by <a href="https://colorlib.com" target="_blank">Colorlib</a>
