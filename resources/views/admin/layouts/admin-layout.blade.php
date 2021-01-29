@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt">
-
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -46,7 +45,7 @@
         <li class="nav-item {{ request()->is('admin') ? 'active' : '' }}">
             <a class="nav-link py-2" href="{{ route('dashboard') }}">
                 <i class="fas fa-fw fa-tachometer-alt"></i>
-                <span>Dashboard</span>
+                <span>{{ trans('admin.dashboard') }}</span>
             </a>
         </li>
 
@@ -55,14 +54,14 @@
 
         <!-- Heading -->
         <div class="sidebar-heading">
-            News
+            {{ trans('admin.news') }}
         </div>
 
         <!-- Nav Item - Categories Menu -->
         <li class="nav-item {{ request()->is('*categories*') ? 'active' : '' }}">
             <a class="nav-link py-1" href="{{ route('categories.index') }}">
                 <i class="fas fa-sitemap"></i>
-                <span>Categories</span>
+                <span>{{ trans('admin.categories') }}</span>
             </a>
         </li>
 
@@ -70,7 +69,7 @@
         <li class="nav-item {{ request()->is('*news*') ? 'active' : '' }}">
             <a class="nav-link py-1" href="{{ route('news.index') }}">
                 <i class="fas fa-newspaper"></i>
-                <span>News</span>
+                <span>{{ trans('admin.news') }}</span>
             </a>
         </li>
 
@@ -79,14 +78,14 @@
 
         <!-- Heading -->
         <div class="sidebar-heading">
-            Adverts
+            {{ trans('admin.adverts') }}
         </div>
 
         <!-- Nav Item - Advertisings Menu -->
         <li class="nav-item {{ request()->is('*advertisements*') ? 'active' : '' }}">
             <a class="nav-link py-1" href="{{ route('advertisements.index') }}">
                 <i class="fab fa-adversal"></i>
-                <span>Advertisings</span>
+                <span>{{ trans('admin.advertisings') }}</span>
             </a>
         </li>
 
@@ -95,14 +94,14 @@
 
         <!-- Heading -->
         <div class="sidebar-heading">
-            Operational
+            {{ trans('admin.operational') }}
         </div>
 
         <!-- Nav Item - Users Menu -->
         <li class="nav-item {{ request()->is('*users*') ? 'active' : '' }}">
             <a class="nav-link py-1" href="{{ route('users.index') }}">
                 <i class="fas fa-users"></i>
-                <span>Users</span>
+                <span>{{ trans('admin.users') }}</span>
             </a>
         </li>
 
@@ -111,26 +110,25 @@
 
         <!-- Heading -->
         <div class="sidebar-heading">
-            Integrations
+            {{ trans('admin.integrations') }}
         </div>
 
         <!-- Nav Item - Ads Menu -->
         <li class="nav-item {{ request()->is('*users*') ? 'active' : '' }}">
             <a class="nav-link py-1" href="{{ route('advertisements.index') }}">
                 <i class="fab fa-google"></i>
-                <span>Google Ads</span>
+                <span>{{ trans('admin.google_ads') }}</span>
             </a>
 
             <a class="nav-link py-1" href="{{ route('advertisements.index') }}">
                 <i class="fab fa-google"></i>
-                <span>Google Analytics</span>
+                <span>{{ trans('admin.google_analytics') }}s</span>
             </a>
 
             <a class="nav-link py-1" href="{{ route('advertisements.index') }}">
                 <i class="fas fa-code"></i>
-                <span>Script Injection</span>
+                <span>{{ trans('admin.script_injection') }}</span>
             </a>
-
 
         </li>
 
@@ -139,14 +137,14 @@
 
         <!-- Heading -->
         <div class="sidebar-heading">
-            Settings
+            {{ trans('admin.settings') }}
         </div>
 
         <!-- Nav Item - Settings Menu -->
         <li class="nav-item {{ request()->is('*settings*') ? 'active' : '' }}">
             <a class="nav-link py-1" href="{{ route('settings.index') }}">
                 <i class="fas fa-cogs"></i>
-                <span>Settings</span>
+                <span>{{ trans('admin.settings') }}</span>
             </a>
         </li>
 

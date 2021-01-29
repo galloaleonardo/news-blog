@@ -1,11 +1,11 @@
 @extends('admin.layouts.admin-layout')
 
 @section('title-page')
-    News Blog - News
+    News Blog - {{ trans('admin.news') }}
 @endsection
 
 @section('title-content')
-    News
+    {{ trans('admin.news') }}
 @endsection
 
 @section('content')
@@ -17,7 +17,7 @@
                     <h5 class="modal-title" id="exampleModalLabel">
                         <span class="icon text-danger">
                             <i class="fas fa-trash-alt"></i>
-                            DELETE
+                            {{ trans('admin.delete') }}
                         </span>
                     </h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
@@ -25,15 +25,15 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p>Do you want to remove the registry?</p>
-                    <p>This operation is irreversible.</p>
+                    <p>{{ trans('admin.want_remove_question') }}</p>
+                    <p>{{ trans('admin.operation_irreversible') }}</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">No, close</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ trans('admin.no_close') }}</button>
                     <form method="POST" action="{{ route('news.destroy', $news->id) }}">
                         @method('DELETE')
                         @csrf
-                        <button type="submit" class="btn btn-danger">Yes, delete</button>
+                        <button type="submit" class="btn btn-danger">{{ trans('admin.yes_delete') }}</button>
                     </form>
                 </div>
             </div>
@@ -46,37 +46,37 @@
                     <span class="icon text-warning">
                       <i class="fas fa-edit"></i>
                     </span>
-                <span class="text">Edit</span>
+                <span class="text">{{ trans('admin.edit') }}</span>
             </a>
             <a href="#" class="btn btn-danger btn-icon-split" data-toggle="modal" data-target="#modalDelete">
                     <span class="icon text-danger">
                       <i class="fas fa-trash-alt"></i>
                     </span>
-                <span class="text">Delete</span>
+                <span class="text">{{ trans('admin.delete') }}</span>
             </a>
         </div>
         <div class="card-body">
             <div class="card mb-4">
                 <div class="card-body">
-                    <p class="h4 pb-3 text-primary">Resume:</p>
+                    <p class="h4 pb-3 text-primary">{{ trans('admin.resume') }}:</p>
 
-                    <p class="h5"><strong>Title</strong></p>
+                    <p class="h5"><strong>{{ trans('admin.title') }}</strong></p>
                     <input type="text" class="form-control col-md-12 mb-4" value="{{ $news->title }}" readonly="readonly">
 
-                    <p class="h5"><strong>Subtitle</strong></p>
+                    <p class="h5"><strong>{{ trans('admin.subtitle') }}</strong></p>
                     <input type="text" class="form-control col-md-12 mb-4" value="{{ $news->subtitle }}" readonly="readonly">
 
-                    <p class="h5"><strong>Category</strong></p>
+                    <p class="h5"><strong>{{ trans('admin.category') }}</strong></p>
                     <input type="text" class="form-control col-md-12 mb-4" value="{{ $news->category->name }}" readonly="readonly">
 
-                    <p class="h5"><strong>Display Order</strong></p>
+                    <p class="h5"><strong>{{ trans('admin.display_order') }}</strong></p>
                     <input type="text" class="form-control col-md-12 mb-4" value="{{ $news->display_order }}" readonly="readonly">
 
-                    <p class="h5"><strong>Author</strong></p>
+                    <p class="h5"><strong>{{ trans('admin.author') }}</strong></p>
                     <input type="text" class="form-control col-md-12 mb-4" value="{{ $news->author }}" readonly="readonly">
 
                     <a class="h4" data-toggle="collapse" href="#collapseImg" role="button" aria-expanded="false" aria-controls="collapseImg">
-                        Main Image <i class="fas fa-sort-down"></i>
+                        {{ trans('admin.main_image') }} <i class="fas fa-sort-down"></i>
                     </a>
                     <div class="collapse my-4" id="collapseImg">
                         <div class="card card-body" style="display: grid;">
@@ -84,7 +84,7 @@
                         </div>
                     </div>
 
-                    <p class="h5 mt-4"><strong>Content</strong></p>
+                    <p class="h5 mt-4"><strong>{{ trans('admin.content') }}</strong></p>
                     <textarea class="form-control" rows="20" readonly="readonly">{{ $news->content }}</textarea>
                 </div>
             </div>

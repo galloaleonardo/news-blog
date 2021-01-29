@@ -53,5 +53,9 @@ return [
     'featured_category_description' => 'This options displays the category as highlight in the home page.',
     'want_change_password_question' => "Do you want to change the user's password?",
     'email_be_sent' => 'An email will be sent to :email with instructions.',
-    'yes_send', 'Yes, send'
+    'yes_send', 'Yes, send',
+    'display_order' => 'Display Order',
+    'choose' => 'Choose...',
+    'destination_link' => 'Destination Link',
+    'image' => 'Image'
 ];

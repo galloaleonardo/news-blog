@@ -1,11 +1,11 @@
 @extends('admin.layouts.admin-layout')
 
 @section('title-page')
-    News Blog - News
+    News Blog - {{ trans('admin.news') }}
 @endsection
 
 @section('title-content')
-    News
+    {{ trans('admin.news') }}
 @endsection
 
 @section('content')
@@ -17,7 +17,7 @@
                     <span class="icon text-white-50">
                       <i class="fas fa-plus-square"></i>
                     </span>
-                <span class="text">Create new</span>
+                <span class="text">{{ trans('admin.create_new') }}</span>
             </a>
         </div>
         <div class="card-body">
@@ -26,7 +26,7 @@
                     <div class="card-header py-3" id="headingOne">
                         <h5 class="mb-0">
                             <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter">
-                                <i class="fas fa-filter"></i> Filter
+                                <i class="fas fa-filter"></i> {{ trans('admin.filter') }}
                             </button>
                         </h5>
                     </div>
@@ -37,14 +37,14 @@
                                 @csrf
                                 <div class="form-row">
                                     <div class="form-group col-md-12">
-                                        <input type="text" class="form-control" id="title" name="title" placeholder="Title">
+                                        <input type="text" class="form-control" id="title" name="title" placeholder="{{ trans('admin.title') }}">
                                     </div>
 
                                 </div>
                                 <div class="form-row">
                                     <div class="form-group col-md-4">
                                         <select id="category_id" name="category_id" class="form-control">
-                                            <option selected disabled>Category</option>
+                                            <option selected disabled>{{ trans('admin.category') }}</option>
                                             @foreach($categories as $category)
                                                 <option value="{{ $category->id }}">{{ $category->name }}</option>
                                             @endforeach
@@ -52,14 +52,14 @@
                                     </div>
                                     <div class="form-group col-md-4">
                                         <select id="active" name="active" class="form-control">
-                                            <option selected disabled>Active</option>
-                                            <option value="A">All</option>
-                                            <option value="Y">Yes</option>
-                                            <option value="N">No</option>
+                                            <option selected disabled>{{ trans('admin.active') }}</option>
+                                            <option value="A">{{ trans('admin.all') }}</option>
+                                            <option value="Y">{{ trans('admin.yes') }}</option>
+                                            <option value="N">{{ trans('admin.no') }}</option>
                                         </select>
                                     </div>
                                     <div class="form-group col-md-4">
-                                        <input type="text" class="form-control" id="author" name="author" placeholder="Author">
+                                        <input type="text" class="form-control" id="author" name="author" placeholder="{{ trans('admin.author') }}">
                                     </div>
                                 </div>
                                 <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
@@ -67,7 +67,7 @@
                                     <span class="icon text-white-50">
                                         <i class="fas fa-broom"></i>
                                     </span>
-                                    <span class="text">Clear filter</span>
+                                    <span class="text">{{ trans('admin.clear_filter') }}</span>
                                 </a>
                             </form>
                         </div>
@@ -82,11 +82,11 @@
                             <table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
                                 <thead>
                                 <tr role="row">
-                                    <th>Title</th>
-                                    <th class="min">Category</th>
-                                    <th class="min">Featured</th>
-                                    <th class="min">Author</th>
-                                    <th class="min text-center">Actions</th>
+                                    <th>{{ trans('admin.title') }}</th>
+                                    <th class="min">{{ trans('admin.category') }}</th>
+                                    <th class="min">{{ trans('admin.featured') }}</th>
+                                    <th class="min">{{ trans('admin.author') }}</th>
+                                    <th class="min text-center">{{ trans('admin.action') }}</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -104,13 +104,13 @@
                                                     <i class="fas fa-eye"></i>
                                                 </span>
                                             </a>
-                                            
+
                                             <a href="{{ route('news.edit', $new->id) }}" class="btn btn-light btn-sm">
                                                 <span class="icon text-info" data-toggle="tooltip" data-placement="top" title="Edit">
                                                     <i class="fas fa-pencil-alt"></i>
                                                 </span>
                                             </a>
-                                            
+
                                             <a href="javascript:" data-toggle="modal" data-target="#modalDelete" class="btn btn-light btn-sm" onclick="deleteData('news', {{$new->id}})">
                                                 <span class="icon text-danger" data-toggle="tooltip" data-placement="top" title="Delete">
                                                     <i class="fas fa-trash-alt"></i>

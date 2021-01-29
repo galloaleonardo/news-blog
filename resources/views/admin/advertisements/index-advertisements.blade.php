@@ -1,11 +1,11 @@
 @extends('admin.layouts.admin-layout')
 
 @section('title-page')
-    News Blog - Advertisements
+    News Blog - {{ trans('admin.adverts') }}
 @endsection
 
 @section('title-content')
-    Advertisements
+    {{ trans('admin.adverts') }}
 @endsection
 
 
@@ -18,7 +18,7 @@
                     <span class="icon text-white-50">
                       <i class="fas fa-plus-square"></i>
                     </span>
-                <span class="text">Create new</span>
+                <span class="text">{{ trans('admin.create_new') }}</span>
             </a>
         </div>
         <div class="card-body">
@@ -29,10 +29,10 @@
                             <table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
                                 <thead>
                                 <tr role="row">
-                                    <th>Title</th>
-                                    <th>Destination Link</th>
-                                    <th class="min text-center">Active</th>
-                                    <th class="min text-center">Action</th>
+                                    <th>{{ trans('admin.title') }}</th>
+                                    <th>{{ trans('admin.destination_link') }}</th>
+                                    <th class="min text-center">{{ trans('admin.active') }}</th>
+                                    <th class="min text-center">{{ trans('admin.action') }}</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -50,13 +50,13 @@
                                                     <i class="fas fa-eye"></i>
                                                 </span>
                                             </a>
-                                            
+
                                             <a href="{{ route('advertisements.edit', $advertising->id) }}" class="btn btn-light btn-sm">
                                                 <span class="icon text-info" data-toggle="tooltip" data-placement="top" title="Edit">
                                                     <i class="fas fa-pencil-alt"></i>
                                                 </span>
                                             </a>
-                                            
+
                                             <a href="javascript:" data-toggle="modal" data-target="#modalDelete" class="btn btn-light btn-sm" onclick="deleteData('advertisements', {{$advertising->id}})">
                                                 <span class="icon text-danger" data-toggle="tooltip" data-placement="top" title="Delete">
                                                     <i class="fas fa-trash-alt"></i>

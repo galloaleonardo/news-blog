@@ -1,11 +1,11 @@
 @extends('admin.layouts.admin-layout')
 
 @section('title-page')
-    News Blog - Users
+    News Blog - {{ trans('admin.users') }}
 @endsection
 
 @section('title-content')
-    Users
+    {{ trans('admin.users') }}
 @endsection
 
 @section('content')
@@ -17,7 +17,7 @@
                     <h5 class="modal-title" id="exampleModalLabel">
                         <span class="icon text-danger">
                             <i class="fas fa-trash-alt"></i>
-                            DELETE
+                            {{ trans('admin.delete') }}
                         </span>
                     </h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
@@ -25,15 +25,15 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p>Do you want to remove the registry?</p>
-                    <p>This operation is irreversible.</p>
+                    <p>{{ trans('admin.want_remove_question') }}</p>
+                    <p>{{ trans('admin.operation_irreversible') }}</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">No, close</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ trans('admin.no_close') }}</button>
                     <form method="POST" action="{{ route('users.destroy', $user->id) }}">
                         @method('DELETE')
                         @csrf
-                        <button type="submit" class="btn btn-danger">Yes, delete</button>
+                        <button type="submit" class="btn btn-danger">{{ trans('admin.yes_delete') }}</button>
                     </form>
                 </div>
             </div>
@@ -48,7 +48,7 @@
                     <h5 class="modal-title" id="exampleModalLabel">
                         <span class="icon">
                             <i class="fas fa-key"></i>
-                            CHANGE PASSWORD
+                            {{ trans('admin.change_password') }}
                         </span>
                     </h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
@@ -56,12 +56,12 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p>Do you want to change the user's password?</p>
-                    <p>An email will be sent to <strong>{{ $user->email }}</strong> with instructions.</p>
+                    <p>{{ trans('admin.want_change_password_question') }}</p>
+                    <p>{{ trans('admin.email_be_sent', ['email' => $user->email]) }}</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">No, close</button>
-                    <button type="submit" class="btn btn-danger">Yes, send</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ trans('admin.no_close') }}</button>
+                    <button type="submit" class="btn btn-danger">{{ trans('admin.yes_send') }}</button>
                 </div>
             </div>
         </div>
@@ -74,13 +74,13 @@
                     <span class="icon text-warning">
                       <i class="fas fa-edit"></i>
                     </span>
-                <span class="text">Edit</span>
+                <span class="text">{{ trans('admin.edit') }}</span>
             </a>
             <a href="#" class="btn btn-danger btn-icon-split" data-toggle="modal" data-target="#modalDelete">
                     <span class="icon text-danger">
                       <i class="fas fa-trash-alt"></i>
                     </span>
-                <span class="text">Delete</span>
+                <span class="text">{{ trans('admin.delete') }}</span>
             </a>
             <a href="#" class="btn btn-dark btn-icon-split float-md-right" data-toggle="modal" data-target="#modalPassword">
                     <span class="icon text-danger">
@@ -90,7 +90,7 @@
             </a>
         </div>
         <div class="card-body">
-            <p class="h4 pb-3 text-primary">Resume:</p>
+            <p class="h4 pb-3 text-primary">{{ trans('admin.resume') }}:</p>
             <p><img src="/images/avatars/{{ $user->avatar }}" alt="..." class="rounded-circle col-1 mb-2"></p>
             <p class="h5"><strong>Name</strong>: {{ $user->name }}</p>
             <p class="h5"><strong>Email:</strong> {{ $user->email }}</p>

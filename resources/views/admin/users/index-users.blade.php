@@ -1,11 +1,11 @@
 @extends('admin.layouts.admin-layout')
 
 @section('title-page')
-    News Blog - Users
+    News Blog - {{ trans('admin.users') }}
 @endsection
 
 @section('title-content')
-    Users
+    {{ trans('admin.users') }}
 @endsection
 
 @section('content')
@@ -17,7 +17,7 @@
                     <span class="icon text-white-50">
                       <i class="fas fa-plus-square"></i>
                     </span>
-                <span class="text">Create new</span>
+                <span class="text">{{ trans('admin.create_new') }}</span>
             </a>
         </div>
         <div class="card-body">
@@ -54,13 +54,13 @@
                                                     <i class="fas fa-eye"></i>
                                                 </span>
                                             </a>
-                                            
+
                                             <a href="{{ route('users.edit', $user->id) }}" class="btn btn-light btn-sm">
                                                 <span class="icon text-info" data-toggle="tooltip" data-placement="top" title="Edit">
                                                     <i class="fas fa-pencil-alt"></i>
                                                 </span>
                                             </a>
-                                            
+
                                             <a href="javascript:" data-toggle="modal" data-target="#modalDelete" class="btn btn-light btn-sm" onclick="deleteData('users', {{$user->id}})">
                                                 <span class="icon text-danger" data-toggle="tooltip" data-placement="top" title="Delete">
                                                     <i class="fas fa-trash-alt"></i>

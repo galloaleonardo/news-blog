@@ -1,11 +1,11 @@
 @extends('admin.layouts.admin-layout')
 
 @section('title-page')
-    News Blog - Categories
+    News Blog - {{ trans('admin.categories') }}
 @endsection
 
 @section('title-content')
-    Categories
+    {{ trans('admin.categories') }}
 @endsection
 
 @section('content')
@@ -17,7 +17,7 @@
                     <span class="icon text-white-50">
                       <i class="fas fa-plus-square"></i>
                     </span>
-                <span class="text">Create new</span>
+                <span class="text">{{ trans('admin.create_new') }}</span>
             </a>
         </div>
         <div class="card-body">
@@ -28,10 +28,10 @@
                             <table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
                                 <thead>
                                 <tr role="row">
-                                    <th>Name</th>
-                                    <th class="min text-center">Displays in menu</th>
-                                    <th class="min text-center">Active</th>
-                                    <th class="min text-center">Action</th>
+                                    <th>{{ trans('admin.name') }}</th>
+                                    <th class="min text-center">{{ trans('admin.displays_menu') }}</th>
+                                    <th class="min text-center">{{ trans('admin.active') }}</th>
+                                    <th class="min text-center">{{ trans('admin.active') }}</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -52,13 +52,13 @@
                                                     <i class="fas fa-eye"></i>
                                                 </span>
                                             </a>
-                                            
+
                                             <a href="{{ route('categories.edit', $category->id) }}" class="btn btn-light btn-sm">
                                                 <span class="icon text-info" data-toggle="tooltip" data-placement="top" title="Edit">
                                                     <i class="fas fa-pencil-alt"></i>
                                                 </span>
                                             </a>
-                                            
+
                                             <a href="javascript:" data-toggle="modal" data-target="#modalDelete" class="btn btn-light btn-sm" onclick="deleteData('categories', {{$category->id}})">
                                                 <span class="icon text-danger" data-toggle="tooltip" data-placement="top" title="Delete">
                                                     <i class="fas fa-trash-alt"></i>

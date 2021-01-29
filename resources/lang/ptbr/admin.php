@@ -53,5 +53,9 @@ return [
     'featured_category_description' => 'Esta opção exibe a categoria como destaque na página inicial.',
     'want_change_password_question' => "Você deseja alterar a senha do usuário?",
     'email_be_sent' => 'Um email será enviado para :email com as instruções.',
-    'yes_send', 'Sim, enviar'
+    'yes_send', 'Sim, enviar',
+    'display_order' => 'Ordem de Exibição',
+    'choose' => 'Escolha...',
+    'destination_link' => 'Link Destino',
+    'image' => 'Imagem'
 ];

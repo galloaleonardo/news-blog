@@ -18,11 +18,11 @@
                 <p>This operation is irreversible.</p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">No, close</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ trans('admin.no_close') }}</button>
                 <form method="POST" id="deleteFormIndex" action="">
                     @method('DELETE')
                     @csrf
-                    <button type="submit" class="btn btn-danger">Yes, delete</button>
+                    <button type="submit" class="btn btn-danger">{{ trans('admin.yes_delete') }}</button>
                 </form>
             </div>
         </div>
