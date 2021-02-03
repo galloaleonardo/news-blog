@@ -1,7 +1,7 @@
 <header class="shadow mb-4" style="background-color: #F8F9FC">
     <div class="container">
         <a class="logo" href="{{ route('magazine.index') }}">
-            <div class="h5 mx-3">{{ trans('magazine.larazine') }} <strong><i class="fas fa-feather-alt"></i></strong></div>
+            <div class="h5 mx-3">{{ App\Helpers\Helper::getCompanyName() }} <strong><i class="fas fa-feather-alt"></i></strong></div>
         </a>
         <a class="right-area src-btn" href="#">
             <i class="active src-icn ion-search"></i>

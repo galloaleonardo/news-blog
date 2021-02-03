@@ -4,19 +4,19 @@
 use DaveJamesMiller\Breadcrumbs\Facades\Breadcrumbs;
 
 Breadcrumbs::for('dashboard', function ($trail) {
-    $trail->push('Dashboard', route('dashboard'));
+    $trail->push(trans('admin.dashboard'), route('dashboard'));
 });
 
 // Home > Categories
 Breadcrumbs::for('categories', function ($trail) {
     $trail->parent('dashboard');
-    $trail->push('Categories', route('categories.index'));
+    $trail->push(trans('admin.categories'), route('categories.index'));
 });
 
 // Home > Categories > Create
 Breadcrumbs::for('category-create', function ($trail) {
     $trail->parent('categories');
-    $trail->push('Create', route('categories.index'));
+    $trail->push(trans('admin.create'), route('categories.index'));
 });
 
 // Home > Categories > Show/Edit
@@ -28,13 +28,13 @@ Breadcrumbs::for('category-show-edit', function ($trail, $category) {
 // Home > Advertisements
 Breadcrumbs::for('advertisements', function ($trail) {
     $trail->parent('dashboard');
-    $trail->push('Advertisements', route('advertisements.index'));
+    $trail->push(trans('admin.adverts'), route('advertisements.index'));
 });
 
 // Home > Advertisements > Create
 Breadcrumbs::for('advertisements-create', function ($trail) {
     $trail->parent('advertisements');
-    $trail->push('Create');
+    $trail->push(trans('admin.create'));
 });
 
 // Home > Advertisements > Show/Edit
@@ -46,13 +46,13 @@ Breadcrumbs::for('advertisements-show-edit', function ($trail, $advertising) {
 // Home > News
 Breadcrumbs::for('news', function ($trail) {
     $trail->parent('dashboard');
-    $trail->push('News', route('news.index'));
+    $trail->push(trans('admin.news'), route('news.index'));
 });
 
 // Home > News > Create
 Breadcrumbs::for('news-create', function ($trail) {
     $trail->parent('news');
-    $trail->push('Create');
+    $trail->push(trans('admin.create'));
 });
 
 // Home > News > Show/Edit
@@ -64,13 +64,13 @@ Breadcrumbs::for('news-show-edit', function ($trail, $news) {
 // Home > Users
 Breadcrumbs::for('users', function ($trail) {
     $trail->parent('dashboard');
-    $trail->push('Users', route('users.index'));
+    $trail->push(trans('admin.users'), route('users.index'));
 });
 
 // Home > Users > Create
 Breadcrumbs::for('users-create', function ($trail) {
     $trail->parent('users');
-    $trail->push('Create');
+    $trail->push(trans('admin.create'));
 });
 
 // Home > Users > Show/Edit
@@ -82,13 +82,13 @@ Breadcrumbs::for('users-show-edit', function ($trail, $user) {
 // Home > Settings
 Breadcrumbs::for('settings', function ($trail) {
     $trail->parent('dashboard');
-    $trail->push('Settings', route('settings.index'));
+    $trail->push(trans('admin.settings'), route('settings.index'));
 });
 
 // Home > Settings > Edit
 Breadcrumbs::for('settings-edit', function ($trail) {
     $trail->parent('settings');
-    $trail->push('Edit');
+    $trail->push(trans('admin.edit'));
 });
 
 // Home > Blog

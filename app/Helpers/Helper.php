@@ -3,6 +3,7 @@
 
 namespace App\Helpers;
 
+use App\Settings;
 use Jenssegers\Date\Date;
 
 class Helper
@@ -47,8 +48,10 @@ class Helper
         return date_format($date, 'Y-m-d');
     }
 
-    private static function setDateLocale(): bool
+    public static function getCompanyName()
     {
-        return Date::setLocale(\App::getLocale());
+        $settings = Settings::first();
+
+        return $settings->company_name ?? 'Larazine';
     }
 }

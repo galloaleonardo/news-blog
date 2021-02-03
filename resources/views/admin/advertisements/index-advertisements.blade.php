@@ -1,7 +1,7 @@
 @extends('admin.layouts.admin-layout')
 
 @section('title-page')
-    News Blog - {{ trans('admin.adverts') }}
+    {{ App\Helpers\Helper::getCompanyName() }} - {{ trans('admin.adverts') }}
 @endsection
 
 @section('title-content')

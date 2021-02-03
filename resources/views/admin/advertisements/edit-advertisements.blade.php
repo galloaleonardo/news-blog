@@ -1,7 +1,7 @@
 @extends('admin.layouts.admin-layout')
 
 @section('title-page')
-    News Blog - {{ trans('admin.adverts') }}
+    {{ App\Helpers\Helper::getCompanyName() }} - {{ trans('admin.adverts') }}
 
 @endsection
 
@@ -20,7 +20,7 @@
                 @csrf
                 <div class="form-row">
                     <div class="form-group col-md-12">
-                        <label for="name">Tile</label>
+                        <label for="name">{{ trans('admin.title') }}</label>
                         <input type="text" class="form-control {{ $errors->has('title') ? 'border-left-danger' : '' }}" id="title" name="title" value="{{ $advertising->title }}">
                     </div>
 

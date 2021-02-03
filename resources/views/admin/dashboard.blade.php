@@ -1,7 +1,7 @@
 @extends('admin.layouts.admin-layout')
 
 @section('title-page')
-    News Blog - Dashboard
+    {{ App\Helpers\Helper::getCompanyName() }} - Dashboard
 @endsection
 
 @section('title-content')

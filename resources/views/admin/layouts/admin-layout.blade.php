@@ -35,7 +35,7 @@
 
         <!-- Sidebar - Brand -->
         <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ route('dashboard') }}">
-            <div class="sidebar-brand-text mx-3">Larazine <i class="fas fa-feather-alt"></i></div>
+            <div class="sidebar-brand-text mx-3">{{ App\Helpers\Helper::getCompanyName() }} <i class="fas fa-feather-alt"></i></div>
         </a>
 
         <!-- Divider -->
