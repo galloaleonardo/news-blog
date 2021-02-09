@@ -14,7 +14,7 @@
     <div class="card shadow mb-4">
         <div class="card-header py-3"><i class="fas fa-edit"></i> {{ trans('admin.update') }} {{ trans('admin.settings') }}</div>
         <div class="card-body">
-            <form method="POST" action="{{ route('settings.update', $settings->id) }}">
+            <form method="POST" action="{{ route('settings.update', $settings->id) }}" enctype="multipart/form-data">
                 @method('PATCH')
                 @csrf
                 <div class="form-row">
@@ -25,7 +25,7 @@
                                id="company_name" name="company_name" value="{{ $settings->company_name }}">
                     </div>
                     <div class="form-group col-md-4">
-                        <label for="image_link">{{ trans('admin.company_logo') }}</label>
+                        <label for="company_logo_link">{{ trans('admin.company_logo') }}</label>
                         <div class="input-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text">
@@ -51,6 +51,17 @@
                                     value="{{ $language->id }}" {{ $language->id == $settings->language_id ? 'selected' : '' }}>{{ $language->name }}</option>
                             @endforeach
                         </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="use_logo_by_default" name="use_logo_by_default" {{ $settings->use_logo_by_default ? 'checked' : '' }}>
+                            <label class="form-check-label" for="use_logo_by_default">
+                                {{ trans('admin.use_logo_by_default') }}
+                            </label>
+                            <i class="fas fa-info-circle" data-toggle="tooltip" data-placement="top" title="{{ trans('admin.use_logo_by_default_description') }}"></i>
+                        </div>
                     </div>
                 </div>
                 <button type="submit" class="btn btn-primary">{{ trans('admin.update') }}</button>

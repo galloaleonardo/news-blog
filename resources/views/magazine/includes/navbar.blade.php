@@ -1,7 +1,12 @@
 <header class="shadow mb-4" style="background-color: #F8F9FC">
     <div class="container">
         <a class="logo" href="{{ route('magazine.index') }}">
-            <div class="h5 mx-3">{{ App\Helpers\Helper::getCompanyName() }} <strong><i class="fas fa-feather-alt"></i></strong></div>
+            @if(App\Helpers\Helper::useLogoByDefault())
+                <img src="{{ asset('/images/logo/logo.png') }}" alt="Logo">
+            @else
+                <div class="h5 mx-3">{{ App\Helpers\Helper::getCompanyName() }} <strong><i
+                            class="fas fa-feather-alt"></i></strong></div>
+            @endif
         </a>
         <a class="right-area src-btn" href="#">
             <i class="active src-icn ion-search"></i>
@@ -27,9 +32,11 @@
                     {{ strtoupper(trans('magazine.categories')) }}
                     <i class="ion-arrow-down-b"></i>
                 </a>
-                    <ul class="drop-down-menu drop-down-inner">
+                <ul class="drop-down-menu drop-down-inner">
                     @foreach ($categories as $category)
-                        <li><a href="{{ route('magazine.all', ['category' => $category->name]) }}">{{ strtoupper($category->name) }}</a></li>
+                        <li>
+                            <a href="{{ route('magazine.all', ['category' => $category->name]) }}">{{ strtoupper($category->name) }}</a>
+                        </li>
                     @endforeach
                 </ul>
             </li>
@@ -41,7 +48,8 @@
             <li>
                 <form method="GET" action="{{ route('magazine.all') }}">
                     <div class="input-group mb-3 ml-4">
-                        <input type="text" name="search" class="form-control form-control-sm" placeholder="{{ trans('magazine.search') }}">
+                        <input type="text" name="search" class="form-control form-control-sm"
+                               placeholder="{{ trans('magazine.search') }}">
                         <div class="input-group-append">
                             <button type="submit" class="btn btn-outline-secondary btn-sm">
                                 {{ trans('magazine.go') }}

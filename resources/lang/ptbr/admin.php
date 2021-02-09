@@ -57,5 +57,7 @@ return [
     'display_order' => 'Ordem de Exibição',
     'choose' => 'Escolha...',
     'destination_link' => 'Link Destino',
-    'image' => 'Imagem'
+    'image' => 'Imagem',
+    'use_logo_by_default' => 'Utiliza logotipo por padrão',
+    'use_logo_by_default_description' => 'Esta opção exibe o logotipo ao invés do nome da empresa nas páginas. Para que funcione, necessita de um logotipo configurado.'
 ];

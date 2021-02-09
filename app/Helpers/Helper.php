@@ -54,4 +54,11 @@ class Helper
 
         return $settings->company_name ?? 'Larazine';
     }
+
+    public static function useLogoByDefault(): bool
+    {
+        $settings = Settings::first();
+
+        return (bool)$settings->use_logo_by_default;
+    }
 }

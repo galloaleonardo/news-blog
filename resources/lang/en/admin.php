@@ -57,5 +57,7 @@ return [
     'display_order' => 'Display Order',
     'choose' => 'Choose...',
     'destination_link' => 'Destination Link',
-    'image' => 'Image'
+    'image' => 'Image',
+    'use_logo_by_default' => 'Use logo by default',
+    'use_logo_by_default_description' => 'This option displays the logo next to the company name on the pages. For it to work, you need a configured logo.'
 ];
