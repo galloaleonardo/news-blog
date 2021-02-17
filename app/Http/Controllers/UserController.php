@@ -3,13 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\Helper;
+use App\Mail\CreatedUser;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Mail;
 use Intervention\Image\Facades\Image;
 
 class UserController extends Controller
 {
+    const MAIN_USER = 1;
+
     public function index()
     {
         $users = User::paginate(15);
@@ -31,17 +35,14 @@ class UserController extends Controller
 
         $attributes = $request->all();
 
-        if ($request->hasFile('avatar')) {
-            $request->validate(['avatar' => $this->validateImage()]);
-            $attributes['avatar'] = $this->uploadImageAndReturnName($request->file('avatar'));
-        }
+        $password = env('APP_NAME') . rand();
 
-        $attributes['password'] = \Hash::make(rand());
-        $attributes['admin']    = $request->has('admin') ? true : false;
+        $attributes['password'] = \Hash::make($password);
         $attributes['active']   = $request->has('active') ? true : false;
-        $attributes['token']    = \Str::random(50);
 
-        User::create($attributes);
+        $user = User::create($attributes);
+
+        Mail::queue(new CreatedUser($user, $password));
 
         return redirect(route('users.index'))->with('success', 'User created successfuly.');
     }
@@ -65,14 +66,8 @@ class UserController extends Controller
             'email' => 'required|unique:users,email, ' . $user->id
         ]);
 
-        if ($request->hasFile('avatar')) {
-            $request->validate(['avatar' => $this->validateImage()]);
-            $attributes['avatar'] = $this->uploadImageAndReturnName($request->file('avatar'));
-        }
-
-        $attributes['admin']    = $request->has('admin') ? true : false;
-        $attributes['active']   = $request->has('active') ? true : false;
-        $attributes['password']   = \Hash::make('9622gallo');
+        $attributes['admin']   = $request->has('admin') ? true : false;
+        $attributes['active']  = $request->has('active') ? true : false;
 
         $user->update($attributes);
 
@@ -81,34 +76,12 @@ class UserController extends Controller
 
     public function destroy(User $user)
     {
+        if ($user->id === self::MAIN_USER) {
+            return redirect(route('users.index'))->with('warning', 'Main user cannot be deleted.');
+        }
+
         $user->delete();
+
         return redirect(route('users.index'))->with('success', 'User deleted successfuly.');
-    }
-
-    private function uploadImageAndReturnName(UploadedFile $image)
-    {
-        $name       = Helper::getRandomNameImage();
-        $jpg_name   = "{$name}.jpg";
-        $path_large = public_path('images/avatars/');
-
-        Helper::checkPath([$path_large]);
-
-        Image::make($image)
-            ->encode('jpg', 60)
-            ->save($path_large . $jpg_name);
-
-        return $jpg_name;
-    }
-
-    private function validateImage()
-    {
-        $validate = [
-            'image',
-            'mimes:jpeg,jpg,png',
-            'max:800',
-            'dimensions:max_width=600, max_height=600'
-        ];
-
-        return $validate;
     }
 }

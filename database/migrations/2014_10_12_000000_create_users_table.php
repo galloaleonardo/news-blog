@@ -17,16 +17,19 @@ class CreateUsersTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->string('avatar')->nullable();
-            $table->boolean('admin')->default(false);
-            $table->string('token')->nullable();
-            $table->boolean('validated')->default(0);
             $table->boolean('active')->default(true);
-            $table->rememberToken();
             $table->timestamps();
         });
+
+        DB::table('users')->insert([
+            'name' => 'Administrator',
+            'email' => 'admin@admin.com',
+            'password' => Hash::make('@dm1np4ss'),
+            'active' => true,
+            'created_at' => date('Y-m-d'),
+            'updated_at' => date('Y-m-d')
+        ]);
     }
 
     /**
