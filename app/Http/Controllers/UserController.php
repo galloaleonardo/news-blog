@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Helpers\Helper;
 use App\Mail\CreatedUser;
 use App\User;
 use Illuminate\Http\Request;
-use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
-use Intervention\Image\Facades\Image;
+use Illuminate\Support\Str;
 
 class UserController extends Controller
 {
@@ -16,7 +15,13 @@ class UserController extends Controller
 
     public function index()
     {
-        $users = User::paginate(15);
+        $users = User::where(function ($query) {
+            $userId = Auth::user()->id;
+
+            if ($userId !== self::MAIN_USER) {
+                $query->where('id', $userId);
+            }
+        })->paginate(15);
 
         return view('admin.users.index-users', compact('users'));
     }
@@ -30,21 +35,21 @@ class UserController extends Controller
     {
         $request->validate([
             'name' => 'required|min:3',
-            'email' => 'required|unique:users,email'
+            'email' => 'required|email|unique:users,email'
         ]);
 
         $attributes = $request->all();
 
-        $password = env('APP_NAME') . rand();
+        $password = Str::random();
 
         $attributes['password'] = \Hash::make($password);
-        $attributes['active']   = $request->has('active') ? true : false;
+        $attributes['active'] = $request->has('active') ? true : false;
 
         $user = User::create($attributes);
 
         Mail::queue(new CreatedUser($user, $password));
 
-        return redirect(route('users.index'))->with('success', 'User created successfuly.');
+        return redirect(route('users.index'))->with('success', 'User created successfuly. Instructions sent to email: ' . $user->email);
     }
 
     public function show(User $user)
@@ -66,8 +71,8 @@ class UserController extends Controller
             'email' => 'required|unique:users,email, ' . $user->id
         ]);
 
-        $attributes['admin']   = $request->has('admin') ? true : false;
-        $attributes['active']  = $request->has('active') ? true : false;
+        $attributes['admin'] = $request->has('admin') ? true : false;
+        $attributes['active'] = $request->has('active') ? true : false;
 
         $user->update($attributes);
 
@@ -80,8 +85,35 @@ class UserController extends Controller
             return redirect(route('users.index'))->with('warning', 'Main user cannot be deleted.');
         }
 
+        if ($user->id === Auth::user()->id) {
+            return redirect(route('users.index'))->with('warning', 'The user cannot be excluded.');
+        }
+
         $user->delete();
 
         return redirect(route('users.index'))->with('success', 'User deleted successfuly.');
+    }
+
+    public function changePasswordShow(User $user)
+    {
+        return view('admin.users.change-password-users', compact('user'));
+    }
+
+    public function changePassword(Request $request, User $user)
+    {
+        $attributes = $request->all();
+
+        $request->validate([
+            'current_password' => 'required',
+            'new_password' => 'required|min:8|max:16|confirmed',
+        ]);
+
+        if (!\Hash::check($attributes['current_password'], $user->password)) {
+            return redirect(route('users.change-password.show', compact('user')))->with('warning', 'The current password does not match.');
+        }
+
+        $user->update(['password' => \Hash::make($attributes['new_password'])]);
+
+        return $this->index();
     }
 }

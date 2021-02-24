@@ -55,6 +55,12 @@
                                                 </span>
                                             </a>
 
+                                            <a href="{{ route('users.change-password.show', $user->id) }}" class="btn btn-light btn-sm">
+                                                <span class="icon text-danger" data-toggle="tooltip" data-placement="top" title="Change Password">
+                                                    <i class="fas fa-key"></i>
+                                                </span>
+                                            </a>
+
                                             <a href="{{ route('users.edit', $user->id) }}" class="btn btn-light btn-sm">
                                                 <span class="icon text-info" data-toggle="tooltip" data-placement="top" title="Edit">
                                                     <i class="fas fa-pencil-alt"></i>

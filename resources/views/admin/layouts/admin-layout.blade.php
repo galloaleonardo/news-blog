@@ -357,7 +357,7 @@
         <footer class="sticky-footer bg-white">
             <div class="container my-auto">
                 <div class="copyright text-center my-auto">
-                    <span>MIT LICENSE - 2019</span>
+                    <span>MIT LICENSE - <span id="year"></span> </span>
                 </div>
             </div>
         </footer>
@@ -396,7 +396,9 @@
     </div>
 </div>
 
-
+<script>
+    document.getElementById("year").innerHTML = new Date().getFullYear();
+</script>
 
 <!-- Bootstrap core JavaScript-->
 <script src="/js/app.js"></script>

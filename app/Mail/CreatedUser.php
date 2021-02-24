@@ -36,7 +36,7 @@ class CreatedUser extends Mailable
 
         $this->subject('Acesso a plataforma.');
         $this->to($this->user->email, $this->user->name);
-        return $this->markdown('view.mail', [
+        return $this->markdown('mail.user-created', [
             'user' => $this->user,
             'password' => $this->password
         ]);

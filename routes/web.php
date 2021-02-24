@@ -8,6 +8,8 @@ Route::group(['middleware' => 'localization'], function () {
         Route::resource('categories', 'CategoryController');
         Route::resource('settings', 'SettingsController');
         Route::resource('users', 'UserController');
+        Route::get('users/{user}/change-password', 'UserController@changePasswordShow')->name('users.change-password.show');
+        Route::patch('users/{user}/change-password', 'UserController@changePassword')->name('users.change-password.update');
         Route::resource('advertisements', 'AdvertisingController', ['parameters' => ['advertisements' => 'advertising']]);
     });
 
