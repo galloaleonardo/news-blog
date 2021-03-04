@@ -4,6 +4,7 @@
 namespace App\Helpers;
 
 use App\Settings;
+use Carbon\Carbon;
 use Jenssegers\Date\Date;
 
 class Helper
@@ -60,5 +61,18 @@ class Helper
         $settings = Settings::first();
 
         return (bool)$settings->use_logo_by_default;
+    }
+
+    public static function getCompetencyDateLanguage(Carbon $date)
+    {
+        if (\App::getLocale() === 'en') {
+            return $date->format('Y-m');
+        }
+
+        if (\App::getLocale() === 'ptbr') {
+            return $date->format('m/Y');
+        }
+
+        return $date->format('Y-m');
     }
 }
