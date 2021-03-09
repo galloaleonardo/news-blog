@@ -127,6 +127,16 @@
 
         </li>
 
+        <!-- Nav Item - Ads Menu -->
+        <li class="nav-item {{ request()->is('*users*') ? 'active' : '' }}">
+
+            <a class="nav-link py-1" href="{{ route('google-ads.index') }}">
+                <i class="fab fa-google"></i>
+                <span>{{ trans('admin.google_ads') }}</span>
+            </a>
+
+        </li>
+
         <!-- Divider -->
         <hr class="sidebar-divider d-none d-md-block">
 

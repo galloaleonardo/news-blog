@@ -91,6 +91,18 @@ Breadcrumbs::for('settings-edit', function ($trail) {
     $trail->push(trans('admin.edit'));
 });
 
+// Home > Google Ads
+Breadcrumbs::for('google-ads', function ($trail) {
+    $trail->parent('dashboard');
+    $trail->push(trans('admin.google_ads'), route('google-ads.index'));
+});
+
+// Home > Google Ads > Edit
+Breadcrumbs::for('google-ads-edit', function ($trail) {
+    $trail->parent('google-ads');
+    $trail->push(trans('admin.edit'));
+});
+
 // Home > Blog
 Breadcrumbs::for('blog', function ($trail) {
     $trail->parent('home');
