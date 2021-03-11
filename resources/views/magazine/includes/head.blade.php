@@ -7,3 +7,6 @@
 <link href="{{ asset('/css/bootstrap.min.css') }}" rel="stylesheet">
 <link href="{{ asset('/css/styles-news-theme.css') }}" rel="stylesheet">
 <link href="{{ asset('/fontawesome/css/all.css') }}" rel="stylesheet" type="text/css">
+
+{!! \App\Helpers\Helper::getGoogleAdsScript() !!}
+{!! \App\Helpers\Helper::getGoogleAnalyticsScript() !!}

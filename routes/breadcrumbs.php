@@ -103,6 +103,18 @@ Breadcrumbs::for('google-ads-edit', function ($trail) {
     $trail->push(trans('admin.edit'));
 });
 
+// Home > Google Analytics
+Breadcrumbs::for('google-analytics', function ($trail) {
+    $trail->parent('dashboard');
+    $trail->push(trans('admin.google_analytics'), route('google-analytics.index'));
+});
+
+// Home > Google Ads > Analytics
+Breadcrumbs::for('google-analytics-edit', function ($trail) {
+    $trail->parent('google-analytics');
+    $trail->push(trans('admin.edit'));
+});
+
 // Home > Blog
 Breadcrumbs::for('blog', function ($trail) {
     $trail->parent('home');

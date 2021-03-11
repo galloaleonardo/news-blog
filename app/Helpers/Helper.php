@@ -3,6 +3,8 @@
 
 namespace App\Helpers;
 
+use App\GoogleAds;
+use App\GoogleAnalytics;
 use App\Settings;
 use Carbon\Carbon;
 use Jenssegers\Date\Date;
@@ -74,5 +76,27 @@ class Helper
         }
 
         return $date->format('Y-m');
+    }
+
+    public static function getGoogleAdsScript()
+    {
+        $googleAds = GoogleAds::first();
+
+        if (!(bool)$googleAds->active || !$googleAds->script) {
+            return ' ';
+        }
+
+        return $googleAds->script;
+    }
+
+    public static function getGoogleAnalyticsScript()
+    {
+        $googleAnalytics = GoogleAnalytics::first();
+
+        if (!(bool)$googleAnalytics->active || !$googleAnalytics->script) {
+            return ' ';
+        }
+
+        return $googleAnalytics->script;
     }
 }

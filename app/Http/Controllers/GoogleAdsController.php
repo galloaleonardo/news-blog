@@ -16,13 +16,6 @@ class GoogleAdsController extends Controller
         return view('admin.google-ads.edit-google-ads', compact('googleAds'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\GoogleAds  $googleAds
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request)
     {
         $fields = $request->all();

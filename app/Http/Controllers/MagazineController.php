@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Helpers\Helper;
 use App\Http\Traits\MagazineTrait;
 use App\News;
+use Artesaos\SEOTools\Facades\SEOTools;
 use Illuminate\Http\Request;
 
 
@@ -38,6 +39,14 @@ class MagazineController extends Controller
         Helper::getWrittenDateLanguage($news->updated_at);
 
         views($news)->record();
+
+        SEOTools::setTitle($news->title);
+        SEOTools::setDescription($news->subtitle);
+        SEOTools::opengraph()->setUrl('http://current.url.com');
+        SEOTools::setCanonical('https://codecasts.com.br/lesson');
+        SEOTools::opengraph()->addProperty('type', 'articles');
+        SEOTools::twitter()->setSite('@LuizVinicius73');
+        SEOTools::jsonLd()->addImage('https://codecasts.com.br/img/logo.jpg');
 
         return view('magazine.post.index', compact('categories', 'news', 'popularNews', 'suggestedNews'));
     }

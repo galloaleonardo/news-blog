@@ -117,22 +117,22 @@
             {{ trans('admin.integrations') }}
         </div>
 
-        <!-- Nav Item - Ads Menu -->
-        <li class="nav-item {{ request()->is('*users*') ? 'active' : '' }}">
-
-            <a class="nav-link py-1" href="{{ route('advertisements.index') }}">
-                <i class="fas fa-code"></i>
-                <span>{{ trans('admin.script_injection') }}</span>
-            </a>
-
-        </li>
-
-        <!-- Nav Item - Ads Menu -->
-        <li class="nav-item {{ request()->is('*users*') ? 'active' : '' }}">
+        <!-- Nav Item - Google Ads Menu -->
+        <li class="nav-item {{ request()->is('*google-ads*') ? 'active' : '' }}">
 
             <a class="nav-link py-1" href="{{ route('google-ads.index') }}">
                 <i class="fab fa-google"></i>
                 <span>{{ trans('admin.google_ads') }}</span>
+            </a>
+
+        </li>
+
+        <!-- Nav Item - Google Analytics Menu -->
+        <li class="nav-item {{ request()->is('*google-analytics*') ? 'active' : '' }}">
+
+            <a class="nav-link py-1" href="{{ route('google-analytics.index') }}">
+                <i class="fab fa-google"></i>
+                <span>{{ trans('admin.google_analytics') }}</span>
             </a>
 
         </li>
