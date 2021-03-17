@@ -126,3 +126,15 @@ Breadcrumbs::for('category', function ($trail, $category) {
     $trail->parent('blog');
     $trail->push($category->title, route('category', $category->id));
 });
+
+// Home > SEO
+Breadcrumbs::for('seo', function ($trail) {
+    $trail->parent('dashboard');
+    $trail->push(trans('admin.seo'), route('seo.index'));
+});
+
+// Home > Settings > Edit
+Breadcrumbs::for('seo-edit', function ($trail) {
+    $trail->parent('seo');
+    $trail->push(trans('admin.edit'));
+});

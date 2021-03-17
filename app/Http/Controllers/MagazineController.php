@@ -48,24 +48,7 @@ class MagazineController extends Controller
 
         views($news)->record();
 
-        SEOMeta::setTitle($news->title);
-        SEOMeta::setDescription($news->subtitle);
-        SEOMeta::addMeta('article:published_time', $news->created_at->toW3CString(), 'property');
-        SEOMeta::addMeta('article:section', $news->category->name, 'property');
-
-        OpenGraph::setTitle($news->title);
-        OpenGraph::setDescription($news->subtitle);
-        OpenGraph::setUrl('http://current.url.com');
-        OpenGraph::addProperty('type', 'article');
-        OpenGraph::addProperty('locale', 'pt-br');
-        OpenGraph::addProperty('locale:alternate', ['pt-pt', 'en-us']);
-
-        OpenGraph::addImage(request()->getHttpHost() . '/images/news/small/' .  $news->image_link, ['height' => 300, 'width' => 300]);
-
-        JsonLd::setTitle($news->title);
-        JsonLd::setDescription($news->subtitle);
-        JsonLd::setType('Article');
-        JsonLd::addImage(request()->getHttpHost() . '/images/news/small/' .  $news->image_link);
+        $this->setSEOPost($news);
 
         return view('magazine.post.index', compact('categories', 'news', 'popularNews', 'suggestedNews'));
     }
@@ -78,6 +61,8 @@ class MagazineController extends Controller
         $categories = $this->getCategories();
 
         $news = $this->getOrSearchAllNews($search, $category);
+
+        $this->setSEOPages();
 
         return view('magazine.all-news.index', compact('news', 'categories'));
     }

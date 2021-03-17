@@ -7,6 +7,11 @@ namespace App\Http\Traits;
 use App\Advertising;
 use App\Category;
 use App\News;
+use App\SeoMagazine;
+use Artesaos\SEOTools\Facades\JsonLd;
+use Artesaos\SEOTools\Facades\OpenGraph;
+use Artesaos\SEOTools\Facades\SEOMeta;
+use Artesaos\SEOTools\Facades\TwitterCard;
 use CyrildeWit\EloquentViewable\Support\Period;
 use CyrildeWit\EloquentViewable\Views;
 
@@ -144,5 +149,52 @@ trait MagazineTrait
             })
             ->orderBy('updated_at', 'desc')
             ->get();
+    }
+
+    public function setSEOPost(News $news)
+    {
+        $seo = SeoMagazine::first();
+
+        SEOMeta::setTitle($news->title);
+        SEOMeta::setDescription($news->subtitle);
+        SEOMeta::addMeta('article:published_time', $news->created_at->toW3CString(), 'property');
+        SEOMeta::addMeta('article:section', $news->category->name, 'property');
+
+        OpenGraph::setTitle($news->title);
+        OpenGraph::setDescription($news->subtitle);
+        OpenGraph::setUrl('http://current.url.com');
+        OpenGraph::addProperty('type', 'article');
+        OpenGraph::addProperty('locale', 'pt-br');
+        OpenGraph::addProperty('locale:alternate', ['pt-pt', 'en-us']);
+
+        OpenGraph::addImage(request()->getHttpHost() . '/images/news/small/' . $news->image_link, ['height' => 300, 'width' => 300]);
+
+        JsonLd::setTitle($news->title);
+        JsonLd::setDescription($news->subtitle);
+        JsonLd::setType($seo->page_type);
+        JsonLd::addImage(request()->getHttpHost() . '/images/news/small/' . $news->image_link);
+    }
+
+    public function setSEOPages()
+    {
+        $seo = SeoMagazine::first();
+
+        SEOMeta::setTitle($seo->page_title);
+        SEOMeta::setDescription($seo->page_description);
+        SEOMeta::setCanonical(request()->getHttpHost());
+
+        OpenGraph::setTitle($seo->page_title);
+        OpenGraph::setDescription($seo->page_description);
+        OpenGraph::setUrl(request()->getHttpHost());
+        OpenGraph::addProperty('type', $seo->page_type);
+
+        $twitterUser = $seo->twitter_user && substr($seo->twitter_user, 0, 1) !== '@' ? '@' . $seo->twitter_user : $seo->twitter_user;
+
+        TwitterCard::setTitle($seo->page_description);
+        TwitterCard::setSite(@$twitterUser);
+
+        JsonLd::setTitle($seo->page_title);
+        JsonLd::setDescription($seo->page_description);
+        JsonLd::addImage($seo->image_link);
     }
 }

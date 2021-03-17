@@ -76,5 +76,11 @@ return [
     'logout_message' => 'Select "Logout" below if you are ready to end your current session.',
     'cancel' => 'Cancel',
     'logout' => 'Logout',
-    'mit_license' => 'MIT LICENSE'
+    'mit_license' => 'MIT LICENSE',
+    'seo' => 'SEO',
+    'page_title' => 'Page Title',
+    'page_description' => 'Page Description',
+    'page_type' => 'Page Type',
+    'twitter_user' => 'Twitter User',
+    'image_link' => 'Page Image'
 ];

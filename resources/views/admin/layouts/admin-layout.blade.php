@@ -142,6 +142,24 @@
 
         <!-- Heading -->
         <div class="sidebar-heading">
+            {{ trans('admin.seo') }}
+        </div>
+
+        <!-- Nav Item - Google Ads Menu -->
+        <li class="nav-item {{ request()->is('*seo*') ? 'active' : '' }}">
+
+            <a class="nav-link py-1" href="{{ route('seo.index') }}">
+                <i class="fas fa-rocket"></i>
+                <span>{{ trans('admin.seo') }}</span>
+            </a>
+
+        </li>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider d-none d-md-block">
+
+        <!-- Heading -->
+        <div class="sidebar-heading">
             {{ trans('admin.settings') }}
         </div>
 

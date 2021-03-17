@@ -76,5 +76,11 @@ return [
     'logout_message' => 'Selecione "Logout" abaixo se você estiver pronto para encerrar sua sessão atual.',
     'cancel' => 'Cancelar',
     'logout' => 'Logout',
-    'mit_license' => 'LICENÇA MIT'
+    'mit_license' => 'LICENÇA MIT',
+    'seo' => 'SEO',
+    'page_title' => 'Título da Página',
+    'page_description' => 'Descrição da Página',
+    'page_type' => 'Tipo da Página',
+    'twitter_user' => 'Usuário do Twitter',
+    'image_link' => 'Imagem da Página'
 ];

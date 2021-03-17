@@ -13,6 +13,7 @@ Route::group(['middleware' => 'localization'], function () {
         Route::resource('advertisements', 'AdvertisingController', ['parameters' => ['advertisements' => 'advertising']]);
         Route::resource('google-ads', 'GoogleAdsController');
         Route::resource('google-analytics', 'GoogleAnalyticsController');
+        Route::resource('seo', 'SeoMagazineController');
     });
 
     Route::get('/', 'MagazineController@index')->name('magazine.index');
