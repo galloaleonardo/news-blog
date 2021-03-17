@@ -28,11 +28,11 @@
                             <table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
                                 <thead>
                                 <tr role="row">
-                                    <th>Name</th>
-                                    <th>Email</th>
-                                    <th class="min text-center">Admin</th>
-                                    <th class="min text-center">Active</th>
-                                    <th class="min text-center">Action</th>
+                                    <th>{{ trans('admin.name') }}</th>
+                                    <th>{{ trans('admin.email') }}</th>
+                                    <th class="min text-center">{{ trans('admin.admin') }}</th>
+                                    <th class="min text-center">{{ trans('admin.active') }}</th>
+                                    <th class="min text-center">{{ trans('admin.action') }}</th>
                                 </tr>
                                 </thead>
                                 <tbody>

@@ -9,7 +9,8 @@ use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 use Intervention\Image\Facades\Image;
 
-class AdvertisingController extends Controller {
+class AdvertisingController extends Controller
+{
 
     public function index()
     {
@@ -32,12 +33,15 @@ class AdvertisingController extends Controller {
 
         $attributes = $request->all();
 
-        $attributes['active']     = $request->has('active') ? true : false;
+        $attributes['active'] = $request->has('active') ? true : false;
         $attributes['image_link'] = $this->uploadImageAndReturnName($request->file('image_link'));
 
         Advertising::create($attributes);
 
-        return redirect(route('advertisements.index'))->with('success', 'Advertising created successfuly.');
+        return redirect(route('advertisements.index'))
+            ->with('success', trans('admin.created_successfully', [
+                'object' => trans('admin.advertisings')
+            ]));
     }
 
     public function show(Advertising $advertising)
@@ -65,26 +69,32 @@ class AdvertisingController extends Controller {
 
         $advertising->update($attributes);
 
-        return redirect(route('advertisements.index'))->with('success', 'Advertising updated successfuly.');
+        return redirect(route('advertisements.index'))
+            ->with('success', trans('admin.updated_successfully', [
+                'object' => trans('admin.advertisings')
+            ]));
     }
 
     public function destroy(Advertising $advertising)
     {
         $advertising->delete();
-        return redirect(route('advertisements.index'))->with('success', 'Advertising deleted successfuly.');
+        return redirect(route('advertisements.index'))
+            ->with('success', trans('admin.deleted_successfully', [
+                'object' => trans('admin.advertisings')
+            ]));
     }
 
     private function uploadImageAndReturnName(UploadedFile $image)
     {
-        $name       = Helper::getRandomNameImage();
-        $jpg_name   = "{$name}.jpg";
+        $name = Helper::getRandomNameImage();
+        $jpg_name = "{$name}.jpg";
         $path_large = public_path('images/announcements/');
 
         Helper::checkPath([$path_large]);
 
         Image::make($image)
-             ->encode('jpg', 60)
-             ->save($path_large . $jpg_name);
+            ->encode('jpg', 60)
+            ->save($path_large . $jpg_name);
 
         return $jpg_name;
     }

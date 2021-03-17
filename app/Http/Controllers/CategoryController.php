@@ -34,7 +34,10 @@ class CategoryController extends Controller
 
         Category::create($category);
 
-        return redirect(route('categories.index'))->with('success', 'Category created successfuly.');
+        return redirect(route('categories.index'))
+            ->with('success', trans('admin.created_successfully', [
+                'object' => trans('admin.category')
+            ]));
     }
 
     public function show(Category $category)
@@ -61,12 +64,18 @@ class CategoryController extends Controller
 
         $category->update($aux_category);
 
-        return redirect(route('categories.index'))->with('success', 'Category updated successfuly.');
+        return redirect(route('categories.index'))
+            ->with('success', trans('admin.updated_successfully', [
+                'object' => trans('admin.category')
+            ]));
     }
 
     public function destroy(Category $category)
     {
         $category->delete();
-        return redirect(route('categories.index'))->with('success', 'Category deleted successfuly.');
+        return redirect(route('categories.index'))
+            ->with('success', trans('admin.deleted_successfully', [
+                'object' => trans('admin.category')
+            ]));
     }
 }

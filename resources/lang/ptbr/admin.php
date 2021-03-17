@@ -60,5 +60,21 @@ return [
     'image' => 'Imagem',
     'use_logo_by_default' => 'Utiliza logotipo por padrão',
     'use_logo_by_default_description' => 'Esta opção exibe o logotipo ao invés do nome da empresa nas páginas. Para que funcione, necessita de um logotipo configurado.',
-    'script' => 'Script'
+    'script' => 'Script',
+    'current_password' => 'Senha Atual',
+    'new_password' => 'Nova Senha',
+    'confirm_new_password' => 'Confirmação Nova Senha',
+    'change_user_password' => 'Alterar senha de usuário',
+    'user' => 'Usuário',
+    'created_successfully' => ':object criado com sucesso!',
+    'updated_successfully' => ':object atualizado com sucesso!',
+    'deleted_successfully' => ':object excluído com sucesso!',
+    'user_created_successfully' => ':object criado com sucesso! Instruções enviadas para o email: :email.',
+    'main_user_cant_delete' => 'Usuário principal não pode ser excluído.',
+    'user_cant_delete' => 'Usuário não pode ser excluído.',
+    'ready_to_leave' => 'Pronto para partir?',
+    'logout_message' => 'Selecione "Logout" abaixo se você estiver pronto para encerrar sua sessão atual.',
+    'cancel' => 'Cancelar',
+    'logout' => 'Logout',
+    'mit_license' => 'LICENÇA MIT'
 ];

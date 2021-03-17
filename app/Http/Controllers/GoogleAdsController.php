@@ -25,6 +25,9 @@ class GoogleAdsController extends Controller
 
         $googleAds->update($fields);
 
-        return redirect(route('google-ads.index'))->with('success', 'Google Ads updated successfuly.');
+        return redirect(route('google-ads.index'))
+            ->with('success', trans('admin.updated_successfully', [
+                'object' => trans('admin.google_ads')
+            ]));
     }
 }

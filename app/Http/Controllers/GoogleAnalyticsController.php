@@ -23,6 +23,9 @@ class GoogleAnalyticsController extends Controller
 
         $googleAds->update($fields);
 
-        return redirect(route('google-analytics.index'))->with('success', 'Google Analytics updated successfuly.');
+        return redirect(route('google-analytics.index'))
+            ->with('success', trans('admin.updated_successfully', [
+                'object' => trans('admin.google_ads')
+            ]));
     }
 }

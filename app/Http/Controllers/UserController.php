@@ -49,7 +49,11 @@ class UserController extends Controller
 
         Mail::queue(new CreatedUser($user, $password));
 
-        return redirect(route('users.index'))->with('success', 'User created successfuly. Instructions sent to email: ' . $user->email);
+        return redirect(route('users.index'))
+            ->with('success', trans('admin.user_created_successfully', [
+                'object' => trans('admin.user'),
+                'email' => $user->email
+            ]));
     }
 
     public function show(User $user)
@@ -76,22 +80,28 @@ class UserController extends Controller
 
         $user->update($attributes);
 
-        return redirect(route('users.index'))->with('success', 'User updated successfuly.');
+        return redirect(route('users.index'))
+            ->with('success', trans('admin.updated_successfully', [
+                'object' => trans('admin.user')
+            ]));
     }
 
     public function destroy(User $user)
     {
         if ($user->id === self::MAIN_USER) {
-            return redirect(route('users.index'))->with('warning', 'Main user cannot be deleted.');
+            return redirect(route('users.index'))->with('warning', trans('admin.main_user_cant_delete'));
         }
 
         if ($user->id === Auth::user()->id) {
-            return redirect(route('users.index'))->with('warning', 'The user cannot be excluded.');
+            return redirect(route('users.index'))->with('warning', trans('admin.user_cant_delete'));
         }
 
         $user->delete();
 
-        return redirect(route('users.index'))->with('success', 'User deleted successfuly.');
+        return redirect(route('users.index'))
+            ->with('success', trans('admin.updated_successfully', [
+                'object' => trans('admin.user')
+            ]));;
     }
 
     public function changePasswordShow(User $user)

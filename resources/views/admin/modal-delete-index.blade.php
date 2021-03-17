@@ -6,7 +6,7 @@
                 <h5 class="modal-title" id="exampleModalLabel">
                         <span class="icon text-danger">
                             <i class="fas fa-trash-alt"></i>
-                            DELETE
+                            {{ trans('admin.delete') }}
                         </span>
                 </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
@@ -14,8 +14,8 @@
                 </button>
             </div>
             <div class="modal-body">
-                <p>Do you want to remove the registry?</p>
-                <p>This operation is irreversible.</p>
+                <p>{{ trans('admin.want_remove_question') }}</p>
+                <p>{{ trans('admin.operation_irreversible') }}</p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ trans('admin.no_close') }}</button>

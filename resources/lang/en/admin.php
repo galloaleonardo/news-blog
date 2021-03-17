@@ -60,5 +60,21 @@ return [
     'image' => 'Image',
     'use_logo_by_default' => 'Use logo by default',
     'use_logo_by_default_description' => 'This option displays the logo next to the company name on the pages. For it to work, you need a configured logo.',
-    'script' => 'Script'
+    'script' => 'Script',
+    'current_password' => 'Current Password',
+    'new_password' => 'New Password',
+    'confirm_new_password' => 'Confirm New Password',
+    'change_user_password' => 'Change user password',
+    'user' => 'User',
+    'created_successfully' => ':object created successfully!',
+    'updated_successfully' => ':object updated successfully!',
+    'deleted_successfully' => ':object deleted successfully!',
+    'user_created_successfully' => ':object created successfully! Instructions sent to email: :email.',
+    'main_user_cant_delete' => 'Main user cannot be deleted.',
+    'user_cant_delete' => 'The user cannot be excluded.',
+    'ready_to_leave' => 'Ready to leave?',
+    'logout_message' => 'Select "Logout" below if you are ready to end your current session.',
+    'cancel' => 'Cancel',
+    'logout' => 'Logout',
+    'mit_license' => 'MIT LICENSE'
 ];

@@ -5,8 +5,16 @@ namespace App\Http\Controllers;
 use App\Helpers\Helper;
 use App\Http\Traits\MagazineTrait;
 use App\News;
-use Artesaos\SEOTools\Facades\SEOTools;
 use Illuminate\Http\Request;
+use Artesaos\SEOTools\Facades\SEOMeta;
+use Artesaos\SEOTools\Facades\OpenGraph;
+use Artesaos\SEOTools\Facades\TwitterCard;
+use Artesaos\SEOTools\Facades\JsonLd;
+// OR with multi
+use Artesaos\SEOTools\Facades\JsonLdMulti;
+
+// OR
+use Artesaos\SEOTools\Facades\SEOTools;
 
 
 class MagazineController extends Controller
@@ -40,13 +48,24 @@ class MagazineController extends Controller
 
         views($news)->record();
 
-        SEOTools::setTitle($news->title);
-        SEOTools::setDescription($news->subtitle);
-        SEOTools::opengraph()->setUrl('http://current.url.com');
-        SEOTools::setCanonical('https://codecasts.com.br/lesson');
-        SEOTools::opengraph()->addProperty('type', 'articles');
-        SEOTools::twitter()->setSite('@LuizVinicius73');
-        SEOTools::jsonLd()->addImage('https://codecasts.com.br/img/logo.jpg');
+        SEOMeta::setTitle($news->title);
+        SEOMeta::setDescription($news->subtitle);
+        SEOMeta::addMeta('article:published_time', $news->created_at->toW3CString(), 'property');
+        SEOMeta::addMeta('article:section', $news->category->name, 'property');
+
+        OpenGraph::setTitle($news->title);
+        OpenGraph::setDescription($news->subtitle);
+        OpenGraph::setUrl('http://current.url.com');
+        OpenGraph::addProperty('type', 'article');
+        OpenGraph::addProperty('locale', 'pt-br');
+        OpenGraph::addProperty('locale:alternate', ['pt-pt', 'en-us']);
+
+        OpenGraph::addImage(request()->getHttpHost() . '/images/news/small/' .  $news->image_link, ['height' => 300, 'width' => 300]);
+
+        JsonLd::setTitle($news->title);
+        JsonLd::setDescription($news->subtitle);
+        JsonLd::setType('Article');
+        JsonLd::addImage(request()->getHttpHost() . '/images/news/small/' .  $news->image_link);
 
         return view('magazine.post.index', compact('categories', 'news', 'popularNews', 'suggestedNews'));
     }

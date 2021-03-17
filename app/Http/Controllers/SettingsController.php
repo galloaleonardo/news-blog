@@ -35,7 +35,10 @@ class SettingsController extends Controller
 
         $settings->update($fields);
 
-        return redirect(route('settings.index'))->with('success', 'Settings updated successfuly.');
+        return redirect(route('settings.index'))
+            ->with('success', trans('admin.updated_successfully', [
+                'object' => trans('admin.settings')
+            ]));
     }
 
     private function validateImage()
