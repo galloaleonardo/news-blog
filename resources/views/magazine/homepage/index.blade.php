@@ -2,6 +2,7 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     @include('magazine.includes.head')
+    {!! \Artesaos\SEOTools\Facades\SEOTools::generate() !!}
 </head>
 <body>
 

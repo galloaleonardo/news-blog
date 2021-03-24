@@ -7,9 +7,13 @@
             <div class="row">
                 <div class="col-sm-4">
                     <div class="mb-30">
-                        <div class="h5">{{ App\Helpers\Helper::getCompanyName() }} <strong><i class="fas fa-feather-alt"></i></i></strong></div>
+                        <div class="h5">{{ App\Helpers\Helper::getCompanyName() }} <strong><i
+                                    class="fas fa-feather-alt"></i></strong></div>
                         <p class="mtb-20 color-ccc">
-                            {{ trans('magazine.description') }}
+
+                            @if( env('APP_ENV') !== 'production' )
+                                {{ trans('magazine.description') }}
+                            @endif
                         </p>
                         <p class="color-ash">
                             {{ trans('magazine.developed_by', ['name' => 'Leonardo Gallo']) }}

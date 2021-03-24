@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\Helper;
 use App\SeoMagazine;
 use Illuminate\Http\Request;
+use Illuminate\Http\UploadedFile;
+use Intervention\Image\Facades\Image;
 
 class SeoMagazineController extends Controller
 {
@@ -15,69 +18,59 @@ class SeoMagazineController extends Controller
         return view('admin.seo.edit-seo', compact('seo'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+
+    public function update(Request $request, SeoMagazine $seo)
     {
-        //
+        $attributes = $request->all();
+
+        $request->validate([
+            'page_title' => ['required', 'max:100'],
+            'page_description' => ['required', 'max:255'],
+            'page_type' => 'required',
+            'twitter_user' => 'nullable'
+        ]);
+
+        if ($request->hasFile('image_link')) {
+            $request->validate(['image_link' => $this->validateImage()]);
+            $attributes['image_link'] = $this->uploadImageAndReturnName($request->file('image_link'));
+        }
+
+        $seo->update($attributes);
+
+        return redirect(route('seo.index'))
+            ->with('success', trans('admin.updated_successfully', [
+                'object' => trans('admin.seo')
+            ]));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    private function uploadImageAndReturnName(UploadedFile $image)
     {
-        //
+        $name = Helper::getRandomNameImage();
+        $jpg_name = "{$name}.jpg";
+        $path_small = public_path('images/seo/small/');
+
+        Helper::checkPath([$path_small]);
+
+        Image::make($image)
+            ->encode('jpg', 60)
+            ->resize(300, null, function ($constraint) {
+                $constraint->aspectRatio();
+            })
+            ->save($path_small . $jpg_name);
+
+        return $jpg_name;
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\SeoMagazine  $seoMagazine
-     * @return \Illuminate\Http\Response
-     */
-    public function show(SeoMagazine $seoMagazine)
+    private function validateImage()
     {
-        //
-    }
+        $validate = [
+            'nullable',
+            'image',
+            'mimes:jpeg,jpg,png',
+            'max:800',
+            'dimensions:max_width=1500, max_height=1500'
+        ];
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\SeoMagazine  $seoMagazine
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(SeoMagazine $seoMagazine)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\SeoMagazine  $seoMagazine
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, SeoMagazine $seoMagazine)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\SeoMagazine  $seoMagazine
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(SeoMagazine $seoMagazine)
-    {
-        //
+        return $validate;
     }
 }

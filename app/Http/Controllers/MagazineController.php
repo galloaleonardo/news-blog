@@ -31,6 +31,8 @@ class MagazineController extends Controller
         $featuredNewsCategories = $this->getNewsFeaturedCategories();
         $popularNews = $this->getPopularNews([$featuredNews, $recentNews, $featuredNewsCategories]);
 
+        $this->setSEOPages();
+
         return view(
             'magazine.homepage.index',
             compact('categories', 'advertising', 'featuredNews', 'recentNews', 'featuredNewsCategories', 'popularNews')

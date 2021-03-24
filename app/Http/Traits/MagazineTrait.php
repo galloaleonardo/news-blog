@@ -162,11 +162,10 @@ trait MagazineTrait
 
         OpenGraph::setTitle($news->title);
         OpenGraph::setDescription($news->subtitle);
-        OpenGraph::setUrl('http://current.url.com');
+        OpenGraph::setUrl(request()->getHttpHost());
         OpenGraph::addProperty('type', 'article');
         OpenGraph::addProperty('locale', 'pt-br');
         OpenGraph::addProperty('locale:alternate', ['pt-pt', 'en-us']);
-
         OpenGraph::addImage(request()->getHttpHost() . '/images/news/small/' . $news->image_link, ['height' => 300, 'width' => 300]);
 
         JsonLd::setTitle($news->title);
@@ -187,14 +186,16 @@ trait MagazineTrait
         OpenGraph::setDescription($seo->page_description);
         OpenGraph::setUrl(request()->getHttpHost());
         OpenGraph::addProperty('type', $seo->page_type);
+        OpenGraph::addImage(request()->getHttpHost() . '/images/seo/small/' . $seo->image_link);
 
         $twitterUser = $seo->twitter_user && substr($seo->twitter_user, 0, 1) !== '@' ? '@' . $seo->twitter_user : $seo->twitter_user;
 
         TwitterCard::setTitle($seo->page_description);
-        TwitterCard::setSite(@$twitterUser);
+        TwitterCard::setSite($twitterUser);
+        TwitterCard::addImage(request()->getHttpHost() . '/images/seo/small/' . $seo->image_link);
 
         JsonLd::setTitle($seo->page_title);
         JsonLd::setDescription($seo->page_description);
-        JsonLd::addImage($seo->image_link);
+        JsonLd::addImage(request()->getHttpHost() . '/images/seo/small/' . $seo->image_link);
     }
 }
