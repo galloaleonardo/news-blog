@@ -5,16 +5,16 @@
 @endsection
 
 @section('title-content')
-    {{ trans('admin.adverts') }}
+    {{ trans('admin.top_banner') }}
 @endsection
 
 @section('content')
     @include('admin.errors')
-    {{ Breadcrumbs::render('advertisements-create') }}
+    {{ Breadcrumbs::render('top-banner-create') }}
     <div class="card shadow mb-4">
-        <div class="card-header py-3"><i class="fas fa-plus-square"></i> {{ trans('admin.create') }} {{ trans('admin.adverts') }}</div>
+        <div class="card-header py-3"><i class="fas fa-plus-square"></i> {{ trans('admin.create') }} {{ trans('admin.top_banner') }}</div>
         <div class="card-body">
-            <form method="POST" action="{{ route('advertisements.store') }}"  enctype="multipart/form-data">
+            <form method="POST" action="{{ route('top-banner.store') }}"  enctype="multipart/form-data">
                 @csrf
                 <div class="form-row">
                     <div class="form-group col-md-12">
@@ -25,7 +25,7 @@
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-6">
-                        <label for="image_link">{{ trans('admin.image') }} - <small>(Max. 600px x 600px) - (Max. 800kb)</small></label>
+                        <label for="image_link">{{ trans('admin.image') }} - <small>({{ trans('admin.suggested') }} 1500px x 200px) - (Max. 800kb)</small></label>
                         <div class="input-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text">

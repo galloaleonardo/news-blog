@@ -9,8 +9,5 @@ class TopBannerSetting extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'active',
-        'keep_on_top_when_scrolling'
-    ];
+    protected $guarded = [];
 }

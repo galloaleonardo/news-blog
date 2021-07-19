@@ -6,6 +6,7 @@ use App\Models\Advertising;
 use App\Helpers\Helper;
 use App\Models\TopBanner;
 use App\Models\TopBannerSetting;
+use App\Services\ImageService;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 use Intervention\Image\Facades\Image;
@@ -31,85 +32,59 @@ class TopBannerController extends Controller
     {
         $request->validate([
             'title' => ['required', 'min:5', 'max:100'],
-            'image_link' => $this->validateImage()
+            'image_link' => ImageService::validateImage()
         ]);
 
         $attributes = $request->all();
 
         $attributes['active'] = $request->has('active') ? true : false;
-        $attributes['image_link'] = $this->uploadImageAndReturnName($request->file('image_link'));
+        $attributes['image_link'] = ImageService::uploadAndReturnName($request->file('image_link'), 'top-banners');
 
-        Advertising::create($attributes);
+        TopBanner::create($attributes);
 
         return redirect(route('top-banner.index'))
             ->with('success', trans('admin.created_successfully', [
-                'object' => trans('admin.advertisings')
+                'object' => trans('admin.top_banner')
             ]));
     }
 
-    public function show(Advertising $advertising)
+    public function show(TopBanner $topBanner)
     {
-        return view('admin.top-banner.show-top-banner', compact('advertising'));
+        return view('admin.top-banner.show-top-banner', compact('topBanner'));
     }
 
-    public function edit(Advertising $advertising)
+    public function edit(TopBanner $topBanner)
     {
-        return view('admin.top-banner.edit-top-banner', compact('advertising'));
+        return view('admin.top-banner.edit-top-banner', compact('topBanner'));
     }
 
-    public function update(Request $request, Advertising $advertising)
+    public function update(Request $request, TopBanner $topBanner)
     {
         $attributes = $request->all();
 
         $request->validate(['title' => ['required', 'min:5', 'max:100']]);
 
         if ($request->hasFile('image_link')) {
-            $request->validate(['image_link' => $this->validateImage()]);
-            $attributes['image_link'] = $this->uploadImageAndReturnName($request->file('image_link'));
+            $request->validate(['image_link' => ImageService::validateImage()]);
+            $attributes['image_link'] = ImageService::uploadAndReturnName($request->file('image_link'), 'top-banners');
         }
 
         $attributes['active'] = $request->has('active') ? true : false;
 
-        $advertising->update($attributes);
+        $topBanner->update($attributes);
 
         return redirect(route('top-banner.index'))
             ->with('success', trans('admin.updated_successfully', [
-                'object' => trans('admin.advertisings')
+                'object' => trans('admin.top_banner')
             ]));
     }
 
-    public function destroy(Advertising $advertising)
+    public function destroy(TopBanner $topBanner)
     {
-        $advertising->delete();
+        $topBanner->delete();
         return redirect(route('top-banner.index'))
             ->with('success', trans('admin.deleted_successfully', [
-                'object' => trans('admin.advertisings')
+                'object' => trans('admin.top_banner')
             ]));
-    }
-
-    private function uploadImageAndReturnName(UploadedFile $image)
-    {
-        $name = Helper::getRandomNameImage();
-        $jpg_name = "{$name}.jpg";
-        $path_large = public_path('images/announcements/');
-
-        Helper::checkPath([$path_large]);
-
-        Image::make($image)
-            ->encode('jpg', 60)
-            ->save($path_large . $jpg_name);
-
-        return $jpg_name;
-    }
-
-    private function validateImage()
-    {
-        $validate = [
-            'required',
-            'image',
-            'mimes:jpeg,jpg,png'
-        ];
-
-        return $validate;
     }
 }

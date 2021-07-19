@@ -91,5 +91,6 @@ return [
     'news_with_the_most_views' => 'News with the Most Views',
     'views' => 'Views',
     'top_banner' => 'Top Banner',
-    'keep_on_top_when_scrolling' => 'Keep on Top When Scrolling'
+    'keep_on_top_when_scrolling' => 'Keep on Top When Scrolling',
+    'suggested' => 'Suggested'
 ];

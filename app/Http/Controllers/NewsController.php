@@ -138,7 +138,7 @@ class NewsController extends Controller
 
     private function uploadImageAndReturnName(UploadedFile $image)
     {
-        $name = Helper::getRandomNameImage();
+        $name = Helper::getRandomImageName();
         $jpg_name = "{$name}.jpg";
         $path_large = public_path('images/news/large/');
         $path_small = public_path('images/news/small/');

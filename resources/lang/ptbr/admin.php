@@ -91,5 +91,6 @@ return [
     'news_with_the_most_views' => 'Notícias com mais números de visualizações',
     'views' => 'Visualizações',
     'top_banner' => 'Banner Superior',
-    'keep_on_top_when_scrolling' => 'Manter no topo ao scrollar'
+    'keep_on_top_when_scrolling' => 'Manter no topo ao scrollar',
+    'suggested' => 'Sugerido'
 ];

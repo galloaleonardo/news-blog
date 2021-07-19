@@ -319,3 +319,71 @@
 2021/07/19 01:02:57 [warn] 32#32: *33 an upstream response is buffered to a temporary file /var/cache/nginx/fastcgi_temp/1/00/0000000001 while reading upstream, client: 172.20.0.1, server: localhost, request: "GET /admin/top-banner HTTP/1.1", upstream: "fastcgi://172.20.0.2:9000", host: "localhost:9000", referrer: "http://localhost:9000/admin"
 2021/07/19 01:02:57 [warn] 32#32: *33 an upstream response is buffered to a temporary file /var/cache/nginx/fastcgi_temp/2/00/0000000002 while reading upstream, client: 172.20.0.1, server: localhost, request: "GET /admin/top-banner HTTP/1.1", upstream: "fastcgi://172.20.0.2:9000", host: "localhost:9000", referrer: "http://localhost:9000/admin"
 2021/07/19 01:02:58 [warn] 32#32: *33 an upstream response is buffered to a temporary file /var/cache/nginx/fastcgi_temp/3/00/0000000003 while reading upstream, client: 172.20.0.1, server: localhost, request: "GET /admin/top-banner HTTP/1.1", upstream: "fastcgi://172.20.0.2:9000", host: "localhost:9000", referrer: "http://localhost:9000/admin"
+2021/07/19 01:32:06 [warn] 35#35: *242 an upstream response is buffered to a temporary file /var/cache/nginx/fastcgi_temp/4/00/0000000004 while reading upstream, client: 172.20.0.1, server: localhost, request: "GET /admin/top-banner HTTP/1.1", upstream: "fastcgi://172.20.0.2:9000", host: "localhost:9000", referrer: "http://localhost:9000/admin/top-banner"
+2021/07/19 01:32:07 [warn] 35#35: *242 an upstream response is buffered to a temporary file /var/cache/nginx/fastcgi_temp/5/00/0000000005 while reading upstream, client: 172.20.0.1, server: localhost, request: "GET /admin/top-banner HTTP/1.1", upstream: "fastcgi://172.20.0.2:9000", host: "localhost:9000", referrer: "http://localhost:9000/admin/top-banner"
+2021/07/19 01:32:45 [notice] 1#1: signal 3 (SIGQUIT) received, shutting down
+2021/07/19 01:32:45 [notice] 32#32: gracefully shutting down
+2021/07/19 01:32:45 [notice] 33#33: gracefully shutting down
+2021/07/19 01:32:45 [notice] 33#33: exiting
+2021/07/19 01:32:45 [notice] 34#34: gracefully shutting down
+2021/07/19 01:32:45 [notice] 35#35: gracefully shutting down
+2021/07/19 01:32:45 [notice] 32#32: exiting
+2021/07/19 01:32:45 [notice] 33#33: exit
+2021/07/19 01:32:45 [notice] 34#34: exiting
+2021/07/19 01:32:45 [notice] 35#35: exiting
+2021/07/19 01:32:45 [notice] 32#32: exit
+2021/07/19 01:32:45 [notice] 34#34: exit
+2021/07/19 01:32:45 [notice] 35#35: exit
+2021/07/19 01:32:45 [notice] 1#1: signal 17 (SIGCHLD) received from 33
+2021/07/19 01:32:45 [notice] 1#1: worker process 33 exited with code 0
+2021/07/19 01:32:45 [notice] 1#1: signal 29 (SIGIO) received
+2021/07/19 01:32:45 [notice] 1#1: signal 17 (SIGCHLD) received from 32
+2021/07/19 01:32:45 [notice] 1#1: worker process 32 exited with code 0
+2021/07/19 01:32:45 [notice] 1#1: worker process 34 exited with code 0
+2021/07/19 01:32:45 [notice] 1#1: signal 29 (SIGIO) received
+2021/07/19 01:32:45 [notice] 1#1: signal 17 (SIGCHLD) received from 34
+2021/07/19 01:32:45 [notice] 1#1: signal 17 (SIGCHLD) received from 35
+2021/07/19 01:32:45 [notice] 1#1: worker process 35 exited with code 0
+2021/07/19 01:32:45 [notice] 1#1: exit
+2021/07/19 01:34:20 [notice] 1#1: using the "epoll" event method
+2021/07/19 01:34:20 [notice] 1#1: nginx/1.20.1
+2021/07/19 01:34:20 [notice] 1#1: built by gcc 10.2.1 20201203 (Alpine 10.2.1_pre1) 
+2021/07/19 01:34:20 [notice] 1#1: OS: Linux 5.10.25-linuxkit
+2021/07/19 01:34:20 [notice] 1#1: getrlimit(RLIMIT_NOFILE): 1048576:1048576
+2021/07/19 01:34:20 [notice] 1#1: start worker processes
+2021/07/19 01:34:20 [notice] 1#1: start worker process 33
+2021/07/19 01:34:20 [notice] 1#1: start worker process 34
+2021/07/19 01:34:20 [notice] 1#1: start worker process 35
+2021/07/19 01:34:20 [notice] 1#1: start worker process 36
+2021/07/19 01:35:45 [notice] 1#1: signal 15 (SIGTERM) received, exiting
+2021/07/19 01:35:45 [notice] 35#35: signal 15 (SIGTERM) received, exiting
+2021/07/19 20:58:26 [notice] 1#1: using the "epoll" event method
+2021/07/19 20:58:26 [notice] 1#1: nginx/1.20.1
+2021/07/19 20:58:26 [notice] 1#1: built by gcc 10.2.1 20201203 (Alpine 10.2.1_pre1) 
+2021/07/19 20:58:26 [notice] 1#1: OS: Linux 5.10.25-linuxkit
+2021/07/19 20:58:26 [notice] 1#1: getrlimit(RLIMIT_NOFILE): 1048576:1048576
+2021/07/19 20:58:26 [notice] 1#1: start worker processes
+2021/07/19 20:58:26 [notice] 1#1: start worker process 32
+2021/07/19 20:58:26 [notice] 1#1: start worker process 33
+2021/07/19 20:58:26 [notice] 1#1: start worker process 34
+2021/07/19 20:58:26 [notice] 1#1: start worker process 35
+2021/07/19 21:50:21 [warn] 32#32: *5 an upstream response is buffered to a temporary file /var/cache/nginx/fastcgi_temp/1/00/0000000001 while reading upstream, client: 172.21.0.1, server: localhost, request: "GET /admin/top-banner HTTP/1.1", upstream: "fastcgi://172.21.0.3:9000", host: "localhost:9000", referrer: "http://localhost:9000/admin"
+2021/07/19 22:03:15 [warn] 32#32: *87 a client request body is buffered to a temporary file /var/cache/nginx/client_temp/0000000002, client: 172.21.0.1, server: localhost, request: "POST /admin/top-banner HTTP/1.1", host: "localhost:9000", referrer: "http://localhost:9000/admin/top-banner/create"
+2021/07/19 22:04:00 [warn] 32#32: *87 a client request body is buffered to a temporary file /var/cache/nginx/client_temp/0000000003, client: 172.21.0.1, server: localhost, request: "POST /admin/top-banner HTTP/1.1", host: "localhost:9000", referrer: "http://localhost:9000/admin/top-banner/create"
+2021/07/19 22:05:50 [warn] 32#32: *97 a client request body is buffered to a temporary file /var/cache/nginx/client_temp/0000000004, client: 172.21.0.1, server: localhost, request: "POST /admin/top-banner HTTP/1.1", host: "localhost:9000", referrer: "http://localhost:9000/admin/top-banner/create"
+2021/07/19 22:07:07 [warn] 32#32: *97 a client request body is buffered to a temporary file /var/cache/nginx/client_temp/0000000005, client: 172.21.0.1, server: localhost, request: "POST /admin/advertisements HTTP/1.1", host: "localhost:9000", referrer: "http://localhost:9000/admin/advertisements/create"
+2021/07/19 22:08:51 [warn] 32#32: *112 a client request body is buffered to a temporary file /var/cache/nginx/client_temp/0000000006, client: 172.21.0.1, server: localhost, request: "POST /admin/advertisements HTTP/1.1", host: "localhost:9000", referrer: "http://localhost:9000/admin/advertisements/create"
+2021/07/19 22:08:58 [warn] 32#32: *112 a client request body is buffered to a temporary file /var/cache/nginx/client_temp/0000000007, client: 172.21.0.1, server: localhost, request: "POST /admin/advertisements HTTP/1.1", host: "localhost:9000", referrer: "http://localhost:9000/admin/advertisements/create"
+2021/07/19 22:10:49 [warn] 32#32: *127 a client request body is buffered to a temporary file /var/cache/nginx/client_temp/0000000008, client: 172.21.0.1, server: localhost, request: "POST /admin/top-banner HTTP/1.1", host: "localhost:9000", referrer: "http://localhost:9000/admin/top-banner/create"
+2021/07/19 22:12:21 [warn] 32#32: *145 a client request body is buffered to a temporary file /var/cache/nginx/client_temp/0000000009, client: 172.21.0.1, server: localhost, request: "POST /admin/top-banner HTTP/1.1", host: "localhost:9000", referrer: "http://localhost:9000/admin/top-banner/create"
+2021/07/19 22:12:21 [warn] 32#32: *145 an upstream response is buffered to a temporary file /var/cache/nginx/fastcgi_temp/0/01/0000000010 while reading upstream, client: 172.21.0.1, server: localhost, request: "GET /admin/top-banner HTTP/1.1", upstream: "fastcgi://172.21.0.3:9000", host: "localhost:9000", referrer: "http://localhost:9000/admin/top-banner/create"
+2021/07/19 22:13:07 [warn] 32#32: *145 a client request body is buffered to a temporary file /var/cache/nginx/client_temp/0000000011, client: 172.21.0.1, server: localhost, request: "POST /admin/top-banner HTTP/1.1", host: "localhost:9000", referrer: "http://localhost:9000/admin/top-banner/create"
+2021/07/19 22:33:16 [warn] 32#32: *283 an upstream response is buffered to a temporary file /var/cache/nginx/fastcgi_temp/2/01/0000000012 while reading upstream, client: 172.21.0.1, server: localhost, request: "GET /admin/top-banner/1/edit HTTP/1.1", upstream: "fastcgi://172.21.0.3:9000", host: "localhost:9000", referrer: "http://localhost:9000/admin/top-banner"
+2021/07/19 22:55:25 [warn] 32#32: *315 a client request body is buffered to a temporary file /var/cache/nginx/client_temp/0000000013, client: 172.21.0.1, server: localhost, request: "POST /admin/top-banner/1 HTTP/1.1", host: "localhost:9000", referrer: "http://localhost:9000/admin/top-banner/1/edit"
+2021/07/19 22:58:14 [warn] 32#32: *334 a client request body is buffered to a temporary file /var/cache/nginx/client_temp/0000000014, client: 172.21.0.1, server: localhost, request: "POST /admin/top-banner HTTP/1.1", host: "localhost:9000", referrer: "http://localhost:9000/admin/top-banner/create"
+2021/07/19 22:58:18 [warn] 32#32: *334 a client request body is buffered to a temporary file /var/cache/nginx/client_temp/0000000015, client: 172.21.0.1, server: localhost, request: "POST /admin/top-banner HTTP/1.1", host: "localhost:9000", referrer: "http://localhost:9000/admin/top-banner/create"
+2021/07/19 23:15:07 [warn] 35#35: *373 a client request body is buffered to a temporary file /var/cache/nginx/client_temp/0000000016, client: 172.21.0.1, server: localhost, request: "POST /admin/top-banner HTTP/1.1", host: "localhost:9000", referrer: "http://localhost:9000/admin/top-banner/create"
+2021/07/19 23:15:07 [warn] 35#35: *373 an upstream response is buffered to a temporary file /var/cache/nginx/fastcgi_temp/7/01/0000000017 while reading upstream, client: 172.21.0.1, server: localhost, request: "POST /admin/top-banner HTTP/1.1", upstream: "fastcgi://172.21.0.3:9000", host: "localhost:9000", referrer: "http://localhost:9000/admin/top-banner/create"
+2021/07/19 23:15:42 [warn] 35#35: *374 a client request body is buffered to a temporary file /var/cache/nginx/client_temp/0000000018, client: 172.21.0.1, server: localhost, request: "POST /admin/top-banner HTTP/1.1", host: "localhost:9000", referrer: "http://localhost:9000/admin/top-banner/create"
+2021/07/19 23:15:42 [warn] 35#35: *374 an upstream response is buffered to a temporary file /var/cache/nginx/fastcgi_temp/9/01/0000000019 while reading upstream, client: 172.21.0.1, server: localhost, request: "POST /admin/top-banner HTTP/1.1", upstream: "fastcgi://172.21.0.3:9000", host: "localhost:9000", referrer: "http://localhost:9000/admin/top-banner/create"
+2021/07/19 23:16:13 [warn] 32#32: *395 a client request body is buffered to a temporary file /var/cache/nginx/client_temp/0000000020, client: 172.21.0.1, server: localhost, request: "POST /admin/top-banner HTTP/1.1", host: "localhost:9000", referrer: "http://localhost:9000/admin/top-banner/create"

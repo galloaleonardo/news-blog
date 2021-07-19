@@ -15,9 +15,10 @@ class CreateTopBannersTable extends Migration
     {
         Schema::create('top_banners', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('title');
             $table->string('image_link');
-            $table->string('link');
+            $table->string('destination_link')->nullable();
+            $table->boolean('active')->default(true);
             $table->timestamps();
         });
     }

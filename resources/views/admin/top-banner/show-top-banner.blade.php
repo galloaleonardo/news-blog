@@ -1,15 +1,15 @@
 @extends('admin.layouts.admin-layout')
 
 @section('title-page')
-    {{ App\Helpers\Helper::getCompanyName() }} - {{ trans('admin.adverts') }}
+    {{ App\Helpers\Helper::getCompanyName() }} - {{ trans('admin.top_banner') }}
 @endsection
 
 @section('title-content')
-    {{ trans('admin.adverts') }}
+    {{ trans('admin.top_banner') }}
 @endsection
 
 @section('content')
-    {{ Breadcrumbs::render('advertisements-show-edit', $advertising) }}
+    {{ Breadcrumbs::render('top-banner-show-edit', $topBanner) }}
     <div class="modal fade" id="modalDelete" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -30,7 +30,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ trans('admin.no_close') }}</button>
-                    <form method="POST" action="{{ route('advertisements.destroy', $advertising->id) }}">
+                    <form method="POST" action="{{ route('top-banner.destroy', $topBanner->id) }}">
                         @method('DELETE')
                         @csrf
                         <button type="submit" class="btn btn-danger">{{ trans('admin.yes_delete') }}</button>
@@ -42,7 +42,7 @@
 
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <a href="{{ route('advertisements.edit', $advertising->id) }}" class="btn btn-warning btn-icon-split">
+            <a href="{{ route('top-banner.edit', $topBanner->id) }}" class="btn btn-warning btn-icon-split">
                     <span class="icon text-warning">
                       <i class="fas fa-edit"></i>
                     </span>
@@ -62,22 +62,22 @@
                     <p class="h4 pb-3 text-primary">{{ trans('admin.resume') }}:</p>
 
                     <p class="h5"><strong>{{ trans('admin.title') }}</strong></p>
-                    <input type="text" class="form-control col-md-12 mb-4" value="{{ $advertising->title }}" readonly="readonly">
+                    <input type="text" class="form-control col-md-12 mb-4" value="{{ $topBanner->title }}" readonly="readonly">
 
                     <p class="h5"><strong>{{ trans('admin.destination_link') }}</strong></p>
-                    <input type="text" class="form-control col-md-12 mb-4" value="{{ $advertising->destination_link }}" readonly="readonly">
+                    <input type="text" class="form-control col-md-12 mb-4" value="{{ $topBanner->destination_link }}" readonly="readonly">
 
                     <a class="h4" data-toggle="collapse" href="#collapseImg" role="button" aria-expanded="false" aria-controls="collapseImg">
                         {{ trans('admin.image') }} <i class="fas fa-sort-down"></i>
                     </a>
                     <div class="collapse my-4" id="collapseImg">
                         <div class="card card-body" style="display: grid;">
-                            <img src="/images/announcements/{{ $advertising->image_link }}" class="mb-4" style="width: auto" alt="">
+                            <img src="/images/top-banners/{{ $topBanner->image_link }}" class="mb-4" style="width: auto" alt="">
                         </div>
                     </div>
 
                     <p class="h5 mt-2">
-                        <input type="checkbox" style="margin-left: 0" class="form-check-input" id="displays_in_menu" {{ $advertising->destination_link ? 'checked' : '' }} disabled="disabled">
+                        <input type="checkbox" style="margin-left: 0" class="form-check-input" id="displays_in_menu" {{ $topBanner->destination_link ? 'checked' : '' }} disabled="disabled">
                         <label class="form-check-label" style="margin-left: 20px" for="displays_in_menu">{{ trans('admin.active') }}</label>
                     </p>
                 </div>

@@ -42,7 +42,7 @@
     @include('admin.modal-delete-index')
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <a href="{{ route('advertisements.create') }}" class="btn btn-primary btn-icon-split">
+            <a href="{{ route('top-banner.create') }}" class="btn btn-primary btn-icon-split">
                     <span class="icon text-white-50">
                       <i class="fas fa-plus-square"></i>
                     </span>
@@ -69,17 +69,17 @@
                                         <td>{{ $topBanner->title }}</td>
                                         <td>{{ $topBanner->destination_link }} </td>
                                         <td class="min text-center">
-                                            <input type="checkbox" style="width:20px; height: 20px" id="is-active" disabled {{ $advertising->active ? 'checked="checked"' : '' }}>
+                                            <input type="checkbox" style="width:20px; height: 20px" id="is-active" disabled {{ $topBanner->active ? 'checked="checked"' : '' }}>
                                             <label class="form-check-label" for="is-active"></label>
                                         </td>
                                         <td class="min text-center">
-                                            <a href="{{ route('advertisements.show', $topBanner->id) }}" class="btn btn-light btn-sm">
+                                            <a href="{{ route('top-banner.show', $topBanner->id) }}" class="btn btn-light btn-sm">
                                                 <span class="icon text-black" data-toggle="tooltip" data-placement="top" title="View">
                                                     <i class="fas fa-eye"></i>
                                                 </span>
                                             </a>
 
-                                            <a href="{{ route('advertisements.edit', $topBanner->id) }}" class="btn btn-light btn-sm">
+                                            <a href="{{ route('top-banner.edit', $topBanner->id) }}" class="btn btn-light btn-sm">
                                                 <span class="icon text-info" data-toggle="tooltip" data-placement="top" title="Edit">
                                                     <i class="fas fa-pencil-alt"></i>
                                                 </span>

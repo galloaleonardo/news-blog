@@ -86,7 +86,7 @@ class AdvertisingController extends Controller
 
     private function uploadImageAndReturnName(UploadedFile $image)
     {
-        $name = Helper::getRandomNameImage();
+        $name = Helper::getRandomImageName();
         $jpg_name = "{$name}.jpg";
         $path_large = public_path('images/announcements/');
 

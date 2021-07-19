@@ -45,7 +45,7 @@ class SeoMagazineController extends Controller
 
     private function uploadImageAndReturnName(UploadedFile $image)
     {
-        $name = Helper::getRandomNameImage();
+        $name = Helper::getRandomImageName();
         $jpg_name = "{$name}.jpg";
         $path_small = public_path('images/seo/small/');
 

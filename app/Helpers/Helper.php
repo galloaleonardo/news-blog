@@ -20,7 +20,7 @@ class Helper
         }
     }
 
-    public static function getRandomNameImage()
+    public static function getRandomImageName()
     {
         return rand() . date('Y-m-d');
     }
