@@ -16,20 +16,24 @@
         @endif
     </div>
     <div class="col-sm-6">
-        @for($i = 1; $i <= 4; $i++)
-            <a class="oflow-hidden pos-relative mb-20 dplay-block" href="{{ route('magazine.show', ['id' => $recentNews[$i]->id, 'title' => Illuminate\Support\Str::slug($recentNews[$i]->title)]) }}">
-                <div class="wh-100x abs-tlr"><img
-                            src="{{ asset('/images/news/large') . '/' . $recentNews[$i]->image_link }}"
-                            alt=""></div>
-                <div class="ml-120 min-h-100x">
-                    <h5><b>{{ $recentNews[$i]->title }}</b></h5>
-                    <h6 class="color-lite-black pt-10">{{ trans('magazine.by') }} <span
-                                class="color-black"><b>{{ $recentNews[$i]->author }},</b></span>
+        @if (isset($recentNews[0]))
+            @for($i = 1; $i <= 4; $i++)
+                @if (isset($recentNews[$i]))
+                    <a class="oflow-hidden pos-relative mb-20 dplay-block" href="{{ route('magazine.show', ['id' => $recentNews[$i]->id, 'title' => Illuminate\Support\Str::slug($recentNews[$i]->title)]) }}">
+                        <div class="wh-100x abs-tlr"><img
+                                    src="{{ asset('/images/news/large') . '/' . $recentNews[$i]->image_link }}"
+                                    alt=""></div>
+                        <div class="ml-120 min-h-100x">
+                            <h5><b>{{ $recentNews[$i]->title }}</b></h5>
+                            <h6 class="color-lite-black pt-10">{{ trans('magazine.by') }} <span
+                                        class="color-black"><b>{{ $recentNews[$i]->author }},</b></span>
 
-                        {{ App\Helpers\Helper::getWrittenDateLanguage($recentNews[$i]->created_at)}}
-                    </h6>
-                </div>
-            </a>
-        @endfor
+                                {{ App\Helpers\Helper::getWrittenDateLanguage($recentNews[$i]->created_at)}}
+                            </h6>
+                        </div>
+                    </a>
+                @endif
+            @endfor
+        @endif
     </div>
 </div>

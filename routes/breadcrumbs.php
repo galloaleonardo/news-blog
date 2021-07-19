@@ -43,6 +43,24 @@ Breadcrumbs::for('advertisements-show-edit', function ($trail, $advertising) {
     $trail->push($advertising->title);
 });
 
+// Home > Top Banner
+Breadcrumbs::for('top-banner', function ($trail) {
+    $trail->parent('dashboard');
+    $trail->push(trans('admin.top_banner'), route('top-banner.index'));
+});
+
+// Home > Top Banner > Create
+Breadcrumbs::for('top-banner-create', function ($trail) {
+    $trail->parent('top-banner');
+    $trail->push(trans('admin.create'));
+});
+
+// Home > Top Banner > Show/Edit
+Breadcrumbs::for('top-banner-show-edit', function ($trail, $topbanner) {
+    $trail->parent('top-banner');
+    $trail->push($topbanner->title);
+});
+
 // Home > News
 Breadcrumbs::for('news', function ($trail) {
     $trail->parent('dashboard');

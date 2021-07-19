@@ -3,9 +3,9 @@
 
 namespace App\Helpers;
 
-use App\GoogleAds;
-use App\GoogleAnalytics;
-use App\Settings;
+use App\Models\GoogleAds;
+use App\Models\GoogleAnalytics;
+use App\Models\Settings;
 use Carbon\Carbon;
 use Jenssegers\Date\Date;
 

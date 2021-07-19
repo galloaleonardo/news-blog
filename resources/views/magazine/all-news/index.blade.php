@@ -17,6 +17,7 @@
 <body>
 
 @include('magazine.includes.navbar')
+@include('magazine.includes.carousel-advertising')
 
 <div class="container">
     <h4 class="p-title"><b>{{trans('magazine.all_news')}}</b></h4>
@@ -45,5 +46,7 @@
 @include('magazine.includes.footer')
 
 @include('magazine.includes.scripts')
+
+
 </body>
 </html>

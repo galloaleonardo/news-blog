@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Advertising;
+use App\Models\Advertising;
 use App\Helpers\Helper;
-use App\News;
+use App\Models\News;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 use Intervention\Image\Facades\Image;

@@ -7,6 +7,7 @@
 <body>
 
 @include('magazine.includes.navbar')
+@include('magazine.includes.carousel-advertising')
 @include('magazine.homepage.includes.featured-news')
 
 <section>

@@ -11,6 +11,8 @@ Route::group(['middleware' => 'localization'], function () {
         Route::get('users/{user}/change-password', 'UserController@changePasswordShow')->name('users.change-password.show');
         Route::patch('users/{user}/change-password', 'UserController@changePassword')->name('users.change-password.update');
         Route::resource('advertisements', 'AdvertisingController', ['parameters' => ['advertisements' => 'advertising']]);
+        Route::resource('top-banner', 'TopBannerController');
+        Route::resource('top-banner-setting', 'TopBannerSettingController');
         Route::resource('google-ads', 'GoogleAdsController');
         Route::resource('google-analytics', 'GoogleAnalyticsController');
         Route::resource('seo', 'SeoMagazineController');

@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\GoogleAds;
-use App\Languages;
-use App\Settings;
+use App\Models\GoogleAds;
+use App\Models\Languages;
+use App\Models\Settings;
 use Illuminate\Http\Request;
 
 class GoogleAdsController extends Controller

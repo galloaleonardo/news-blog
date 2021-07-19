@@ -10,3 +10,4 @@
 
 {!! \App\Helpers\Helper::getGoogleAdsScript() !!}
 {!! \App\Helpers\Helper::getGoogleAnalyticsScript() !!}
+

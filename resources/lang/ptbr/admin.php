@@ -82,5 +82,14 @@ return [
     'page_description' => 'Descrição da Página',
     'page_type' => 'Tipo da Página',
     'twitter_user' => 'Usuário do Twitter',
-    'image_link' => 'Imagem da Página'
+    'image_link' => 'Imagem da Página',
+    'active_news' => 'Notícias Ativas',
+    'categories' => 'Categorias',
+    'active_advertisements' => 'Propagandas Ativas',
+    'usuarios' => 'Usuários',
+    'number_of_news_views' => 'Número de visualizações de notícias',
+    'news_with_the_most_views' => 'Notícias com mais números de visualizações',
+    'views' => 'Visualizações',
+    'top_banner' => 'Banner Superior',
+    'keep_on_top_when_scrolling' => 'Manter no topo ao scrollar'
 ];

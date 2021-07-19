@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\Helper;
-use App\Languages;
-use App\Settings;
+use App\Models\Languages;
+use App\Models\Settings;
 use Hamcrest\Core\Set;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;

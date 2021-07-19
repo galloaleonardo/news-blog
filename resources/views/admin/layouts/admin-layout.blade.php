@@ -93,6 +93,14 @@
             </a>
         </li>
 
+        <!-- Nav Item - Top Banner Menu -->
+        <li class="nav-item {{ request()->is('*top-banner*') ? 'active' : '' }}">
+            <a class="nav-link py-1" href="{{ route('top-banner.index') }}">
+                <i class="fab fa-adversal"></i>
+                <span>{{ trans('admin.top_banner') }}</span>
+            </a>
+        </li>
+
         <!-- Divider -->
         <hr class="sidebar-divider d-none d-md-block">
 

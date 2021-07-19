@@ -82,5 +82,14 @@ return [
     'page_description' => 'Page Description',
     'page_type' => 'Page Type',
     'twitter_user' => 'Twitter User',
-    'image_link' => 'Page Image'
+    'image_link' => 'Page Image',
+    'active_news' => 'Active News',
+    'categories' => 'Categories',
+    'active_advertisements' => 'Active Advertisements',
+    'usuarios' => 'Users',
+    'number_of_news_views' => 'Number of News Views',
+    'news_with_the_most_views' => 'News with the Most Views',
+    'views' => 'Views',
+    'top_banner' => 'Top Banner',
+    'keep_on_top_when_scrolling' => 'Keep on Top When Scrolling'
 ];

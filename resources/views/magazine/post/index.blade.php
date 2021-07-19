@@ -7,6 +7,7 @@
 <body>
 
 @include('magazine.includes.navbar')
+@include('magazine.includes.carousel-advertising')
 
 <section>
     <div class="container">
@@ -65,15 +66,6 @@
                             </div>
                         </a>
                         @endfor
-                    </div><!-- mtb-50 -->
-
-                    <div class="mtb-50 mb-md-0">
-                        <h4 class="p-title"><b>{{ trans('magazine.newsletter') }}</b></h4>
-                        <p class="mb-20">{{ trans('magazine.newsletter_description') }}</p>
-                        <form class="nwsltr-primary-1">
-                            <input type="text" placeholder="{{ trans('magazine.newsletter_placeholder') }}">
-                            <button type="submit"><i style="color: white" class="fas fa-paper-plane"></i></button>
-                        </form>
                     </div><!-- mtb-50 -->
 
                 </div><!--  pl-20 -->

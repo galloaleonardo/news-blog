@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\GoogleAnalytics;
+use App\Models\GoogleAnalytics;
 use Illuminate\Http\Request;
 
 class GoogleAnalyticsController extends Controller

@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Advertising;
-use App\Category;
+use App\Models\Advertising;
+use App\Models\Category;
 use App\Charts\NewsChart;
 use App\Helpers\Helper;
-use App\News;
-use App\User;
+use App\Models\News;
+use App\Models\User;
 use Carbon\Carbon;
 use CyrildeWit\EloquentViewable\Contracts\Viewable;
 use CyrildeWit\EloquentViewable\Support\Period;

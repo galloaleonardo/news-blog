@@ -4,16 +4,17 @@
 namespace App\Http\Traits;
 
 
-use App\Advertising;
-use App\Category;
-use App\News;
-use App\SeoMagazine;
+use App\Models\Advertising;
+use App\Models\Category;
+use App\Models\News;
+use App\Models\SeoMagazine;
 use Artesaos\SEOTools\Facades\JsonLd;
 use Artesaos\SEOTools\Facades\OpenGraph;
 use Artesaos\SEOTools\Facades\SEOMeta;
 use Artesaos\SEOTools\Facades\TwitterCard;
 use CyrildeWit\EloquentViewable\Support\Period;
 use CyrildeWit\EloquentViewable\Views;
+use Illuminate\Database\Eloquent\Collection;
 
 trait MagazineTrait
 {
@@ -103,22 +104,30 @@ trait MagazineTrait
         foreach ($newsWillBeDisplayed as $news) {
             if (is_array($news)) {
                 foreach ($news as $categoryNews) {
-                    array_push($newsID, $categoryNews->pluck('id')->toArray());
+                    if ($categoryNews instanceof Collection) {
+                        array_push($newsID, $categoryNews->pluck('id')->toArray());
+                    }
                 }
             } else {
-                array_push($newsID, $news->pluck('id')->toArray());
+                if ($news instanceof Collection) {
+                    array_push($newsID, $news->pluck('id')->toArray());
+                }
             }
         }
 
-        $newsID = array_unique(array_merge(...$newsID));
+        if ($newsID) {
+            $newsID = array_unique(array_merge(...$newsID));
 
-        $news = News::orderByViews('desc', Period::pastDays(90))->whereNotIn('id', $newsID)->limit(4)->get();
+            $news = News::orderByViews('desc', Period::pastDays(90))->whereNotIn('id', $newsID)->limit(4)->get();
 
-        if (!$news->first()) {
-            $news = News::orderByViews('desc', Period::pastDays(90))->limit(4)->get();
+            if (!$news->first()) {
+                $news = News::orderByViews('desc', Period::pastDays(90))->limit(4)->get();
+            }
+
+            return $news;
         }
 
-        return $news;
+        return [];
     }
 
     public function suggestedNews($id, $category_id)

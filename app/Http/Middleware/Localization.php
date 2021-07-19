@@ -2,7 +2,7 @@
 
 namespace App\Http\Middleware;
 
-use App\Settings;
+use App\Models\Settings;
 use Closure;
 
 class Localization
