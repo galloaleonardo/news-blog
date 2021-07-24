@@ -30,12 +30,23 @@ class MagazineController extends Controller
         $recentNews = $this->getRecentNews();
         $featuredNewsCategories = $this->getNewsFeaturedCategories();
         $popularNews = $this->getPopularNews([$featuredNews, $recentNews, $featuredNewsCategories]);
+        $topBanners = $this->getTopBanners();
+        $topBannerSetting = $this->getTopBannerSetting();
 
         $this->setSEOPages();
 
         return view(
             'magazine.homepage.index',
-            compact('categories', 'advertising', 'featuredNews', 'recentNews', 'featuredNewsCategories', 'popularNews')
+            compact(
+                'categories',
+                'advertising',
+                'featuredNews',
+                'recentNews',
+                'featuredNewsCategories',
+                'popularNews',
+                'topBanners',
+                'topBannerSetting'
+            )
         );
     }
 
@@ -45,6 +56,9 @@ class MagazineController extends Controller
         $news = News::findOrFail($id);
         $popularNews = $this->getPopularNews([]);
         $suggestedNews = $this->suggestedNews($news->id, $news->category_id);
+        $topBanners = $this->getTopBanners();
+        $topBannerSetting = $this->getTopBannerSetting();
+
 
         Helper::getWrittenDateLanguage($news->updated_at);
 
@@ -52,13 +66,23 @@ class MagazineController extends Controller
 
         $this->setSEOPost($news);
 
-        return view('magazine.post.index', compact('categories', 'news', 'popularNews', 'suggestedNews'));
+        return view('magazine.post.index', compact(
+            'categories',
+            'news',
+            'popularNews',
+            'suggestedNews',
+            'topBanners',
+            'topBannerSetting'
+        ));
     }
 
     public function all(Request $request)
     {
         $search   = $request->has('search') ? $request->get('search') : null;
         $category = $request->has('category') ? $request->get('category') : null;
+        $topBanners = $this->getTopBanners();
+        $topBannerSetting = $this->getTopBannerSetting();
+
 
         $categories = $this->getCategories();
 
@@ -66,6 +90,11 @@ class MagazineController extends Controller
 
         $this->setSEOPages();
 
-        return view('magazine.all-news.index', compact('news', 'categories'));
+        return view('magazine.all-news.index', compact(
+            'news',
+            'categories',
+            'topBanners',
+            'topBannerSetting'
+        ));
     }
 }

@@ -41,7 +41,7 @@
                                         <td>{{ $user->name }}</td>
                                         <td>{{ $user->email }} </td>
                                         <td class="min text-center">
-                                            <input type="checkbox" style="width:20px; height: 20px" id="is-admin" disbled {{ $user->admin ? 'checked="checked"' : '' }}>
+                                            <input type="checkbox" style="width:20px; height: 20px" id="is-admin" disabled {{ $user->admin ? 'checked="checked"' : '' }}>
                                             <label class="form-check-label" for="is-admin"></label>
                                         </td>
                                         <td class="min text-center">

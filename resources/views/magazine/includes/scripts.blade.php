@@ -5,12 +5,14 @@
 <script>
     $(document).ready( function() {
 
+    @if($topBannerSetting->keep_on_top_when_scrolling)
     $(window).scroll( function() {
         if ($(window).scrollTop() > $('#carousel-wrapper').offset().top)
             $('#carousel').addClass('floating');
         else
             $('#carousel').removeClass('floating');
     } );
+    @endif
 
 } );
 </script>

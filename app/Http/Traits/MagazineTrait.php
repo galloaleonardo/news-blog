@@ -8,6 +8,8 @@ use App\Models\Advertising;
 use App\Models\Category;
 use App\Models\News;
 use App\Models\SeoMagazine;
+use App\Models\TopBanner;
+use App\Models\TopBannerSetting;
 use Artesaos\SEOTools\Facades\JsonLd;
 use Artesaos\SEOTools\Facades\OpenGraph;
 use Artesaos\SEOTools\Facades\SEOMeta;
@@ -206,5 +208,15 @@ trait MagazineTrait
         JsonLd::setTitle($seo->page_title);
         JsonLd::setDescription($seo->page_description);
         JsonLd::addImage(request()->getHttpHost() . '/images/seo/small/' . $seo->image_link);
+    }
+
+    public function getTopBanners()
+    {
+        return TopBanner::all();
+    }
+
+    public function getTopBannerSetting()
+    {
+        return TopBannerSetting::first();
     }
 }
