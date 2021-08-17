@@ -97,7 +97,7 @@
                                         <td class="min text-center">
                                             <input type="checkbox" style="width:20px; height: 20px" id="fatured" disabled {{ $new->featured ? 'checked="checked"' : '' }}>
                                             <label class="form-check-label" for="fatured"></label>
-                                        <td class="min">{{ $new->author }}</td>
+                                        <td class="min">{{ $new->author->name }}</td>
                                         <td class="min text-center">
                                             <a href="{{ route('news.show', $new->id) }}" class="btn btn-light btn-sm">
                                                 <span class="icon text-black" data-toggle="tooltip" data-placement="top" title="View">

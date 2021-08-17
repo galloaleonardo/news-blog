@@ -32,9 +32,11 @@
 
                 @if (isset($youtubeLinks) && $youtubeLinks)
                         @foreach ($youtubeLinks as $link)
-                        <div class="py-2">
-                            <iframe width="100%" height="315" src="{{ App\Helpers\Helper::getYoutubeLink($link) }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        </div>
+                            @if ($link)
+                                <div class="py-2">
+                                    <iframe width="100%" height="315" src="{{ App\Helpers\Helper::getYoutubeLink($link) }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                </div>
+                            @endif
                     @endforeach
                 @endif
 

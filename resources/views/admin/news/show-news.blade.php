@@ -73,7 +73,7 @@
                     <input type="text" class="form-control col-md-12 mb-4" value="{{ $news->display_order }}" readonly="readonly">
 
                     <p class="h5"><strong>{{ trans('admin.author') }}</strong></p>
-                    <input type="text" class="form-control col-md-12 mb-4" value="{{ $news->author }}" readonly="readonly">
+                    <input type="text" class="form-control col-md-12 mb-4" value="{{ $news->author->name }}" readonly="readonly">
 
                     <a class="h4" data-toggle="collapse" href="#collapseImg" role="button" aria-expanded="false" aria-controls="collapseImg">
                         {{ trans('admin.main_image') }} <i class="fas fa-sort-down"></i>
