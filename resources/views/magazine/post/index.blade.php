@@ -16,7 +16,7 @@
                 <img src="{{ asset('/images/news/large') . '/' . $news->image_link }}" alt="">
                 <h3 class="mt-30"><b>{{ $news->title }}</b></h3>
                 <ul class="list-li-mr-20 mtb-15">
-                    <li>{{ trans('magazine.by') }} <a href="#"><b>{{ $news->author }}</b>, </a> {{ App\Helpers\Helper::getWrittenDateLanguage($news->created_at, false) }}
+                    <li>{{ trans('magazine.by') }} <a href="#"><b>{{ $news->author->name }}</b>, </a> {{ App\Helpers\Helper::getWrittenDateLanguage($news->created_at, false) }}
                         | {{ trans('magazine.updated_in') }} {{ App\Helpers\Helper::getDateFormatLanguage($news->updated_at) }} {{ trans('magazine.at') }} {{ date_format($news->updated_at, 'H:i:s') }}</li>
                 </ul>
                 <div class="mt-40 mt-sm-20">
@@ -30,6 +30,14 @@
 
                 {!! $news->content !!}
 
+                @if (isset($youtubeLinks) && $youtubeLinks)
+                        @foreach ($youtubeLinks as $link)
+                        <div class="py-2">
+                            <iframe width="100%" height="315" src="{{ App\Helpers\Helper::getYoutubeLink($link) }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                    @endforeach
+                @endif
+
                 <div class="brdr-ash-1 opacty-5 mt-50"></div>
 
                 <h4 class="p-title mt-50"><b>{{ trans('magazine.you_may_also_like') }}</b></h4>
@@ -41,7 +49,7 @@
                             <h4 class="pt-20"><b>{{ $news->title }}</b></h4>
                             <ul class="list-li-mr-20 pt-10 mb-30">
                                 <li class="color-lite-black">
-                                    {{ trans('magazine.by') }} <a href="#" class="color-black"><b>&nbsp;{{ $news->author }}</b></a>
+                                    {{ trans('magazine.by') }} <a href="#" class="color-black"><b>&nbsp;{{ $news->author->name }}</b></a>
                                     {{ App\Helpers\Helper::getWrittenDateLanguage($news->created_at) }}
                                 </li>
                             </ul>
@@ -62,7 +70,7 @@
                             <div class="ml-120 min-h-100x">
                                 <h5><b>{{ $popularNews[$i]->title }}</b></h5>
                                 <h6 class="color-lite-black pt-10">{{ trans('magazine.by') }} <span
-                                            class="color-black"><b>{{ $popularNews[$i]->author }}</b></span> {{ App\Helpers\Helper::getWrittenDateLanguage($popularNews[$i]->created_at) }}</h6>
+                                            class="color-black"><b>{{ $popularNews[$i]->author->name }}</b></span> {{ App\Helpers\Helper::getWrittenDateLanguage($popularNews[$i]->created_at) }}</h6>
                             </div>
                         </a>
                         @endfor

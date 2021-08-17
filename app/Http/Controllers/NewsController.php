@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Helpers\Helper;
+use App\Models\Author;
 use App\Models\News;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
@@ -23,8 +24,9 @@ class NewsController extends Controller
     public function create()
     {
         $categories = Category::where('active', 1)->get();
+        $authors = Author::where('active', 1)->get();
 
-        return view('admin.news.create-news', compact('categories'));
+        return view('admin.news.create-news', compact('categories', 'authors'));
     }
 
     public function store(Request $request)
@@ -34,7 +36,7 @@ class NewsController extends Controller
             'subtitle' => ['required', 'max:255'],
             'image_link' => $this->validateImage(),
             'category_id' => ['required', 'numeric'],
-            'author' => 'required',
+            'author_id' => 'required',
             'content' => 'required'
         ]);
 
@@ -61,7 +63,9 @@ class NewsController extends Controller
     public function edit(News $news)
     {
         $categories = Category::where('active', 1)->get();
-        return view('admin.news.edit-news', compact('news', 'categories'));
+        $authors = Author::where('active', 1)->get();
+
+        return view('admin.news.edit-news', compact('news', 'categories', 'authors'));
     }
 
     public function update(Request $request, News $news)
@@ -72,7 +76,7 @@ class NewsController extends Controller
             'title' => ['required', 'max:100'],
             'subtitle' => ['required', 'max:255'],
             'category_id' => ['required', 'numeric'],
-            'author' => 'required',
+            'author_id' => 'required',
             'content' => 'required'
         ]);
 
@@ -107,12 +111,13 @@ class NewsController extends Controller
         $news = News::query();
         $categories = Category::where('active', 1)->get();
 
-        if ($request->has('title')) {
-            $news->where('title', 'LIKE', "%{$request->get('title')}%");
+        if ($request->has('author')) {
+            $news->join('authors', 'news.author_id', 'authors.id');
+            $news->where('authors.name', 'LIKE', "%{$request->get('author')}%");
         }
 
-        if ($request->has('author')) {
-            $news->where('author', 'LIKE', "%{$request->get('author')}%");
+        if ($request->has('title')) {
+            $news->where('title', 'LIKE', "%{$request->get('title')}%");
         }
 
         if ($request->has('category_id')) {

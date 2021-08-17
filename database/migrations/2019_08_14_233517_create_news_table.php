@@ -21,8 +21,9 @@ class CreateNewsTable extends Migration
             $table->string('subtitle')->nullable();
             $table->string('image_link');
             $table->longText('content');
-            $table->string('author');
-            $table->string('youtube_link')->nullable();
+            $table->bigInteger('author_id')->unsigned();
+            $table->foreign('author_id')->references('id')->on('authors');
+            $table->longText('youtube_links')->nullable();
             $table->boolean('active')->default(true);
             $table->boolean('featured')->default(false);
             $table->timestamps();

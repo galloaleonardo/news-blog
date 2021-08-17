@@ -58,7 +58,7 @@ class MagazineController extends Controller
         $suggestedNews = $this->suggestedNews($news->id, $news->category_id);
         $topBanners = $this->getTopBanners();
         $topBannerSetting = $this->getTopBannerSetting();
-
+        $youtubeLinks = explode(PHP_EOL, $news->youtube_links);
 
         Helper::getWrittenDateLanguage($news->updated_at);
 
@@ -72,7 +72,8 @@ class MagazineController extends Controller
             'popularNews',
             'suggestedNews',
             'topBanners',
-            'topBannerSetting'
+            'topBannerSetting',
+            'youtubeLinks'
         ));
     }
 

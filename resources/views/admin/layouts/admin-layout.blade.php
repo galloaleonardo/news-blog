@@ -62,6 +62,14 @@
         </div>
 
         <!-- Nav Item - Categories Menu -->
+        <li class="nav-item {{ request()->is('*authors*') ? 'active' : '' }}">
+            <a class="nav-link py-1" href="{{ route('authors.index') }}">
+                <i class="fas fa-user-edit"></i>
+                <span>{{ trans('admin.authors') }}</span>
+            </a>
+        </li>
+
+        <!-- Nav Item - Categories Menu -->
         <li class="nav-item {{ request()->is('*categories*') ? 'active' : '' }}">
             <a class="nav-link py-1" href="{{ route('categories.index') }}">
                 <i class="fas fa-sitemap"></i>

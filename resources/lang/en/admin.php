@@ -33,7 +33,7 @@ return [
     'no' => 'No',
     'main_image' => 'Main Image',
     'subtitle' => 'Subtitle',
-    'link_youtube' => 'Link Youtube',
+    'youtube_links' => 'Youtube Links',
     'content' => 'Content',
     'resume' => 'Resume',
     'email' => 'Email',
@@ -92,5 +92,9 @@ return [
     'views' => 'Views',
     'top_banner' => 'Top Banner',
     'keep_on_top_when_scrolling' => 'Keep on Top When Scrolling',
-    'suggested' => 'Suggested'
+    'suggested' => 'Suggested',
+    'authors' => 'Authors',
+    'author' => 'Author',
+    'default' => 'Default',
+    'youtube_links_info' => 'Add more than one video by typing the link on a new line.'
 ];

@@ -99,4 +99,13 @@ class Helper
 
         return $googleAnalytics->script;
     }
+
+    public static function getYoutubeLink(string $link)
+    {
+        $shortLink = substr($link, strpos($link, "watch?v=") + 8, 11);
+
+        $embeddedLink = 'https://www.youtube.com/embed/' . $shortLink;
+
+        return $embeddedLink;
+    }
 }

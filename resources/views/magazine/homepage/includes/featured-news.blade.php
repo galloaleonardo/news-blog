@@ -14,7 +14,7 @@
                             <h3 class="mb-15 mb-sm-5 font-sm-13"><b>{{ $featuredNews[0]->title }}</b></h3>
                             <ul class="list-li-mr-20">
                                 <li>{{ trans('magazine.by') }} <span
-                                        class="color-primary"><b>{{ $featuredNews[0]->author }}</b></span> {{ App\Helpers\Helper::getWrittenDateLanguage($featuredNews[0]->created_at) }}
+                                        class="color-primary"><b>{{ $featuredNews[0]->author->name }}</b></span> {{ App\Helpers\Helper::getWrittenDateLanguage($featuredNews[0]->created_at) }}
                                 </li>
                             </ul>
                         </div>

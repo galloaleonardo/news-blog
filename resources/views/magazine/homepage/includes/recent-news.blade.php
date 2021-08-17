@@ -8,7 +8,7 @@
             <h4 class="pt-20"><a href="{{ route('magazine.show', ['id' => $recentNews[0]->id, 'title' => Illuminate\Support\Str::slug($recentNews[0]->title)]) }}"><b>{{ $recentNews[0]->title }}</b></a></h4>
             <ul class="list-li-mr-20 pt-10 pb-20">
                 <li class="color-lite-black">{{ trans('magazine.by') }}
-                    <a href="#" class="color-black"><b>{{ $recentNews[0]->author }}, </b></a>
+                    <a href="#" class="color-black"><b>{{ $recentNews[0]->author->name }}, </b></a>
                     {{ App\Helpers\Helper::getWrittenDateLanguage($recentNews[0]->created_at)}}
                 </li>
             </ul>
@@ -26,7 +26,7 @@
                         <div class="ml-120 min-h-100x">
                             <h5><b>{{ $recentNews[$i]->title }}</b></h5>
                             <h6 class="color-lite-black pt-10">{{ trans('magazine.by') }} <span
-                                        class="color-black"><b>{{ $recentNews[$i]->author }},</b></span>
+                                        class="color-black"><b>{{ $recentNews[$i]->author->name }},</b></span>
 
                                 {{ App\Helpers\Helper::getWrittenDateLanguage($recentNews[$i]->created_at)}}
                             </h6>

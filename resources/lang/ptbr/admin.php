@@ -33,7 +33,7 @@ return [
     'no' => 'Não',
     'main_image' => 'Imagem Principal',
     'subtitle' => 'Subtítulo',
-    'link_youtube' => 'Link Youtube',
+    'youtube_links' => 'Links do Youtube',
     'content' => 'Conteúdo',
     'resume' => 'Resumo',
     'email' => 'Email',
@@ -92,5 +92,9 @@ return [
     'views' => 'Visualizações',
     'top_banner' => 'Banner Superior',
     'keep_on_top_when_scrolling' => 'Manter no topo ao scrollar',
-    'suggested' => 'Sugerido'
+    'suggested' => 'Sugerido',
+    'authors' => 'Autores',
+    'author' => 'Autor',
+    'default' => 'Padrão',
+    'youtube_links_info' => 'Adicione mais de um vídeo digitando o link em uma nova linha.'
 ];

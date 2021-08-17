@@ -21,5 +21,9 @@ class News extends Model implements Viewable
     {
         return $this->belongsTo(Category::class);
     }
-}
 
+    public function author()
+    {
+        return $this->belongsTo(Author::class);
+    }
+}

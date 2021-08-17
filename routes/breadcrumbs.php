@@ -7,6 +7,24 @@ Breadcrumbs::for('dashboard', function ($trail) {
     $trail->push(trans('admin.dashboard'), route('dashboard'));
 });
 
+// Home > Authors
+Breadcrumbs::for('authors', function ($trail) {
+    $trail->parent('dashboard');
+    $trail->push(trans('admin.authors'), route('authors.index'));
+});
+
+// Home > Authors > Create
+Breadcrumbs::for('author-create', function ($trail) {
+    $trail->parent('authors');
+    $trail->push(trans('admin.create'), route('authors.index'));
+});
+
+// Home > Authors > Show/Edit
+Breadcrumbs::for('author-show-edit', function ($trail, $author) {
+    $trail->parent('authors');
+    $trail->push($author->name);
+});
+
 // Home > Categories
 Breadcrumbs::for('categories', function ($trail) {
     $trail->parent('dashboard');

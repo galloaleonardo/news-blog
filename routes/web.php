@@ -16,6 +16,7 @@ Route::group(['middleware' => 'localization'], function () {
         Route::resource('google-ads', 'GoogleAdsController');
         Route::resource('google-analytics', 'GoogleAnalyticsController');
         Route::resource('seo', 'SeoMagazineController');
+        Route::resource('authors', 'AuthorController');
     });
 
     Route::get('/', 'MagazineController@index')->name('magazine.index');

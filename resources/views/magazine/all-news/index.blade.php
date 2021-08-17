@@ -31,7 +31,7 @@
                     </div>
                     <h4 class="pt-20"><b>{{ $new->title }}</b></h4>
                     <ul class="list-li-mr-20 pt-10 mb-30">
-                        <li class="color-lite-black">{{ trans('magazine.by') }} <b>{{ $new->author }}</b></a>
+                        <li class="color-lite-black">{{ trans('magazine.by') }} <b>{{ $new->author->name }}</b></a>
                             {{ App\Helpers\Helper::getWrittenDateLanguage($new->created_at)}}
                         </li>
                     </ul>
