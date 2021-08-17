@@ -3,6 +3,12 @@
 <head>
     @include('magazine.includes.head')
     {!! \Artesaos\SEOTools\Facades\SEOTools::generate() !!}
+
+    <style>
+        .content-news a {
+            color: #4e73df
+        }
+    </style>
 </head>
 <body>
 
@@ -16,7 +22,7 @@
                 <img src="{{ asset('/images/news/large') . '/' . $news->image_link }}" alt="">
                 <h3 class="mt-30"><b>{{ $news->title }}</b></h3>
                 <ul class="list-li-mr-20 mtb-15">
-                    <li>{{ trans('magazine.by') }} <a href="#"><b>{{ $news->author->name }}</b>, </a> {{ App\Helpers\Helper::getWrittenDateLanguage($news->created_at, false) }}
+                    <li>{{ trans('magazine.by') }} <a href="{{ route('magazine.all', ['author' => $news->author->name]) }}"><b>{{ $news->author->name }}</b>, </a> {{ App\Helpers\Helper::getWrittenDateLanguage($news->created_at, false) }}
                         | {{ trans('magazine.updated_in') }} {{ App\Helpers\Helper::getDateFormatLanguage($news->updated_at) }} {{ trans('magazine.at') }} {{ date_format($news->updated_at, 'H:i:s') }}</li>
                 </ul>
                 <div class="mt-40 mt-sm-20">
@@ -28,7 +34,9 @@
                     </ul>
                 </div>
 
-                {!! $news->content !!}
+                <div class="content-news">
+                    {!! $news->content !!}
+                </div>
 
                 @if (isset($youtubeLinks) && $youtubeLinks)
                         @foreach ($youtubeLinks as $link)
@@ -51,7 +59,7 @@
                             <h4 class="pt-20"><b>{{ $news->title }}</b></h4>
                             <ul class="list-li-mr-20 pt-10 mb-30">
                                 <li class="color-lite-black">
-                                    {{ trans('magazine.by') }} <a href="#" class="color-black"><b>&nbsp;{{ $news->author->name }}</b></a>
+                                    {{ trans('magazine.by') }} <a href="{{ route('magazine.all', ['author' => $news->author->name]) }}" class="color-black"><b>&nbsp;{{ $news->author->name }}</b></a>
                                     {{ App\Helpers\Helper::getWrittenDateLanguage($news->created_at) }}
                                 </li>
                             </ul>

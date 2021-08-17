@@ -81,13 +81,15 @@ class MagazineController extends Controller
     {
         $search   = $request->has('search') ? $request->get('search') : null;
         $category = $request->has('category') ? $request->get('category') : null;
+        $author = $request->has('author') ? $request->get('author') : null;
+
         $topBanners = $this->getTopBanners();
         $topBannerSetting = $this->getTopBannerSetting();
 
 
         $categories = $this->getCategories();
 
-        $news = $this->getOrSearchAllNews($search, $category);
+        $news = $this->getOrSearchAllNews($search, $category, $author);
 
         $this->setSEOPages();
 

@@ -96,5 +96,7 @@ return [
     'authors' => 'Authors',
     'author' => 'Author',
     'default' => 'Default',
-    'youtube_links_info' => 'Add more than one video by typing the link on a new line.'
+    'youtube_links_info' => 'Add more than one video by typing the link on a new line.',
+    'error_fk_author' => 'There are news with this author. Unable to delete the record.',
+    'error_fk_category' => 'There are news with this category. Unable to delete the record.'
 ];

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Author;
+use App\Models\News;
 use Illuminate\Http\Request;
 
 class AuthorController extends Controller
@@ -110,6 +111,15 @@ class AuthorController extends Controller
      */
     public function destroy(Author $author)
     {
+        $existsNewsWithThisAuthor = News::where('author_id', $author->id)->get()->count();
+
+        if ($existsNewsWithThisAuthor) {
+            return redirect(route('authors.index'))
+                ->with('warning', trans('admin.error_fk_author', [
+                    'object' => trans('admin.author')
+                ]));
+        }
+
         $author->delete();
         
         return redirect(route('authors.index'))

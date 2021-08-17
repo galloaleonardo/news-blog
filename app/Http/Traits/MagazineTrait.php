@@ -5,6 +5,7 @@ namespace App\Http\Traits;
 
 
 use App\Models\Advertising;
+use App\Models\Author;
 use App\Models\Category;
 use App\Models\News;
 use App\Models\SeoMagazine;
@@ -142,10 +143,10 @@ trait MagazineTrait
         return Advertising::where('active', true)->limit(6)->get();
     }
 
-    public function getOrSearchAllNews(?string $search, ?string $category)
+    public function getOrSearchAllNews(?string $search, ?string $category, ?string $author)
     {
         return News::where('active', true)
-            ->where(function ($query) use ($search, $category) {
+            ->where(function ($query) use ($search, $category, $author) {
                 if ($search) {
                     $query->where('title', 'LIKE', '%' . $search . '%');
                 }
@@ -155,6 +156,14 @@ trait MagazineTrait
 
                     if ($categoryModel) {
                         $query->where('category_id', $categoryModel->id);
+                    }
+                }
+
+                if ($author) {
+                    $authorModel = Author::where('name', $author)->first();
+
+                    if ($authorModel) {
+                        $query->where('author_id', $authorModel->id);
                     }
                 }
             })

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\News;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -72,7 +73,17 @@ class CategoryController extends Controller
 
     public function destroy(Category $category)
     {
+        $existsNewsWithThisCategory = News::where('category_id', $category->id)->get()->count();
+
+        if ($existsNewsWithThisCategory) {
+            return redirect(route('categories.index'))
+                ->with('warning', trans('admin.error_fk_category', [
+                    'object' => trans('admin.author')
+                ]));
+        }
+
         $category->delete();
+
         return redirect(route('categories.index'))
             ->with('success', trans('admin.deleted_successfully', [
                 'object' => trans('admin.category')
