@@ -13,7 +13,7 @@ services:
       - php
       - mysql
     ports:
-      - 9000:80
+      - 9005:80
     volumes:
       - ./:/var/www/html
       - ./nginx/conf/default.conf:/etc/nginx/conf.d/default.conf

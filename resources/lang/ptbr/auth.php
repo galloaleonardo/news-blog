@@ -13,9 +13,10 @@ return [
     |
     */
 
-    'failed' => 'Invalid credentials.',
-    'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
+    'failed' => 'Credenciais inválidas.',
+    'throttle' => 'Foram tentadas múltiplas tentativas de login. Por favor, tente novamente em :seconds segundos.',
     'email' => 'E-mail',
-    'password' => 'Password',
-    'remember' => 'Remember me'
+    'password' => 'Senha',
+    'remember' => 'Lembrar-me'
+
 ];
