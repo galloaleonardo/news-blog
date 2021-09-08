@@ -18,15 +18,19 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
+            $table->string('first_password');
             $table->boolean('active')->default(true);
             $table->rememberToken();
             $table->timestamps();
         });
 
+        $password = Hash::make('@dm1np4ss');
+
         DB::table('users')->insert([
             'name' => 'Administrator',
             'email' => 'admin@admin.com',
-            'password' => Hash::make('@dm1np4ss'),
+            'password' => $password,
+            'first_password' => $password,
             'active' => true,
             'remember_token' => null,
             'created_at' => date('Y-m-d'),

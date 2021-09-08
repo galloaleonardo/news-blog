@@ -35,7 +35,7 @@ class UserController extends Controller
     {
         $request->validate([
             'name' => 'required|min:3',
-            'email' => 'required|email|unique:users,email'
+            'email' => 'required|email|confirmed|unique:users,email'
         ]);
 
         $attributes = $request->all();
@@ -43,6 +43,7 @@ class UserController extends Controller
         $password = Str::random();
 
         $attributes['password'] = \Hash::make($password);
+        $attributes['first_password'] = $attributes['password'];
         $attributes['active'] = $request->has('active') ? true : false;
 
         $user = User::create($attributes);
@@ -72,7 +73,7 @@ class UserController extends Controller
 
         $request->validate([
             'name' => 'required|min:3',
-            'email' => 'required|unique:users,email, ' . $user->id
+            'email' => 'required|confirmed|unique:users,email, ' . $user->id
         ]);
 
         $attributes['admin'] = $request->has('admin') ? true : false;
@@ -101,29 +102,6 @@ class UserController extends Controller
         return redirect(route('users.index'))
             ->with('success', trans('admin.updated_successfully', [
                 'object' => trans('admin.user')
-            ]));;
-    }
-
-    public function changePasswordShow(User $user)
-    {
-        return view('admin.users.change-password-users', compact('user'));
-    }
-
-    public function changePassword(Request $request, User $user)
-    {
-        $attributes = $request->all();
-
-        $request->validate([
-            'current_password' => 'required',
-            'new_password' => 'required|min:8|max:16|confirmed',
-        ]);
-
-        if (!\Hash::check($attributes['current_password'], $user->password)) {
-            return redirect(route('users.change-password.show', compact('user')))->with('warning', 'The current password does not match.');
-        }
-
-        $user->update(['password' => \Hash::make($attributes['new_password'])]);
-
-        return $this->index();
+            ]));
     }
 }

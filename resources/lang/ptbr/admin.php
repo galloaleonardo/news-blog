@@ -37,6 +37,7 @@ return [
     'content' => 'Conteúdo',
     'resume' => 'Resumo',
     'email' => 'Email',
+    'email_confirmation' => 'Confirmação de Email',
     'admin' => 'Admin',
     'created_at' => 'Criado Em',
     'updated_at' => 'Atualizado Em',

@@ -18,20 +18,24 @@
                 @method('PATCH')
                 @csrf
                 <div class="form-row">
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-md-4">
                         <label for="name">{{ trans('admin.name') }}</label>
                         <input type="text" class="form-control {{ $errors->has('name') ? 'border-left-danger' : '' }}" id="name" name="name" value="{{ $user->name }}">
                     </div>
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-md-4">
                         <label for="name">{{ trans('admin.email') }}</label>
                         <input type="email" class="form-control {{ $errors->has('email') ? 'border-left-danger' : '' }}" id="email" name="email" value="{{ $user->email }}">
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="email_confirmation">{{ trans('admin.email_confirmation') }}</label>
+                        <input type="email" class="form-control {{ $errors->has('email_confirmation') ? 'border-left-danger' : '' }}" id="email_confirmation" name="email_confirmation" value="{{ $user->email_confirmation }}">
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" id="active" name="active" {{ $user->active ? 'checked' : '' }}>
                         <label class="form-check-label" for="active">
-                            Active
+                            {{ trans('admin.active') }}
                         </label>
                     </div>
                 </div>
