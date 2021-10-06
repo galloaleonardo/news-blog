@@ -48,11 +48,6 @@ class TopBannerController extends Controller
             ]));
     }
 
-    public function show(TopBanner $topBanner)
-    {
-        return view('admin.top-banner.show-top-banner', compact('topBanner'));
-    }
-
     public function edit(TopBanner $topBanner)
     {
         return view('admin.top-banner.edit-top-banner', compact('topBanner'));

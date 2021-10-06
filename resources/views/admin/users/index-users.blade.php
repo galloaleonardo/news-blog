@@ -49,12 +49,6 @@
                                             <label class="form-check-label" for="is-active"></label>
                                         </td>
                                         <td class="min text-center">
-                                            <a href="{{ route('users.show', $user->id) }}" class="btn btn-light btn-sm">
-                                                <span class="icon text-black" data-toggle="tooltip" data-placement="top" title="View">
-                                                    <i class="fas fa-eye"></i>
-                                                </span>
-                                            </a>
-
                                             <a href="{{ route('users.edit', $user->id) }}" class="btn btn-light btn-sm">
                                                 <span class="icon text-info" data-toggle="tooltip" data-placement="top" title="Edit">
                                                     <i class="fas fa-pencil-alt"></i>
@@ -65,7 +59,7 @@
                                                 <span class="icon text-danger" data-toggle="tooltip" data-placement="top" title="Delete">
                                                     <i class="fas fa-trash-alt"></i>
                                                 </span>
-                                            </a>
+                                        </a>
                                         </td>
                                     </tr>
                                 @endforeach

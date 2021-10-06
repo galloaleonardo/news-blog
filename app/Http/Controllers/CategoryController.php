@@ -41,11 +41,6 @@ class CategoryController extends Controller
             ]));
     }
 
-    public function show(Category $category)
-    {
-        return view('admin.categories.show-categories', compact('category'));
-    }
-
     public function edit(Category $category)
     {
         return view('admin.categories.edit-categories', compact('category'));

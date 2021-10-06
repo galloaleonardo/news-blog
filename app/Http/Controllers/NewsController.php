@@ -55,11 +55,6 @@ class NewsController extends Controller
             ]));
     }
 
-    public function show(News $news)
-    {
-        return view('admin.news.show-news', compact('news'));
-    }
-
     public function edit(News $news)
     {
         $categories = Category::where('active', 1)->get();

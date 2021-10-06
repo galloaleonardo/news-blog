@@ -44,11 +44,6 @@ class AdvertisingController extends Controller
             ]));
     }
 
-    public function show(Advertising $advertising)
-    {
-        return view('admin.advertisements.show-advertisements', compact('advertising'));
-    }
-
     public function edit(Advertising $advertising)
     {
         return view('admin.advertisements.edit-advertisements', compact('advertising'));

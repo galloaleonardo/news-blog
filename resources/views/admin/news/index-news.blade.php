@@ -99,12 +99,7 @@
                                             <label class="form-check-label" for="fatured"></label>
                                         <td class="min">{{ $new->author->name }}</td>
                                         <td class="min text-center">
-                                            <a href="{{ route('news.show', $new->id) }}" class="btn btn-light btn-sm">
-                                                <span class="icon text-black" data-toggle="tooltip" data-placement="top" title="View">
-                                                    <i class="fas fa-eye"></i>
-                                                </span>
-                                            </a>
-
+                                            
                                             <a href="{{ route('news.edit', $new->id) }}" class="btn btn-light btn-sm">
                                                 <span class="icon text-info" data-toggle="tooltip" data-placement="top" title="Edit">
                                                     <i class="fas fa-pencil-alt"></i>

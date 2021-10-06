@@ -73,12 +73,6 @@
                                             <label class="form-check-label" for="is-active"></label>
                                         </td>
                                         <td class="min text-center">
-                                            <a href="{{ route('top-banner.show', $topBanner->id) }}" class="btn btn-light btn-sm">
-                                                <span class="icon text-black" data-toggle="tooltip" data-placement="top" title="View">
-                                                    <i class="fas fa-eye"></i>
-                                                </span>
-                                            </a>
-
                                             <a href="{{ route('top-banner.edit', $topBanner->id) }}" class="btn btn-light btn-sm">
                                                 <span class="icon text-info" data-toggle="tooltip" data-placement="top" title="Edit">
                                                     <i class="fas fa-pencil-alt"></i>
