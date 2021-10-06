@@ -29,8 +29,8 @@
                     <ul class="mb-30 list-a-bg-grey list-a-hw-radial-35 list-a-hvr-primary list-li-ml-5">
                         <li class="mr-10 ml-0">{{trans('magazine.share')}}</li>
                         <li class="text-center align-middle"><a href="https://www.facebook.com/sharer/sharer.php?u={{ url()->current() }}" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
-                        <li class="text-center align-middle"><a href="https://twitter.com/intent/tweet?url={{ url()->current() }}&text={{ $news->title }}"><i class="fab fa-twitter"></i></a></li>
-                        <li class="text-center align-middle"><a href="https://wa.me/?text={{ urlencode(url()->current()) }}"><i class="fab fa-whatsapp"></i></a></li>
+                        <li class="text-center align-middle"><a href="https://twitter.com/intent/tweet?url={{ url()->current() }}&text={{ $news->title }}" target="_blank"><i class="fab fa-twitter"></i></a></li>
+                        <li class="text-center align-middle"><a href="https://wa.me/?text={{ urlencode(url()->current()) }}" target="_blank"><i class="fab fa-whatsapp"></i></a></li>
                     </ul>
                 </div>
 
