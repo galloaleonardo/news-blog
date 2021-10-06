@@ -61,21 +61,23 @@
             {{ trans('admin.news') }}
         </div>
 
-        <!-- Nav Item - Categories Menu -->
-        <li class="nav-item {{ request()->is('*authors*') ? 'active' : '' }}">
-            <a class="nav-link py-1" href="{{ route('authors.index') }}">
-                <i class="fas fa-user-edit"></i>
-                <span>{{ trans('admin.authors') }}</span>
-            </a>
-        </li>
+        @if(App\Helpers\Helper::userIsAdmin())
+            <!-- Nav Item - Categories Menu -->
+            <li class="nav-item {{ request()->is('*authors*') ? 'active' : '' }}">
+                <a class="nav-link py-1" href="{{ route('authors.index') }}">
+                    <i class="fas fa-user-edit"></i>
+                    <span>{{ trans('admin.authors') }}</span>
+                </a>
+            </li>
 
-        <!-- Nav Item - Categories Menu -->
-        <li class="nav-item {{ request()->is('*categories*') ? 'active' : '' }}">
-            <a class="nav-link py-1" href="{{ route('categories.index') }}">
-                <i class="fas fa-sitemap"></i>
-                <span>{{ trans('admin.categories') }}</span>
-            </a>
-        </li>
+            <!-- Nav Item - Categories Menu -->
+            <li class="nav-item {{ request()->is('*categories*') ? 'active' : '' }}">
+                <a class="nav-link py-1" href="{{ route('categories.index') }}">
+                    <i class="fas fa-sitemap"></i>
+                    <span>{{ trans('admin.categories') }}</span>
+                </a>
+            </li>
+        @endif
 
         <!-- Nav Item - News Menu -->
         <li class="nav-item {{ request()->is('*news*') ? 'active' : '' }}">
@@ -85,107 +87,109 @@
             </a>
         </li>
 
-        <!-- Divider -->
-        <hr class="sidebar-divider">
+        @if(App\Helpers\Helper::userIsAdmin())
+            <!-- Divider -->
+            <hr class="sidebar-divider">
 
-        <!-- Heading -->
-        <div class="sidebar-heading">
-            {{ trans('admin.adverts') }}
-        </div>
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                {{ trans('admin.adverts') }}
+            </div>
 
-        <!-- Nav Item - Advertisings Menu -->
-        <li class="nav-item {{ request()->is('*advertisements*') ? 'active' : '' }}">
-            <a class="nav-link py-1" href="{{ route('advertisements.index') }}">
-                <i class="fab fa-adversal"></i>
-                <span>{{ trans('admin.advertisings') }}</span>
-            </a>
-        </li>
+            <!-- Nav Item - Advertisings Menu -->
+            <li class="nav-item {{ request()->is('*advertisements*') ? 'active' : '' }}">
+                <a class="nav-link py-1" href="{{ route('advertisements.index') }}">
+                    <i class="fab fa-adversal"></i>
+                    <span>{{ trans('admin.advertisings') }}</span>
+                </a>
+            </li>
 
-        <!-- Nav Item - Top Banner Menu -->
-        <li class="nav-item {{ request()->is('*top-banner*') ? 'active' : '' }}">
-            <a class="nav-link py-1" href="{{ route('top-banner.index') }}">
-                <i class="fab fa-adversal"></i>
-                <span>{{ trans('admin.top_banner') }}</span>
-            </a>
-        </li>
+            <!-- Nav Item - Top Banner Menu -->
+            <li class="nav-item {{ request()->is('*top-banner*') ? 'active' : '' }}">
+                <a class="nav-link py-1" href="{{ route('top-banner.index') }}">
+                    <i class="fab fa-adversal"></i>
+                    <span>{{ trans('admin.top_banner') }}</span>
+                </a>
+            </li>
 
-        <!-- Divider -->
-        <hr class="sidebar-divider d-none d-md-block">
+            <!-- Divider -->
+            <hr class="sidebar-divider d-none d-md-block">
 
-        <!-- Heading -->
-        <div class="sidebar-heading">
-            {{ trans('admin.operational') }}
-        </div>
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                {{ trans('admin.operational') }}
+            </div>
 
-        <!-- Nav Item - Users Menu -->
-        <li class="nav-item {{ request()->is('*users*') ? 'active' : '' }}">
-            <a class="nav-link py-1" href="{{ route('users.index') }}">
-                <i class="fas fa-users"></i>
-                <span>{{ trans('admin.users') }}</span>
-            </a>
-        </li>
+            <!-- Nav Item - Users Menu -->
+            <li class="nav-item {{ request()->is('*users*') ? 'active' : '' }}">
+                <a class="nav-link py-1" href="{{ route('users.index') }}">
+                    <i class="fas fa-users"></i>
+                    <span>{{ trans('admin.users') }}</span>
+                </a>
+            </li>
 
-        <!-- Divider -->
-        <hr class="sidebar-divider d-none d-md-block">
+            <!-- Divider -->
+            <hr class="sidebar-divider d-none d-md-block">
 
-        <!-- Heading -->
-        <div class="sidebar-heading">
-            {{ trans('admin.integrations') }}
-        </div>
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                {{ trans('admin.integrations') }}
+            </div>
 
-        <!-- Nav Item - Google Ads Menu -->
-        <li class="nav-item {{ request()->is('*google-ads*') ? 'active' : '' }}">
+            <!-- Nav Item - Google Ads Menu -->
+            <li class="nav-item {{ request()->is('*google-ads*') ? 'active' : '' }}">
 
-            <a class="nav-link py-1" href="{{ route('google-ads.index') }}">
-                <i class="fab fa-google"></i>
-                <span>{{ trans('admin.google_ads') }}</span>
-            </a>
+                <a class="nav-link py-1" href="{{ route('google-ads.index') }}">
+                    <i class="fab fa-google"></i>
+                    <span>{{ trans('admin.google_ads') }}</span>
+                </a>
 
-        </li>
+            </li>
 
-        <!-- Nav Item - Google Analytics Menu -->
-        <li class="nav-item {{ request()->is('*google-analytics*') ? 'active' : '' }}">
+            <!-- Nav Item - Google Analytics Menu -->
+            <li class="nav-item {{ request()->is('*google-analytics*') ? 'active' : '' }}">
 
-            <a class="nav-link py-1" href="{{ route('google-analytics.index') }}">
-                <i class="fab fa-google"></i>
-                <span>{{ trans('admin.google_analytics') }}</span>
-            </a>
+                <a class="nav-link py-1" href="{{ route('google-analytics.index') }}">
+                    <i class="fab fa-google"></i>
+                    <span>{{ trans('admin.google_analytics') }}</span>
+                </a>
 
-        </li>
+            </li>
 
-        <!-- Divider -->
-        <hr class="sidebar-divider d-none d-md-block">
+            <!-- Divider -->
+            <hr class="sidebar-divider d-none d-md-block">
 
-        <!-- Heading -->
-        <div class="sidebar-heading">
-            {{ trans('admin.seo') }}
-        </div>
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                {{ trans('admin.seo') }}
+            </div>
 
-        <!-- Nav Item - Google Ads Menu -->
-        <li class="nav-item {{ request()->is('*seo*') ? 'active' : '' }}">
+            <!-- Nav Item - Google Ads Menu -->
+            <li class="nav-item {{ request()->is('*seo*') ? 'active' : '' }}">
 
-            <a class="nav-link py-1" href="{{ route('seo.index') }}">
-                <i class="fas fa-rocket"></i>
-                <span>{{ trans('admin.seo') }}</span>
-            </a>
+                <a class="nav-link py-1" href="{{ route('seo.index') }}">
+                    <i class="fas fa-rocket"></i>
+                    <span>{{ trans('admin.seo') }}</span>
+                </a>
 
-        </li>
+            </li>
 
-        <!-- Divider -->
-        <hr class="sidebar-divider d-none d-md-block">
+            <!-- Divider -->
+            <hr class="sidebar-divider d-none d-md-block">
 
-        <!-- Heading -->
-        <div class="sidebar-heading">
-            {{ trans('admin.settings') }}
-        </div>
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                {{ trans('admin.settings') }}
+            </div>
 
-        <!-- Nav Item - Settings Menu -->
-        <li class="nav-item {{ request()->is('*settings*') ? 'active' : '' }}">
-            <a class="nav-link py-1" href="{{ route('settings.index') }}">
-                <i class="fas fa-cogs"></i>
-                <span>{{ trans('admin.settings') }}</span>
-            </a>
-        </li>
+            <!-- Nav Item - Settings Menu -->
+            <li class="nav-item {{ request()->is('*settings*') ? 'active' : '' }}">
+                <a class="nav-link py-1" href="{{ route('settings.index') }}">
+                    <i class="fas fa-cogs"></i>
+                    <span>{{ trans('admin.settings') }}</span>
+                </a>
+            </li>
+        @endif
 
         <!-- Sidebar Toggler (Sidebar) -->
         <div class="text-center d-none d-md-inline pt-4">

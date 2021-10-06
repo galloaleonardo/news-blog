@@ -30,7 +30,6 @@
                                 <tr role="row">
                                     <th>{{ trans('admin.name') }}</th>
                                     <th>{{ trans('admin.email') }}</th>
-                                    <th class="min text-center">{{ trans('admin.admin') }}</th>
                                     <th class="min text-center">{{ trans('admin.active') }}</th>
                                     <th class="min text-center">{{ trans('admin.action') }}</th>
                                 </tr>
@@ -40,10 +39,6 @@
                                     <tr role="row">
                                         <td>{{ $user->name }}</td>
                                         <td>{{ $user->email }} </td>
-                                        <td class="min text-center">
-                                            <input type="checkbox" style="width:20px; height: 20px" id="is-admin" disabled {{ $user->admin ? 'checked="checked"' : '' }}>
-                                            <label class="form-check-label" for="is-admin"></label>
-                                        </td>
                                         <td class="min text-center">
                                             <input type="checkbox" style="width:20px; height: 20px" id="is-active" disabled {{ $user->active ? 'checked="checked"' : '' }}>
                                             <label class="form-check-label" for="is-active"></label>

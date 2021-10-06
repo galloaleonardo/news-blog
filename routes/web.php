@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Middleware\EnsureUserChangedFirstPassword;
+use App\Http\Middleware\EnsureUserIsAdmin;
 use App\Http\Middleware\EnsureUserIsNotDisabled;
 
 Route::group(['middleware' => 'localization'], function () {
@@ -13,18 +14,21 @@ Route::group(['middleware' => 'localization'], function () {
             Route::get('/', 'DashboardController@index')->name('dashboard');
             Route::resource('news', 'NewsController');
             Route::get('search', 'NewsController@search')->name('news.search');
-            Route::resource('categories', 'CategoryController');
-            Route::resource('settings', 'SettingsController');
-            Route::resource('users', 'UserController');
-            Route::get('users/{user}/change-password', 'UserController@changePasswordShow')->name('users.change-password.show');
-            Route::patch('users/{user}/change-password', 'UserController@changePassword')->name('users.change-password.update');
-            Route::resource('advertisements', 'AdvertisingController', ['parameters' => ['advertisements' => 'advertising']]);
-            Route::resource('top-banner', 'TopBannerController');
-            Route::resource('top-banner-setting', 'TopBannerSettingController');
-            Route::resource('google-ads', 'GoogleAdsController');
-            Route::resource('google-analytics', 'GoogleAnalyticsController');
-            Route::resource('seo', 'SeoMagazineController');
-            Route::resource('authors', 'AuthorController');
+       
+            Route::middleware(EnsureUserIsAdmin::class)->group(function () {
+                Route::resource('categories', 'CategoryController');
+                Route::resource('settings', 'SettingsController');
+                Route::resource('users', 'UserController');
+                Route::get('users/{user}/change-password', 'UserController@changePasswordShow')->name('users.change-password.show');
+                Route::patch('users/{user}/change-password', 'UserController@changePassword')->name('users.change-password.update');
+                Route::resource('advertisements', 'AdvertisingController', ['parameters' => ['advertisements' => 'advertising']]);
+                Route::resource('top-banner', 'TopBannerController');
+                Route::resource('top-banner-setting', 'TopBannerSettingController');
+                Route::resource('google-ads', 'GoogleAdsController');
+                Route::resource('google-analytics', 'GoogleAnalyticsController');
+                Route::resource('seo', 'SeoMagazineController');
+                Route::resource('authors', 'AuthorController');
+            });
         });
     });
 

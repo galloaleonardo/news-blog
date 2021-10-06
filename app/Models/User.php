@@ -17,7 +17,7 @@ class User extends Authenticatable implements CanResetPassword
      * @var array
      */
     protected $guarded = [
-        'password', 'first_password', 'remember_token'
+        'email_confirmation'
     ];
 
     /**

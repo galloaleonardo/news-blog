@@ -7,10 +7,12 @@ use App\Models\GoogleAds;
 use App\Models\GoogleAnalytics;
 use App\Models\Settings;
 use Carbon\Carbon;
-use Jenssegers\Date\Date;
 
 class Helper
 {
+
+    const ADMIN_USER = 1;
+
     public static function checkPath(Array $paths)
     {
         foreach ($paths as $path) {
@@ -107,5 +109,10 @@ class Helper
         $embeddedLink = 'https://www.youtube.com/embed/' . $shortLink;
 
         return $embeddedLink;
+    }
+
+    public static function userIsAdmin()
+    {
+        return \Auth::user()->id === self::ADMIN_USER;
     }
 }
