@@ -42,8 +42,8 @@
                                         alt="">
                                     <h4 class="pt-20"><b>{{ $category_1->title }}</b></h4>
                                     <ul class="list-li-mr-20 pt-10 mb-30">
-                                        <li class="color-lite-black">{{ trans('magazine.by') }} <b>{{ $category_1->author->name }}</b></a>
-                                            {{ App\Helpers\Helper::getWrittenDateLanguage($category_1->created_at)}}
+                                        <li class="color-lite-black">{{ trans('magazine.by') }} <b>{{ $category_1->author->name }}</b></a>, 
+                                            {{ App\Helpers\Helper::getDateFormatLanguage($category_1->created_at)}}
                                         </li>
                                     </ul>
                                 </a>
@@ -65,8 +65,8 @@
                                         <h4 class="pt-20"><b>{{ $category_2->title }}</b>
                                         </h4>
                                         <ul class="list-li-mr-20 pt-10 mb-30">
-                                            <li class="color-lite-black">{{ trans('magazine.by') }} <b>{{ $category_2->author->name }}</b>
-                                                {{ App\Helpers\Helper::getWrittenDateLanguage($category_2->created_at)}}
+                                            <li class="color-lite-black">{{ trans('magazine.by') }} <b>{{ $category_2->author->name }}</b>, 
+                                                {{ App\Helpers\Helper::getDateFormatLanguage($category_2->created_at)}}
                                             </li>
                                         </ul>
                                     </a>
@@ -89,8 +89,8 @@
                                         <h4 class="pt-20"><b>{{ $category_3->title }}</b>
                                         </h4>
                                         <ul class="list-li-mr-20 pt-10 mb-30">
-                                            <li class="color-lite-black">{{ trans('magazine.by') }} <b>{{ $category_3->author->name }}</b>
-                                                {{ App\Helpers\Helper::getWrittenDateLanguage($category_3->created_at)}}
+                                            <li class="color-lite-black">{{ trans('magazine.by') }} <b>{{ $category_3->author->name }}</b>, 
+                                                {{ App\Helpers\Helper::getDateFormatLanguage($category_3->created_at)}}
                                             </li>
                                         </ul>
                                     </a>
@@ -113,8 +113,8 @@
                                         <h4 class="pt-20"><a href="#"><b>{{ $category_4->title }}</b></a>
                                         </h4>
                                         <ul class="list-li-mr-20 pt-10 mb-30">
-                                            <li class="color-lite-black">{{ trans('magazine.by') }} <b>{{ $category_4->author->name }}</b>
-                                                {{ App\Helpers\Helper::getWrittenDateLanguage($category_4->created_at) }}
+                                            <li class="color-lite-black">{{ trans('magazine.by') }} <b>{{ $category_4->author->name }}</b>, 
+                                                {{ App\Helpers\Helper::getDateFormatLanguage($category_4->created_at) }}
                                             </li>
                                         </ul>
                                     </a>

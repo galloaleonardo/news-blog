@@ -14,7 +14,7 @@
                             <h3 class="mb-15 mb-sm-5 font-sm-13"><b>{{ $featuredNews[0]->title }}</b></h3>
                             <ul class="list-li-mr-20">
                                 <li>{{ trans('magazine.by') }} <span
-                                        class="color-primary"><b>{{ $featuredNews[0]->author->name }}</b></span> {{ App\Helpers\Helper::getWrittenDateLanguage($featuredNews[0]->created_at) }}
+                                        class="color-primary"><b>{{ $featuredNews[0]->author->name }}</b></span>, {{ App\Helpers\Helper::getDateFormatLanguage($featuredNews[0]->created_at) }}
                                 </li>
                             </ul>
                         </div>
@@ -34,7 +34,7 @@
                             <div class="abs-blr color-white p-20 bg-sm-color-7">
                                 <h4 class="mb-10 mb-sm-5"><b>{{ $featuredNews[1]->title }}</b></h4>
                                 <ul class="list-li-mr-20">
-                                    <li>{{ App\Helpers\Helper::getWrittenDateLanguage($featuredNews[1]->created_at) }}</li>
+                                    <li>{{ App\Helpers\Helper::getDateFormatLanguage($featuredNews[1]->created_at) }}</li>
                                 </ul>
                             </div>
                         </a>
@@ -52,7 +52,7 @@
                             <div class="abs-blr color-white p-20 bg-sm-color-7">
                                 <h4 class="mb-10 mb-sm-5"><b>{{$featuredNews[2]->title }}</b></h4>
                                 <ul class="list-li-mr-20">
-                                    <li>{{ App\Helpers\Helper::getWrittenDateLanguage($featuredNews[2]->created_at) }}</li>
+                                    <li>{{ App\Helpers\Helper::getDateFormatLanguage($featuredNews[2]->created_at) }}</li>
                                 </ul>
                             </div>
                         </a>
@@ -73,7 +73,7 @@
                         <div class="abs-blr color-white p-20 bg-sm-color-7">
                             <h4 class="mb-10 mb-sm-5"><b>{{ $featuredNews[3]->title }}</b></h4>
                             <ul class="list-li-mr-20">
-                                <li>{{ App\Helpers\Helper::getWrittenDateLanguage($featuredNews[3]->created_at) }}</li>
+                                <li>{{ App\Helpers\Helper::getDateFormatLanguage($featuredNews[3]->created_at) }}</li>
                             </ul>
                         </div>
                     </a>
@@ -92,7 +92,7 @@
                         <div class="abs-blr color-white p-20 bg-sm-color-7">
                             <h4 class="mb-10 mb-sm-5"><b>{{ $featuredNews[4]->title }}</b></h4>
                             <ul class="list-li-mr-20">
-                                <li>{{ App\Helpers\Helper::getWrittenDateLanguage($featuredNews[4]->created_at) }}</li>
+                                <li>{{ App\Helpers\Helper::getDateFormatLanguage($featuredNews[4]->created_at) }}</li>
                             </ul>
                         </div>
                     </a>
@@ -111,7 +111,7 @@
                         <div class="abs-blr color-white p-20 bg-sm-color-7">
                             <h4 class="mb-10 mb-sm-5"><b>{{ $featuredNews[5]->title }}</b></h4>
                             <ul class="list-li-mr-20">
-                                <li>{{ App\Helpers\Helper::getWrittenDateLanguage($featuredNews[5]->created_at)}}</li>
+                                <li>{{ App\Helpers\Helper::getDateFormatLanguage($featuredNews[5]->created_at)}}</li>
                             </ul>
                         </div>
                     </a>

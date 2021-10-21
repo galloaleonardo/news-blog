@@ -18,11 +18,24 @@
                 @method('PATCH')
                 @csrf
                 <div class="form-row">
-                    <div class="form-group col-md-4">
+                    <div class="form-group col-md-12">
                         <label for="company_name">{{ trans('admin.company_name') }}</label>
                         <input type="text"
                                class="form-control {{ $errors->has('company_name') ? 'border-left-danger' : '' }}"
                                id="company_name" name="company_name" value="{{ $settings->company_name }}">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label for="language_id">{{ trans('admin.language') }}</label>
+                        <select id="language_id" name="language_id"
+                                class="form-control {{ $errors->has('language_id') ? 'border-left-danger' : '' }}">
+                            <option selected disabled>Choose...</option>
+                            @foreach($languages as $language)
+                                <option
+                                    value="{{ $language->id }}" {{ $language->id == $settings->language_id ? 'selected' : '' }}>{{ $language->name }}</option>
+                            @endforeach
+                        </select>
                     </div>
                     <div class="form-group col-md-4">
                         <label for="company_logo_link">{{ trans('admin.company_logo') }}</label>
@@ -42,15 +55,21 @@
                         </div>
                     </div>
                     <div class="form-group col-md-4">
-                        <label for="language_id">{{ trans('admin.language') }}</label>
-                        <select id="language_id" name="language_id"
-                                class="form-control {{ $errors->has('language_id') ? 'border-left-danger' : '' }}">
-                            <option selected disabled>Choose...</option>
-                            @foreach($languages as $language)
-                                <option
-                                    value="{{ $language->id }}" {{ $language->id == $settings->language_id ? 'selected' : '' }}>{{ $language->name }}</option>
-                            @endforeach
-                        </select>
+                        <label for="icon_tab_link">{{ trans('admin.icon_tab') }}</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">
+                                    <i class="fas fa-images"></i>
+                                </span>
+                            </div>
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="icon_tab_link"
+                                       name="icon_tab_link">
+                                <label
+                                    class="custom-file-label {{ $errors->has('icon_tab_link') ? 'border-left-danger' : '' }}"
+                                    for="icon_tab_link">{{ $settings->icon_tab_link }}</label>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="form-row">

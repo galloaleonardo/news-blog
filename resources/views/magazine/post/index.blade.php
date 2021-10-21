@@ -22,8 +22,12 @@
                 <img src="{{ asset('/images/news/large') . '/' . $news->image_link }}" alt="">
                 <h3 class="mt-30"><b>{{ $news->title }}</b></h3>
                 <ul class="list-li-mr-20 mtb-15">
-                    <li>{{ trans('magazine.by') }} <a href="{{ route('magazine.all', ['author' => $news->author->name]) }}"><b>{{ $news->author->name }}</b>, </a> {{ App\Helpers\Helper::getWrittenDateLanguage($news->created_at, false) }}
-                        | {{ trans('magazine.updated_in') }} {{ App\Helpers\Helper::getDateFormatLanguage($news->updated_at) }} {{ trans('magazine.at') }} {{ date_format($news->updated_at, 'H:i:s') }}</li>
+                    <li>{{ trans('magazine.by') }} 
+                        <a href="{{ route('magazine.all', ['author' => $news->author->name]) }}">
+                            <b>{{ $news->author->name }}</b>,
+                        </a>
+                        {{ App\Helpers\Helper::getDateFormatLanguage($news->created_at) }} | 
+                        {{ trans('magazine.updated_in') }} {{ App\Helpers\Helper::getDateFormatLanguage($news->updated_at) }} {{ trans('magazine.at') }} {{ date_format($news->updated_at, 'H:i:s') }}</li>
                 </ul>
                 <div class="mt-40 mt-sm-20">
                     <ul class="mb-30 list-a-bg-grey list-a-hw-radial-35 list-a-hvr-primary list-li-ml-5">
@@ -59,8 +63,8 @@
                             <h4 class="pt-20"><b>{{ $news->title }}</b></h4>
                             <ul class="list-li-mr-20 pt-10 mb-30">
                                 <li class="color-lite-black">
-                                    {{ trans('magazine.by') }} <a href="{{ route('magazine.all', ['author' => $news->author->name]) }}" class="color-black"><b>&nbsp;{{ $news->author->name }}</b></a>
-                                    {{ App\Helpers\Helper::getWrittenDateLanguage($news->created_at) }}
+                                    {{ trans('magazine.by') }} <a href="{{ route('magazine.all', ['author' => $news->author->name]) }}" class="color-black"><b>&nbsp;{{ $news->author->name }}</b></a>, 
+                                    {{ App\Helpers\Helper::getDateFormatLanguage($news->created_at) }}
                                 </li>
                             </ul>
                         </a>
@@ -80,7 +84,7 @@
                             <div class="ml-120 min-h-100x">
                                 <h5><b>{{ $popularNews[$i]->title }}</b></h5>
                                 <h6 class="color-lite-black pt-10">{{ trans('magazine.by') }} <span
-                                            class="color-black"><b>{{ $popularNews[$i]->author->name }}</b></span> {{ App\Helpers\Helper::getWrittenDateLanguage($popularNews[$i]->created_at) }}</h6>
+                                            class="color-black"><b>{{ $popularNews[$i]->author->name }}</b></span>, {{ App\Helpers\Helper::getDateFormatLanguage($popularNews[$i]->created_at) }}</h6>
                             </div>
                         </a>
                         @endfor

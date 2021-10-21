@@ -12,6 +12,8 @@ class Helper
 {
 
     const ADMIN_USER = 1;
+    const EN = 'en';
+    const PTBR = 'ptbr';
 
     public static function checkPath(Array $paths)
     {
@@ -27,37 +29,26 @@ class Helper
         return rand() . date('Y-m-d');
     }
 
-    public static function getWrittenDateLanguage(string $datetime, bool $short = true)
-    {
-        if (!$datetime) {
-            return null;
-        }
-
-        if ($short) {
-            return strtolower(strftime('%d %b %y', strtotime($datetime)));
-        }
-
-        return strtolower(strftime('%A, %d %B %Y', strtotime($datetime)));
-    }
-
     public static function getDateFormatLanguage($date)
     {
-        if (\App::getLocale() === 'en') {
+        $locale = \App::getLocale();
+
+        if ($locale === self::EN) {
             return date_format($date, 'Y-m-d');
         }
 
-        if (\App::getLocale() === 'ptbr') {
+        if ($locale === self::PTBR) {
             return date_format($date, 'd/m/Y');
         }
 
         return date_format($date, 'Y-m-d');
     }
 
-    public static function getCompanyName()
+    public static function hasCompanyName()
     {
         $settings = Settings::first();
 
-        return $settings->company_name ?? 'Larazine';
+        return $settings->company_name ? true : false;
     }
 
     public static function useLogoByDefault(): bool
@@ -67,13 +58,22 @@ class Helper
         return (bool)$settings->use_logo_by_default;
     }
 
+    public static function getCompanyName()
+    {
+        $settings = Settings::first();
+
+        return $settings->company_name ?? 'Larazine';
+    }
+
     public static function getCompetencyDateLanguage(Carbon $date)
     {
-        if (\App::getLocale() === 'en') {
+        $locale = \App::getLocale();
+
+        if ($locale === self::EN) {
             return $date->format('Y-m');
         }
 
-        if (\App::getLocale() === 'ptbr') {
+        if ($locale === self::PTBR) {
             return $date->format('m/Y');
         }
 

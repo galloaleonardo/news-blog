@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Helpers\Helper;
 use App\Models\Languages;
 use App\Models\Settings;
+use File;
 use Hamcrest\Core\Set;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
@@ -27,8 +28,13 @@ class SettingsController extends Controller
         $settings = Settings::first();
 
         if ($request->hasFile('company_logo_link')) {
-            $request->validate(['image_link' => $this->validateImage()]);
+            $request->validate(['company_logo_link' => 'mimes:jpeg,jpg,png|max:800|dimensions:max_width=2000,max_height=2000']);
             $fields['company_logo_link'] = $this->uploadImageAndReturnName($request->file('company_logo_link'));
+        }
+
+        if ($request->hasFile('icon_tab_link')) {
+            $request->validate(['icon_tab_link' => ['mimes:ico']]);
+            $fields['icon_tab_link'] = $this->uploadIconAndReturnName($request->file('icon_tab_link'));
         }
 
         $fields['use_logo_by_default'] = $request->has('use_logo_by_default');
@@ -39,16 +45,6 @@ class SettingsController extends Controller
             ->with('success', trans('admin.updated_successfully', [
                 'object' => trans('admin.settings')
             ]));
-    }
-
-    private function validateImage()
-    {
-        return [
-            'image',
-            'mimes:jpeg,jpg,png',
-            'max:800',
-            'dimensions:max_width=2000, max_height=2000'
-        ];
     }
 
     private function uploadImageAndReturnName(UploadedFile $image)
@@ -67,5 +63,18 @@ class SettingsController extends Controller
             ->save($path . $png_name);
 
         return $png_name;
+    }
+
+    private function uploadIconAndReturnName(UploadedFile $image)
+    {
+        $name = 'icon_tab';
+        $ico_name = "{$name}.ico";
+        $path = public_path('images/ico/');
+
+        Helper::checkPath([$path]);
+
+        File::move($path, $image->getClientOriginalName());
+
+        return $ico_name;
     }
 }

@@ -21,6 +21,8 @@ class CreateSettingsTable extends Migration
             $table->foreign('language_id')->references('id')->on('languages');
             $table->string('company_name')->nullable();
             $table->string('company_logo_link')->nullable();
+            $table->string('icon_tab_link')->nullable();
+            $table->boolean('use_logo_by_default')->default(false);
             $table->timestamps();
         });
 
@@ -28,7 +30,8 @@ class CreateSettingsTable extends Migration
             [
                 'language_id' => self::ENGLISH,
                 'company_name' => null,
-                'company_logo_link' => null
+                'company_logo_link' => null,
+                'icon_tab_link' => null
             ]
         );
     }

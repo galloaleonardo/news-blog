@@ -10,10 +10,7 @@ use Artesaos\SEOTools\Facades\SEOMeta;
 use Artesaos\SEOTools\Facades\OpenGraph;
 use Artesaos\SEOTools\Facades\TwitterCard;
 use Artesaos\SEOTools\Facades\JsonLd;
-// OR with multi
 use Artesaos\SEOTools\Facades\JsonLdMulti;
-
-// OR
 use Artesaos\SEOTools\Facades\SEOTools;
 
 
@@ -54,13 +51,14 @@ class MagazineController extends Controller
     {
         $categories = $this->getCategories();
         $news = News::findOrFail($id);
-        $popularNews = $this->getPopularNews([]);
+        $featuredNews = $this->getFeaturedNews();
+        $recentNews = $this->getRecentNews();
+        $featuredNewsCategories = $this->getNewsFeaturedCategories();
+        $popularNews = $this->getPopularNews([$featuredNews, $recentNews, $featuredNews]);
         $suggestedNews = $this->suggestedNews($news->id, $news->category_id);
         $topBanners = $this->getTopBanners();
         $topBannerSetting = $this->getTopBannerSetting();
         $youtubeLinks = explode(PHP_EOL, $news->youtube_links);
-
-        Helper::getWrittenDateLanguage($news->updated_at);
 
         views($news)->record();
 
