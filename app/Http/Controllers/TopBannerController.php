@@ -2,17 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Advertising;
-use App\Helpers\Helper;
+use App\Exceptions\ImageUploadFailedException;
 use App\Models\TopBanner;
 use App\Models\TopBannerSetting;
 use App\Services\ImageService;
 use Illuminate\Http\Request;
-use Illuminate\Http\UploadedFile;
-use Intervention\Image\Facades\Image;
 
 class TopBannerController extends Controller
 {
+
+    public function __construct(public ImageService $imageService) {}
 
     public function index()
     {
@@ -32,13 +31,22 @@ class TopBannerController extends Controller
     {
         $request->validate([
             'title' => ['required', 'min:5', 'max:100'],
-            'image_link' => ImageService::validateImage()
+            'image_link' => $this->imageService->validateImage()
         ]);
 
         $attributes = $request->all();
 
+        try {
+            $imageLink = $this->imageService->uploadAndReturnName($request->file('image_link'), 'top-banners');
+        } catch (ImageUploadFailedException $e) {
+            return redirect(route('top-banner.index'))
+            ->with('warning', trans('admin.image_upload_error', [
+                'object' => trans('admin.top_banner')
+            ]));
+        }
+
         $attributes['active'] = $request->has('active') ? true : false;
-        $attributes['image_link'] = ImageService::uploadAndReturnName($request->file('image_link'), 'top-banners');
+        $attributes['image_link'] = $imageLink;
 
         TopBanner::create($attributes);
 

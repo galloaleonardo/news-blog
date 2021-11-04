@@ -100,5 +100,6 @@ return [
     'youtube_links_info' => 'Adicione mais de um vídeo digitando o link em uma nova linha.',
     'error_fk_author' => 'Existem notícias com esse autor. Não é possível excluir o registro.',
     'error_fk_category' => 'Existem notícias com esse categoria. Não é possível excluir o registro.',
-    'icon_tab' => 'Icone da Aba (.ico)'
+    'icon_tab' => 'Icone da Aba (.ico)',
+    'image_upload_error' => 'Ocorreu um erro ao fazer o upload do arquivo..'
 ];
