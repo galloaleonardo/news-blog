@@ -65,6 +65,11 @@ class Helper
         return $settings->company_name ?? 'Larazine';
     }
 
+    public static function faviconExists()
+    {
+        return file_exists(public_path('images/ico/icon_tab.ico'));
+    }
+
     public static function getCompetencyDateLanguage(Carbon $date)
     {
         $locale = \App::getLocale();

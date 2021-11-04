@@ -73,7 +73,7 @@ class SettingsController extends Controller
 
         Helper::checkPath([$path]);
 
-        File::move($path, $image->getClientOriginalName());
+        $image->move($path, $ico_name);
 
         return $ico_name;
     }
