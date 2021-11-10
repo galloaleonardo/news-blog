@@ -3,17 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\Models\Advertising;
-use App\Helpers\Helper;
+use App\Services\AdvertisingService;
 use Illuminate\Http\Request;
-use Illuminate\Http\UploadedFile;
 use Intervention\Image\Facades\Image;
 
-class AdvertisingController extends Controller
+class AdvertisingController extends CustomController
 {
+    const INDEX_ROUTE = 'advertisements.index';
+    const OBJECT_MESSAGE = 'admin.advertisings';
+
+    public function __construct(private AdvertisingService $service) {}
 
     public function index()
     {
-        $advertisements = Advertising::paginate(10);
+        $advertisements = $this->service->index();
 
         return view('admin.advertisements.index-advertisements', compact('advertisements'));
     }
@@ -25,22 +28,23 @@ class AdvertisingController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
-            'title' => ['required', 'min:5', 'max:100'],
-            'image_link' => $this->validateImage()
-        ]);
+        try {
+            $this->service->store($request);
+        } catch (\Throwable $th) {
+            return $this->responseRoute(
+                $this::ERROR,
+                $this::INDEX_ROUTE,
+                $this::ERROR_CREATE_MESSAGE,
+                $this::OBJECT_MESSAGE
+            );
+        }
 
-        $attributes = $request->all();
-
-        $attributes['active'] = $request->has('active') ? true : false;
-        $attributes['image_link'] = $this->uploadImageAndReturnName($request->file('image_link'));
-
-        Advertising::create($attributes);
-
-        return redirect(route('advertisements.index'))
-            ->with('success', trans('admin.created_successfully', [
-                'object' => trans('admin.advertisings')
-            ]));
+        return $this->responseRoute(
+            $this::SUCCESS,
+            $this::INDEX_ROUTE,
+            $this::SUCCESS_CREATE_MESSAGE,
+            $this::OBJECT_MESSAGE
+        );
     }
 
     public function edit(Advertising $advertising)
@@ -48,59 +52,45 @@ class AdvertisingController extends Controller
         return view('admin.advertisements.edit-advertisements', compact('advertising'));
     }
 
-    public function update(Request $request, Advertising $advertising)
+    public function update(Advertising $advertising)
     {
-        $attributes = $request->all();
-
-        $request->validate(['title' => ['required', 'min:5', 'max:100']]);
-
-        if ($request->hasFile('image_link')) {
-            $request->validate(['image_link' => $this->validateImage()]);
-            $attributes['image_link'] = $this->uploadImageAndReturnName($request->file('image_link'));
+        try {
+            $this->service->update($advertising);
+        } catch (\Throwable $th) {
+            return $this->responseRoute(
+                $this::ERROR,
+                $this::INDEX_ROUTE,
+                $this::ERROR_UPDATE_MESSAGE,
+                $this::OBJECT_MESSAGE
+            );
         }
 
-        $attributes['active'] = $request->has('active') ? true : false;
-
-        $advertising->update($attributes);
-
-        return redirect(route('advertisements.index'))
-            ->with('success', trans('admin.updated_successfully', [
-                'object' => trans('admin.advertisings')
-            ]));
+        return $this->responseRoute(
+            $this::SUCCESS,
+            $this::INDEX_ROUTE,
+            $this::SUCCESS_UPDATE_MESSAGE,
+            $this::OBJECT_MESSAGE
+        );
     }
 
     public function destroy(Advertising $advertising)
     {
-        $advertising->delete();
-        return redirect(route('advertisements.index'))
-            ->with('success', trans('admin.deleted_successfully', [
-                'object' => trans('admin.advertisings')
-            ]));
-    }
-
-    private function uploadImageAndReturnName(UploadedFile $image)
-    {
-        $name = Helper::getRandomImageName();
-        $jpg_name = "{$name}.jpg";
-        $path_large = public_path('images/announcements/');
-
-        Helper::checkPath([$path_large]);
-
-        Image::make($image)
-            ->encode('jpg', 60)
-            ->save($path_large . $jpg_name);
-
-        return $jpg_name;
-    }
-
-    private function validateImage()
-    {
-        $validate = [
-            'required',
-            'image',
-            'mimes:jpeg,jpg,png'
-        ];
-
-        return $validate;
+        try {
+            $this->service->destroy($advertising);
+        } catch (\Throwable $th) {
+            return $this->responseRoute(
+                $this::ERROR,
+                $this::INDEX_ROUTE,
+                [$this::ERROR_DELETE_MESSAGE, $th->getMessage()],
+                $this::OBJECT_MESSAGE
+            );
+        }
+    
+        return $this->responseRoute(
+            $this::SUCCESS,
+            $this::INDEX_ROUTE,
+            $this::SUCCESS_DELETE_MESSAGE,
+            $this::OBJECT_MESSAGE
+        );
     }
 }
