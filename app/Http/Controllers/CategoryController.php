@@ -4,11 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Services\CategoryService;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class CategoryController extends CustomController
 {
+    const INDEX_ROUTE = 'categories.index';
+    const OBJECT_MESSAGE = 'admin.category';
+
     public function __construct(private CategoryService $service) {}
 
     public function index()
@@ -30,17 +32,17 @@ class CategoryController extends CustomController
         } catch (\Throwable $th) {
             return $this->responseRoute(
                 $this::ERROR,
-                'categories.index',
-                'admin.error_creating',
-                'admin.category'
+                $this::INDEX_ROUTE,
+                $this::ERROR_CREATE_MESSAGE,
+                $this::OBJECT_MESSAGE
             );
         }
 
         return $this->responseRoute(
             $this::SUCCESS,
-            'categories.index',
-            'admin.created_successfully',
-            'admin.category'
+            $this::INDEX_ROUTE,
+            $this::SUCCESS_CREATE_MESSAGE,
+            $this::OBJECT_MESSAGE
         );
     }
 
@@ -56,17 +58,17 @@ class CategoryController extends CustomController
         } catch (\Throwable $th) {
             return $this->responseRoute(
                 $this::ERROR,
-                'categories.index',
-                'admin.error_updating',
-                'admin.category'
+                $this::INDEX_ROUTE,
+                $this::ERROR_UPDATE_MESSAGE,
+                $this::OBJECT_MESSAGE
             );
         }
 
         return $this->responseRoute(
             $this::SUCCESS,
-            'categories.index',
-            'admin.updated_successfully',
-            'admin.category'
+            $this::INDEX_ROUTE,
+            $this::SUCCESS_UPDATE_MESSAGE,
+            $this::OBJECT_MESSAGE
         );
     }
 
@@ -77,17 +79,17 @@ class CategoryController extends CustomController
         } catch (\Throwable $th) {
             return $this->responseRoute(
                 $this::ERROR,
-                'categories.index',
-                ['admin.error_deleting', $th->getMessage()],
-                'admin.category'
+                $this::INDEX_ROUTE,
+                [$this::ERROR_DELETE_MESSAGE, $th->getMessage()],
+                $this::OBJECT_MESSAGE
             );
         }
     
         return $this->responseRoute(
             $this::SUCCESS,
-            'categories.index',
-            'admin.deleted_successfully',
-            'admin.category'
+            $this::INDEX_ROUTE,
+            $this::SUCCESS_DELETE_MESSAGE,
+            $this::OBJECT_MESSAGE
         );
     }
 }
