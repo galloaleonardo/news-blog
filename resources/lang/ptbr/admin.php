@@ -70,6 +70,9 @@ return [
     'created_successfully' => ':object criado com sucesso!',
     'updated_successfully' => ':object atualizado com sucesso!',
     'deleted_successfully' => ':object excluído com sucesso!',
+    'error_creating' => 'Ocorreu um erro ao criar :object',
+    'error_updating' => 'Ocorreu um erro ao atualizar :object',
+    'error_deleting' => 'Ocorreu um erro ao deletar :object',
     'user_created_successfully' => ':object criado com sucesso! Instruções enviadas para o email: :email.',
     'main_user_cant_delete' => 'Usuário principal não pode ser excluído.',
     'user_cant_delete' => 'Usuário não pode ser excluído.',
@@ -98,8 +101,8 @@ return [
     'author' => 'Autor',
     'default' => 'Padrão',
     'youtube_links_info' => 'Adicione mais de um vídeo digitando o link em uma nova linha.',
-    'error_fk_author' => 'Existem notícias com esse autor. Não é possível excluir o registro.',
-    'error_fk_category' => 'Existem notícias com esse categoria. Não é possível excluir o registro.',
+    'error_fk_author' => 'Existem notícias com esse autor.',
+    'error_fk_category' => 'Existem notícias com esta categoria.',
     'icon_tab' => 'Icone da Aba (.ico)',
     'image_upload_error' => 'Ocorreu um erro ao fazer o upload do arquivo..'
 ];

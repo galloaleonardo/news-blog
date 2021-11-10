@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Advertising;
 use App\Helpers\Helper;
-use App\Models\News;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 use Intervention\Image\Facades\Image;

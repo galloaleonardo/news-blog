@@ -3,15 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
-use App\Models\News;
+use App\Services\CategoryService;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
-class CategoryController extends Controller
+class CategoryController extends CustomController
 {
+    public function __construct(private CategoryService $service) {}
 
     public function index()
     {
-        $categories = Category::paginate(10);
+        $categories = $this->service->index();
 
         return view('admin.categories.index-categories', compact('categories'));
     }
@@ -23,22 +25,23 @@ class CategoryController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
-            'name' => 'required'
-        ]);
+        try {
+            $this->service->store($request);
+        } catch (\Throwable $th) {
+            return $this->responseRoute(
+                $this::ERROR,
+                'categories.index',
+                'admin.error_creating',
+                'admin.category'
+            );
+        }
 
-        $category = $request->all();
-
-        $category['displays_in_menu'] = $request->has('displays_in_menu') ? true : false;
-        $category['featured'] = $request->has('featured') ? true : false;
-        $category['active'] = $request->has('active') ? true : false;
-
-        Category::create($category);
-
-        return redirect(route('categories.index'))
-            ->with('success', trans('admin.created_successfully', [
-                'object' => trans('admin.category')
-            ]));
+        return $this->responseRoute(
+            $this::SUCCESS,
+            'categories.index',
+            'admin.created_successfully',
+            'admin.category'
+        );
     }
 
     public function edit(Category $category)
@@ -48,40 +51,43 @@ class CategoryController extends Controller
 
     public function update(Category $category)
     {
-        \request()->validate([
-            'name' => 'required'
-        ]);
+        try {
+            $this->service->update($category);
+        } catch (\Throwable $th) {
+            return $this->responseRoute(
+                $this::ERROR,
+                'categories.index',
+                'admin.error_updating',
+                'admin.category'
+            );
+        }
 
-        $aux_category = \request()->all();
-
-        $aux_category['displays_in_menu'] = \request()->has('displays_in_menu') ? true : false;
-        $aux_category['featured'] = \request()->has('featured') ? true : false;
-        $aux_category['active'] = \request()->has('active') ? true : false;
-
-        $category->update($aux_category);
-
-        return redirect(route('categories.index'))
-            ->with('success', trans('admin.updated_successfully', [
-                'object' => trans('admin.category')
-            ]));
+        return $this->responseRoute(
+            $this::SUCCESS,
+            'categories.index',
+            'admin.updated_successfully',
+            'admin.category'
+        );
     }
 
     public function destroy(Category $category)
     {
-        $existsNewsWithThisCategory = News::where('category_id', $category->id)->get()->count();
-
-        if ($existsNewsWithThisCategory) {
-            return redirect(route('categories.index'))
-                ->with('warning', trans('admin.error_fk_category', [
-                    'object' => trans('admin.author')
-                ]));
+        try {
+            $this->service->destroy($category);
+        } catch (\Throwable $th) {
+            return $this->responseRoute(
+                $this::ERROR,
+                'categories.index',
+                ['admin.error_deleting', $th->getMessage()],
+                'admin.category'
+            );
         }
-
-        $category->delete();
-
-        return redirect(route('categories.index'))
-            ->with('success', trans('admin.deleted_successfully', [
-                'object' => trans('admin.category')
-            ]));
+    
+        return $this->responseRoute(
+            $this::SUCCESS,
+            'categories.index',
+            'admin.deleted_successfully',
+            'admin.category'
+        );
     }
 }

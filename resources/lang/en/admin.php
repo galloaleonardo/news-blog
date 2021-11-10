@@ -70,6 +70,9 @@ return [
     'created_successfully' => ':object created successfully!',
     'updated_successfully' => ':object updated successfully!',
     'deleted_successfully' => ':object deleted successfully!',
+    'error_creating' => 'An error occurred creating :object',
+    'error_updating' => 'An error occurred updating :object',
+    'error_deleting' => 'An error occurred deleting :object',
     'user_created_successfully' => ':object created successfully! Instructions sent to email: :email.',
     'main_user_cant_delete' => 'Main user cannot be deleted.',
     'user_cant_delete' => 'The user cannot be excluded.',
@@ -98,8 +101,8 @@ return [
     'author' => 'Author',
     'default' => 'Default',
     'youtube_links_info' => 'Add more than one video by typing the link on a new line.',
-    'error_fk_author' => 'There are news with this author. Unable to delete the record.',
-    'error_fk_category' => 'There are news with this category. Unable to delete the record.',
+    'error_fk_author' => 'There are news with this author.',
+    'error_fk_category' => 'There are news with this category.',
     'icon_tab' => 'Icon Tab (.ico)',
     'image_upload_error' => 'An error occurred while uploading the file.'
 ];
