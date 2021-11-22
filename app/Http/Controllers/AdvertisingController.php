@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AdvertisingRequest;
 use App\Models\Advertising;
 use App\Services\AdvertisingService;
-use Illuminate\Http\Request;
-use Intervention\Image\Facades\Image;
 
 class AdvertisingController extends CustomController
 {
@@ -26,10 +25,12 @@ class AdvertisingController extends CustomController
         return view('admin.advertisements.create-advertisements');
     }
 
-    public function store(Request $request)
+    public function store(AdvertisingRequest $request)
     {
         try {
-            $this->service->store($request);
+            $data = $request->validated();
+
+            $this->service->store($data);
         } catch (\Throwable $th) {
             return $this->responseRoute(
                 $this::ERROR,
@@ -52,10 +53,12 @@ class AdvertisingController extends CustomController
         return view('admin.advertisements.edit-advertisements', compact('advertising'));
     }
 
-    public function update(Advertising $advertising)
+    public function update(AdvertisingRequest $request, Advertising $advertising)
     {
         try {
-            $this->service->update($advertising);
+            $data = $request->validated();
+
+            $this->service->update($advertising, $data);
         } catch (\Throwable $th) {
             return $this->responseRoute(
                 $this::ERROR,

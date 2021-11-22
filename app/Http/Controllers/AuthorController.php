@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AuthorRequest;
 use App\Models\Author;
-use App\Models\News;
 use App\Services\AuthorService;
-use Illuminate\Http\Request;
 
 class AuthorController extends CustomController
 {
@@ -26,10 +25,12 @@ class AuthorController extends CustomController
         return view('admin.authors.create-authors');
     }
 
-    public function store(Request $request)
+    public function store(AuthorRequest $request)
     {
         try {
-            $this->service->store($request);
+            $data = $request->validated();
+
+            $this->service->store($data);
         } catch (\Throwable $th) {
             return $this->responseRoute(
                 $this::ERROR,
@@ -52,10 +53,12 @@ class AuthorController extends CustomController
         return view('admin.authors.edit-authors', compact('author'));
     }
 
-    public function update(Author $author)
+    public function update(AuthorRequest $request, Author $author)
     {
         try {
-            $this->service->update($author);
+            $data = $request->validated();
+
+            $this->service->update($author, $data);
         } catch (\Throwable $th) {
             return $this->responseRoute(
                 $this::ERROR,

@@ -2,22 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use App\Exceptions\ImageUploadFailedException;
+use App\Http\Requests\TopBannerRequest;
 use App\Models\TopBanner;
 use App\Models\TopBannerSetting;
-use App\Services\ImageService;
-use Illuminate\Http\Request;
 
-class TopBannerController extends Controller
+class TopBannerController extends CustomController
 {
+    const INDEX_ROUTE = 'top-banner.index';
+    const OBJECT_MESSAGE = 'admin.top_banner';
 
-    public function __construct(public ImageService $imageService) {}
+    public function __construct(private TopBannerService $service) {}
 
     public function index()
     {
         $topBannerSetting = TopBannerSetting::first();
 
-        $topBanners = TopBanner::paginate(10);
+        $topBanners = $this->service->index();
 
         return view('admin.top-banner.index-top-banner', compact('topBannerSetting', 'topBanners'));
     }
@@ -27,33 +27,27 @@ class TopBannerController extends Controller
         return view('admin.top-banner.create-top-banner');
     }
 
-    public function store(Request $request)
+    public function store(TopBannerRequest $request)
     {
-        $request->validate([
-            'title' => ['required', 'min:5', 'max:100'],
-            'image_link' => $this->imageService->validateImage()
-        ]);
-
-        $attributes = $request->all();
-
         try {
-            $imageLink = $this->imageService->uploadAndReturnName($request->file('image_link'), 'top-banners');
-        } catch (ImageUploadFailedException $e) {
-            return redirect(route('top-banner.index'))
-            ->with('warning', trans('admin.image_upload_error', [
-                'object' => trans('admin.top_banner')
-            ]));
+            $data = $request->validated();
+
+            $this->service->store($data);
+        } catch (\Throwable $th) {
+            return $this->responseRoute(
+                $this::ERROR,
+                $this::INDEX_ROUTE,
+                $this::ERROR_CREATE_MESSAGE,
+                $this::OBJECT_MESSAGE
+            );
         }
 
-        $attributes['active'] = $request->has('active') ? true : false;
-        $attributes['image_link'] = $imageLink;
-
-        TopBanner::create($attributes);
-
-        return redirect(route('top-banner.index'))
-            ->with('success', trans('admin.created_successfully', [
-                'object' => trans('admin.top_banner')
-            ]));
+        return $this->responseRoute(
+            $this::SUCCESS,
+            $this::INDEX_ROUTE,
+            $this::SUCCESS_CREATE_MESSAGE,
+            $this::OBJECT_MESSAGE
+        );
     }
 
     public function edit(TopBanner $topBanner)
@@ -61,33 +55,47 @@ class TopBannerController extends Controller
         return view('admin.top-banner.edit-top-banner', compact('topBanner'));
     }
 
-    public function update(Request $request, TopBanner $topBanner)
+    public function update(TopBannerRequest $request, TopBanner $topBanner)
     {
-        $attributes = $request->all();
+        try {
+            $data = $request->validated();
 
-        $request->validate(['title' => ['required', 'min:5', 'max:100']]);
-
-        if ($request->hasFile('image_link')) {
-            $request->validate(['image_link' => ImageService::validateImage()]);
-            $attributes['image_link'] = ImageService::uploadAndReturnName($request->file('image_link'), 'top-banners');
+            $this->service->update($topBanner, $data);
+        } catch (\Throwable $th) {
+            return $this->responseRoute(
+                $this::ERROR,
+                $this::INDEX_ROUTE,
+                $this::ERROR_UPDATE_MESSAGE,
+                $this::OBJECT_MESSAGE
+            );
         }
 
-        $attributes['active'] = $request->has('active') ? true : false;
-
-        $topBanner->update($attributes);
-
-        return redirect(route('top-banner.index'))
-            ->with('success', trans('admin.updated_successfully', [
-                'object' => trans('admin.top_banner')
-            ]));
+        return $this->responseRoute(
+            $this::SUCCESS,
+            $this::INDEX_ROUTE,
+            $this::SUCCESS_UPDATE_MESSAGE,
+            $this::OBJECT_MESSAGE
+        );
     }
 
     public function destroy(TopBanner $topBanner)
     {
-        $topBanner->delete();
-        return redirect(route('top-banner.index'))
-            ->with('success', trans('admin.deleted_successfully', [
-                'object' => trans('admin.top_banner')
-            ]));
+        try {
+            $this->service->destroy($topBanner);
+        } catch (\Throwable $th) {
+            return $this->responseRoute(
+                $this::ERROR,
+                $this::INDEX_ROUTE,
+                [$this::ERROR_DELETE_MESSAGE, $th->getMessage()],
+                $this::OBJECT_MESSAGE
+            );
+        }
+    
+        return $this->responseRoute(
+            $this::SUCCESS,
+            $this::INDEX_ROUTE,
+            $this::SUCCESS_DELETE_MESSAGE,
+            $this::OBJECT_MESSAGE
+        );
     }
 }

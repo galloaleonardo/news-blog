@@ -1,15 +1,16 @@
 <?php
 
-namespace App\Services;
+namespace App\Http\Controllers;
 
 use App\Exceptions\ImageUploadFailedException;
-use App\Models\Advertising;
-use App\Repositories\AdvertisingRepository;
+use App\Models\TopBanner;
+use App\Repositories\TopBannerRepository;
+use App\Services\ImageService;
 
-class AdvertisingService
+class TopBannerService extends Controller
 {
     public function __construct(
-        private AdvertisingRepository $repository,
+        private TopBannerRepository $repository,
         private ImageService $image
     ) {}
 
@@ -27,13 +28,15 @@ class AdvertisingService
         } catch (\Throwable $th) {
             throw new ImageUploadFailedException(trans('admin.image_upload_error'));
         }
+        
+        $attributes['image_link'] = $imageLink;
 
-        $data['image_link'] = $imageLink;
+        TopBanner::create($attributes);
 
         return $this->repository->store($data);
     }
 
-    public function update(Advertising $advertising, array $data)
+    public function update(TopBanner $topBanner, array $data)
     {
         $request = request();
 
@@ -49,11 +52,11 @@ class AdvertisingService
             
         $data['active'] = isset($data['active']) ? true : false;
 
-        return $this->repository->update($advertising->id, $data);
+        return $this->repository->update($topBanner->id, $data);
     }
 
-    public function destroy(Advertising $advertising)
+    public function destroy(TopBanner $topBanner)
     {
-        return $this->repository->destroy($advertising->id);
+        return $this->repository->destroy($topBanner->id);
     }
 }

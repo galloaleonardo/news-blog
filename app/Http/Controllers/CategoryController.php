@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CategoryRequest;
 use App\Models\Category;
 use App\Services\CategoryService;
-use Illuminate\Http\Request;
 
 class CategoryController extends CustomController
 {
@@ -25,10 +25,12 @@ class CategoryController extends CustomController
         return view('admin.categories.create-categories');
     }
 
-    public function store(Request $request)
+    public function store(CategoryRequest $request)
     {
         try {
-            $this->service->store($request);
+            $data = $request->validated();
+
+            $this->service->store($data);
         } catch (\Throwable $th) {
             return $this->responseRoute(
                 $this::ERROR,
@@ -51,10 +53,12 @@ class CategoryController extends CustomController
         return view('admin.categories.edit-categories', compact('category'));
     }
 
-    public function update(Category $category)
+    public function update(CategoryRequest $request, Category $category)
     {
         try {
-            $this->service->update($category);
+            $data = $request->validated();
+
+            $this->service->update($category, $data);
         } catch (\Throwable $th) {
             return $this->responseRoute(
                 $this::ERROR,
