@@ -30,6 +30,8 @@ class TopBannerRequest extends FormRequest
         return [
             'title' => ['required', 'min:5', 'max:100'],
             'image_link' => [$mandatory, 'image', 'mimes:jpeg,jpg,png'],
+            'destination_link' => 'nullable|url',
+            'active' => 'nullable'
         ];
     }
 }

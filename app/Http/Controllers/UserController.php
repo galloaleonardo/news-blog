@@ -2,26 +2,24 @@
 
 namespace App\Http\Controllers;
 
-use App\Mail\CreatedUser;
+use App\Http\Requests\UserRequest;
 use App\Models\User;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Str;
+use App\Services\UserService;
+use Auth;
 
-class UserController extends Controller
+class UserController extends CustomController
 {
     const MAIN_USER = 1;
+    const INDEX_ROUTE = 'users.index';
+    const OBJECT_MESSAGE = 'admin.user';
+    const MAIN_USER_CANNOT_BE_DELETED_MESSAGE = 'admin.main_user_cant_delete';
+    const USER_CANNOT_BE_DELETED_MESSAGE = 'admin.user_cant_delete';
+
+    public function __construct(private UserService $service) {}
 
     public function index()
     {
-        $users = User::where(function ($query) {
-            $userId = Auth::user()->id;
-
-            if ($userId !== self::MAIN_USER) {
-                $query->where('id', $userId);
-            }
-        })->paginate(15);
+        $users = $this->service->index();
 
         return view('admin.users.index-users', compact('users'));
     }
@@ -31,35 +29,27 @@ class UserController extends Controller
         return view('admin.users.create-users');
     }
 
-    public function store(Request $request)
+    public function store(UserRequest $request)
     {
-        $request->validate([
-            'name' => 'required|min:3',
-            'email' => 'required|email|confirmed|unique:users,email'
-        ]);
+        try {
+            $data = $request->validated();
 
-        $attributes = $request->all();
+            $this->service->store($data);
+        } catch (\Throwable $th) {
+            return $this->responseRoute(
+                $this::ERROR,
+                $this::INDEX_ROUTE,
+                $this::ERROR_CREATE_MESSAGE,
+                $this::OBJECT_MESSAGE
+            );
+        }
 
-        $password = Str::random();
-
-        $attributes['password'] = \Hash::make($password);
-        $attributes['first_password'] = $attributes['password'];
-        $attributes['active'] = $request->has('active') ? true : false;
-
-        $user = User::create($attributes);
-
-        Mail::queue(new CreatedUser($user, $password));
-
-        return redirect(route('users.index'))
-            ->with('success', trans('admin.user_created_successfully', [
-                'object' => trans('admin.user'),
-                'email' => $user->email
-            ]));
-    }
-
-    public function show(User $user)
-    {
-        return view('admin.users.show-users', compact('user'));
+        return $this->responseRoute(
+            $this::SUCCESS,
+            $this::INDEX_ROUTE,
+            $this::SUCCESS_CREATE_MESSAGE,
+            $this::OBJECT_MESSAGE
+        );
     }
 
     public function edit(User $user)
@@ -67,41 +57,68 @@ class UserController extends Controller
         return view('admin.users.edit-users', compact('user'));
     }
 
-    public function update(Request $request, User $user)
+    public function update(UserRequest $request, User $user)
     {
-        $attributes = $request->all();
+        try {
+            $data = $request->validated();
 
-        $request->validate([
-            'name' => 'required|min:3',
-            'email' => 'required|confirmed|unique:users,email, ' . $user->id
-        ]);
+            $this->service->update($user, $data);
+        } catch (\Throwable $th) {
 
-        $attributes['admin'] = $request->has('admin') ? true : false;
-        $attributes['active'] = $request->has('active') ? true : false;
+            dd($th->getMessage());
 
-        $user->update($attributes);
+            return $this->responseRoute(
+                $this::ERROR,
+                $this::INDEX_ROUTE,
+                $this::ERROR_UPDATE_MESSAGE,
+                $this::OBJECT_MESSAGE
+            );
+        }
 
-        return redirect(route('users.index'))
-            ->with('success', trans('admin.updated_successfully', [
-                'object' => trans('admin.user')
-            ]));
+        return $this->responseRoute(
+            $this::SUCCESS,
+            $this::INDEX_ROUTE,
+            $this::SUCCESS_UPDATE_MESSAGE,
+            $this::OBJECT_MESSAGE
+        );
     }
 
     public function destroy(User $user)
     {
         if ($user->id === self::MAIN_USER) {
-            return redirect(route('users.index'))->with('warning', trans('admin.main_user_cant_delete'));
+            return $this->responseRoute(
+                $this::ERROR,
+                $this::INDEX_ROUTE,
+                $this::MAIN_USER_CANNOT_BE_DELETED_MESSAGE,
+                $this::OBJECT_MESSAGE
+            );
         }
 
         if ($user->id === Auth::user()->id) {
-            return redirect(route('users.index'))->with('warning', trans('admin.user_cant_delete'));
+            return $this->responseRoute(
+                $this::ERROR,
+                $this::INDEX_ROUTE,
+                $this::USER_CANNOT_BE_DELETED_MESSAGE,
+                $this::OBJECT_MESSAGE
+            );
         }
 
-        $user->delete();
-
-        return redirect(route('users.index'))
-            ->with('success', trans('admin.updated_successfully', [
-                'object' => trans('admin.user')
-            ]));
+        try {
+            $this->service->destroy($user);
+        } catch (\Throwable $th) {
+            return $this->responseRoute(
+                $this::ERROR,
+                $this::INDEX_ROUTE,
+                [$this::ERROR_DELETE_MESSAGE, $th->getMessage()],
+                $this::OBJECT_MESSAGE
+            );
+        }
+    
+        return $this->responseRoute(
+            $this::SUCCESS,
+            $this::INDEX_ROUTE,
+            $this::SUCCESS_DELETE_MESSAGE,
+            $this::OBJECT_MESSAGE
+        );
     }
 }

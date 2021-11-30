@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\TopBannerRequest;
 use App\Models\TopBanner;
 use App\Models\TopBannerSetting;
+use App\Services\TopBannerService;
 
 class TopBannerController extends CustomController
 {

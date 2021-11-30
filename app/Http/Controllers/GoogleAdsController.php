@@ -2,32 +2,45 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\GoogleAdsRequest;
 use App\Models\GoogleAds;
-use App\Models\Languages;
-use App\Models\Settings;
-use Illuminate\Http\Request;
+use App\Services\GoogleAdsService;
 
-class GoogleAdsController extends Controller
+class GoogleAdsController extends CustomController
 {
+    const INDEX_ROUTE = 'google-ads.index';
+    const OBJECT_MESSAGE = 'admin.google_ads';
+
+    public function __construct(private GoogleAdsService $service) {}
+
     public function index()
     {
-        $googleAds = GoogleAds::first();
+        $googleAds = $this->service->index();
 
         return view('admin.google-ads.edit-google-ads', compact('googleAds'));
     }
 
-    public function update(Request $request)
+    public function update(GoogleAdsRequest $request, GoogleAds $googleAds)
     {
-        $fields = $request->all();
-        $googleAds = GoogleAds::first();
+        try {
+            $data = $request->validated();
 
-        $fields['active'] = $request->has('active');
+            $this->service->update($googleAds, $data);
+        } catch (\Throwable $th) {
+            dd($th->getMessage());
+            return $this->responseRoute(
+                $this::ERROR,
+                $this::INDEX_ROUTE,
+                $this::ERROR_UPDATE_MESSAGE,
+                $this::OBJECT_MESSAGE
+            );
+        }
 
-        $googleAds->update($fields);
-
-        return redirect(route('google-ads.index'))
-            ->with('success', trans('admin.updated_successfully', [
-                'object' => trans('admin.google_ads')
-            ]));
+        return $this->responseRoute(
+            $this::SUCCESS,
+            $this::INDEX_ROUTE,
+            $this::SUCCESS_UPDATE_MESSAGE,
+            $this::OBJECT_MESSAGE
+        );
     }
 }

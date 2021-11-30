@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Services;
 
 use App\Exceptions\ImageUploadFailedException;
 use App\Models\TopBanner;
 use App\Repositories\TopBannerRepository;
 use App\Services\ImageService;
 
-class TopBannerService extends Controller
+class TopBannerService
 {
     public function __construct(
         private TopBannerRepository $repository,
@@ -24,14 +24,12 @@ class TopBannerService extends Controller
         $data['active'] = isset($data['active']) ? true : false;
 
         try {
-            $imageLink = $this->image->uploadAndReturnName(request()->file('image_link'), 'announcements');
+            $imageLink = $this->image->uploadAndReturnName(request()->file('image_link'), 'top-banners');
         } catch (\Throwable $th) {
             throw new ImageUploadFailedException(trans('admin.image_upload_error'));
         }
-        
-        $attributes['image_link'] = $imageLink;
 
-        TopBanner::create($attributes);
+        $data['image_link'] = $imageLink;
 
         return $this->repository->store($data);
     }
@@ -42,7 +40,7 @@ class TopBannerService extends Controller
 
         if ($request->hasFile('image_link') && $request->file('image_link')->isValid()) {
             try {
-                $imageLink = $this->image->uploadAndReturnName($request->file('image_link'), 'announcements');
+                $imageLink = $this->image->uploadAndReturnName($request->file('image_link'), 'top-banners');
             } catch (\Throwable $th) {
                 throw new ImageUploadFailedException(trans('admin.image_upload_error'));
             }

@@ -2,30 +2,38 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\TopBannerSettingRequest;
 use App\Models\TopBannerSetting;
+use App\Services\TopBannerSettingService;
 use Illuminate\Http\Request;
 
-class TopBannerSettingController extends Controller
+class TopBannerSettingController extends CustomController
 {
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\TopBannerSetting  $topBannerSetting
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, TopBannerSetting $topBannerSetting)
+    const INDEX_ROUTE = 'top-banner.index';
+    const OBJECT_MESSAGE = 'admin.settings';
+
+    public function __construct(private TopBannerSettingService $service) {}
+    
+    public function update(TopBannerSettingRequest $request, TopBannerSetting $topBannerSetting)
     {
-        $settings = TopBannerSetting::first();
+        try {
+            $data = $request->validated();
 
-        $fields['active'] = $request->has('active');
-        $fields['keep_on_top_when_scrolling'] = $request->has('keep_on_top_when_scrolling');
+            $this->service->update($topBannerSetting, $data);
+        } catch (\Throwable $th) {
+            return $this->responseRoute(
+                $this::ERROR,
+                $this::INDEX_ROUTE,
+                $this::ERROR_UPDATE_MESSAGE,
+                $this::OBJECT_MESSAGE
+            );
+        }
 
-        $settings->update($fields);
-
-        return redirect(route('top-banner.index'))
-            ->with('success', trans('admin.updated_successfully', [
-                'object' => trans('admin.settings')
-            ]));
+        return $this->responseRoute(
+            $this::SUCCESS,
+            $this::INDEX_ROUTE,
+            $this::SUCCESS_UPDATE_MESSAGE,
+            $this::OBJECT_MESSAGE
+        );
     }
 }
