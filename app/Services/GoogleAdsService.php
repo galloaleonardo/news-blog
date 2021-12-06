@@ -2,7 +2,6 @@
 
 namespace App\Services;
 
-use App\Models\GoogleAds;
 use App\Repositories\GoogleAdsRepository;
 
 class GoogleAdsService
@@ -11,12 +10,14 @@ class GoogleAdsService
 
     public function index()
     {
-        return $this->repository->index();
+        return $this->repository->getGoogleAds();
     }
 
-    public function update(GoogleAds $googleAds, array $data)
+    public function update(array $data)
     {
         $data['active'] = isset($data['active']);
+
+        $googleAds = $this->repository->getGoogleAds();
 
         return $this->repository->update($googleAds->id, $data);
     }

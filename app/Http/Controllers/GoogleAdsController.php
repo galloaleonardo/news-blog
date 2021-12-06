@@ -20,14 +20,13 @@ class GoogleAdsController extends CustomController
         return view('admin.google-ads.edit-google-ads', compact('googleAds'));
     }
 
-    public function update(GoogleAdsRequest $request, GoogleAds $googleAds)
+    public function update(GoogleAdsRequest $request)
     {
         try {
             $data = $request->validated();
 
-            $this->service->update($googleAds, $data);
+            $this->service->update($data);
         } catch (\Throwable $th) {
-            dd($th->getMessage());
             return $this->responseRoute(
                 $this::ERROR,
                 $this::INDEX_ROUTE,

@@ -2,13 +2,13 @@
 
 namespace App\Repositories;
 
-use App\Models\GoogleAds;
+use App\Models\GoogleAnalytics;
 
-class GoogleAdsRepository
+class GoogleAnalyticsRepository
 {
-    public function __construct(private GoogleAds $model) {}
+    public function __construct(private GoogleAnalytics $model) {}
 
-    public function getGoogleAds()
+    public function getGoogleAnalytics()
     {
         return $this->model->first();
     }

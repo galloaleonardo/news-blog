@@ -2,30 +2,43 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\GoogleAnalytics;
-use Illuminate\Http\Request;
+use App\Http\Requests\GoogleAnalyticsRequest;
+use App\Services\GoogleAnalyticsService;
 
-class GoogleAnalyticsController extends Controller
+class GoogleAnalyticsController extends CustomController
 {
+    const INDEX_ROUTE = 'google-analytics.index';
+    const OBJECT_MESSAGE = 'admin.google_analytics';
+
+    public function __construct(private GoogleAnalyticsService $service) {}
+
     public function index()
     {
-        $googleAnalytics = GoogleAnalytics::first();
+        $googleAnalytics = $this->service->index();
 
         return view('admin.google-analytics.edit-google-analytics', compact('googleAnalytics'));
     }
 
-    public function update(Request $request)
+    public function update(GoogleAnalyticsRequest $request)
     {
-        $fields = $request->all();
-        $googleAds = GoogleAnalytics::first();
+        try {
+            $data = $request->validated();
 
-        $fields['active'] = $request->has('active');
+            $this->service->update($data);
+        } catch (\Throwable $th) {
+            return $this->responseRoute(
+                $this::ERROR,
+                $this::INDEX_ROUTE,
+                $this::ERROR_UPDATE_MESSAGE,
+                $this::OBJECT_MESSAGE
+            );
+        }
 
-        $googleAds->update($fields);
-
-        return redirect(route('google-analytics.index'))
-            ->with('success', trans('admin.updated_successfully', [
-                'object' => trans('admin.google_ads')
-            ]));
+        return $this->responseRoute(
+            $this::SUCCESS,
+            $this::INDEX_ROUTE,
+            $this::SUCCESS_UPDATE_MESSAGE,
+            $this::OBJECT_MESSAGE
+        );
     }
 }

@@ -64,9 +64,6 @@ class UserController extends CustomController
 
             $this->service->update($user, $data);
         } catch (\Throwable $th) {
-
-            dd($th->getMessage());
-
             return $this->responseRoute(
                 $this::ERROR,
                 $this::INDEX_ROUTE,
