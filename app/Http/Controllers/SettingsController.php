@@ -2,79 +2,46 @@
 
 namespace App\Http\Controllers;
 
-use App\Helpers\Helper;
-use App\Models\Languages;
-use App\Models\Settings;
-use File;
-use Hamcrest\Core\Set;
+use App\Http\Requests\SettingsRequest;
+use App\Services\SettingsService;
 use Illuminate\Http\Request;
-use Illuminate\Http\UploadedFile;
-use Intervention\Image\Facades\Image;
 
-class SettingsController extends Controller
+class SettingsController extends CustomController
 {
+    const INDEX_ROUTE = 'settings.index';
+    const OBJECT_MESSAGE = 'admin.settings';
+
+    public function __construct(private SettingsService $service) {}
 
     public function index()
     {
-        $settings = Settings::first();
-        $languages = Languages::all();
+        $settings = $this->service->settingsIndex();
+        $languages = $this->service->languagesIndex();
 
         return view('admin.settings.edit-settings', compact('settings', 'languages'));
     }
 
-    public function update(Request $request)
+    public function update(SettingsRequest $request)
     {
-        $fields = $request->all();
-        $settings = Settings::first();
+        try {
+            $data = $request->validated();
 
-        if ($request->hasFile('company_logo_link')) {
-            $request->validate(['company_logo_link' => 'mimes:jpeg,jpg,png|max:800|dimensions:max_width=2000,max_height=2000']);
-            $fields['company_logo_link'] = $this->uploadImageAndReturnName($request->file('company_logo_link'));
+            $this->service->update($data);
+        } catch (\Throwable $th) {
+            dd($th->getMessage());
+            return $this->responseRoute(
+                $this::ERROR,
+                $this::INDEX_ROUTE,
+                $this::ERROR_UPDATE_MESSAGE,
+                $this::OBJECT_MESSAGE
+            );
         }
 
-        if ($request->hasFile('icon_tab_link')) {
-            $request->validate(['icon_tab_link' => ['mimes:ico']]);
-            $fields['icon_tab_link'] = $this->uploadIconAndReturnName($request->file('icon_tab_link'));
-        }
-
-        $fields['use_logo_by_default'] = $request->has('use_logo_by_default');
-
-        $settings->update($fields);
-
-        return redirect(route('settings.index'))
-            ->with('success', trans('admin.updated_successfully', [
-                'object' => trans('admin.settings')
-            ]));
-    }
-
-    private function uploadImageAndReturnName(UploadedFile $image)
-    {
-        $name = 'logo';
-        $png_name = "{$name}.png";
-        $path = public_path('images/logo/');
-
-        Helper::checkPath([$path]);
-
-        Image::make($image)
-            ->encode('png', 60)
-            ->resize(160, null, function ($constraint) {
-                $constraint->aspectRatio();
-            })
-            ->save($path . $png_name);
-
-        return $png_name;
-    }
-
-    private function uploadIconAndReturnName(UploadedFile $image)
-    {
-        $name = 'icon_tab';
-        $ico_name = "{$name}.ico";
-        $path = public_path('images/ico/');
-
-        Helper::checkPath([$path]);
-
-        $image->move($path, $ico_name);
-
-        return $ico_name;
+        return $this->responseRoute(
+            $this::SUCCESS,
+            $this::INDEX_ROUTE,
+            $this::SUCCESS_UPDATE_MESSAGE,
+            $this::OBJECT_MESSAGE
+        );
     }
 }

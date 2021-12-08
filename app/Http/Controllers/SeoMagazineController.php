@@ -2,75 +2,46 @@
 
 namespace App\Http\Controllers;
 
-use App\Helpers\Helper;
-use App\Models\SeoMagazine;
-use Illuminate\Http\Request;
-use Illuminate\Http\UploadedFile;
-use Intervention\Image\Facades\Image;
+use App\Http\Requests\SeoMagazineRequest;
+use App\Services\SeoMagazineService;
 
-class SeoMagazineController extends Controller
+class SeoMagazineController extends CustomController
 {
+
+    const INDEX_ROUTE = 'seo.index';
+    const OBJECT_MESSAGE = 'admin.seo';
+
+    public function __construct(private SeoMagazineService $service) {}
 
     public function index()
     {
-        $seo = SeoMagazine::first();
+        $seo = $this->service->index();
 
         return view('admin.seo.edit-seo', compact('seo'));
     }
 
 
-    public function update(Request $request, SeoMagazine $seo)
+    public function update(SeoMagazineRequest $request)
     {
-        $attributes = $request->all();
+        try {
+            $data = $request->validated();
 
-        $request->validate([
-            'page_title' => ['required', 'max:100'],
-            'page_description' => ['required', 'max:255'],
-            'page_type' => 'required',
-            'twitter_user' => 'nullable'
-        ]);
-
-        if ($request->hasFile('image_link')) {
-            $request->validate(['image_link' => $this->validateImage()]);
-            $attributes['image_link'] = $this->uploadImageAndReturnName($request->file('image_link'));
+            $this->service->update($data);
+        } catch (\Throwable $th) {
+            dd($th->getMessage());
+            return $this->responseRoute(
+                $this::ERROR,
+                $this::INDEX_ROUTE,
+                $this::ERROR_UPDATE_MESSAGE,
+                $this::OBJECT_MESSAGE
+            );
         }
 
-        $seo->update($attributes);
-
-        return redirect(route('seo.index'))
-            ->with('success', trans('admin.updated_successfully', [
-                'object' => trans('admin.seo')
-            ]));
-    }
-
-    private function uploadImageAndReturnName(UploadedFile $image)
-    {
-        $name = Helper::getRandomImageName();
-        $jpg_name = "{$name}.jpg";
-        $path_small = public_path('images/seo/small/');
-
-        Helper::checkPath([$path_small]);
-
-        Image::make($image)
-            ->encode('jpg', 60)
-            ->resize(300, null, function ($constraint) {
-                $constraint->aspectRatio();
-            })
-            ->save($path_small . $jpg_name);
-
-        return $jpg_name;
-    }
-
-    private function validateImage()
-    {
-        $validate = [
-            'nullable',
-            'image',
-            'mimes:jpeg,jpg,png',
-            'max:800',
-            'dimensions:max_width=1500, max_height=1500'
-        ];
-
-        return $validate;
+        return $this->responseRoute(
+            $this::SUCCESS,
+            $this::INDEX_ROUTE,
+            $this::SUCCESS_UPDATE_MESSAGE,
+            $this::OBJECT_MESSAGE
+        );
     }
 }

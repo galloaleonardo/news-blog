@@ -2,17 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Helpers\Helper;
 use App\Http\Traits\MagazineTrait;
 use App\Models\News;
 use Illuminate\Http\Request;
-use Artesaos\SEOTools\Facades\SEOMeta;
-use Artesaos\SEOTools\Facades\OpenGraph;
-use Artesaos\SEOTools\Facades\TwitterCard;
-use Artesaos\SEOTools\Facades\JsonLd;
-use Artesaos\SEOTools\Facades\JsonLdMulti;
-use Artesaos\SEOTools\Facades\SEOTools;
-
 
 class MagazineController extends Controller
 {
