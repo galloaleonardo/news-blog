@@ -32,7 +32,12 @@ class SettingsService
 
         if ($request->hasFile('company_logo_link') && $request->file('company_logo_link')->isValid()) {
             try {
-                $imageLink = $this->image->uploadAndReturnName($request->file('company_logo_link'), 'logo');
+                $imageLink = $this->image->upload(
+                    $request->file('company_logo_link'),
+                    'logo',
+                    'logo',
+                    'png'
+                )->size(150)->save();
             } catch (\Throwable $th) {
                 throw new ImageUploadFailedException(trans('admin.image_upload_error'));
             }
@@ -42,7 +47,7 @@ class SettingsService
 
         if ($request->hasFile('icon_tab_link') && $request->file('icon_tab_link')->isValid()) {
             try {
-                $imageLink = $this->ico->uploadAndReturnName($request->file('icon_tab_link'), 'ico');
+                $imageLink = $this->ico->upload($request->file('icon_tab_link'), 'ico');
             } catch (\Throwable $th) {
                 dd($th->getMessage());
                 throw new ImageUploadFailedException(trans('admin.image_upload_error'));

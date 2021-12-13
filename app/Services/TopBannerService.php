@@ -24,7 +24,7 @@ class TopBannerService
         $data['active'] = isset($data['active']) ? true : false;
 
         try {
-            $imageLink = $this->image->uploadAndReturnName(request()->file('image_link'), 'top-banners');
+            $imageLink = $this->image->upload(request()->file('image_link'), 'top-banners')->save();
         } catch (\Throwable $th) {
             throw new ImageUploadFailedException(trans('admin.image_upload_error'));
         }
@@ -40,7 +40,7 @@ class TopBannerService
 
         if ($request->hasFile('image_link') && $request->file('image_link')->isValid()) {
             try {
-                $imageLink = $this->image->uploadAndReturnName($request->file('image_link'), 'top-banners');
+                $imageLink = $this->image->upload($request->file('image_link'), 'top-banners')->save();
             } catch (\Throwable $th) {
                 throw new ImageUploadFailedException(trans('admin.image_upload_error'));
             }

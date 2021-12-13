@@ -23,7 +23,7 @@ class AdvertisingService
         $data['active'] = isset($data['active']) ? true : false;
 
         try {
-            $imageLink = $this->image->uploadAndReturnName(request()->file('image_link'), 'announcements');
+            $imageLink = $this->image->upload(request()->file('image_link'), 'announcements')->save();
         } catch (\Throwable $th) {
             throw new ImageUploadFailedException(trans('admin.image_upload_error'));
         }
@@ -39,7 +39,7 @@ class AdvertisingService
 
         if ($request->hasFile('image_link') && $request->file('image_link')->isValid()) {
             try {
-                $imageLink = $this->image->uploadAndReturnName($request->file('image_link'), 'announcements');
+                $imageLink = $this->image->upload($request->file('image_link'), 'announcements')->save();
             } catch (\Throwable $th) {
                 throw new ImageUploadFailedException(trans('admin.image_upload_error'));
             }

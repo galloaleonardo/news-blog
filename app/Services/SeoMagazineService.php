@@ -23,7 +23,7 @@ class SeoMagazineService
 
         if ($request->hasFile('image_link') && $request->file('image_link')->isValid()) {
             try {
-                $imageLink = $this->image->uploadAndReturnName($request->file('image_link'), 'seo/small');
+                $imageLink = $this->image->upload($request->file('image_link'), 'seo/small')->save();
             } catch (\Throwable $th) {
                 throw new ImageUploadFailedException(trans('admin.image_upload_error'));
             }
