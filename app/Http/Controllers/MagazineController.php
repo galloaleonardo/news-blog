@@ -4,67 +4,52 @@ namespace App\Http\Controllers;
 
 use App\Http\Traits\MagazineTrait;
 use App\Models\News;
+use App\Services\MagazineService;
 use Illuminate\Http\Request;
 
 class MagazineController extends Controller
 {
+    const INDEX_ROUTE = 'advertisements.index';
+    const OBJECT_MESSAGE = 'admin.advertisings';
 
-    use MagazineTrait;
+    public function __construct(private MagazineService $service) {}
 
     public function index()
     {
-        $categories = $this->getCategories();
-        $advertising = $this->getAdvertising();
-        $featuredNews = $this->getFeaturedNews();
-        $recentNews = $this->getRecentNews();
-        $featuredNewsCategories = $this->getNewsFeaturedCategories();
-        $popularNews = $this->getPopularNews([$featuredNews, $recentNews, $featuredNewsCategories]);
-        $topBanners = $this->getTopBanners();
-        $topBannerSetting = $this->getTopBannerSetting();
+        $news = $this->service->index();
 
-        $this->setSEOPages();
+        $this->service->setSEOPages();
 
         return view(
             'magazine.homepage.index',
-            compact(
-                'categories',
-                'advertising',
-                'featuredNews',
-                'recentNews',
-                'featuredNewsCategories',
-                'popularNews',
-                'topBanners',
-                'topBannerSetting'
-            )
+            [
+                'categories' => $news['categories'],
+                'advertising' => $news['advertising'],
+                'featuredNews' => $news['featuredNews'],
+                'recentNews' => $news['recentNews'],
+                'featuredNewsCategories' => $news['featuredNewsCategories'],
+                'popularNews' => $news['popularNews'],
+                'topBanners' => $news['topBanners'],
+                'topBannerSetting' => $news['topBannerSetting']
+            ]
         );
     }
 
     public function show(int $id, string $title)
     {
-        $categories = $this->getCategories();
-        $news = News::findOrFail($id);
-        $featuredNews = $this->getFeaturedNews();
-        $recentNews = $this->getRecentNews();
-        $featuredNewsCategories = $this->getNewsFeaturedCategories();
-        $popularNews = $this->getPopularNews([$featuredNews, $recentNews, $featuredNews]);
-        $suggestedNews = $this->suggestedNews($news->id, $news->category_id);
-        $topBanners = $this->getTopBanners();
-        $topBannerSetting = $this->getTopBannerSetting();
-        $youtubeLinks = explode(PHP_EOL, $news->youtube_links);
+        $news = $this->service->show($id);
+    
+        $this->service->setSEOPost($news['news']);
 
-        views($news)->record();
-
-        $this->setSEOPost($news);
-
-        return view('magazine.post.index', compact(
-            'categories',
-            'news',
-            'popularNews',
-            'suggestedNews',
-            'topBanners',
-            'topBannerSetting',
-            'youtubeLinks'
-        ));
+        return view('magazine.post.index', [
+            'categories'=> $news['categories'],
+            'news'=> $news['news'],
+            'popularNews'=> $news['popularNews'],
+            'suggestedNews'=> $news['suggestedNews'],
+            'topBanners'=> $news['topBanners'],
+            'topBannerSetting'=> $news['topBannerSetting'],
+            'youtubeLinks' => $news['youtubeLinks']
+        ]);
     }
 
     public function all(Request $request)
@@ -73,21 +58,15 @@ class MagazineController extends Controller
         $category = $request->has('category') ? $request->get('category') : null;
         $author = $request->has('author') ? $request->get('author') : null;
 
-        $topBanners = $this->getTopBanners();
-        $topBannerSetting = $this->getTopBannerSetting();
+        $news = $this->service->all($search, $category, $author);
 
+        $this->service->setSEOPages();
 
-        $categories = $this->getCategories();
-
-        $news = $this->getOrSearchAllNews($search, $category, $author);
-
-        $this->setSEOPages();
-
-        return view('magazine.all-news.index', compact(
-            'news',
-            'categories',
-            'topBanners',
-            'topBannerSetting'
-        ));
+        return view('magazine.all-news.index', [
+            'news' => $news['news'],
+            'categories' => $news['categories'],
+            'topBanners' => $news['topBanners'],
+            'topBannerSetting' => $news['topBannerSetting']
+        ]);
     }
 }
