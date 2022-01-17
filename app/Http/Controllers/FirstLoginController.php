@@ -2,10 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash as FacadesHash;
-use Illuminate\Validation\Rules\Password;
+use App\Http\Requests\FirstLoginRequest;
 
 class FirstLoginController extends Controller
 {
@@ -14,25 +11,11 @@ class FirstLoginController extends Controller
         return view('auth.passwords.first-login');
     }
 
-    public function store(Request $request)
+    public function updatePassword(FirstLoginRequest $request)
     {
-        $request->validate([
-            'password' => [
-                'required',
-                'confirmed',
-                Password::min(8)
-                    ->letters()
-                    ->numbers(),
-            ]
-        ]);
+        $data = $request->validated();
 
-        $attributes = $request->all();
-
-        $user = User::find($request->user()->id);
-        
-        $user->update([
-            'password' => \Hash::make($attributes['password'])
-        ]);
+        $this->service->updatePassword((int)$request->user()->id, $data);
 
         return redirect()->route('dashboard');
     }

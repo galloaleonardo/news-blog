@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Traits\MagazineTrait;
-use App\Models\News;
 use App\Services\MagazineService;
 use Illuminate\Http\Request;
 

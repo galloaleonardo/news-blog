@@ -8,7 +8,7 @@ Route::group(['middleware' => 'localization'], function () {
     Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
 
         Route::get('first-login', 'FirstLoginController@index')->name('first-login.index');
-        Route::post('first-login', 'FirstLoginController@store')->name('first-login.store');
+        Route::post('first-login', 'FirstLoginController@updatePassword')->name('first-login.updatePassword');
 
         Route::middleware([EnsureUserChangedFirstPassword::class, EnsureUserIsNotDisabled::class])->group(function () {
             Route::get('/', 'DashboardController@index')->name('dashboard');
@@ -37,6 +37,4 @@ Route::group(['middleware' => 'localization'], function () {
     Route::get('/show/{id}/{title}', 'MagazineController@show')->name('magazine.show');
 
     Auth::routes();
-
-    Route::get('/home', 'HomeController@index')->name('home');
 });

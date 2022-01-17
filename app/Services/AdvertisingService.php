@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Exceptions\ImageUploadFailedException;
 use App\Models\Advertising;
 use App\Repositories\AdvertisingRepository;
+use File;
 
 class AdvertisingService
 {
@@ -40,6 +41,7 @@ class AdvertisingService
         if ($request->hasFile('image_link') && $request->file('image_link')->isValid()) {
             try {
                 $imageLink = $this->image->upload($request->file('image_link'), 'announcements')->save();
+                $this->deleteOldImage($advertising->image_link);
             } catch (\Throwable $th) {
                 throw new ImageUploadFailedException(trans('admin.image_upload_error'));
             }
@@ -54,6 +56,17 @@ class AdvertisingService
 
     public function destroy(Advertising $advertising)
     {
+        $this->deleteOldImage($advertising->image_link);
+
         return $this->repository->destroy($advertising->id);
+    }
+
+    private function deleteOldImage($imageName)
+    {
+        $imagePath = 'images/announcements/' . $imageName;
+        
+        if (File::exists($imagePath)) {
+            File::delete($imagePath);
+        }
     }
 }

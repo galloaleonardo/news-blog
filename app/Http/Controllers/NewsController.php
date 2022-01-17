@@ -3,19 +3,22 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
-use App\Helpers\Helper;
+use App\Http\Requests\NewsRequest;
 use App\Models\Author;
 use App\Models\News;
+use App\Services\NewsService;
 use Illuminate\Http\Request;
-use Illuminate\Http\UploadedFile;
-use Intervention\Image\Facades\Image;
 
-class NewsController extends Controller
+class NewsController extends CustomController
 {
+    const INDEX_ROUTE = 'news.index';
+    const OBJECT_MESSAGE = 'admin.news';
+
+    public function __construct(private NewsService $service) {}
 
     public function index()
     {
-        $news = News::orderBy('updated_at', 'desc')->paginate(10);
+        $news = $this->service->index();
         $categories = Category::where('active', 1)->get();
 
         return view('admin.news.index-news', compact('news', 'categories'));
@@ -29,30 +32,27 @@ class NewsController extends Controller
         return view('admin.news.create-news', compact('categories', 'authors'));
     }
 
-    public function store(Request $request)
+    public function store(NewsRequest $request)
     {
-        $request->validate([
-            'title' => ['required', 'max:100'],
-            'subtitle' => ['required', 'max:255'],
-            'image_link' => $this->validateImage(),
-            'category_id' => ['required', 'numeric'],
-            'author_id' => 'required',
-            'content' => 'required'
-        ]);
+        try {
+            $data = $request->validated();
 
-        $attributes = $request->all();
+            $this->service->store($data);
+        } catch (\Throwable $th) {
+            return $this->responseRoute(
+                $this::ERROR,
+                $this::INDEX_ROUTE,
+                $this::ERROR_CREATE_MESSAGE,
+                $this::OBJECT_MESSAGE
+            );
+        }
 
-        $attributes['active'] = $request->has('active') ? true : false;
-        $attributes['featured'] = $request->has('featured') ? true : false;
-        $attributes['image_link'] = $this->uploadImageAndReturnName($request->file('image_link'));
-        $attributes['content'] = str_replace('<p>', '<p class="mtb-40">', $attributes['content']);
-
-        News::create($attributes);
-
-        return redirect(route('news.index'))
-            ->with('success', trans('admin.create_successfully', [
-                'object' => trans('admin.news')
-            ]));
+        return $this->responseRoute(
+            $this::SUCCESS,
+            $this::INDEX_ROUTE,
+            $this::SUCCESS_CREATE_MESSAGE,
+            $this::OBJECT_MESSAGE
+        );
     }
 
     public function edit(News $news)
@@ -63,107 +63,55 @@ class NewsController extends Controller
         return view('admin.news.edit-news', compact('news', 'categories', 'authors'));
     }
 
-    public function update(Request $request, News $news)
+    public function update(NewsRequest $request, News $news)
     {
-        $attributes = $request->all();
+        try {
+            $data = $request->validated();
 
-        $request->validate([
-            'title' => ['required', 'max:100'],
-            'subtitle' => ['required', 'max:255'],
-            'category_id' => ['required', 'numeric'],
-            'author_id' => 'required',
-            'content' => 'required'
-        ]);
-
-        if ($request->hasFile('image_link')) {
-            $request->validate(['image_link' => $this->validateImage()]);
-            $attributes['image_link'] = $this->uploadImageAndReturnName($request->file('image_link'));
+            $this->service->update($news, $data);
+        } catch (\Throwable $th) {
+            return $this->responseRoute(
+                $this::ERROR,
+                $this::INDEX_ROUTE,
+                $this::ERROR_UPDATE_MESSAGE,
+                $this::OBJECT_MESSAGE
+            );
         }
 
-        $attributes['active'] = $request->has('active') ? true : false;
-        $attributes['featured'] = $request->has('featured') ? true : false;
-        $attributes['content'] = str_replace('<p>', '<p class="mtb-40">', $attributes['content']);
-
-        $news->update($attributes);
-
-        return redirect(route('news.index'))
-            ->with('success', trans('admin.updated_successfully', [
-                'object' => trans('admin.news')
-            ]));
+        return $this->responseRoute(
+            $this::SUCCESS,
+            $this::INDEX_ROUTE,
+            $this::SUCCESS_UPDATE_MESSAGE,
+            $this::OBJECT_MESSAGE
+        );
     }
 
     public function destroy(News $news)
     {
-        $news->delete();
-        return redirect(route('news.index'))
-            ->with('success', trans('admin.delete_successfully', [
-                'object' => trans('admin.news')
-            ]));
+        try {
+            $this->service->destroy($news);
+        } catch (\Throwable $th) {
+            return $this->responseRoute(
+                $this::ERROR,
+                $this::INDEX_ROUTE,
+                [$this::ERROR_DELETE_MESSAGE, $th->getMessage()],
+                $this::OBJECT_MESSAGE
+            );
+        }
+    
+        return $this->responseRoute(
+            $this::SUCCESS,
+            $this::INDEX_ROUTE,
+            $this::SUCCESS_DELETE_MESSAGE,
+            $this::OBJECT_MESSAGE
+        );
     }
 
     public function search(Request $request)
     {
-        $news = News::query();
+        $news = $this->service->search($request);
         $categories = Category::where('active', 1)->get();
 
-        if ($request->has('author')) {
-            $news->join('authors', 'news.author_id', 'authors.id');
-            $news->where('authors.name', 'LIKE', "%{$request->get('author')}%");
-        }
-
-        if ($request->has('title')) {
-            $news->where('title', 'LIKE', "%{$request->get('title')}%");
-        }
-
-        if ($request->has('category_id')) {
-            $news->where('category_id', $request->get('category_id'));
-        }
-
-        if ($request->has('display_order')) {
-            $news->where('display_order', $request->get('display_order'));
-        }
-
-        if ($request->has('active')) {
-            if ($request->get('active') == 'Y') {
-                $news->where('active', true);
-            } elseif ($request->get('active') == 'N') {
-                $news->where('active', false);
-            }
-        }
-
-        $news = $news->paginate(10)->appends($request->except('page'));
-
         return view('admin.news.index-news', compact('news', 'categories'));
-    }
-
-    private function uploadImageAndReturnName(UploadedFile $image)
-    {
-        $name = Helper::getRandomImageName();
-        $jpg_name = "{$name}.jpg";
-        $path_large = public_path('images/news/large/');
-        $path_small = public_path('images/news/small/');
-
-        Helper::checkPath([$path_large, $path_small]);
-
-        Image::make($image)
-            ->encode('jpg', 60)
-            ->save($path_large . $jpg_name)
-            ->resize(300, 300)
-            ->save($path_small . $jpg_name);
-
-        return $jpg_name;
-    }
-
-    private function validateImage()
-    {
-        $validate = [
-            'required',
-            'image',
-            'mimes:jpeg,jpg,png',
-            'max:800',
-            'dimensions:max_width=1500, max_height=1500'
-        ];
-
-        return $validate;
     }
 }
