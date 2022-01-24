@@ -46,7 +46,8 @@ class MagazineController extends Controller
             'suggestedNews'=> $news['suggestedNews'],
             'topBanners'=> $news['topBanners'],
             'topBannerSetting'=> $news['topBannerSetting'],
-            'youtubeLinks' => $news['youtubeLinks']
+            'youtubeLinks' => $news['youtubeLinks'],
+            'twitterLinks' => $news['twitterLinks'],
         ]);
     }
 

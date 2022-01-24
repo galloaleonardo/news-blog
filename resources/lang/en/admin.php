@@ -104,5 +104,7 @@ return [
     'error_fk_author' => 'There are news with this author.',
     'error_fk_category' => 'There are news with this category.',
     'icon_tab' => 'Icon Tab (.ico)',
-    'image_upload_error' => 'An error occurred while uploading the file.'
+    'image_upload_error' => 'An error occurred while uploading the file.',
+    'twitter_links' => 'Twitter Links',
+    'twitter_links_info' => 'Add more than one tweet by typing the link on a new line.',
 ];

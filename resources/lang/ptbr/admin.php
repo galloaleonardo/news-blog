@@ -104,5 +104,7 @@ return [
     'error_fk_author' => 'Existem notícias com esse autor.',
     'error_fk_category' => 'Existem notícias com esta categoria.',
     'icon_tab' => 'Icone da Aba (.ico)',
-    'image_upload_error' => 'Ocorreu um erro ao fazer o upload do arquivo..'
+    'image_upload_error' => 'Ocorreu um erro ao fazer o upload do arquivo..',
+    'twitter_links' => 'Links do Twitter',
+    'twitter_links_info' => 'Adicione mais de um tweet digitando o link em uma nova linha.',
 ];

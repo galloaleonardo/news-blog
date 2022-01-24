@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddFeaturedToUsersTable extends Migration
+class AddTwitterLinksToNewsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class AddFeaturedToUsersTable extends Migration
      */
     public function up()
     {
-        Schema::table('categories', function (Blueprint $table) {
-            $table->boolean('featured')->default(false);
+        Schema::table('news', function (Blueprint $table) {
+            $table->longText('twitter_links')->nullable();
         });
     }
 
@@ -25,8 +25,8 @@ class AddFeaturedToUsersTable extends Migration
      */
     public function down()
     {
-        Schema::table('categories', function (Blueprint $table) {
-            $table->dropColumn(['featured']);
+        Schema::table('news', function (Blueprint $table) {
+            $table->dropColumn(['twitter_links']);
         });
     }
 }

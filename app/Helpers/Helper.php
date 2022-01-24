@@ -7,6 +7,8 @@ use App\Models\GoogleAds;
 use App\Models\GoogleAnalytics;
 use App\Models\Settings;
 use Carbon\Carbon;
+use File;
+use Illuminate\Support\Facades\Http;
 
 class Helper
 {
@@ -14,6 +16,7 @@ class Helper
     const ADMIN_USER = 1;
     const EN = 'en';
     const PTBR = 'ptbr';
+    const URL_EMBED_TWEET = 'https://publish.twitter.com/oembed?url=';
 
     public static function checkPath(Array $paths)
     {
@@ -119,5 +122,32 @@ class Helper
     public static function userIsAdmin()
     {
         return \Auth::user()->id === self::ADMIN_USER;
+    }
+
+    public static function deleteImage($imagePath)
+    {
+        if (File::exists($imagePath)) {
+            File::delete($imagePath);
+        }
+    }
+
+    public static function getEmbededTweet(string $link)
+    {
+
+        try {
+            $response = Http::get(self::URL_EMBED_TWEET . $link);
+
+            if ($response->status() === 200) {
+                $content = $response->json();
+
+                if (isset($content['html']) && $content['html']) {
+                    return $content['html'];
+                }
+            }
+        } catch (\Throwable $th) {
+            return "<div class='fail_to_load_tweet'></div>";
+        }
+        
+        return "<div class='fail_to_load_tweet'></div>";
     }
 }

@@ -27,7 +27,7 @@
                             <b>{{ $news->author->name }}</b>,
                         </a>
                         {{ App\Helpers\Helper::getDateFormatLanguage($news->created_at) }} | 
-                        {{ trans('magazine.updated_in') }} {{ App\Helpers\Helper::getDateFormatLanguage($news->updated_at) }} {{ trans('magazine.at') }} {{ date_format($news->updated_at, 'H:i:s') }}</li>
+                        {{ trans('magazine.updated_in') }} {{ App\Helpers\Helper::getDateFormatLanguage($news->updated_at) }}</li>
                 </ul>
                 <div class="mt-40 mt-sm-20">
                     <ul class="mb-30 list-a-bg-grey list-a-hw-radial-35 list-a-hvr-primary list-li-ml-5">
@@ -47,6 +47,16 @@
                             @if ($link)
                                 <div class="py-2">
                                     <iframe width="100%" height="315" src="{{ App\Helpers\Helper::getYoutubeLink($link) }}" title="YouTube video player" frameborder="0" allowfullscreen></iframe>
+                                </div>
+                            @endif
+                    @endforeach
+                @endif
+
+                @if (isset($twitterLinks) && $twitterLinks)
+                        @foreach ($twitterLinks as $link)
+                            @if ($link)
+                                <div class="py-2">
+                                    {!! App\Helpers\Helper::getEmbededTweet($link) !!}
                                 </div>
                             @endif
                     @endforeach

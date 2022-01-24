@@ -53,7 +53,8 @@ class MagazineService
             'suggestedNews' => $this->repository->suggestedNews($news->id, $news->category_id),
             'topBanners' => $this->repository->getTopBanners(),
             'topBannerSetting' => $this->repository->getTopBannerSetting(),
-            'youtubeLinks' => explode(PHP_EOL, $news->youtube_links)
+            'youtubeLinks' => explode(PHP_EOL, $news->youtube_links),
+            'twitterLinks' => explode(PHP_EOL, $news->twitter_links)
         ];
     }
 

@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Exceptions\ImageUploadFailedException;
+use App\Helpers\Helper;
 use App\Models\TopBanner;
 use App\Repositories\TopBannerRepository;
 use App\Services\ImageService;
@@ -41,6 +42,8 @@ class TopBannerService
         if ($request->hasFile('image_link') && $request->file('image_link')->isValid()) {
             try {
                 $imageLink = $this->image->upload($request->file('image_link'), 'top-banners')->save();
+
+                Helper::deleteImage('images/top-banners/' . $topBanner->image_link);
             } catch (\Throwable $th) {
                 throw new ImageUploadFailedException(trans('admin.image_upload_error'));
             }
@@ -55,6 +58,8 @@ class TopBannerService
 
     public function destroy(TopBanner $topBanner)
     {
+        Helper::deleteImage('images/top-banners/' . $topBanner->image_link);
+
         return $this->repository->destroy($topBanner->id);
     }
 }

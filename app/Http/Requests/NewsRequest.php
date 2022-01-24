@@ -35,7 +35,9 @@ class NewsRequest extends FormRequest
             'author_id' => 'required',
             'content' => 'required',
             'active' => 'nullable',
-            'featured' => 'nullable'
+            'featured' => 'nullable',
+            'youtube_links' => 'nullable',
+            'twitter_links' => 'nullable'
         ];
     }
 }

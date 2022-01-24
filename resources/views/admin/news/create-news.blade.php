@@ -85,6 +85,15 @@
 
                 <div class="form-row">
                     <div class="form-group col-md-12">
+                        <label for="twitter_links">{{ trans('admin.twitter_links') }}</label>
+                        <i class="fas fa-info-circle" data-toggle="tooltip" data-placement="top" title="{{ trans('admin.twitter_links_info') }}"></i>
+                        <textarea class="form-control {{ $errors->has('twitter_links') ? 'border-left-danger' : '' }}"
+                                name="twitter_links" id="twitter_links">{{ old('twitter_links') }}</textarea>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-12">
                         <label class="{{ $errors->has('content') ? 'border-bottom-danger' : '' }}"
                                for="news_content">{{ trans('admin.content') }}</label>
                         <textarea name="content" id="news_content">{{ old('content') }} </textarea>

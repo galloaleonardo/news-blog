@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Exceptions\ImageUploadFailedException;
+use App\Helpers\Helper;
 use App\Http\Controllers\LanguagesController;
 use App\Repositories\LanguagesRepository;
 use App\Repositories\SettingsRepository;
@@ -30,6 +31,8 @@ class SettingsService
     {
         $request = request();
 
+        $settings = $this->settingsRepository->getSettings();
+
         if ($request->hasFile('company_logo_link') && $request->file('company_logo_link')->isValid()) {
             try {
                 $imageLink = $this->image->upload(
@@ -38,6 +41,8 @@ class SettingsService
                     'logo',
                     'png'
                 )->size(150)->save();
+
+                Helper::deleteImage('images/logo/logo.png');
             } catch (\Throwable $th) {
                 throw new ImageUploadFailedException(trans('admin.image_upload_error'));
             }
@@ -48,6 +53,7 @@ class SettingsService
         if ($request->hasFile('icon_tab_link') && $request->file('icon_tab_link')->isValid()) {
             try {
                 $imageLink = $this->ico->upload($request->file('icon_tab_link'), 'ico');
+                Helper::deleteImage('images/ico/icon_tab.ico');
             } catch (\Throwable $th) {
                 dd($th->getMessage());
                 throw new ImageUploadFailedException(trans('admin.image_upload_error'));
@@ -57,8 +63,6 @@ class SettingsService
         }
 
         $data['use_logo_by_default'] = isset($data['use_logo_by_default']) ? true : false;
-
-        $settings = $this->settingsRepository->getSettings();
 
         return $this->settingsRepository->update($settings->id, $data);
     }

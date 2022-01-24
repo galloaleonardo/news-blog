@@ -15,6 +15,7 @@
         "davejamesmiller/laravel-breadcrumbs": "^5.3",
         "facade/ignition": "^2.3.6",
         "fideloper/proxy": "^4.0",
+        "guzzlehttp/guzzle": "^7.4",
         "intervention/image": "^2.5",
         "jenssegers/date": "^4.0",
         "laravel/framework": "^8.0",

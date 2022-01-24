@@ -51,6 +51,9 @@ class NewsService
 
                 $imageLink = $this->image->upload($request->file('image_link'), 'news/large', $imageName)->save();
                 $this->image->upload($request->file('image_link'), 'news/small', $imageName)->size(300)->save();
+
+                Helper::deleteImage('images/news/large/' . $news->image_link);
+                Helper::deleteImage('images/news/small/' . $news->image_link);
             } catch (\Throwable $th) {
                 throw new ImageUploadFailedException(trans('admin.image_upload_error'));
             }
@@ -70,6 +73,9 @@ class NewsService
 
     public function destroy(News $news)
     {
+        Helper::deleteImage('images/news/large/' . $news->image_link);
+        Helper::deleteImage('images/news/small/' . $news->image_link);
+
         return $this->repository->destroy($news->id);
     }
 
