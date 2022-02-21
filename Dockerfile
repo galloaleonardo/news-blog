@@ -1,51 +1,28 @@
-FROM php:8.0.8-fpm-alpine
+FROM webdevops/php-nginx:8.0-alpine
 
-# Set env timezone
-ARG TZ='America/Sao_Paulo'
-ENV DEFAULT_TZ ${TZ}
+RUN docker-php-ext-install pdo_mysql
 
-# Install PHP Extensions
-RUN set -euxo pipefail ;\
-    apk add --no-cache --virtual build-dependencies \
-    pcre-dev \
-    ${PHPIZE_DEPS} ;\
-    docker-php-ext-install \
-    pdo \
-    pdo_mysql \
-    opcache ;\
-    docker-php-ext-enable pdo_mysql ;\
-    apk del build-dependencies
+# Copy Composer binary from the Composer official Docker image
+COPY --from=composer:2.1 /usr/bin/composer /usr/bin/composer
 
-RUN set -euxo pipefail ;\
-    apk add --no-cache freetype \
-    libpng \
-    libjpeg-turbo \
-    freetype-dev \
-    libpng-dev \
-    libjpeg-turbo-dev && \
-    docker-php-ext-configure gd \
-    --with-freetype \
-    --with-jpeg \
-    NPROC=$(grep -c ^processor /proc/cpuinfo 2>/dev/null || 1) && \
-    docker-php-ext-install -j$(nproc) gd && \
-    apk del --no-cache freetype-dev libpng-dev libjpeg-turbo-dev
+ENV WEB_DOCUMENT_ROOT /app/public
 
-# Set timezone
-RUN apk upgrade --update \
-    && apk add -U tzdata \
-    && cp /usr/share/zoneinfo/${DEFAULT_TZ} /etc/localtime \
-    && apk del tzdata \
-    && rm -rf \
-    /var/cache/apk/*
+WORKDIR /app
+COPY . .
 
-# Create web user/group.
-RUN addgroup -g 1000 web && adduser -G web -g web -s /bin/sh -D web
+RUN composer install --no-interaction --optimize-autoloader --ignore-platform-reqs
 
-# Change path owner.
-RUN chown -R web:web /var/www/html
 
-# Copy php-fpm config.
-ADD ./conf/fpm-www.conf /usr/local/etc/php-fpm.d/www.conf
+# Coping .env file
+RUN cp .env.example .env
 
-# Copy OPCache changes.
-ADD ./conf/opcache.ini /usr/local/etc/php/conf.d/opcache.ini
+# Generating laravel secret key
+RUN php artisan key:generate
+
+RUN php artisan storage:link
+
+RUN mkdir storage/images
+
+RUN chmod 777 -R storage
+
+RUN chown -R application:application .
