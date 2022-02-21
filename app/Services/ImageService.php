@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Exceptions\ImageUploadFailedException;
 use App\Helpers\Helper;
+use Spatie\ImageOptimizer\OptimizerChainFactory;
 use Illuminate\Http\UploadedFile;
 use Intervention\Image\Facades\Image;
 
@@ -57,6 +58,9 @@ class ImageService
     {
         try {
             $this->image->save($this->imagePathName);
+
+            $optimizerChain = OptimizerChainFactory::create();
+            $optimizerChain->optimize($this->imagePathName);
         } catch (\Exception $e) {
             throw new ImageUploadFailedException();
         }

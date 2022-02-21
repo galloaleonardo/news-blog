@@ -23,7 +23,7 @@
                         <input type="text" class="form-control {{ $errors->has('title') ? 'border-left-danger' : '' }}" id="title" name="title" value="{{ $news->title }}">
                     </div>
                     <div class="form-group col-md-6">
-                        <label for="image_link">{{ trans('admin.main_image') }} - <small>(Max. 1500px x 1500px) - (Max. 800kb)</small></label>
+                        <label for="image_link">{{ trans('admin.main_image') }} - <small>(Max. 1mb)</small></label>
                         <div class="input-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text">

@@ -46,7 +46,7 @@
                                id="twitter_user" name="twitter_user" value="{{ $seo->twitter_user }}">
                     </div>
                     <div class="form-group col-md-4">
-                        <label for="image_link">{{ trans('admin.image_link') }}</label>
+                        <label for="image_link">{{ trans('admin.image_link') }} - <small>(Max. 1mb)</small></label>
                         <div class="input-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text">

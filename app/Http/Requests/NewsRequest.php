@@ -30,7 +30,7 @@ class NewsRequest extends FormRequest
         return [
             'title' => ['required', 'max:100'],
             'subtitle' => ['required', 'max:255'],
-            'image_link' => [$mandatory, 'image', 'mimes:jpeg,jpg,png'],
+            'image_link' => [$mandatory, 'image', 'mimes:jpeg,jpg,png', 'max:1000'],
             'category_id' => ['required', 'numeric'],
             'author_id' => 'required',
             'content' => 'required',

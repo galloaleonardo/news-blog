@@ -27,7 +27,7 @@
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-6">
-                        <label for="image_link">{{ trans('admin.image') }} - <small>({{ trans('admin.suggested') }} 1500px x 200px) - (Max. 800kb)</small></label>
+                        <label for="image_link">{{ trans('admin.image') }} - <small>(Max. 1mb)</small></label>
                         <div class="input-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text">

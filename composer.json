@@ -20,7 +20,8 @@
         "jenssegers/date": "^4.0",
         "laravel/framework": "^8.0",
         "laravel/tinker": "^2.0",
-        "laravel/ui": "^3.0"
+        "laravel/ui": "^3.0",
+        "spatie/image-optimizer": "^1.6"
     },
     "require-dev": {
         "beyondcode/laravel-dump-server": "^1.0",

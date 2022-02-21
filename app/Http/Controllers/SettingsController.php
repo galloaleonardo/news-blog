@@ -28,7 +28,6 @@ class SettingsController extends CustomController
 
             $this->service->update($data);
         } catch (\Throwable $th) {
-            dd($th->getMessage());
             return $this->responseRoute(
                 $this::ERROR,
                 $this::INDEX_ROUTE,

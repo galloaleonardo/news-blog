@@ -55,7 +55,6 @@ class SettingsService
                 $imageLink = $this->ico->upload($request->file('icon_tab_link'), 'ico');
                 Helper::deleteImage('images/ico/icon_tab.ico');
             } catch (\Throwable $th) {
-                dd($th->getMessage());
                 throw new ImageUploadFailedException(trans('admin.image_upload_error'));
             }
             
